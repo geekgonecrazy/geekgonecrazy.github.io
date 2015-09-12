@@ -2,7 +2,7 @@
 layout: post
 title:  "Dedicated Virtualbox Host"
 date:   2010-11-16
-categories: virtualization
+tags: [virtualization]
 ---
 A while back I posted about [building a quad core system][1].  In the post I discussed virtualization, and building a dedicated machine for hosting virtual machines.  Following that, I posted about actually building that machine.  In it I mentioned installing Xenserver.  I have no doubt that it is amazing.  Just wasn't exactly what I had in mind.  
 
@@ -124,7 +124,7 @@ Now you can start setting up your virtual machines.  If you want to be able to 
 As long as you don't have your router pointing at this ip you should be safe.  If you're paranoid setup password protection.   I will do this in a later post.  
 
 
-[1]: https://geekgonecrazy.com/2010/03/building-first-computer.html
+[1]: /2010/03/24/building-first-computer
 [2]: http://4.bp.blogspot.com/_BMKBVRf6mio/TQoBIQzXW5I/AAAAAAAAAY0/g6Tdv1MrmvY/s320/Screenshot.png
 [4]: http://pastebin.com/fgMC20b8
 [5]: http://3.bp.blogspot.com/_BMKBVRf6mio/TQoBXvaX-GI/AAAAAAAAAY4/Dw8D9wLEEE4/s320/phpvirtualbox.jpg

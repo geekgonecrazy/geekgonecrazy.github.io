@@ -2,7 +2,7 @@
 layout: post
 title:  "IPv6 keeping tunnel connected"
 date:   2011-02-28
-categories: ipv6
+tags: [ipv6]
 ---
 Put together a script to keep your ip updated for the tunnel.  This is for Hurricane Electric.  Just plug in your info from your tunnel info page.  
 

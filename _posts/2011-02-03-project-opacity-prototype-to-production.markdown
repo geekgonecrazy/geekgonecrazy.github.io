@@ -2,7 +2,7 @@
 layout: post
 title:  "Project Opacity: Prototype to Production"
 date:   2011-02-03
-categories: hardware
+tags: [hardware]
 ---
 About a month ago at work we started a project internally known as Project Opacity.
 
