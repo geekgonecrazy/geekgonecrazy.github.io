@@ -2,6 +2,7 @@
 layout: post
 title:  "Building my first computer"
 date:   2010-03-24
+comments: true
 tags: [hardware]
 ---
 Well after much waiting, I have officially built my first computer from scratch. Before this, any computer built was pieced together from parts laying around.  This

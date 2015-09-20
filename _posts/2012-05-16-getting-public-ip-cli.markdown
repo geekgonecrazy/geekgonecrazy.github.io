@@ -2,6 +2,7 @@
 layout: post
 title:  "Getting public ip from CLI"
 date:   2012-05-16
+comments: true
 tags: [tips, linux]
 ---
 I've found my self on occasion needing to find the public IP of a machine while in commandline(CLI).  Most of the time its just because i've spoiled my self with DNS entries, and haven't memorized it.  
