@@ -1,0 +1,68 @@
+==================================================================
+https://keybase.io/geekgonecrazy
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://geekgonecrazy.com
+  * I am geekgonecrazy (https://keybase.io/geekgonecrazy) on keybase.
+  * I have a public key with fingerprint 2A5A 5C22 5AF2 1F35 189D  332D 3087 0924 E321 595E
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "010190c0f0c7a999ce31cf802e99ccc240e61ff8aa801f17dceca05900e32f04ca380a",
+            "fingerprint": "2a5a5c225af21f35189d332d30870924e321595e",
+            "host": "keybase.io",
+            "key_id": "30870924e321595e",
+            "kid": "010190c0f0c7a999ce31cf802e99ccc240e61ff8aa801f17dceca05900e32f04ca380a",
+            "uid": "cdc19562bbb059c88052d76e02151a19",
+            "username": "geekgonecrazy"
+        },
+        "service": {
+            "hostname": "geekgonecrazy.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1460762070,
+    "expire_in": 157680000,
+    "prev": "01f4917cf6fb307799bb16ef6309fe7492aeb296e94ed46cd900283d5c46b4be",
+    "seqno": 5,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.53
+Comment: https://keybase.io/crypto
+
+yMIlAnicrVJbSBRRGN7NttLsSpra6sNsQaLVOXM/+1IGFtZDRIEV5XbmzJltMmfW
+mVlzM7tgF4QKKsVIulCSZXSBKMpCUwyCCKSHLpRF0EXoQpFF0EOdWerNx87Lufzf
+9/3f+fgHJmUEsoIn3v/seTuT3xx80Hc6GaiclnzcwGm2nuKiDVw1TW90i05dL1Zt
+6lyUAxBABAgwAFEwQohQARJDBTxlZ0J4EVAZGoaKsQqgARWdUIKBhACgAm8AkWBB
+BZgr5QzTilMn4ZiWx2R5LGGJ8LyEDR4aggRVpAsCrwtAVQDiRUaGEpIoI26yXZ/B
+zGnYpfNNm72xSyxtbxT8f/adTMsRnUAkybymaQxEVBVIvK7IFLC2EEPkA13qWLiG
+MnSc0uq4bVHi4G0prrGUY6U6k1A/Xf87o8HmE7uGqSQc27OJvYWVN3leIuqzvVTC
+h2+lWuyvUEwzLZ0Fygh11HFN2+KikCGJZ/rKUJSBIvNAAaUcrU+YDo2ZPkJSZBWw
+5behdemUDBFBhRiyoQlAURDSNChTQxYAMqgiIh5TjUcyRSLVRZnoLB9eFXSJiLIm
+an7cLq21bC4qMZs4ziRdM25hL+lQrrH/7vqxgWBWYFxojD9ogazMqf/Gb/PiCYHr
+x4f6z0080CB8qFjyhuN2jmltXnk70vY7d/x0c2xG3qwrPd9Ofi88FV7+qfzlHLVt
+Y/bwocipnB958utdtZHQnpprLdLNuQcnX1nTIx9+RAtaroe7OqyO8eKyVP5IS2j3
+wxX4/qq+xrIntRWhy+T1m+eoO3/2uuLML7dL6l+SsPd06Fjhht72wX1FC/fea7/Q
+6TSdHCk4++t4vCIXuHPrny1917S691Vf1yMciAzcKv/4uX/tjWOu3r52evbF1klf
+w07VD+G0XDRjBykbHO69OuXOwzPLS0aKM4vndL8YXvCksnp/xqXcooNf8tycRXc6
+gxVHQ9r2AnfeU/NI8/mqwuxYzh8ULTtc
+=LJvG
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/geekgonecrazy
+
+==================================================================
