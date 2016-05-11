@@ -14,4 +14,6 @@ permalink: pretty
 kramdown:
   input: GFM
 
-gems: ["jemoji"]
+gems: 
+  - jemoji
+  - jekyll-seo-tag
