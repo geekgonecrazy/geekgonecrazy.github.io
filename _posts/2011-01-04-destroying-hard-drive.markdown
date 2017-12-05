@@ -3,6 +3,7 @@ layout: post
 title:  "Destroying a hard drive"
 date:   2011-01-04
 comments: true
+publish: true
 tags: [hardware, fun]
 ---
 Not very often do I get to be destructive at work. So when I do get to I get slightly excited! Had an old pentium 3 desktop they planned to give away. But it their copy of xp on it as well as some somewhat sensitive information. At first we were going to put the linux distribution of our fancy on it(this changes from day to day). But it wouldn't boot from the cd. Thought the cd drive was shot. Tried it and an external neither work. After 30 minutes of messing with it my boss gives up. Told me to just pull the hard drive out and trash it! :D  

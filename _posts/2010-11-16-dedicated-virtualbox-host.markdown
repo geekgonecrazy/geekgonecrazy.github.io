@@ -3,6 +3,7 @@ layout: post
 title:  "Dedicated Virtualbox Host"
 date:   2010-11-16
 comments: true
+publish: true
 tags: [virtualization]
 ---
 A while back I posted about [building a quad core system][1].  In the post I discussed virtualization, and building a dedicated machine for hosting virtual machines.  Following that, I posted about actually building that machine.  In it I mentioned installing Xenserver.  I have no doubt that it is amazing.  Just wasn't exactly what I had in mind.  

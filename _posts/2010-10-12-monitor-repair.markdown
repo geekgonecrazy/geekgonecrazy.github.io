@@ -3,6 +3,7 @@ layout: post
 title:  "Monitor Repair"
 date:   2010-10-12
 comments: true
+publish: true
 tags: [hardware]
 ---
 A few days ago I found a 22" Lcd screen that was being tossed out because it didn't work.  The thought of the beauty being thrown away didn't set well with me.  So I picked it up.  

@@ -3,6 +3,7 @@ layout: post
 title:  "IPv6 Connectivity in Ubuntu: Setting up"
 date:   2011-02-20
 comments: true
+publish: true
 tags: [ipv6]
 ---
 With ICANN recently announcing [the end of IPv4 addresses to allocate][1], its time to take a look at the future.

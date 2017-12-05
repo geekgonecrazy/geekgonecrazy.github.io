@@ -8,6 +8,7 @@ layout: default
 
   <ul class="post-list">
     {% for post in site.posts %}
+     {% if post.publish %}
       <li>
         <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
@@ -21,6 +22,7 @@ layout: default
 
         <p><a href="{{ post.url | remove:'.html' }}">Read more...</a></p>
       </li>
+     {% endif %}
     {% endfor %}
   </ul>
 

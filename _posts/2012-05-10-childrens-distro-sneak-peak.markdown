@@ -3,6 +3,7 @@ layout: post
 title:  "Childrens Distro sneak peak"
 date:   2012-05-10
 comments: true
+publish: true
 tags: [ipv6]
 ---
 I was assigned the task of creating a children's linux distro for use here at the library.  Here's a sneak peak.  

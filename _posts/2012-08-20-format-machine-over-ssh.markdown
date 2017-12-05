@@ -3,6 +3,7 @@ layout: post
 title:  "Format Machine over ssh"
 date:   2012-08-20
 comments: true
+publish: true
 tags: [tips,linux]
 ---
 Lets say you have data on a remote linux machine, and for what ever reason you need to format the drive.  Like for instance you decide to switch VPS hosts.  If you just let them delete it, you have no way of knowing what really happens to your data.  So providing you have ssh access here is a way to eliminate your data.  
