@@ -21,9 +21,15 @@ Enable workspaces span displays
 Set screenshot area to clipboard to ctrl+shift+4
 
 Install tilix
+
 `sudo dnf install tilix`
 
 `sudo dnf install tmux`
+
+```
+sudo dnf groupinstall "Development Tools"
+sudo dnf groupinstall "C Development Tools and Libraries"
+```
 
 sudo dnf install zsh
 
@@ -95,3 +101,5 @@ https://www.yubico.com/support/knowledge-base/categories/articles/can-set-linux-
 Install keybase
 `sudo yum install https://prerelease.keybase.io/keybase_amd64.rpm`
 
+Install kubectl
+https://kubernetes.io/docs/tasks/tools/install-kubectl/
