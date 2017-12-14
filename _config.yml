@@ -1,10 +1,10 @@
 # Site settings
-title: Aaron's Blog
+title: Aaron's Ramblings
 #email: your-email@domain.com
 description: > # this means to ignore newlines until "baseurl:"
   This is a place for all of my ramblings
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://geekgonecrazy.com" # the base hostname & protocol for your site
+url: "https://me.geekgonecrazy.com" # the base hostname & protocol for your site
 twitter_username: geekgonecrazy
 github_username:  geekgonecrazy
 
