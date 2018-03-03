@@ -77,6 +77,9 @@ Install Google Play Music Desktop Player
 Install Visual Studio Code
 `flatpak install --from https://flathub.org/repo/appstream/com.visualstudio.code.flatpakref`
 
+Actually switched to from repo due to terminal limitation
+
+
 Install Enpass
 
 
