@@ -68,6 +68,7 @@ Drop in .gitconfig
 Add gpg key for signing
 https://www.debuntu.org/how-to-importexport-gpg-key-pair/
 Install Rocket.Chat
+`flatpak install flathub chat.rocket.RocketChat`
 
 Install Google Chrome
 
