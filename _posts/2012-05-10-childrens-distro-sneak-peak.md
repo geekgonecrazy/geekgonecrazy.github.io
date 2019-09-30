@@ -6,7 +6,7 @@ comments: true
 publish: true
 tags: [ipv6]
 ---
-I was assigned the task of creating a children's linux distro for use here at the library.  Here's a sneak peak.  
+I was assigned the task of creating a children's linux distro for use here at the library(where I work).  Here's a sneak peak:
 
 ![][1]
 
@@ -18,4 +18,7 @@ As you can see I've loaded it up with games.  Once i've finished i'll give a be
 
 [edit 04/11/2014] It actually turned out looking nothing like this at all.  We called the project rachel. You can find out more about it on its [github page](https://github.com/geekgonecrazy/rachel).
 
-[1]: http://lh5.ggpht.com/_BMKBVRf6mio/TcmQfVPmMbI/AAAAAAAAAh4/EKEKmhMUn5s/2011-05-10%2014.20.35.png
+[1]: https://lh5.ggpht.com/_BMKBVRf6mio/TcmQfVPmMbI/AAAAAAAAAh4/EKEKmhMUn5s/2011-05-10%2014.20.35.png
+
+#### Updates
+09/30/2019: Changed image link to https

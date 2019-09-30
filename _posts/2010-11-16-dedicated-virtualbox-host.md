@@ -6,7 +6,7 @@ comments: true
 publish: true
 tags: [virtualization]
 ---
-A while back I posted about [building a quad core system][1].  In the post I discussed virtualization, and building a dedicated machine for hosting virtual machines.  Following that, I posted about actually building that machine.  In it I mentioned installing Xenserver.  I have no doubt that it is amazing.  Just wasn't exactly what I had in mind.  
+A while back I posted about [Building first desktop from scratch][1].  In it I mentioned installing Xenserver.  I have no doubt that it is amazing.  Just wasn't exactly what I had in mind.  
 
 Long story cut extremely short, I went with virtualbox.  Reasons being: Its fast, so far has supported everything I throw at it, stable, cross platform, live migration, snapshots make backup easy, easy to use, and I like it. 
 
@@ -127,6 +127,9 @@ As long as you don't have your router pointing at this ip you should be safe.  
 
 
 [1]: /2010/03/24/building-first-computer
-[2]: http://4.bp.blogspot.com/_BMKBVRf6mio/TQoBIQzXW5I/AAAAAAAAAY0/g6Tdv1MrmvY/s320/Screenshot.png
-[4]: http://pastebin.com/fgMC20b8
-[5]: http://3.bp.blogspot.com/_BMKBVRf6mio/TQoBXvaX-GI/AAAAAAAAAY4/Dw8D9wLEEE4/s320/phpvirtualbox.jpg
+[2]: https://4.bp.blogspot.com/_BMKBVRf6mio/TQoBIQzXW5I/AAAAAAAAAY0/g6Tdv1MrmvY/s320/Screenshot.png
+[4]: https://pastebin.com/fgMC20b8
+[5]: https://3.bp.blogspot.com/_BMKBVRf6mio/TQoBXvaX-GI/AAAAAAAAAY4/Dw8D9wLEEE4/s320/phpvirtualbox.jpg
+
+#### Updates
+09/30/2019: Switch image links to https

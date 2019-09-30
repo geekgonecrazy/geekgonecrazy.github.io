@@ -27,10 +27,13 @@ I'm sure we could've used a floppy to boot from the cd. But, this was much more 
 ![][13]
 
 
-[1]: http://3.bp.blogspot.com/_BMKBVRf6mio/TSPTkxv1F1I/AAAAAAAAAZc/KvnyXO1JRxQ/s320/2011-01-04+11.57.46.jpg
-[3]: http://4.bp.blogspot.com/_BMKBVRf6mio/TSPTqNfBCdI/AAAAAAAAAZg/IlegdVicZKc/s320/2011-01-04+12.00.22.jpg
-[5]: http://1.bp.blogspot.com/_BMKBVRf6mio/TSPTwD_uVUI/AAAAAAAAAZk/YBV6Aj8fl24/s320/2011-01-04+12.01.20.jpg
-[7]: http://1.bp.blogspot.com/_BMKBVRf6mio/TSPT2B85xnI/AAAAAAAAAZo/5yaAokOvAjQ/s320/2011-01-04+12.01.58.jpg
-[9]: http://2.bp.blogspot.com/_BMKBVRf6mio/TSPT6lE6FjI/AAAAAAAAAZs/NAKFZ92ZQMI/s320/2011-01-04+12.04.07.jpg
-[11]: http://1.bp.blogspot.com/_BMKBVRf6mio/TSPT_k5sBiI/AAAAAAAAAZw/6M7mHPkWNt4/s320/2011-01-04+12.04.12.jpg
-[13]: http://4.bp.blogspot.com/_BMKBVRf6mio/TSPUFhUNeLI/AAAAAAAAAZ0/NKjteIC7epM/s320/2011-01-04+12.06.06.jpg
+[1]: https://3.bp.blogspot.com/_BMKBVRf6mio/TSPTkxv1F1I/AAAAAAAAAZc/KvnyXO1JRxQ/s320/2011-01-04+11.57.46.jpg
+[3]: https://4.bp.blogspot.com/_BMKBVRf6mio/TSPTqNfBCdI/AAAAAAAAAZg/IlegdVicZKc/s320/2011-01-04+12.00.22.jpg
+[5]: https://1.bp.blogspot.com/_BMKBVRf6mio/TSPTwD_uVUI/AAAAAAAAAZk/YBV6Aj8fl24/s320/2011-01-04+12.01.20.jpg
+[7]: https://1.bp.blogspot.com/_BMKBVRf6mio/TSPT2B85xnI/AAAAAAAAAZo/5yaAokOvAjQ/s320/2011-01-04+12.01.58.jpg
+[9]: https://2.bp.blogspot.com/_BMKBVRf6mio/TSPT6lE6FjI/AAAAAAAAAZs/NAKFZ92ZQMI/s320/2011-01-04+12.04.07.jpg
+[11]: https://1.bp.blogspot.com/_BMKBVRf6mio/TSPT_k5sBiI/AAAAAAAAAZw/6M7mHPkWNt4/s320/2011-01-04+12.04.12.jpg
+[13]: https://4.bp.blogspot.com/_BMKBVRf6mio/TSPUFhUNeLI/AAAAAAAAAZ0/NKjteIC7epM/s320/2011-01-04+12.06.06.jpg
+
+#### Updates
+09/30/2019: Switching image links to https

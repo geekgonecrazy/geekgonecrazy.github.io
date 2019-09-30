@@ -86,7 +86,6 @@ sudo /etc/init.d/networking restart
 ```
 
 You should now have access.  Try browsing [http://ipv6.google.com][11] or [http://www.v6.facebook.com][12]
-or [http://ipv6.geekgonecrazy.com ][13]
 
 Its important to note, that the bridge Ip and your actual ip are only slightly different.  So make sure to keep them straight.  As the bridge does no more than connect you.  The other is your routed subnet of /64. A /64 can have 
 
@@ -108,4 +107,6 @@ If you have questions/problems, let me know i'd be happy to help in any way I ca
 [10]: https://lh5.googleusercontent.com/-HCsf0YcS7NU/TYWNH1NAG3I/AAAAAAAAAgs/2yWlVZfhELc/s1600/Screen+shot+2011-03-20+at+12.03.15+AM.png
 [11]: http://ipv6.google.com/
 [12]: http://www.v6.facebook.com/
-[13]: http://ipv6.geekgonecrazy.com/
+
+#### Updates
+09/30/2019: Removed link to my subdomain that has since been shutdown
