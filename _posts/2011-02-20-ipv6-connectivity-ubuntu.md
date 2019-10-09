@@ -38,7 +38,7 @@ Lets get started! First you will need to choose a tunnel provider. Personally I 
 
 Once you sign up for an account and sign in, click [Create Regular Tunnel][8].
 
-[![][9]][10]
+[![][9]{: .center-image }][10]
 
 You should see something similar.  
 

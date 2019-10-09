@@ -10,7 +10,7 @@ A few days ago I found a 22" Lcd screen that was being tossed out because it did
 
 Before messing with it.
 
-![][1]
+![][1]{: .center-image }
 
 When turning it on, it would show its gateway logo and then go blank.  Which was a good sign.  But none of the inputs worked.  
 
@@ -18,59 +18,59 @@ So I took it apart.
 
 <!--excerpt-->
 
-![][3]
+![][3]{: .center-image }
 
 Front panel off
 
-![][5]
+![][5]{: .center-image }
 
 The guts exposed.
 
 I took off the box there on the back then removed the power board and the video input board.  
 
-![][7]
+![][7]{: .center-image }
 
 Video board.
 
-![][9]
+![][9]{: .center-image }
 
 Another view of the video board.
 
-![][11]
+![][11]{: .center-image }
 
 Power board.
 I don't know if you can see it or not but capacitor is domed at the top. A sign that its busted.  
 
-![][13]
+![][13]{: .center-image }
 
 A better shot of the busted capacitor. 
 It was a 25v 1000uF capacitor.  So I made a trip to Radio Shack this afternoon.  They didn't have 25v so I picked up a 35v 1000uF capacitor.   The voltage doesn't matter too much.  Of course you'll want to be safe and stay close to the old voltage.  But keeping it at 1000uF is a must.  According to Google.  :)  
 
-![][15]
+![][15]{: .center-image }
 
 Bottom view of the power board.
 
-![][17]
+![][17]{: .center-image }
 
 New capacitor.
  
 I removed the old capacitor, and put the new one in.  
 
-![][19]
+![][19]{: .center-image }
 
 The new capacitor in place.
 
-![][21]
+![][21]{: .center-image }
 
 Top view of the new capacitor.
 Woot!  Put it together and hooked it up to my mac.  
 
-![][23]
+![][23]{: .center-image }
 
 Booom!
 It's humongous!
 
-![][25]
+![][25]{: .center-image }
 
 Cool feature takes the second input and shows it in another window.
 So there you have it.  Just because  your lcd screen won't show anything or power up doesn't mean its dead.

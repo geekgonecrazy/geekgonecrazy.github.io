@@ -15,14 +15,14 @@ About a month ago at work we started a project internally known as Project Opaci
 Anyways, on to what Project Opacity actually is.  Through out the library there are computer stations from which patrons can access the library catalog.  Which we call Opac's or kiosks.  Come to think of it, this probably is where the name comes from.  
 
 An Old Opac Station
-[![An Old Opac Station][1]][2]
+[![An Old Opac Station][1]{: .center-image }][2]
 
 This was one of the old Opac's.  They were becoming extremely unreliable.  Half the time they weren't working.  The graphics on the web page wouldn't show.  Pages took a long time to load.  Most of this is due to the browser being something along the lines of IE4(Ok maybe not. Honestly not sure).  It was winCE based.
 
 This is the cabinet space below where the thin client was kept.
-[![][3]][4]
+[![][3]{: .center-image }][4]
 
-[![][5]][6]
+[![][5]{: .center-image }][6]
 
 They were using old WYSE thin clients.  I'm sure these could have been updated or something.  But I can imagine licensing would have been a pain.  As well has who knows might not have supported this hardware.  Personally really glad to not have to deal with winCE, being a linux guy.
 
@@ -31,9 +31,9 @@ Linux.  WOOT!  Needless to say,  I got excited about this project.
 
 So low and behold we have a prototype!!
 
-[![][7]][8]
+[![][7]{: .center-image }][8]
 
-[![][9]][10]
+[![][9]{: .center-image }][10]
 
 Kind of a sexy little machine.  Using CF card for hard drive, Atom processor, and 2 gigs of ram.  Decent setup really.  
 
@@ -43,85 +43,85 @@ So tested it got everything working.  Then, a shocking thing happened.  My bo
   
 Long story short, verified it was the power supply, and ordered new one.  Around the same time also ordering parts, for the eight needed to replace all the Opac's, in both branches of the library.
 
-[![][12]][13]
+[![][12]{: .center-image }][13]
 
 Cart full of parts for all eight Opac's.
 
 Then we started building them.  Here are some pictures of the parts and putting them together.
 
-[![][14]][15]
+[![][14]{: .center-image }][15]
 
 8gb CF card.
 
-[![][16]][17]
+[![][16]{: .center-image }][17]
 
 The CF to SATA converter.
 
-[![][18]][19]
+[![][18]{: .center-image }][19]
 
 2GB Ram.  Yeah I know just ram.  But I took a pic.. 
 
-[![][20]][21]
+[![][20]{: .center-image }][21]
 
 Motherboard with Atom processor on it.
 
 Now laying the parts out and actually building them.  Yeah I know, some of you are saying, "So what?  Been there done that."  If you're that person, go read something else.  Others that don't get the chance to build computers, carry on.  
 
-[![][22]][23]
+[![][22]{: .center-image }][23]
 
 Laid them out.  Ain't it so purdy?  
 
-[![][24]][25]
+[![][24]{: .center-image }][25]
 
 GAh! Wow that was hard.  We went and removed the cases from the box!  :-O  
 Actually in this same step we inventoried them.  I guess that is the significance.
 
-[![][26]][27]
+[![][26]{: .center-image }][27]
 
 Open case.
 
-[![][28]][29]
+[![][28]{: .center-image }][29]
 
 The motherboard in, and power supply in place.
 
-[![][30]][31]
+[![][30]{: .center-image }][31]
 
 Everything hooked up and ready.  Well almost..
 
-[![][32]][33]
+[![][32]{: .center-image }][33]
 
 CF to SATA adapter mounted. Using power tools as an IT Assistant?? Who would have thought?
 
 To mount the adapter, we drilled three holes through the top of the CD/Hard-drive bay. Then we used motherboard standoffs, nuts, and screws to raise it away from the metal, preventing shorting.
 
-[![][34]][35]
+[![][34]{: .center-image }][35]
 
 Done?  No, not exactly.  One thing we forgot about completely, was how it would be fit into the cabinet.  Turns out, it didn't fit like we thought it would. So for the ones mounted on the poles(4 of them), we had to make some modifications.
 
-[![][36]][37]
+[![][36]{: .center-image }][37]
 
 Two holes drilled where the legs normally would be glued.
 
-[![][38]][39]
+[![][38]{: .center-image }][39]
 
 Nuts & Bolts through strips of copper
 
-[![][40]][41]
+[![][40]{: .center-image }][41]
 
 View from the inside.  Yes had to remove the motherboard's.
 Was kind of annoying.  But you do what you got to do.
 
-[![][42]][43]
+[![][42]{: .center-image }][43]
 
 Then we hung these bad boys!
 
 A lot of hacking, but we got them in.  Next I had to flash/clone the CF cards.  
 
-[![][44]][45]
+[![][44]{: .center-image }][45]
 
 Prototype, being prototype?
 
-[![][46]][47]
+[![][46]{: .center-image }][47]
 
 First attempt.
 
@@ -129,7 +129,7 @@ As with anything in this project, cloning the cards was a learning experience. A
 
 So the cloning route seemed more appealing.  As seen in the screenshot, I booted from a cd, created a disc image, compressed it, then uncompressed and DD(the disk copy command in linux) to card.  Not sure why this didn't work.  Next just copied directly from one disc to another.
 
-[![][48]][49]
+[![][48]{: .center-image }][49]
 
 Direct copying from sda to sdb.
 Worked great!  Done using:  
@@ -150,12 +150,12 @@ disc.  Be careful!
 Think before you do, and you'll be fine.  Now we just simply installed the CF cards.
 
 
-[![][50]][51]
+[![][50]{: .center-image }][51]
 
 CF card being put in.
 Finally!  Power them up!  
 
-[![][52]][53]
+[![][52]{: .center-image }][53]
 
 Opac interface Software fully operational.  Still making some little tweaks to make the experience better. 
 

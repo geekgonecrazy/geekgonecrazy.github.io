@@ -17,7 +17,7 @@ I ran into a couple of problems along the way.  A case/power supply combo I orde
 
 For most of my parts I went to MicroCenter, one of my favorite computer stores.
 
-![Parts I picked up][picture_of_parts]
+![Parts I picked up][picture_of_parts]{: .center-image }
 
 I picked up: 
 * Extra case fans
@@ -30,23 +30,23 @@ I picked up:
 * Green wig - Yup spent the rest of the day wearing that
 * Code Red - You know gotta keep up the energy
 
-![Motherboard and CPU installed][motherboard_cpu_installed]
+![Motherboard and CPU installed][motherboard_cpu_installed]{: .center-image }
 
 Couple of pictures of the case.
 
-![Case pic 1][case_1]
+![Case pic 1][case_1]{: .center-image }
 
-![Case pic 2][case_2]
+![Case pic 2][case_2]{: .center-image }
 
-![Case pic 3][case_3]
+![Case pic 3][case_3]{: .center-image }
 
 The slots are for hot swappable hard drives.  I can pop a new drive in at any time with out having to power down.
 
-![Hot swappable bays][front_bays]
+![Hot swappable bays][front_bays]{: .center-image }
 
 I installed XenServer on it at first... But as awesome as it was... I like having an operating system I can easily get around.  So I installed Ubuntu 64bit 9.10. Btw... XFCE is a beautiful desktop environment. 
 
-![Screenshot of OS][screenshot]
+![Screenshot of OS][screenshot]{: .center-image }
 
 Any questions or comments hit me up.
 

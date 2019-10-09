@@ -12,19 +12,19 @@ Not very often do I get to be destructive at work. So when I do get to I get sli
 
 I'm sure we could've used a floppy to boot from the cd. But, this was much more enjoyable.  
 
-![][1]
+![][1]{: .center-image }
 
-![][3]
+![][3]{: .center-image }
 
-![][5]
+![][5]{: .center-image }
 
-![][7]
+![][7]{: .center-image }
 
-![][9]
+![][9]{: .center-image }
 
-![][11]
+![][11]{: .center-image }
 
-![][13]
+![][13]{: .center-image }
 
 
 [1]: https://3.bp.blogspot.com/_BMKBVRf6mio/TSPTkxv1F1I/AAAAAAAAAZc/KvnyXO1JRxQ/s320/2011-01-04+11.57.46.jpg

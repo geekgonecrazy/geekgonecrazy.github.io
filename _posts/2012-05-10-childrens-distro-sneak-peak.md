@@ -8,7 +8,7 @@ tags: [ipv6]
 ---
 I was assigned the task of creating a children's linux distro for use here at the library(where I work).  Here's a sneak peak:
 
-![][1]
+![][1]{: .center-image }
 
 <!--excerpt-->  
 

@@ -25,7 +25,7 @@ sudo apt-get install ssh
 
 Then ssh in from your desktop computer to do the rest.  Copy and paste works this way :D
 
-![][2]
+![][2]{: .center-image }
 
 Not generally a good practice.  But lets start out by becoming root.
 
@@ -119,7 +119,7 @@ Should return you to normal 'ol you!
 
 Now you should be able to access the web interface from the machines ip. In this case it is: http://10.10.1.180/phpvirtualbox  
 
-![][5]
+![][5]{: .center-image }
 
 Now you can start setting up your virtual machines.  If you want to be able to route traffic to them like I am in my setup.  Make sure to set the network interface to bridged.  
 
