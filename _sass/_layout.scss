@@ -4,14 +4,30 @@
     color: #e4e4e4;
   }
   
-  .site-title {
+  .site-title, .site-nav .page-link {
      color: #e4e4e4 !important;
   }
   
+  pre, code, code.highlighter-rouge, .highlight, .highlight code {
+    background-color: #353030 !important; 
+  }
   
-  a {
+  a, a:visited {
     color: #e39777;
   }
+
+  a:hover {
+    color: #bb6a48;
+  }
+
+  blockquote {
+    color: #bdbdbd;
+  }
+
+  .gist .blob-code, .gist .blob-num {
+      background-color: #fff !important;
+  }
+
   img {
     filter: grayscale(30%);
   }
