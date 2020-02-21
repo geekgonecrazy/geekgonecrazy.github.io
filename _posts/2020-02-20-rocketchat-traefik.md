@@ -3,7 +3,7 @@ layout: post
 title:  "Rocket.Chat + Kubernetes + Traefik = :heart:"
 date:   2020-02-20
 comments: true
-publish: false
+publish: true
 tags: [traefik]
 ---
 
