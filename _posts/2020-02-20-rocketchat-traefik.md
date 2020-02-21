@@ -13,7 +13,7 @@ We started this journey off with a couple of my collegues actually putting toget
 
 This solution worked great as a quick proof of concept.  We were able to setup a page on our website and people could come in and try Rocket.Chat out. It would provision using tutum and proxy traffic through with hipache and the user would have a Rocket.Chat instance to play with in just a few minutes.
 
-[insert screenshot if we can find one]
+![screenshot](/images/2020-02-20/deploy.png){: .center-image }
 
 The problem with this solution is it just wouldn't scale that well. Tutum wasn't really great to work with and introduced a lot of weird quirks into the system. It seemed to perform worse an worse the more containers we had running.  Hipache while doing the job didn't really fit that nicely with this dynamic load.  We had to setup a redis cluster just for hipache and inject new records every time we wanted to handle traffic for a new subdomain.
 
