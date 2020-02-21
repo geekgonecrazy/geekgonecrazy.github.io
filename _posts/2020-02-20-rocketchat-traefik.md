@@ -126,7 +126,7 @@ spec:
 
 ```
 
-We started writing a tool that we call fleetcommand.  This tool handles all of the talking to the kubernetes clusters, the billing integrations, the customer self service options etc.  We wrote it in Go. Which actually allowed us a lot of benefits.  We were able to easily wrap the kubernetes client and use it directly instead of having to build our own mappings to the api.
+We started writing a tool that we call fleetcommand.  This tool handles all of the talking to the kubernetes clusters, the billing integrations, the customer self service options etc.  We wrote it in Go. Which actually allowed us a lot of benefits.  We were able to easily wrap the kubernetes client and use it directly instead of having to build our own mappings to the api. We were able to use it to directly inject the deployment, service and ingress objects directly into kubernetes.
 
 When we started looking at our vendor for our managed Kubernetes (GKE) we quickly realized we had a bit of a problem. If we just defined an ingress rule like we were in our minikube environment... While Google would handle it for us.. It would also give a new ip for each one. Which while great of them.. meant we would some how have to get DNS configured and then after all of that we would be pretty shackled into GCP.
 
