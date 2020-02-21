@@ -7,7 +7,7 @@ publish: false
 tags: [traefik]
 ---
 
-I've been a docker / container fan boy since the dotcloud days.  Managed to introduce them into a couple of previous jobs. Primarily only as aids for the build process or for maintaining the same environment between dev and production. But at my current job I got the opportunity to really go all in. At Rocket.Chat we wanted to build a cloud offering to allow people to quickly and easily deploy Rocket.Chat.
+I've been a docker / container fanboy since the dotcloud days.  Managed to introduce containers into a couple of previous jobs. Primarily only as aids for the build process or for maintaining the same environment between dev and production. But at my current job I got the opportunity to really go all in. At Rocket.Chat we wanted to build a cloud offering to allow people to quickly and easily deploy Rocket.Chat.
 
 We started this journey off with a couple of my collegues actually putting together a quick proof of concept using a wildcard cert, hipache and a solution that was at the time called tutum.  Tutum was later aquired by docker.. and shutdown.
 
@@ -15,7 +15,7 @@ This solution worked great as a quick proof of concept.  We were able to setup a
 
 ![screenshot](/images/2020-02-20/deploy.png){: .center-image }
 
-The problem with this solution is it just wouldn't scale that well. Tutum wasn't really great to work with and introduced a lot of weird quirks into the system. It seemed to perform worse an worse the more containers we had running.  Hipache while doing the job didn't really fit that nicely with this dynamic load.  We had to setup a redis cluster just for hipache and inject new records every time we wanted to handle traffic for a new subdomain.
+The problem with this solution is it just wouldn't scale that well. Tutum wasn't really great to work with and introduced a lot of weird quirks into the system. It seemed to perform worse the more containers we had running.  Hipache while doing the job didn't really fit that nicely with this dynamic load.  We had to setup a redis cluster just for hipache and inject new records every time we wanted to handle traffic for a new subdomain.
 
 We started to evaluate a few other options.  At the time the orchestration landscape was actually rather scarce. Kubernetes already existed and looked super promising, but it was a bit young.  We looked at adapting a few other solutions to fit our needs.. We checked out Juju charms and LXD containers.. But.. after some prototyping felt that it was going to take a lot of work to make work as we invisioned.
 
