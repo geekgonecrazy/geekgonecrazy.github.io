@@ -134,7 +134,7 @@ When we started looking at our vendor for our managed Kubernetes (GKE) we quickl
 
 We started looking around at various ingress controllers. At the time there weren't a lot. We found the default nginx controller that I think is still used as the example ingress controller and used in minikube.  Some how we stumbled across traefik.  Right off the bat I loved Traefik because of the gopher. 
 
-![traefik mascot](https://github.com/containous/traefik/blob/master/docs/content/assets/img/traefik.logo.png)
+![traefik mascot](https://github.com/containous/traefik/raw/master/docs/content/assets/img/traefik.logo.png){: .center-image }
 
 But then we discovered that not only did it have a super cool mascot.  They also could act as an ingress controller. This would allow us to just programatically insert an ingress record into our Kubernetes cluster and traefik would scoop it up and handle the rest.  They also added a little icing on the cake by providing support for provisioning Letsencrypt certs.  Which we knew we would want to make use of for custom domains.
 
