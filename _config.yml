@@ -15,6 +15,8 @@ markdown: kramdown
 permalink: pretty
 kramdown:
   input: GFM
+  
+comments: false
 
 gems: 
   - jemoji
