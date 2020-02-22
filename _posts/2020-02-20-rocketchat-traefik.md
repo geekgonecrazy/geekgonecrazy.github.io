@@ -9,6 +9,8 @@ tags: [traefik]
 
 You could say I've been a docker / container fanboy for a while now...  I started working with containers in a couple of previous jobs. Primarily only as aids for the build process or for maintaining the same environment between dev and production. But at my current job I got the opportunity to really go all in. At Rocket.Chat we wanted to build a cloud offering to allow people to quickly and easily deploy Rocket.Chat.
 
+<!--excerpt-->
+
 We started this journey off with a couple of my collegues actually putting together a quick proof of concept using a wildcard cert, hipache and a solution that was at the time called tutum.  Tutum was later aquired by docker.. and shutdown.
 
 This solution worked great as a quick proof of concept.  We were able to setup a page on our website and people could come in and try Rocket.Chat out. It would provision a docker container using tutum and proxy traffic through with hipache and the user would have a Rocket.Chat instance to play with in just a few minutes.
