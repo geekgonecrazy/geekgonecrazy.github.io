@@ -2,7 +2,7 @@
 layout: post
 title:  "Hacking in the Physical World"
 date:   2020-04-26
-publish: false
+publish: true
 tags: [100DaysToOffload]
 ---
 
