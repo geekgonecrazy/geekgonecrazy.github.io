@@ -31,21 +31,21 @@ The second major issue is the top 2x4s were layed flat and super bowed.
 I loosened some pieces around the beam leaving the section unhooked from the post and then since mostly doing by my self made a make shift pulley out of rope and stake in the ground.
 
 
-![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947823306_file.jpeg)
+![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947823306_file.jpeg){: .center-image }
 
-![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947837444_file.jpeg)
+![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947837444_file.jpeg){: .center-image }
 
-![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947858948_file.jpeg)
+![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947858948_file.jpeg){: .center-image }
 
-![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947877962_file.jpeg)
+![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947877962_file.jpeg){: .center-image }
 
-![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947890351_file.jpeg)
+![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947890351_file.jpeg){: .center-image }
 
-![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947906948_file.jpeg)
+![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947906948_file.jpeg){: .center-image }
 
-![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947924886_file.jpeg)
+![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947924886_file.jpeg){: .center-image }
 
-![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947938717_file.jpeg)
+![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947938717_file.jpeg){: .center-image }
 
 
 Once they were as straight as I could.. cut a few spare 2x4s put them in as square as I could and then removed the bowed pieces.
