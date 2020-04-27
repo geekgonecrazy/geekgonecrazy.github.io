@@ -1,14 +1,14 @@
 ---
 layout: post
 title:  "Hacking in the Physical World"
-date:   2020-04-25
+date:   2020-04-26
 publish: false
 tags: [100DaysToOffload]
 ---
 
 Hacking is often a term used to mean malicious behavior.  But I believe hacking is a mindset.  It's about trying to be creative.. Taking things and making them work in a different way.  It's about not letting your self be your own limiter.  Just because you've never done something before… doesn't mean you shouldn't try.
 
-I don't consider my self good at carpentry.  Or using screws, hammers, power tools etc.. I'm also sure some most of the work makes professionals cringe just like I do at code by a novice.
+I don't consider my self good at carpentry.  Or using screws, hammers, power tools etc.. I'm also sure ~~some~~ most of the work makes professionals cringe just like I do at code by a novice.
 
 <!--excerpt-->
 
@@ -29,26 +29,29 @@ First thing was obvious.. some of the bottom 2x4s weren't even connected.  🙈
 The second major issue is the top 2x4s were layed flat and super bowed.  
 
 I loosened some pieces around the beam leaving the section unhooked from the post and then since mostly doing by my self made a make shift pulley out of rope and stake in the ground.
- 
-User-uploaded image: file.jpeg
- 
-User-uploaded image: file.jpeg
 
-User-uploaded image: file.jpeg
 
-User-uploaded image: file.jpeg
+![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947823306_file.jpeg)
 
-User-uploaded image: file.jpeg
- 
-User-uploaded image: file.jpeg
+![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947837444_file.jpeg)
 
-User-uploaded image: file.jpeg
+![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947858948_file.jpeg)
 
-User-uploaded image: file.jpeg
- 
+![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947877962_file.jpeg)
+
+![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947890351_file.jpeg)
+
+![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947906948_file.jpeg)
+
+![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947924886_file.jpeg)
+
+![](https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947938717_file.jpeg)
+
 
 Once they were as straight as I could.. cut a few spare 2x4s put them in as square as I could and then removed the bowed pieces.
 
 Anyways… it's not pretty.  But it will last a little longer until I can do it right.
 
 Hopefully interesting in some way!  If not we’ll try again.  I've got several more projects needing done 🙂
+
+
