@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "De-Googling"
-date:   2020-04-26
+date:   2020-04-27
 publish: true
 tags: [100DaysToOffload]
 ---
