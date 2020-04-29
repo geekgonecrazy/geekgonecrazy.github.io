@@ -2,7 +2,7 @@
 layout: post
 title:  "De-Googling: My Progress"
 date:   2020-04-28
-publish: false
+publish: true
 tags: [100DaysToOffload]
 ---
 
@@ -10,12 +10,12 @@ I wrote a bit about my reasoning to De-Google here.  Now I want to write a bit a
 
 # Search
 
-Or Google as many think of it.  This one I have toyed with off and on with over the years.  But a while back probably around a year ago.. I was listening to a podcast.  I think either ask Noah show or one of the Jupiter Broadcast Linux podcasts and was inspired to challenge my self to switch and see how it went.
+Or Google as many think of it.  This one I have toyed with off and on with over the years.  But a while back probably around a year ago.. I was listening to a podcast.  I think either Ask Noah Show or one of the Jupiter Broadcast Linux podcasts and was inspired to challenge my self to switch and see how it went.
 
 I switched to:
 
 
-## Duckduckgo
+## [Duckduckgo](https://duckduckgo.com)
 
 It was one that I had tried direct comparison searches with before.. Every time I would feel it wasn't as good.  But I went ahead and switched it as my default on my phone.
 
@@ -57,7 +57,7 @@ Then after really dragging my feet some more…  I eyed protonmail.. But didn't 
 I switched to:
 
 
-## Self-hosted with mail-in-a-box
+## Self-hosted with [mail-in-a-box](https://mailinabox.email)
 
 This made it so simple!  Simple enough for me to spend half an hour to set it up a $5 droplet on DigitalOcean and have it receiving email for several domains and a couple of new ones 🙂
 
