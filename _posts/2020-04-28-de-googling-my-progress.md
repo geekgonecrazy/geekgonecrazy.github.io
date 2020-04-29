@@ -138,12 +138,13 @@ I think I've used every incarnation of messenger Google has had and killed off. 
 
 Switched to:
 
-
 #### Whatsapp
 
 Yeah I know.. One evil for another.  I was traveling and one of the services I could use for free and worked best in Brazil was WhatsApp. Moving my family, in-laws, etc off is battle for another day.
 
 I would like to get them all using a self hosted Rocket.Chat workspace. One day!
+
+_**Edit to clarify:**_ This was replacing my need for extended family communication groups.  My wife's family my family and extended family thats pretty much it.  For other communications I use Rocket.Chat for team collab and signal or sms(which if they do happen to have iMessage does convert.  I definitely do not trust facebook any more than Google.
 
 # Music
 
