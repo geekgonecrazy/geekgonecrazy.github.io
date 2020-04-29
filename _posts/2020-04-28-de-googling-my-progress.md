@@ -6,7 +6,9 @@ publish: true
 tags: [100DaysToOffload]
 ---
 
-I wrote a bit about my reasoning to De-Google here.  Now I want to write a bit about my progress, the struggles and what I ended up with.
+I wrote a bit about my reasoning to De-Google [here](https://geekgonecrazy.com/2020/04/27/de-googling/).  Now I want to write a bit about my progress, the struggles and what I ended up with.
+
+<!--excerpt-->
 
 # Search
 
