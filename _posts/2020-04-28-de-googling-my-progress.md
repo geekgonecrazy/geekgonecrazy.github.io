@@ -17,7 +17,7 @@ Or Google as many think of it.  This one I have toyed with off and on with over 
 I switched to:
 
 
-## [Duckduckgo](https://duckduckgo.com)
+### [Duckduckgo](https://duckduckgo.com)
 
 It was one that I had tried direct comparison searches with before.. Every time I would feel it wasn't as good.  But I went ahead and switched it as my default on my phone.
 
@@ -40,7 +40,7 @@ I have to give Google major props for Chrome.  The web was getting a bit stagnan
 But it's still Google and my browsing habits is my data.  So I switched to:
 
 
-## Firefox
+### Firefox
 
 Firefox has gotten a lot better!  Like night and day difference.  Its fast, lighter on memory, looks a bit better and perhaps most importantly…
 
@@ -59,7 +59,7 @@ Then after really dragging my feet some more…  I eyed protonmail.. But didn't 
 I switched to:
 
 
-## Self-hosted with [mail-in-a-box](https://mailinabox.email)
+### Self-hosted with [mail-in-a-box](https://mailinabox.email)
 
 This made it so simple!  Simple enough for me to spend half an hour to set it up a $5 droplet on DigitalOcean and have it receiving email for several domains and a couple of new ones 🙂
 
@@ -79,7 +79,7 @@ I tried just switching apps but I'd find my self right back into Google Assistan
 So I switched to what only an insane person would:
 
 
-## iPhone
+### iPhone
 
 I probably just lost 99% of you 🙈
 
@@ -99,7 +99,7 @@ All photos used to backup automatically in full resolution to Google Photos.  By
 Switched to:
 
 
-## iCloud
+### iCloud
 
 Yeah… I'm still looking for a good place to store this.  But at least I'm paying for this service and am not the product.
 
@@ -113,7 +113,7 @@ Another byproduct of using Android my Google account was default.
 Switched to:
 
 
-## iCloud
+### iCloud
 
 I'm thinking about using nextcloud.
 
@@ -125,7 +125,7 @@ I never really used Google Drive or any of the gsuite.
 Switched to:
 
 
-## Hackmd
+### Hackmd
 
 I like writing markdown.  Downside… typing on mobile doesn't work very well.  Especially copy and pasting or moving cursor.  
 
@@ -139,7 +139,7 @@ I think I've used every incarnation of messenger Google has had and killed off. 
 Switched to:
 
 
-## Whatsapp
+### Whatsapp
 
 Yeah I know.. One evil for another.  I was traveling and one of the services I could use for free and worked best in Brazil was WhatsApp. Moving my family, in-laws, etc off is battle for another day.
 
@@ -151,7 +151,7 @@ Used Google Music a lot and actually really liked its recommendations.  But even
 
 Switched to:
 
-## Spotify
+### Spotify
 
 Its one of the few services I don't mind paying for.  It does an okay job at playing music I might be interested in.
 
@@ -163,4 +163,4 @@ Youtube is the only app/service I visit any more for personal use.  I've tried u
 
 When ever I do find my self having to access Google I do so in a separate Firefox Container.
 
-Overall I feel like I've done a great job removing my reliance on Google!
+Overall I feel like I've done a great job removing my reliance on Google!  I have a feeling I will be self hosting a lot more in the future.  Maybe more on that another time.  😉
