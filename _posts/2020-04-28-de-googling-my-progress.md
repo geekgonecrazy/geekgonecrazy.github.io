@@ -144,7 +144,7 @@ Yeah I know.. One evil for another.  I was traveling and one of the services I c
 
 I would like to get them all using a self hosted Rocket.Chat workspace. One day!
 
-_**Edit to clarify:**_ This was replacing my need for extended family communication groups.  My wife's family my family and extended family thats pretty much it.  For other communications I use Rocket.Chat for team collab, signal, keybase chat or sms(which if they do happen to have iMessage does convert.  I definitely do not trust facebook any more than Google.
+_**Edit to clarify:**_ This was replacing my need for extended family communication groups.  My wife's family my family and extended family thats pretty much it.  For other communications I use Rocket.Chat for team collab, signal, keybase chat or sms(which if they do happen to have iMessage does convert).  I definitely do not trust facebook any more than Google.
 
 # Music
 
