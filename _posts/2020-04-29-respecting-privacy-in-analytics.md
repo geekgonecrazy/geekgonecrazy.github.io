@@ -6,7 +6,7 @@ publish: true
 tags: [100DaysToOffload]
 ---
 
-There is a reason why people tend to add analytics to sites. A majority of them probably do it innocently.  They just want to be able to see how their site is doing and if anyone actually shows up. 
+There is a reason why people tend to add analytics to sites. I'd say most people add for completely honest reasoning.  They just want to be able to see how their site is doing and if anyone actually shows up. 
 
 <!--excerpt-->
 
