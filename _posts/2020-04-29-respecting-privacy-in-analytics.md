@@ -16,9 +16,9 @@ Let's imagine you read the exciting sales pitch from AssociatedIn on how adding 
 
 Lets put on our privacy detective hat!
 
-So you turn it on and they start giving you this data.. How are they able to give you this info? The only way they would know anything about your users if they send something to them selves right?  So of course they do this.  But the only way them sending the page to them selves would be useful if they some how told themselves something about the user.  For this info to be useful to themselves they would have to some how identify you in some way to see if unique.
+So you turn it on and they start giving you this data.. How are they able to give you this info? The only way they would know anything about your users if they send something to them selves right?  So of course they do this.  But the only way them sending the page to themselves would be useful if they included something about the user. So they have to some how identify you or to see if unique.
 
-Maybe they see you are logged in to their service? Ouch.. But likely.
+Maybe they see you are logged in to their service? Ouch.. But ok ones easy.
 
 Maybe they fingerprint you by grabbing an assortment of clues the browser gives away?  Could be.. To make it even easier on themselves maybe they drop a cookie in the browser so next time that user visits a page they will know it'd the same user.  Oh it happens to also send to any other site using their analytics?
 
