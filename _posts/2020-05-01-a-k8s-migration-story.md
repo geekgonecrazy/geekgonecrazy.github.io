@@ -8,9 +8,9 @@ tags: [100DaysToOffload]
 
 Surprisingly I don’t have a lot of kubernetes related content on my blog yet.  This might just because I’m too busy using it to talk about it.  But i’m a heavy user of it.  To me it just makes orchestrating work loads easier.
 
-<!--excerpt-->
-
 One thing in general I don’t see a lot of talk about is migrating between infrastructure.  Especially don’t see much for kubernetes.  
+
+<!--excerpt-->
 
 So I wanted to share a general set of steps that i’ve followed a couple of times to migrate between a couple of kubernetes clusters with minimal to no downtime.
 
