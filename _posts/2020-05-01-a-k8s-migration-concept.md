@@ -2,7 +2,7 @@
 layout: post
 title:  "A k8s Migration Concept"
 date:   2020-05-01
-publish: false
+publish: true
 tags: [100DaysToOffload]
 redirect_from:
   - /2020/05/01/a-k8s-migration-story/
