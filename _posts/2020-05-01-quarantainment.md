@@ -1,9 +1,11 @@
 ---
 layout: post
-title:  "Quarintainment"
+title:  "Quarantainment"
 date:   2020-05-01
 publish: true
 tags: [100DaysToOffload]
+redirect_from:
+  - /2020/05/01/quarintainment/
 ---
 
 I don’t think its likely a surprise to anyone if I say I’m typically an introvert.  I stay at and around home a lot in general.  But when its no longer by choice.. kinda takes the fun out of it.
