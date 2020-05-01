@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "A k8s migration story"
+title:  "A k8s Migration Story"
 date:   2020-05-01
 publish: false
 tags: [100DaysToOffload]
