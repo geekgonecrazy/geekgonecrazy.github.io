@@ -21,3 +21,4 @@ comments: false
 gems: 
   - jemoji
   - jekyll-seo-tag
+  - jekyll-redirect-from
