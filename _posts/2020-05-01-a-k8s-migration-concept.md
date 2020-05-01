@@ -1,9 +1,11 @@
 ---
 layout: post
-title:  "A k8s Migration Story"
+title:  "A k8s Migration Concept"
 date:   2020-05-01
 publish: false
 tags: [100DaysToOffload]
+redirect_from:
+  - /2020/05/01/a-k8s-migration-story/
 ---
 
 Surprisingly I don’t have a lot of kubernetes related content on my blog yet.  This might just because I’m too busy using it to talk about it.  But i’m a heavy user of it.  To me it just makes orchestrating work loads easier.
@@ -12,13 +14,7 @@ One thing in general I don’t see a lot of talk about is migrating between infr
 
 <!--excerpt-->
 
-So I wanted to share a general set of steps that i’ve followed a couple of times to migrate between a couple of kubernetes clusters with minimal to no downtime.
-
-**Attention: Do not in anyway consider this a guide!  I’m going based on memory and high level idea.  Do the research and try it out before you try and migrate in production.  I tried several times before I actually did it.**
-
-**Disclaimer: This is mostly from memory didn't consult actual migration plan.  Take with grain of salt**
-
-That out of the way lets go through the basic process.
+So I wanted to share a high level concept set of steps that i’ve followed a couple of times to migrate between a couple of kubernetes clusters with minimal to no downtime.
 
 
 ### Establishing a link between environments
@@ -42,9 +38,9 @@ Now that the other side is ready to accept traffic over the peering and route th
 
 At this point you can make a request like:
 
-
-    curl --verbose --header 'Host: www.example.com' 'http://10.1.1.36:8080/url'
-
+```
+curl --verbose --header 'Host: www.example.com' 'http://10.1.1.36:8080/url'
+```
 
 ### DNS
 
