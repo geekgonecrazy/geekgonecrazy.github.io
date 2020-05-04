@@ -18,9 +18,15 @@ kramdown:
   
 comments: false
 
+# jekyll tagging
+tag_page_layout: tag_index
+tag_page_dir: tags
+tag_feed_dir: tags
+
 gems: 
   - jemoji
   - jekyll-seo-tag
   - jekyll-redirect-from
+  - jekyll-tagging
 
 include: [".well-known"]
