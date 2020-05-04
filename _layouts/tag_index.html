@@ -7,7 +7,7 @@ layout: default
   <h1 class="page-heading">Posts tagged "#{{page.tag}}"</h1>
 
   <ul class="post-list">
-    {% for post in site.tags[page.tag] %}
+    {% for post in page.posts %}
      {% if post.publish %}
       <li>
         <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
