@@ -22,3 +22,5 @@ gems:
   - jemoji
   - jekyll-seo-tag
   - jekyll-redirect-from
+
+include: [".well-known"]
