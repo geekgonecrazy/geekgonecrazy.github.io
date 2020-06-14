@@ -12,3 +12,17 @@ params:
         url: "/"
       - title: "About"
         url: "/about"
+outputs:
+  home:
+  - HTML
+  - Feed
+mediaTypes:
+  application/rss+xml:
+    suffixes:
+      - xml
+outputFormats:
+  Feed:
+    baseName: feed
+    isPlainText: false
+    mediaType: application/rss+xml
+  
