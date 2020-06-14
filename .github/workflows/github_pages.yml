@@ -21,7 +21,6 @@ jobs:
         cname: geekgonecrazy.com
         # Use if your site is not hosted on the gh-pages branch.
         branch: master
-        repo: you/you.github.io
         hugoVersion: extended_0.72.0
         # Use if your site requires a specific version of Hugo
         # Append "extended_" to the begining to use Hugo Extended
