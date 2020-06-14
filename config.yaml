@@ -1,10 +1,9 @@
-baseURL: "http://geekgonecrazy.com/"
+baseURL: "https://geekgonecrazy.com/"
 languageCode: "en-us"
 title: "Aaron's Ramblings"
 theme: "hugo-notepadium"
 permalinks:
   posts: "/:year/:month/:day/:title"
-  feed.xml: "/index.xml"
 params:
   style: "dark"
   nav:
