@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: geekgonecrazy.com
+Token: 278420e14a7f270f3f97c97109abad64a096dcdf6d1d71f312567f76a9107d89
