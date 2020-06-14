@@ -1,0 +1,1125 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Aaron&#39;s Ramblings</title>
+    <link>http://geekgonecrazy.com/</link>
+    <description>Recent content on Aaron&#39;s Ramblings</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 01 May 2020 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="http://geekgonecrazy.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      
+      <title>A k8s Migration Concept</title>
+      
+      <link>http://geekgonecrazy.com/2020/05/01/a-k8s-migration-concept/</link>
+      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2020/05/01/a-k8s-migration-concept/</guid>
+      <description>
+          &lt;p&gt;Surprisingly I don’t have a lot of kubernetes related content on my blog yet.  This might just because I’m too busy using it to talk about it.  But i’m a heavy user of it.  To me it just makes orchestrating work loads easier.&lt;/p&gt;
+&lt;p&gt;One thing in general I don’t see a lot of talk about is migrating between infrastructure.  Especially don’t see much for kubernetes.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;So I wanted to share a high level concept set of steps that i’ve followed a couple of times to migrate between a couple of kubernetes clusters with minimal to no downtime.&lt;/p&gt;
+&lt;h3 id=&#34;establishing-a-link-between-environments&#34;&gt;Establishing a link between environments&lt;/h3&gt;
+&lt;p&gt;The first step in this process was establishing a link between the old environment and the new environment.  Most major cloud providers have VPC peering so can set this up pretty easily.  So far all have been IPSEC.  A few tweaks to the firewall later you can talk across.&lt;/p&gt;
+&lt;h3 id=&#34;spin-up-new-db-nodes&#34;&gt;Spin up new DB nodes&lt;/h3&gt;
+&lt;p&gt;In my case it was some mongo nodes.  Once they were up, joined them to the replicaset on the other side.  One important thing here is they were set with 0 priority to prevent them from some how becoming a primary before we were ready&lt;/p&gt;
+&lt;h3 id=&#34;proxy-endpoint&#34;&gt;Proxy Endpoint&lt;/h3&gt;
+&lt;p&gt;Once the DB is ready and ready to migrate.  Established an endpoint from the new environment across to the old environments ingress provider.  On caveat here is did actually have to spin up a second internal ingress provider that would handle proxying to load inside the cluster.  But did not handle TLS termination.  This is what we pointed the endpoint to.&lt;/p&gt;
+&lt;h3 id=&#34;create-ingress-records&#34;&gt;Create ingress records&lt;/h3&gt;
+&lt;p&gt;Now that the other side is ready to accept traffic over the peering and route the traffic to the appropriate place… Need to actually tell the new environment what routes to listen for and where to send them.  So all of them just point to the proxy endpoint.&lt;/p&gt;
+&lt;p&gt;At this point you can make a request like:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;curl --verbose --header &#39;Host: www.example.com&#39; &#39;http://10.1.1.36:8080/url&#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;dns&#34;&gt;DNS&lt;/h3&gt;
+&lt;p&gt;Now that requests are verified to go across you can swap over the DNS from old environment to the new environment.  Making sure to take note of the TTL on the record.  I actually decreased the TTL a couple of days prior to prevent having to wait as long.&lt;/p&gt;
+&lt;p&gt;So the traffic will flow into new environment and the proxy over to old environment&lt;/p&gt;
+&lt;h3 id=&#34;migrate&#34;&gt;Migrate&lt;/h3&gt;
+&lt;p&gt;Once  give the time for the TTL time to have fully ran out.  Could start migrating.&lt;/p&gt;
+&lt;p&gt;For us this process looked like:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Deploy Deployment&lt;/li&gt;
+&lt;li&gt;Deploy SVC&lt;/li&gt;
+&lt;li&gt;Swap ingress to point to service&lt;/li&gt;
+&lt;li&gt;Verify traffic hits&lt;/li&gt;
+&lt;li&gt;Spin down resource in old environment&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;db-primary-switch&#34;&gt;DB Primary Switch&lt;/h3&gt;
+&lt;p&gt;We waited until about half of the deployments had switched and then adjusted priority in our DB cluster so that only nodes in the new environment had priority and now all in old environment had none and then made our primary in the old environment step down.&lt;/p&gt;
+&lt;p&gt;Important to make sure your application can actually detect and handle this. Otherwise it won’t work.&lt;/p&gt;
+&lt;h3 id=&#34;finishing-up&#34;&gt;Finishing up&lt;/h3&gt;
+&lt;p&gt;Once it was all over only thing left to do was to clean up.&lt;/p&gt;
+&lt;p&gt;To me the magic here is in being able to change the DNS and traffic still be working with some minimal latency increase.&lt;/p&gt;
+&lt;p&gt;Things can definitely go wrong. You have to plan for them.  This is also why giving your self a maintenance window is also extremely important.&lt;/p&gt;
+&lt;p&gt;Also if you know anything about working with the kubernetes api.. consider writing something to do this.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>Quarantainment</title>
+      
+      <link>http://geekgonecrazy.com/2020/05/01/quarantainment/</link>
+      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2020/05/01/quarantainment/</guid>
+      <description>
+          &lt;p&gt;I don’t think its likely a surprise to anyone if I say I’m typically an introvert.  I stay at and around home a lot in general.  But when its no longer by choice.. kinda takes the fun out of it.&lt;/p&gt;
+&lt;p&gt;We identified early on that we needed to keep our selves busy and entertained.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;Started out the quarantine with me teaching my wife to play chess.  So pulled out the ‘ol &lt;a href=&#34;https://www.amazon.com/USAopoly-CH005-191-Chess-Super-Mario/dp/B00168PI9S&#34;target=&#34;_blank&#34;&gt;Mario chess set&lt;/a&gt;.  Yes its awesome!&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://paper-attachments.dropbox.com/s_5B8DDF11035244A7AC92669A93E624BCD7D0866F945EF2DF2F75C708AABAABDC_1588363799655_file.jpeg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://paper-attachments.dropbox.com/s_5B8DDF11035244A7AC92669A93E624BCD7D0866F945EF2DF2F75C708AABAABDC_1588363821571_file.jpeg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;I’ve wanted to learn to play go for a long time.  Pretty much ever since seeing AlphaGo compete against the top players.  So I figured what better time to learn?  Picked &lt;a href=&#34;https://en.wikipedia.org/wiki/Go_equipment#Board&#34;target=&#34;_blank&#34;&gt;Goban&lt;/a&gt; and &lt;a href=&#34;https://en.wikipedia.org/wiki/Go_equipment#Stones&#34;target=&#34;_blank&#34;&gt;stones&lt;/a&gt; or &lt;a href=&#34;https://en.wikipedia.org/wiki/Yunzi&#34;target=&#34;_blank&#34;&gt;Yunzi&lt;/a&gt; as they are apparently called.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://paper-attachments.dropbox.com/s_5B8DDF11035244A7AC92669A93E624BCD7D0866F945EF2DF2F75C708AABAABDC_1588364259006_file.jpeg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;Proceeded to play a couple of very noob games of go.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://paper-attachments.dropbox.com/s_5B8DDF11035244A7AC92669A93E624BCD7D0866F945EF2DF2F75C708AABAABDC_1588364332277_file.jpeg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;The same board doubles as a chess board on the other side so have been alternating between this board and the other for playing chess.&lt;/p&gt;
+&lt;p&gt;Even taught my kids.  They now can all correctly identify the pieces and how the pieces can move.&lt;/p&gt;
+&lt;p&gt;Picked up a few more various card games and board games to add to our collection.  We already regularly enjoy family game nights.&lt;/p&gt;
+&lt;p&gt;Have spent a fair amount of time in my backyard. Got some patio furniture and a Hammock.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://paper-attachments.dropbox.com/s_5B8DDF11035244A7AC92669A93E624BCD7D0866F945EF2DF2F75C708AABAABDC_1588365007947_file.jpeg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m pretty sure amazon and UPS hate us.&lt;/p&gt;
+&lt;p&gt;I also bought some controllers and loaded a raspberry pi up with &lt;a href=&#34;https://retropie.org.uk/&#34;target=&#34;_blank&#34;&gt;retropie&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://paper-attachments.dropbox.com/s_5B8DDF11035244A7AC92669A93E624BCD7D0866F945EF2DF2F75C708AABAABDC_1588365556279_file.jpeg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;So far its working.  We have stayed fairly sane and we are coming out the other side a bit better then we went in.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>Respecting Privacy in Analytics</title>
+      
+      <link>http://geekgonecrazy.com/2020/04/29/respecting-privacy-in-analytics/</link>
+      <pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2020/04/29/respecting-privacy-in-analytics/</guid>
+      <description>
+          &lt;p&gt;There is a reason why people tend to add analytics to sites. I&amp;rsquo;d say most people add for completely honest reasoning.  They just want to be able to see how their site is doing and if anyone actually shows up.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;But its really important to go down the path with caution.  If you dont carefully select and think through your analytics… You end up spying on your users likely without even realizing it.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s imagine you read the exciting sales pitch from AssociatedIn on how adding their analytics will let you see the types of users or businesses visit your site.  Seems innocent enough right?&lt;/p&gt;
+&lt;p&gt;Lets put on our privacy detective hat!&lt;/p&gt;
+&lt;p&gt;So you turn it on and they start giving you this data.. How are they able to give you this info? The only way they would know anything about your users if they send something to them selves right?  So of course they do this.  But the only way them sending the page to themselves would be useful if they included something about the user. So they have to some how identify you or to see if unique.&lt;/p&gt;
+&lt;p&gt;Maybe they see you are logged in to their service? Ouch.. But ok ones easy.&lt;/p&gt;
+&lt;p&gt;Maybe they fingerprint you by grabbing an assortment of clues the browser gives away?  Could be.. To make it even easier on themselves maybe they drop a cookie in the browser so next time that user visits a page they will know it&amp;rsquo;d the same user.  Oh it happens to also send to any other site using their analytics?&lt;/p&gt;
+&lt;p&gt;This just went from analytics straight on over in to tracking territory.  Now by getting some analytics about the type of business your users run.. You have traded it for your user being tracked.&lt;/p&gt;
+&lt;p&gt;The tracking company is then aggregating this data, building models about users, maybe selling it?  Or maybe they aren&amp;rsquo;t so blatenly nefarious.. maybe they are just offering a paid plan offering advanced abilities.  Your users data that you are giving them now let&amp;rsquo;s them make money.&lt;/p&gt;
+&lt;p&gt;Seemed innocent though right?&lt;/p&gt;
+&lt;p&gt;Super important to think about the type of information we collect about our users.  Is that bit of data worth allowing a tracker to invade your users privacy?&lt;/p&gt;
+&lt;h1 id=&#34;ok-so-what-should-i-use&#34;&gt;Ok so what should I use?&lt;/h1&gt;
+&lt;p&gt;Great question!  First off self hosting an open source analytics tool can be a great way to know exactly what data you collect and how its collected.  Also you ensure that data isn&amp;rsquo;t then being aggregated to track your users across the web.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m still on the hunt for good options but will update this list as I find out about them. But here are a couple:&lt;/p&gt;
+&lt;h2 id=&#34;matomo&#34;&gt;Matomo&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://matomo.org&#34;&gt;https://matomo.org&lt;/a&gt; is one recommended by many people in the open source community. Full featured alternative to the likes of Google Analytics.&lt;/p&gt;
+&lt;h2 id=&#34;fatham&#34;&gt;Fatham&lt;/h2&gt;
+&lt;p&gt;Recently came across this one.  I&amp;rsquo;m actually using it for my site and inspired this topic. Feels great for use cases like mine.&lt;/p&gt;
+&lt;p&gt;Its kind of confusing.. But apparently their first version is/was open source.  Then they rewrote it and this version is not open source but available on their SaaS offering.&lt;/p&gt;
+&lt;p&gt;But the open source version can be found here: &lt;a href=&#34;https://github.com/usefathom/fathom&#34;&gt;https://github.com/usefathom/fathom&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;What I like about this is I can see exactly what is transmitted and what is stored.&lt;/p&gt;
+&lt;p&gt;Transmitted: &lt;a href=&#34;https://github.com/usefathom/fathom/blob/8f7c6d2e45ebb28651208e2a7320e29948ecdb2c/assets/src/js/tracker.js#L162&#34;target=&#34;_blank&#34;&gt;here&lt;/a&gt;
+Saved: &lt;a href=&#34;https://github.com/usefathom/fathom/blob/8f7c6d2e45ebb28651208e2a7320e29948ecdb2c/pkg/api/collect.go#L54&#34;target=&#34;_blank&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Here is a sample of my brief moment on hackernews yesterday.  But what you see there is it.  Super simple, but does the job.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://paper-attachments.dropbox.com/s_3A770CD59D00AB3A931B3BF5D654149EDE7875E5917677E7CC0A064B28BBDD07_1588216208662_file.jpeg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;Think about privacy the next time you start adding analytics to your website.  Think about what you are making your users give up in exchange. Do the right thing 🙂&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>De-Googling: My Progress</title>
+      
+      <link>http://geekgonecrazy.com/2020/04/28/de-googling-my-progress/</link>
+      <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2020/04/28/de-googling-my-progress/</guid>
+      <description>
+          &lt;p&gt;I wrote a bit about my reasoning to De-Google &lt;a href=&#34;https://geekgonecrazy.com/2020/04/27/de-googling/&#34;target=&#34;_blank&#34;&gt;here&lt;/a&gt;.  Now I want to write a bit about my progress, the struggles and what I ended up with.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h1 id=&#34;search&#34;&gt;Search&lt;/h1&gt;
+&lt;p&gt;Or Google as many think of it.  This one I have toyed with off and on with over the years.  But a while back probably around a year ago.. I was listening to a podcast.  I think either Ask Noah Show or one of the Jupiter Broadcast Linux podcasts and was inspired to challenge my self to switch and see how it went.&lt;/p&gt;
+&lt;p&gt;I switched to:&lt;/p&gt;
+&lt;h4 id=&#34;duckduckgo&#34;&gt;Duckduckgo&lt;/h4&gt;
+&lt;p&gt;It was one that I had tried direct comparison searches with before.. Every time I would feel it wasn&amp;rsquo;t as good.  But I went ahead and switched it as my default on my phone.&lt;/p&gt;
+&lt;p&gt;At first I noticed what felt like results not showing.  Felt like I was digging a lot.  The same sort of thing I see everyone else complain about and turn away.  But I decided to stick it out.&lt;/p&gt;
+&lt;p&gt;Before long I stopped noticing.  I also almost always find the result on the first page.  No different than Google.&lt;/p&gt;
+&lt;p&gt;What I&amp;rsquo;ve come to realize is I&amp;rsquo;m no longer depending on what Google knows about me to help me find what I want and instead I have become better at searching.&lt;/p&gt;
+&lt;p&gt;Google knows you, it knows the typed of things you would look for.  It farms data on lots of people just like you.  So of course its able to fill in the gap.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll take training my brain my privacy any day!&lt;/p&gt;
+&lt;h1 id=&#34;browser&#34;&gt;Browser&lt;/h1&gt;
+&lt;p&gt;I almost forgot to add.  I actually feel kind of bad.. I help move a lot of people to Chrome from other browsers. 😔&lt;/p&gt;
+&lt;p&gt;I have to give Google major props for Chrome.  The web was getting a bit stagnant.  With Chrome it feels like they gave the web the kick in the pants we needed to evolve.&lt;/p&gt;
+&lt;p&gt;But it&amp;rsquo;s still Google and my browsing habits is my data.  So I switched to:&lt;/p&gt;
+&lt;h4 id=&#34;firefox&#34;&gt;Firefox&lt;/h4&gt;
+&lt;p&gt;Firefox has gotten a lot better!  Like night and day difference.  Its fast, lighter on memory, looks a bit better and perhaps most importantly…&lt;/p&gt;
+&lt;p&gt;Its maintaining some diversity.  Most browsers now use chromium or at least blink under the hood.  Competition is good.  Firefox&amp;rsquo;s phenoix like rise from the the ashes is proof enough of this.&lt;/p&gt;
+&lt;p&gt;I keep chromium and brave around as a backup for times when Firefox doesn&amp;rsquo;t cut it.&lt;/p&gt;
+&lt;h1 id=&#34;email&#34;&gt;Email&lt;/h1&gt;
+&lt;p&gt;I drug my feet for the longest time on this.  I had a grandfathered in Google apps free account for my domains email.  So I&amp;rsquo;m already in better shape then most.&lt;/p&gt;
+&lt;p&gt;I started off in a similar way to search.  I first started using a non-gmail account on my phone.  Desktop I used Thunderbird or Mail.app on osx.  This started to train my self to not really care about the gmail features.&lt;/p&gt;
+&lt;p&gt;Then after really dragging my feet some more…  I eyed protonmail.. But didn&amp;rsquo;t really feel like the encryption they provided and plan options ever really was that great of a deal.&lt;/p&gt;
+&lt;p&gt;I switched to:&lt;/p&gt;
+&lt;h4 id=&#34;self-hosted-with-mail-in-a-boxhttpsmailinaboxemail&#34;&gt;Self-hosted with &lt;a href=&#34;https://mailinabox.email&#34;target=&#34;_blank&#34;&gt;mail-in-a-box&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;This made it so simple!  Simple enough for me to spend half an hour to set it up a $5 droplet on DigitalOcean and have it receiving email for several domains and a couple of new ones 🙂&lt;/p&gt;
+&lt;p&gt;Took another few hours to fail miserably with the terrible Google Takeout export of my email.  Then force Thunderbird to fully download all of my mail and then push it all back up.  Moral of story just use IMAP and you can move your mail anywhere.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m not 100% satisfied with this.  I think in the future I will use some sort of docker based solution or roll my own.  So I can self host a few more things a bit easier.  But I got through the hardest part… I got my data back.&lt;/p&gt;
+&lt;h1 id=&#34;phone&#34;&gt;Phone&lt;/h1&gt;
+&lt;p&gt;One of my biggest tie-ins to Google has actually been mobile.  I&amp;rsquo;ve had a nexus or pixel for as long as I can remember.  I tried Samsung and absolutely hated the skin they threw on it.&lt;/p&gt;
+&lt;p&gt;I tried ROMs like Cyanogenmod but it was always so buggy..  My phone is the one device I need to just work.&lt;/p&gt;
+&lt;p&gt;I tried just switching apps but I&amp;rsquo;d find my self right back into Google Assistant, Google Now etc…&lt;/p&gt;
+&lt;p&gt;So I switched to what only an insane person would:&lt;/p&gt;
+&lt;h4 id=&#34;iphone&#34;&gt;iPhone&lt;/h4&gt;
+&lt;p&gt;I probably just lost 99% of you 🙈&lt;/p&gt;
+&lt;p&gt;But doing this in one fell swoop I cut off a lot of temptation and random little Google apps.&lt;/p&gt;
+&lt;p&gt;This also let me see how the other side is. To be honest not that different.. I haven&amp;rsquo;t really missed anything.&lt;/p&gt;
+&lt;p&gt;But I think this really helped cut my reliance on Google and I feel a lot less reliant on any particular phone OS.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m keeping my eye on pinephone.  Very exciting work being done. I&amp;rsquo;ll be buying one to play with before too long.&lt;/p&gt;
+&lt;h1 id=&#34;photos&#34;&gt;Photos&lt;/h1&gt;
+&lt;p&gt;All photos used to backup automatically in full resolution to Google Photos.  By having original pixel I got this for free.&lt;/p&gt;
+&lt;p&gt;Switched to:&lt;/p&gt;
+&lt;h4 id=&#34;icloud&#34;&gt;iCloud&lt;/h4&gt;
+&lt;p&gt;Yeah… I&amp;rsquo;m still looking for a good place to store this.  But at least I&amp;rsquo;m paying for this service and am not the product.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m open to suggestions on self hosted.  I&amp;rsquo;ve already pulled down my 2-300GB Google Photos archive.&lt;/p&gt;
+&lt;h1 id=&#34;contactscalendar&#34;&gt;Contacts/Calendar&lt;/h1&gt;
+&lt;p&gt;Another byproduct of using Android my Google account was default.&lt;/p&gt;
+&lt;p&gt;Switched to:&lt;/p&gt;
+&lt;h4 id=&#34;icloud-1&#34;&gt;iCloud&lt;/h4&gt;
+&lt;p&gt;I&amp;rsquo;m thinking about using nextcloud.&lt;/p&gt;
+&lt;h1 id=&#34;docs&#34;&gt;Docs&lt;/h1&gt;
+&lt;p&gt;I never really used Google Drive or any of the gsuite.&lt;/p&gt;
+&lt;p&gt;Switched to:&lt;/p&gt;
+&lt;h4 id=&#34;hackmd&#34;&gt;Hackmd&lt;/h4&gt;
+&lt;p&gt;I like writing markdown.  Downside… typing on mobile doesn&amp;rsquo;t work very well.  Especially copy and pasting or moving cursor.&lt;/p&gt;
+&lt;p&gt;Nextcloud might fill this gap.  But I don&amp;rsquo;t feel a void to fill right now.&lt;/p&gt;
+&lt;h1 id=&#34;google-hangouts&#34;&gt;Google Hangouts&lt;/h1&gt;
+&lt;p&gt;I think I&amp;rsquo;ve used every incarnation of messenger Google has had and killed off.  I had all of my family on Google Hangouts in group conversations.&lt;/p&gt;
+&lt;p&gt;Switched to:&lt;/p&gt;
+&lt;h4 id=&#34;whatsapp&#34;&gt;Whatsapp&lt;/h4&gt;
+&lt;p&gt;Yeah I know.. One evil for another.  I was traveling and one of the services I could use for free and worked best in Brazil was WhatsApp. Moving my family, in-laws, etc off is battle for another day.&lt;/p&gt;
+&lt;p&gt;I would like to get them all using a self hosted Rocket.Chat workspace. One day!&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Edit to clarify:&lt;/strong&gt;&lt;/em&gt; This was replacing my need for extended family communication groups.  My wife&amp;rsquo;s family my family and extended family thats pretty much it.  For other communications I use Rocket.Chat for team collab, signal, keybase chat or sms(which if they do happen to have iMessage does convert).  I definitely do not trust facebook any more than Google.&lt;/p&gt;
+&lt;h1 id=&#34;music&#34;&gt;Music&lt;/h1&gt;
+&lt;p&gt;Used Google Music a lot and actually really liked its recommendations.  But even before my De-Googling exercise I noticed that they started pushing YouTube Music.  Rumor is it will be replace with YouTube Music. My guess is to leverage all of the music brought on by artists with vevo.&lt;/p&gt;
+&lt;p&gt;Switched to:&lt;/p&gt;
+&lt;h4 id=&#34;spotify&#34;&gt;Spotify&lt;/h4&gt;
+&lt;p&gt;Its one of the few services I don&amp;rsquo;t mind paying for.  It does an okay job at playing music I might be interested in.&lt;/p&gt;
+&lt;h1 id=&#34;todo&#34;&gt;Todo&lt;/h1&gt;
+&lt;p&gt;Looking through my phone at the Google Apps installed.&lt;/p&gt;
+&lt;p&gt;Youtube is the only app/service I visit any more for personal use.  I&amp;rsquo;ve tried using invidious.. But I don&amp;rsquo;t know how much this really helps.  Also if I self host then the data is then tied to me… so kinda defeats the purposes.&lt;/p&gt;
+&lt;p&gt;When ever I do find my self having to access Google I do so in a separate Firefox Container.&lt;/p&gt;
+&lt;p&gt;Overall I feel like I&amp;rsquo;ve done a great job removing my reliance on Google!  I have a feeling I will be self hosting a lot more in the future.  Maybe more on that another time.  😉&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>De-Googling</title>
+      
+      <link>http://geekgonecrazy.com/2020/04/27/de-googling/</link>
+      <pubDate>Mon, 27 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2020/04/27/de-googling/</guid>
+      <description>
+          &lt;p&gt;This is not by any means a new idea.  A quick search around the web will return many results of people doing this.  My reasons are likely similar to many others.  Privacy being the most common shared reason.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;Ok that&amp;rsquo;s it I spoiled it! Now you don&amp;rsquo;t need to read on 😜 But I&amp;rsquo;ll explain anyways.&lt;/p&gt;
+&lt;h1 id=&#34;privacy&#34;&gt;Privacy&lt;/h1&gt;
+&lt;p&gt;Google gives their applications and services away for free.  This is extreeemly attractive!  We humans are cheap!  That&amp;rsquo;s not totally fair.. But I think in regard to software it holds true.&lt;/p&gt;
+&lt;p&gt;We will buy the best hardware in the world and then we hunt for the cheapest software we can find.  But this is a rabbit hole.. I won&amp;rsquo;t go down today.&lt;/p&gt;
+&lt;p&gt;What we often forget(my self included) is to stop and ask your self a question:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;How are they able to pay people to make this if they are giving it away for free?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Don&amp;rsquo;t know?  Let me help you out.  You are paying with your data!&lt;/p&gt;
+&lt;p&gt;Of course there are exceptions that I won&amp;rsquo;t go into here.  But for the most part this holds true.&lt;/p&gt;
+&lt;p&gt;Google specifically is an ad company.  This is how they make money.  &amp;ldquo;But I thought Google was just a search engine?&amp;rdquo; Nope they historically make most money on ads.  &lt;a href=&#34;https://www.investopedia.com/articles/investing/020515/business-google.asp&#34;target=&#34;_blank&#34;&gt;Here is one example&lt;/a&gt; of many out there talking about this.  So your data feeds their ad machine.&lt;/p&gt;
+&lt;p&gt;Creeped out yet?  Me too..&lt;/p&gt;
+&lt;h1 id=&#34;google-grave-yard&#34;&gt;Google Grave yard&lt;/h1&gt;
+&lt;p&gt;A less common reason.. I&amp;rsquo;ll try not to sound too bitter here.  Bear with me.  But Google has left in its wake a trail of bodies.&lt;/p&gt;
+&lt;p&gt;A few that I used to use:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Google Wave - so cool&lt;/li&gt;
+&lt;li&gt;Google Reader - still don&amp;rsquo;t have one I like as much&lt;/li&gt;
+&lt;li&gt;100 different messaging products - I&amp;rsquo;m exaggerating… but only slightly&lt;/li&gt;
+&lt;li&gt;Many more&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Its enough that there is a dedicated website just to products Google has killed:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://killedbygoogle.com&#34;&gt;https://killedbygoogle.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If they can&amp;rsquo;t figure out how to get their ad clicks or get bored (seems to be the case of messengers) to the chopping block they go!&lt;/p&gt;
+&lt;h1 id=&#34;diversity&#34;&gt;Diversity&lt;/h1&gt;
+&lt;p&gt;It  goes a bit beyond Google for me.  Its more like a way of life.  As the old saying goes:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Dont put all of your eggs in one basket&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;What if a company went out of business and took all of your data with them?  This has happened.&lt;/p&gt;
+&lt;p&gt;Diversifying the companies you use for services you can&amp;rsquo;t host your self is like hedging your bets.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Thats it folks!  Hopefully my perspective is different enough to be interesting. 😜 I might follow this up with how I have de-googled.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>Hacking in the Physical World</title>
+      
+      <link>http://geekgonecrazy.com/2020/04/26/hacking-in-the-physical-world/</link>
+      <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2020/04/26/hacking-in-the-physical-world/</guid>
+      <description>
+          &lt;p&gt;Hacking is often a term used to mean malicious behavior.  But I believe hacking is a mindset.  It&amp;rsquo;s about trying to be creative.. Taking things and making them work in a different way.  It&amp;rsquo;s about not letting your self be your own limiter.  Just because you&amp;rsquo;ve never done something before… doesn&amp;rsquo;t mean you shouldn&amp;rsquo;t try.&lt;/p&gt;
+&lt;p&gt;I don&amp;rsquo;t consider my self good at carpentry.  Or using screws, hammers, power tools etc.. I&amp;rsquo;m also sure &lt;del&gt;some&lt;/del&gt; most of the work makes professionals cringe just like I do at code by a novice.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;But when a project comes around that needs done.. I think the only way to learn is to do.&lt;/p&gt;
+&lt;p&gt;When ever I can I like to help on projects where someone knows what they are doing.   This way I can slowly build up some tips and tricks.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve always been a tinkerer with a very curious mind.  My parents love to tell the story of me as a young kid ripping the thermostat off of the wall so that I could see how it worked.&lt;/p&gt;
+&lt;p&gt;Over the last few years I feel I&amp;rsquo;ve gotten a bit more comfortable with power tools.  Hurricane Harvey hit me and my in-laws houses.  Fortunately for us we were renting.  But my in-laws have spent the last few years gutting and remodeling their house.  A lot of opportunities to learn there and they have gotten to make the house like they want it.  Look for the silver linings right?&lt;/p&gt;
+&lt;p&gt;Anyways.. Few years back we bought a house and I inherited an amazing fence &lt;!-- raw HTML omitted --&gt;.  I&amp;rsquo;ve done repairs in the past replacing pieces that butt up against my neighbors yard.  It was an urgent repair to keep the neighbors aggressive acting dog from barging through the very weak pieces.  The side has always leaned out a bit towards the road.&lt;/p&gt;
+&lt;p&gt;What needs to happen is I need to pull all planks off and fix it properly.  But until I have resources to do so I have attempted to straighten some and strengthen it.&lt;/p&gt;
+&lt;p&gt;First thing was obvious.. some of the bottom 2x4s weren&amp;rsquo;t even connected.  🙈&lt;/p&gt;
+&lt;p&gt;The second major issue is the top 2x4s were layed flat and super bowed.&lt;/p&gt;
+&lt;p&gt;I loosened some pieces around the beam leaving the section unhooked from the post and then since mostly doing by my self made a make shift pulley out of rope and stake in the ground.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947823306_file.jpeg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947837444_file.jpeg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947858948_file.jpeg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947877962_file.jpeg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947890351_file.jpeg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947906948_file.jpeg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947924886_file.jpeg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://paper-attachments.dropbox.com/s_316E9D8BF50C70E0D031ECDBEA216C11C9895ACBF532434B292654CB7AD99E07_1587947938717_file.jpeg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;Once they were as straight as I could.. cut a few spare 2x4s put them in as square as I could and then removed the bowed pieces.&lt;/p&gt;
+&lt;p&gt;Anyways… it&amp;rsquo;s not pretty.  But it will last a little longer until I can do it right.&lt;/p&gt;
+&lt;p&gt;Hopefully interesting in some way!  If not we’ll try again.  I&amp;rsquo;ve got several more projects needing done 🙂&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>100 Day writing challenge</title>
+      
+      <link>http://geekgonecrazy.com/2020/04/25/100-day-writing-challenge/</link>
+      <pubDate>Sat, 25 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2020/04/25/100-day-writing-challenge/</guid>
+      <description>
+          &lt;p&gt;Hello its me again your friendly neighborhood Geek Gone Crazy.😜 Its been a bit less time since my last post than normal.  Recently I came across a challenge on mastodon to do a 100 day writing challenge. Inspired by the 100 days of code.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;The idea being much like 100 days of code it encourages a person to sit down to write more often.  Of course by doing this you get better at it.&lt;/p&gt;
+&lt;p&gt;As you can see from my posting history here.. I don&amp;rsquo;t post a lot.  But I do enjoy writing, I do a fair amount of writing for work and have always wanted to post a bit more. So.. here goes nothing!&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s to hopefully a few more posts!&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>Rocket.Chat &#43; Kubernetes &#43; Traefik = :heart:</title>
+      
+      <link>http://geekgonecrazy.com/2020/02/20/rocket.chat-kubernetes-traefik-heart/</link>
+      <pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2020/02/20/rocket.chat-kubernetes-traefik-heart/</guid>
+      <description>
+          &lt;p&gt;You could say I&amp;rsquo;ve been a docker / container fanboy for a while now&amp;hellip;  I started working with containers in a couple of previous jobs. Primarily only as aids for the build process or for maintaining the same environment between dev and production. But at my current job I got the opportunity to really go all in. At Rocket.Chat we wanted to build a cloud offering to allow people to quickly and easily deploy Rocket.Chat.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;We started this journey off with a couple of my collegues actually putting together a quick proof of concept using a wildcard cert, hipache and a solution that was at the time called tutum.  Tutum was later aquired by docker.. and shutdown.&lt;/p&gt;
+&lt;p&gt;This solution worked great as a quick proof of concept.  We were able to setup a page on our website and people could come in and try Rocket.Chat out. It would provision a docker container using tutum and proxy traffic through with hipache and the user would have a Rocket.Chat instance to play with in just a few minutes.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;http://geekgonecrazy.com/images/2020-02-20/deploy.png&#34;
+        alt=&#34;screenshot&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;The problem with this solution is it just wouldn&amp;rsquo;t scale that well. Tutum wasn&amp;rsquo;t really great to work with and had a lot of weird quirks. It seemed to perform worse the more containers we had running.  Lots of network issues, lower level docker issues etc.  Hipache while doing the job didn&amp;rsquo;t really fit that nicely with this dynamic load.  We had to setup a redis cluster just for hipache and inject new records every time we wanted to handle traffic for a new subdomain.&lt;/p&gt;
+&lt;p&gt;We started to evaluate a few other options.  At the time the orchestration landscape was rather scarce. Kubernetes already existed and looked super promising, but it was a bit young.  We looked at adapting a few other solutions to fit our needs.. We checked out Juju charms and LXD containers.. But.. after some prototyping felt that it was going to take a lot of work to make work as we invisioned.&lt;/p&gt;
+&lt;p&gt;Finally we decided to just take a bet on Kubernetes. Much like a lot of other companies were doing at the time.  It of course helped to see companies both big and small on board.  We really loved that Kubernetes had a super declaritive way of defining the payload and that it had a super easy to use api. We also really loved the idea that we could remain vendor independent.&lt;/p&gt;
+&lt;p&gt;We were able to pretty quickly get a yaml file up and running.  It looked much like it does today:&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;We started writing a tool that we call fleetcommand.  This tool handled all of the talking to the kubernetes clusters, the billing integrations, the customer self service options etc.  We wrote it in Go. Which actually allowed us a lot of benefits.  We were able to easily wrap the kubernetes client and use it directly instead of having to build our own mappings to the api. We were able to use it to directly inject the deployment, service and ingress objects directly into kubernetes.  Its evolved a lot.. but its still in use today. :smile:&lt;/p&gt;
+&lt;p&gt;When we started looking at our infrastructure vendor for our managed Kubernetes (GKE) we quickly realized we had a bit of a problem. If we just defined an ingress rule like we were in our minikube environment&amp;hellip; While Google would handle it for us.. It would also give a new ip for each one. Which while great of them.. meant we would some how have to get DNS configured and then after all of that we would be pretty shackled into GCP.&lt;/p&gt;
+&lt;h2 id=&#34;introducing-traefik&#34;&gt;Introducing Traefik&lt;/h2&gt;
+&lt;p&gt;We started looking around at various ingress controllers. At the time there weren&amp;rsquo;t a lot. We found the default nginx controller.. I think is still used today as the example ingress controller and used in minikube.  Some how we stumbled across traefik.  Right off the bat I loved Traefik because of the gopher.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://github.com/containous/traefik/raw/master/docs/content/assets/img/traefik.logo.png&#34;
+        alt=&#34;traefik mascot&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;But then we discovered that not only did it have a super cool mascot.  They also could act as an ingress controller. This would allow us to just programatically insert an ingress record into our Kubernetes cluster and traefik would scoop it up and handle the rest.  They also added a little icing on the cake by providing support for provisioning Letsencrypt certs.  Which we knew we would want to make use of for custom domains.  It also certainly didn&amp;rsquo;t hurt that it was also written in Go.&lt;/p&gt;
+&lt;h2 id=&#34;putting-the-pieces-together&#34;&gt;Putting the pieces together&lt;/h2&gt;
+&lt;p&gt;We were then able to put the pieces together.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A wildcard DNS record so no need to add on the fly DNS record creation.&lt;/li&gt;
+&lt;li&gt;A Google Provided IP and TCP LoadBalancer&lt;/li&gt;
+&lt;li&gt;A couple of Traefik instances sitting on nodes we tainted as edge nodes and Traefik had selectors for and had a tolerence for.&lt;/li&gt;
+&lt;li&gt;Fleetcommand to talk to kubernetes api to inject the deployment, service and ingress records.&lt;/li&gt;
+&lt;li&gt;Some worker nodes&lt;/li&gt;
+&lt;li&gt;Some database nodes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;now&#34;&gt;Now&lt;/h2&gt;
+&lt;p&gt;A lot has changed!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;We switched away from GCP. Proving our solution was actually able to be vendor agnostic.&lt;/li&gt;
+&lt;li&gt;We introduced multiple regions - We now spin up DNS records&lt;/li&gt;
+&lt;li&gt;We still use and love Traefik - Have gone from just 2 Traefik instances to now 10+&lt;/li&gt;
+&lt;li&gt;We let our customers bring their own custom domains and provide Letsencrypt certificates for them&lt;/li&gt;
+&lt;li&gt;We still love Golang for our infrastructure needs.  But thats a topic for another time. :smile:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We are still very thankful to have discovered 2 key pieces. Kubernetes and Traefik&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>Fedora Setup</title>
+      
+      <link>http://geekgonecrazy.com/2017/12/05/fedora-setup/</link>
+      <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2017/12/05/fedora-setup/</guid>
+      <description>
+          &lt;p&gt;Install nvidia drivers (oss drivers on this card fail miserably)&lt;/p&gt;
+&lt;p&gt;Install gnome tweak tool
+&lt;code&gt;sudo dnf install gnome-tweak-tool&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Enable global dark theme&lt;/p&gt;
+&lt;p&gt;Enable minamize and maximize buttons&lt;/p&gt;
+&lt;p&gt;Enable workspaces span displays&lt;/p&gt;
+&lt;p&gt;Set screenshot area to clipboard to ctrl+shift+4&lt;/p&gt;
+&lt;p&gt;Install tilix&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo dnf install tilix&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo dnf install tmux&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo dnf groupinstall &amp;quot;Development Tools&amp;quot;
+sudo dnf groupinstall &amp;quot;C Development Tools and Libraries&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;sudo dnf install zsh&lt;/p&gt;
+&lt;p&gt;Install oh my zsh
+&lt;code&gt;sh -c &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;restore dotfiles&lt;/p&gt;
+&lt;p&gt;Install Docker
+&lt;code&gt;sudo dnf -y install dnf-plugins-core&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo dnf config-manager \
+    --add-repo \
+    https://download.docker.com/linux/fedora/docker-ce.repo
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;sudo dnf install docker-ce&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;At time of writing have to actually hop in: &lt;code&gt;/etc/yum.repos.d/docker-ci.repo&lt;/code&gt; and set version to 26 since docker doesn&amp;rsquo;t have fedora 27&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;baseurl=https://download.docker.com/linux/fedora/26/$basearch/stable
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;add user to group
+&lt;code&gt;sudo usermod -G docker aaron&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;too lazy to restart to make sure things are working&amp;hellip; &lt;code&gt;newgrp docker&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Install golang
+&lt;code&gt;sudo dnf install golang-bin&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo dnf install nodejs&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Drop in .gitconfig&lt;/p&gt;
+&lt;p&gt;Add gpg key for signing
+&lt;a href=&#34;https://www.debuntu.org/how-to-importexport-gpg-key-pair/&#34;&gt;https://www.debuntu.org/how-to-importexport-gpg-key-pair/&lt;/a&gt;
+Install Rocket.Chat
+&lt;code&gt;flatpak install flathub chat.rocket.RocketChat&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Install Google Chrome&lt;/p&gt;
+&lt;p&gt;Install Google Play Music Desktop Player
+&lt;code&gt;flatpak install --from https://flathub.org/repo/appstream/com.googleplaymusicdesktopplayer.GPMDP.flatpakref&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Install Visual Studio Code
+&lt;code&gt;flatpak install --from https://flathub.org/repo/appstream/com.visualstudio.code.flatpakref&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Actually switched to from repo due to terminal limitation&lt;/p&gt;
+&lt;p&gt;Install Enpass&lt;/p&gt;
+&lt;p&gt;Install Corebird
+&lt;code&gt;flatpak install --from https://flathub.org/repo/appstream/org.baedert.corebird.flatpakref&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;GNOME Extensions
+&lt;code&gt;sudo dnf install chrome-gnome-shell&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Dash to panel - &lt;a href=&#34;https://extensions.gnome.org/extension/1160/dash-to-panel/&#34;&gt;https://extensions.gnome.org/extension/1160/dash-to-panel/&lt;/a&gt;
+Top Icons Plus - &lt;a href=&#34;https://extensions.gnome.org/extension/1031/topicons/&#34;&gt;https://extensions.gnome.org/extension/1031/topicons/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Download minio hook up to s3 buckets (digitalocean)
+&lt;a href=&#34;https://minio.io/downloads.html#download-client&#34;&gt;https://minio.io/downloads.html#download-client&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;yubikey u2f setup
+&lt;a href=&#34;https://www.yubico.com/support/knowledge-base/categories/articles/can-set-linux-system-use-u2f/&#34;&gt;https://www.yubico.com/support/knowledge-base/categories/articles/can-set-linux-system-use-u2f/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Install keybase
+&lt;code&gt;sudo yum install https://prerelease.keybase.io/keybase_amd64.rpm&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Install kubectl
+&lt;a href=&#34;https://kubernetes.io/docs/tasks/tools/install-kubectl/&#34;&gt;https://kubernetes.io/docs/tasks/tools/install-kubectl/&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>My OSX Setup</title>
+      
+      <link>http://geekgonecrazy.com/2015/09/19/my-osx-setup/</link>
+      <pubDate>Sat, 19 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2015/09/19/my-osx-setup/</guid>
+      <description>
+          &lt;p&gt;I&amp;rsquo;m an on again off again macOS / OSX user.  This started off at some point as a blog post, but its grown into more of a living page of the programs I install when on macOS / OSX.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h2 id=&#34;os-tweaks&#34;&gt;OS tweaks&lt;/h2&gt;
+&lt;h3 id=&#34;changed-scroll-direction&#34;&gt;Changed Scroll Direction&lt;/h3&gt;
+&lt;p&gt;If using a normal mouse with a scroll wheel.  The default &amp;ldquo;natural&amp;rdquo; feels very un-natural.&lt;/p&gt;
+&lt;p&gt;Unchecked &amp;ldquo;Scroll direction: natural&amp;rdquo;
+&lt;img  src=&#34;http://geekgonecrazy.com/images/2015-09-19/scroll-dir.png&#34;
+        alt=&#34;Scroll Direction&#34;/&gt;&lt;/p&gt;
+&lt;h3 id=&#34;change-modifier-keys&#34;&gt;Change Modifier keys&lt;/h3&gt;
+&lt;p&gt;If not using an apple keyboard.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;http://geekgonecrazy.com/images/2015-09-19/modifier-keys.png&#34;
+        alt=&#34;Modifier Keys&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;Map the windows key to the command key.&lt;/p&gt;
+&lt;h3 id=&#34;auto-hide-dock&#34;&gt;Auto hide dock&lt;/h3&gt;
+&lt;p&gt;I like the maximum amount of screen space I can get.  So of course I hide the dock.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;http://geekgonecrazy.com/images/2015-09-19/dock-autohide.png&#34;
+        alt=&#34;Dock Auto Hide&#34;/&gt;&lt;/p&gt;
+&lt;h3 id=&#34;hot-corner&#34;&gt;Hot Corner&lt;/h3&gt;
+&lt;p&gt;If i&amp;rsquo;m at a normal mouse and keyboard I like to turn this on.  Also if coming from Fedora/Gnome3 this helps feel more at home.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;http://geekgonecrazy.com/images/2015-09-19/hot-corner.png&#34;
+        alt=&#34;Hot Corner&#34;/&gt;&lt;/p&gt;
+&lt;h3 id=&#34;finder-config&#34;&gt;Finder config&lt;/h3&gt;
+&lt;p&gt;Very much personal preference.&lt;/p&gt;
+&lt;p&gt;I like having the hard drive icons on my desktop.  Its convenient.
+&lt;img  src=&#34;http://geekgonecrazy.com/images/2015-09-19/finder-desktop.png&#34;
+        alt=&#34;Finder Desktop&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;Also like being able to quickly get to my home folder.
+&lt;img  src=&#34;http://geekgonecrazy.com/images/2015-09-19/finder-sidebar.png&#34;
+        alt=&#34;Finder Sidebar&#34;/&gt;&lt;/p&gt;
+&lt;h3 id=&#34;screenshot-directory&#34;&gt;Screenshot Directory&lt;/h3&gt;
+&lt;p&gt;I take a lot of screenshots.  So I don&amp;rsquo;t want them cluttering my desktop.  So I change the folder they are saved to.&lt;/p&gt;
+&lt;p&gt;First create the directory you want them saved to.  I chose &lt;code&gt;~/Documents/Screenshots&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Then run this command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;defaults write com.apple.screencapture location ~/Documents/Screenshots
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then to reload so this takes its followed by:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;killall SystemUIServer
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For extra convenience I drag the folder into my dock so I have quick access to them.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;http://geekgonecrazy.com/images/2015-09-19/Screenshots-dock.png&#34;
+        alt=&#34;Screenshots in dock&#34;/&gt;&lt;/p&gt;
+&lt;h2 id=&#34;applications&#34;&gt;Applications&lt;/h2&gt;
+&lt;p&gt;A few of the apps I always seem to download.&lt;/p&gt;
+&lt;h3 id=&#34;google-chrome&#34;&gt;Google Chrome&lt;/h3&gt;
+&lt;p&gt;Gotta have my favorite browser.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.google.com/chrome&#34;target=&#34;_blank&#34;&gt;Download Here&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;spectacle&#34;&gt;Spectacle&lt;/h3&gt;
+&lt;p&gt;This is an application that allows you to use keyboard shortcuts to quickly snap windows.  Very useful&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.spectacleapp.com/&#34;target=&#34;_blank&#34;&gt;Download Here&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;visual-studio-code&#34;&gt;Visual Studio Code&lt;/h3&gt;
+&lt;p&gt;Code editor of choice.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://code.visualstudio.com/assets/home/home-screenshot-mac.png&#34;
+        alt=&#34;Vs Code&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;Open the &lt;strong&gt;Command Palette&lt;/strong&gt; (⇧ + ⌘ + p)) and type &amp;lsquo;shell command&amp;rsquo; to find the &lt;strong&gt;Shell Command: Install &amp;lsquo;code&amp;rsquo; command in PATH&lt;/strong&gt; command.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://code.visualstudio.com/assets/docs/setup/mac/shell-command.png&#34;
+        alt=&#34;vscode Commands&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;Also will need to set the git path.  The path if installed from xcode is: &lt;code&gt;/usr/bin/git&lt;/code&gt;.  Simply typing git in the terminal will trigger a popup to install from xcode.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;http://geekgonecrazy.com/images/2015-09-19/git-path.png&#34;
+        alt=&#34;vscode git setting&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://code.visualstudio.com/&#34;target=&#34;_blank&#34;&gt;Download Here&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;rocketchat&#34;&gt;Rocket.Chat&lt;/h3&gt;
+&lt;p&gt;Awesome group chat platform like slack / hipchat.  Great set of developers.  This project is moving very quickly.&lt;/p&gt;
+&lt;p&gt;It for sure gets my recommendation for group chat in business.  Offers you that privacy and control that you want and need.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://rocket.chat&#34;target=&#34;_blank&#34;&gt;Check the community out here&lt;/a&gt;
+&lt;a href=&#34;https://github.com/RocketChat/Rocket.Chat.Electron/releases&#34;target=&#34;_blank&#34;&gt;Download Client Here&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;robo-3t-formally-robomongo&#34;&gt;Robo 3T (formally Robomongo)&lt;/h3&gt;
+&lt;p&gt;Great application to query / view mongodb databases.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://robomongo.org/&#34;target=&#34;_blank&#34;&gt;Download Here&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;google-play-music-desktop-player&#34;&gt;Google Play Music Desktop Player&lt;/h3&gt;
+&lt;p&gt;Best desktop player for Google Music I&amp;rsquo;ve found&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.googleplaymusicdesktopplayer.com&#34;target=&#34;_blank&#34;&gt;Download Here&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;vlc&#34;&gt;VLC&lt;/h3&gt;
+&lt;p&gt;If a video / audio file won&amp;rsquo;t play anywhere else.  This will play it.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.videolan.org/vlc/index.html&#34;target=&#34;_blank&#34;&gt;Download Here&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;iterm2&#34;&gt;iTerm2&lt;/h3&gt;
+&lt;p&gt;Quickly becoming my favorite terminal emulator. This is what i&amp;rsquo;ll use below for setting up my shell.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.iterm2.com/&#34;target=&#34;_blank&#34;&gt;Download Here&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;hyper&#34;&gt;Hyper&lt;/h3&gt;
+&lt;p&gt;I&amp;rsquo;m on again off again with this terminal.  One of the things I like most is cross-platform&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://hyper.is/&#34;target=&#34;_blank&#34;&gt;Download Here&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;gifgrabber&#34;&gt;GifGrabber&lt;/h3&gt;
+&lt;p&gt;Great application for recording gifs.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.gifgrabber.com/&#34;target=&#34;_blank&#34;&gt;Download Here&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;docker-for-mac&#34;&gt;Docker for Mac&lt;/h3&gt;
+&lt;p&gt;I use Docker a lot. :)&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.docker.com/docker-mac&#34;target=&#34;_blank&#34;&gt;Download Here&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;brew&#34;&gt;Brew&lt;/h3&gt;
+&lt;p&gt;If you consider your self any sort of power user, this is a must.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://brew.sh/&#34;target=&#34;_blank&#34;&gt;Download Here&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;terminal&#34;&gt;Terminal&lt;/h2&gt;
+&lt;h3 id=&#34;zsh&#34;&gt;zsh&lt;/h3&gt;
+&lt;p&gt;I have come to like zsh.  So I always do this.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;chsh -s $(which zsh)
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;install-oh-my-zsh&#34;&gt;Install oh-my-zsh&lt;/h3&gt;
+&lt;p&gt;Part of what makes zsh awesome is installing oh-my-zsh.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://ohmyz.sh/&#34;target=&#34;_blank&#34;&gt;More Info Here&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sh -c &amp;quot;$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This will possibly prompt you to install XCode CLI tools.  If so do that.  Then re-run the command.&lt;/p&gt;
+&lt;h3 id=&#34;set-zsh-prompt&#34;&gt;Set zsh prompt&lt;/h3&gt;
+&lt;p&gt;To edit which one of the prompts you use do:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;code .zshrc
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Replacing atom with your editor of choice.&lt;/p&gt;
+&lt;p&gt;Change the line near the top. That starts with &lt;code&gt;ZSH_THEME&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ZSH_THEME=&amp;quot;ys&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I changed to &lt;code&gt;ys&lt;/code&gt; which looks like this:&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;http://geekgonecrazy.com/images/2015-09-19/zsh-prompt.png&#34;
+        alt=&#34;ZSH Prompt&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;Using &lt;code&gt;source ~/.zshrc&lt;/code&gt; will reload your zsh config.&lt;/p&gt;
+&lt;h3 id=&#34;setup-git-info&#34;&gt;Setup git Info&lt;/h3&gt;
+&lt;p&gt;You&amp;rsquo;ll be reminded at some point to do this.  But good to go ahead and set this.  :smile:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git config --global user.email &amp;quot;you@example.com&amp;quot;
+git config --global user.name &amp;quot;Your Name&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;install-misc-other-things&#34;&gt;Install misc other things&lt;/h2&gt;
+&lt;p&gt;I used brew to install a few things I used frequently&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;brew install nodejs tmux golang gpg minio/stable/mc kubectl
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Also I needed jekyll to write blog posts.  :smile:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gem install jekyll
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;Great OS.  Lots of tools for developers.  If you have some program you can&amp;rsquo;t live with out.  Would be glad to hear it.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;http://geekgonecrazy.com/images/2015-09-19/final.png&#34;
+        alt=&#34;Final&#34;/&gt;&lt;/p&gt;
+&lt;h3 id=&#34;updates&#34;&gt;Updates&lt;/h3&gt;
+&lt;h4 id=&#34;06152018&#34;&gt;06/15/2018&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Come to realization that this is isn&amp;rsquo;t a blog post&amp;hellip; but more just of a list of software I use.&lt;/li&gt;
+&lt;li&gt;Renamed Docker Toolbox to Docker for Mac&lt;/li&gt;
+&lt;li&gt;Removed virtualbox, not typically part of my bare minimum any more&lt;/li&gt;
+&lt;li&gt;Removed Vagrant.  Never use it any more&lt;/li&gt;
+&lt;li&gt;Added Hyper.  Great Terminal&lt;/li&gt;
+&lt;li&gt;Add minio client to list of tools installed via brew.  Minio Client is super useful for managing s3 buckets&lt;/li&gt;
+&lt;li&gt;Added kubectl to brew a daily driver now days :)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;03032018&#34;&gt;03/03/2018&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;New primary editor switched from &lt;a href=&#34;https://atom.io&#34;target=&#34;_blank&#34;&gt;atom&lt;/a&gt; to &lt;a href=&#34;https://code.visualstudio.com/&#34;target=&#34;_blank&#34;&gt;vscode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Renamed robomongo to robo 3T&lt;/li&gt;
+&lt;li&gt;Remove postgres.app and sequel pro due to them never being used.&lt;/li&gt;
+&lt;li&gt;Swapped out spotify for Google Play Music Desktop Player&lt;/li&gt;
+&lt;li&gt;Removed teamviewer and join.me&lt;/li&gt;
+&lt;li&gt;Added golang and gpg to those installed with brew&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>Format Machine over ssh</title>
+      
+      <link>http://geekgonecrazy.com/2012/08/20/format-machine-over-ssh/</link>
+      <pubDate>Mon, 20 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2012/08/20/format-machine-over-ssh/</guid>
+      <description>
+          &lt;p&gt;Lets say you have data on a remote linux machine, and for what ever reason you need to format the drive.  Like for instance you decide to switch VPS hosts.  If you just let them delete it, you have no way of knowing what really happens to your data.  So providing you have ssh access here is a way to eliminate your data.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;One of the beauties of linux is that everything is represented as a file or folder.  So if you need to store something in the RAM you can do so by copying it to: &lt;code&gt;/dev/shm&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;/proc&lt;/code&gt; directory holds information about your system, kernel, configuration parameters, processes, etc.  We need access to this.  Once we have formatted the system, we will no longer be able to use our normal methods of shutting down.&lt;/p&gt;
+&lt;p&gt;So first off you will want to become root.  If you don&amp;rsquo;t know how to do this.. You probably shouldn&amp;rsquo;t be trying to do this.&lt;/p&gt;
+&lt;p&gt;Then we need to mount &lt;code&gt;/proc&lt;/code&gt; in &lt;code&gt;/dev/shm&lt;/code&gt; so we will have access after we have formatted the drive.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;mkdir /dev/shm/proc
+mount /proc /dev/shm/proc -t proc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you need any other tools like ls copy them from /bin into &lt;code&gt;/dev/shm&lt;/code&gt; because they will be gone.&lt;/p&gt;
+&lt;p&gt;Now you need to cd into &lt;code&gt;/dev/shm&lt;/code&gt;.  Again once you have formatted the drive you won&amp;rsquo;t be able to change into it, because / doesn&amp;rsquo;t exist.&lt;/p&gt;
+&lt;p&gt;Now you can choose your method of destruction.  Some you could use:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;rm -rf &amp;ndash;no-preserve-root /&lt;/li&gt;
+&lt;li&gt;dd if=/dev/urandom of=/dev/sda&lt;/li&gt;
+&lt;li&gt;shred -n1 -z -v  /dev/sda (you can replace the number with how ever many passes you wish to run)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I personally used shred.&lt;/p&gt;
+&lt;p&gt;Once this is done its time to put the machine to rest.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;echo &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &amp;gt; proc/sys/kernel/sysrq
+echo o &amp;gt; proc/sysrq-trigger
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And next time it starts up you will have nada!  Everything is gone.  You might want to fire up a VM and give this a go before you go and try it.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>Getting public ip from CLI</title>
+      
+      <link>http://geekgonecrazy.com/2012/05/16/getting-public-ip-from-cli/</link>
+      <pubDate>Wed, 16 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2012/05/16/getting-public-ip-from-cli/</guid>
+      <description>
+          &lt;p&gt;I&amp;rsquo;ve found my self on occasion needing to find the public IP of a machine while in commandline(CLI).  Most of the time its just because i&amp;rsquo;ve spoiled my self with DNS entries, and haven&amp;rsquo;t memorized it.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;You need to have curl installed.  If you don&amp;rsquo;t have it, it should be in your package manager.  In Ubuntu its easily installed via:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;sudo apt-get install curl
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then just simply run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;curl ifconfig.me
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I figured since I hadn&amp;rsquo;t posted in a while, this is a useful enough tidbit to share.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>Childrens Distro sneak peak</title>
+      
+      <link>http://geekgonecrazy.com/2012/05/10/childrens-distro-sneak-peak/</link>
+      <pubDate>Thu, 10 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2012/05/10/childrens-distro-sneak-peak/</guid>
+      <description>
+          &lt;p&gt;I was assigned the task of creating a children&amp;rsquo;s linux distro for use here at the library(where I work).  Here&amp;rsquo;s a sneak peak:&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://lh5.ggpht.com/_BMKBVRf6mio/TcmQfVPmMbI/AAAAAAAAAh4/EKEKmhMUn5s/2011-05-10%2014.20.35.png&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;I&amp;rsquo;m basing it on Linux Mint for now.  I think i&amp;rsquo;ll probably move it all over to straight Ubuntu before finalizing.  The dock is called docky.  Can be installed from apt-get.&lt;/p&gt;
+&lt;p&gt;As you can see I&amp;rsquo;ve loaded it up with games.  Once i&amp;rsquo;ve finished i&amp;rsquo;ll give a better break down of what i&amp;rsquo;ve done.&lt;/p&gt;
+&lt;p&gt;[edit 04/11/2014] It actually turned out looking nothing like this at all.  We called the project rachel. You can find out more about it on its &lt;a href=&#34;https://github.com/geekgonecrazy/rachel&#34;target=&#34;_blank&#34;&gt;github page&lt;/a&gt;.&lt;/p&gt;
+&lt;h4 id=&#34;updates&#34;&gt;Updates&lt;/h4&gt;
+&lt;p&gt;09/30/2019: Changed image link to https&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>IPv6 keeping tunnel connected</title>
+      
+      <link>http://geekgonecrazy.com/2011/02/28/ipv6-keeping-tunnel-connected/</link>
+      <pubDate>Mon, 28 Feb 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2011/02/28/ipv6-keeping-tunnel-connected/</guid>
+      <description>
+          &lt;p&gt;Put together a script to keep your ip updated for the tunnel.  This is for Hurricane Electric.  Just plug in your info from your tunnel info page.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;If Ubuntu, copy this file to:  /etc/init.d/updateip&lt;br&gt;
+Then, &lt;code&gt;sudo ln -s /etc/init.d/updateip /etc/rc2.d/S95updateip  &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Will now start up with the computer.&lt;br&gt;
+Hope it helps someone.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>IPv6 Connectivity in Ubuntu: Setting up</title>
+      
+      <link>http://geekgonecrazy.com/2011/02/20/ipv6-connectivity-in-ubuntu-setting-up/</link>
+      <pubDate>Sun, 20 Feb 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2011/02/20/ipv6-connectivity-in-ubuntu-setting-up/</guid>
+      <description>
+          &lt;p&gt;With ICANN recently announcing &lt;a href=&#34;http://www.bbc.co.uk/news/technology-12367484&#34;target=&#34;_blank&#34;&gt;the end of IPv4 addresses to allocate&lt;/a&gt;, its time to take a look at the future.&lt;/p&gt;
+&lt;p&gt;What is IPv6? According to &lt;a href=&#34;http://www.cisco.com/en/US/docs/ios_xr_sw/iosxr_r3.0/interfaces/configuration/guide/hc3gloss.html&#34;target=&#34;_blank&#34;&gt;Cisco&lt;/a&gt; IPv6 is:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;IP Version 6. Replacement for IPv4. A next generation IP protocol. IPv6 is
+backward compatible with and is designed to fix the shortcomings of IPv4, such
+as data security and maximum number of user addresses. IPv6 increases the address
+space from 32 to 128 bits, providing for an unlimited number of networks and
+systems. It also supports quality of service (QoS) parameters for real-time
+audio and video.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;A typical IPv4 address looked something like this: 74.125.225.17 (One of google&amp;rsquo;s)&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;An IPv6 Address: &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;2a00:1450:8006:0000:0000:0000:0000:0068
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This can also be wrote as:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;2a00:1450:8006::68
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The multiple sets of zeros can be represented with an extra colon.&lt;/p&gt;
+&lt;p&gt;Yeah&amp;hellip; Not pretty, not pretty at all. Do I need to switch to IPv6? No you don&amp;rsquo;t. I don&amp;rsquo;t think we&amp;rsquo;ll ever see a complete switch. Your current setup is fine. This is for those of you that actually like learning technology.  Learn hands on.&lt;/p&gt;
+&lt;p&gt;Lets get started! First you will need to choose a tunnel provider. Personally I chose &lt;a href=&#34;http://tunnelbroker.net/&#34;target=&#34;_blank&#34;&gt;Hurricane Electric&amp;rsquo;s Tunnel Broker&lt;/a&gt;. There is also &lt;a href=&#34;http://sixxs.com/&#34;target=&#34;_blank&#34;&gt;Sixxs&lt;/a&gt;, &lt;a href=&#34;http://gogo6.net/&#34;target=&#34;_blank&#34;&gt;Gogo6&lt;/a&gt;, &lt;a href=&#34;http://technet.microsoft.com/en-us/library/bb457011.aspx&#34;target=&#34;_blank&#34;&gt;Teredo&lt;/a&gt;/&lt;a href=&#34;http://www.remlab.net/miredo/&#34;target=&#34;_blank&#34;&gt;Miredo&lt;/a&gt; etc.. This guide, only applies to Hurricane Electric&amp;rsquo;s as the rest use a different approach. If you only want to check IPv6 enabled websites out. Go with one of the others. Teredo/Miredo is pretty much point and click.&lt;/p&gt;
+&lt;p&gt;Once you sign up for an account and sign in, click &lt;a href=&#34;http://tunnelbroker.net/ipv6_normal.php&#34;target=&#34;_blank&#34;&gt;Create Regular Tunnel&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://lh5.googleusercontent.com/-HCsf0YcS7NU/TYWNH1NAG3I/AAAAAAAAAgs/2yWlVZfhELc/s1600/Screen&amp;#43;shot&amp;#43;2011-03-20&amp;#43;at&amp;#43;12.03.15&amp;#43;AM.png&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://lh5.googleusercontent.com/-HCsf0YcS7NU/TYWNH1NAG3I/AAAAAAAAAgs/2yWlVZfhELc/s320/Screen&amp;#43;shot&amp;#43;2011-03-20&amp;#43;at&amp;#43;12.03.15&amp;#43;AM.png&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You should see something similar.  &lt;/p&gt;
+&lt;p&gt;Where it says the IP you are view from.  Copy and paste that into the IPv4 endpoint Box.  Select a server nearest you.  For me Chicago is the closest. Click Submit.&lt;/p&gt;
+&lt;p&gt;If it gives you an error about not being able to reach the ipv4 address.  
+You will need to login to your router and allow ICMP packets through.  If you need help finding this let me know.&lt;/p&gt;
+&lt;p&gt;Once complete you will receive a list of Information for your tunnel.  Write this all down.  Important for the next step.  You should have the information
+similar to this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#Tunnel Connection
+
+Server End IPv4:  209.51.191.5
+IPv6: 2001:470:d51e:f35::1/64
+
+Client End IPv4: (Your IP)
+IPv6: 2001:470:d51e:f35::2/64
+
+#DNS
+IPv4: 74.82.42.42
+IPv6: 2001:470:20::2
+
+#Routed
+
+2001:470:d51f:f35::1/64
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Note: This is not my information.  Made the addresses up.  But yours should look very similar.&lt;/p&gt;
+&lt;p&gt;It also has the option to allocate a /48.  If you want to setup a firewalled network with clients and servers on different subnets like I am.  Go ahead and allocate one.&lt;/p&gt;
+&lt;p&gt;Now open up a terminal issue:  &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo nano /etc/network/interfaces
+&lt;/code&gt;&lt;/pre&gt;&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;Should then look something like that.  Run:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo /etc/init.d/networking restart
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You should now have access.  Try browsing &lt;a href=&#34;http://ipv6.google.com/&#34;target=&#34;_blank&#34;&gt;http://ipv6.google.com&lt;/a&gt; or &lt;a href=&#34;http://www.v6.facebook.com/&#34;target=&#34;_blank&#34;&gt;http://www.v6.facebook.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Its important to note, that the bridge Ip and your actual ip are only slightly different.  So make sure to keep them straight.  As the bridge does no more than connect you.  The other is your routed subnet of /64. A /64 can have &lt;/p&gt;
+&lt;p&gt;&lt;em&gt;18,446,744,073,709,551,616&lt;/em&gt; Hosts or devices.  Insane right?  Compared to IPv4, where your ISP will charge you $10+ for 1 static.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve enabled IPv6 access to my whole network, and will be continuing in several following posts showing the steps i&amp;rsquo;ve taken.&lt;/p&gt;
+&lt;p&gt;If you have questions/problems, let me know i&amp;rsquo;d be happy to help in any way I can.&lt;/p&gt;
+&lt;h4 id=&#34;updates&#34;&gt;Updates&lt;/h4&gt;
+&lt;p&gt;09/30/2019: Removed link to my subdomain that has since been shutdown&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>Project Opacity: Prototype to Production</title>
+      
+      <link>http://geekgonecrazy.com/2011/02/03/project-opacity-prototype-to-production/</link>
+      <pubDate>Thu, 03 Feb 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2011/02/03/project-opacity-prototype-to-production/</guid>
+      <description>
+          &lt;p&gt;About a month ago at work we started a project internally known as Project Opacity.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Opacity by definition: is the quality of being opaque to a degree; the degree to which something reduces the passage of light&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;Anyways, on to what Project Opacity actually is.  Through out the library there are computer stations from which patrons can access the library catalog.  Which we call Opac&amp;rsquo;s or kiosks.  Come to think of it, this probably is where the name comes from.&lt;/p&gt;
+&lt;p&gt;An Old Opac Station
+&lt;a href=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUtyudbUbaI/AAAAAAAAAbA/9uBkOxQ8fQU/s1600/2011-01-04&amp;#43;10.45.14.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUtyudbUbaI/AAAAAAAAAbA/9uBkOxQ8fQU/s320/2011-01-04&amp;#43;10.45.14.jpg&#34;
+        alt=&#34;An Old Opac Station&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This was one of the old Opac&amp;rsquo;s.  They were becoming extremely unreliable.  Half the time they weren&amp;rsquo;t working.  The graphics on the web page wouldn&amp;rsquo;t show.  Pages took a long time to load.  Most of this is due to the browser being something along the lines of IE4(Ok maybe not. Honestly not sure).  It was winCE based.&lt;/p&gt;
+&lt;p&gt;This is the cabinet space below where the thin client was kept.
+&lt;a href=&#34;https://3.bp.blogspot.com/_BMKBVRf6mio/TUt07O6PkbI/AAAAAAAAAcY/2aH_4lCzdC0/s1600/2011-01-14&amp;#43;16.33.45.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://3.bp.blogspot.com/_BMKBVRf6mio/TUt07O6PkbI/AAAAAAAAAcY/2aH_4lCzdC0/s320/2011-01-14&amp;#43;16.33.45.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUt1BoiuV6I/AAAAAAAAAcc/g3zITIoJPPM/s1600/2011-01-14&amp;#43;14.14.27.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUt1BoiuV6I/AAAAAAAAAcc/g3zITIoJPPM/s320/2011-01-14&amp;#43;14.14.27.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;They were using old WYSE thin clients.  I&amp;rsquo;m sure these could have been updated or something.  But I can imagine licensing would have been a pain.  As well has who knows might not have supported this hardware.  Personally really glad to not have to deal with winCE, being a linux guy.&lt;/p&gt;
+&lt;p&gt;So my boss hunted around looking into upgrading these.  Custom clients vs updated WYSE type thin clients.  Custom clients won!  Thankfully!  I believe they were same price, if not cheaper with twice the hardware specs.  Operating system:
+Linux.  WOOT!  Needless to say,  I got excited about this project.&lt;/p&gt;
+&lt;p&gt;So low and behold we have a prototype!!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/TUt4z3AGryI/AAAAAAAAAdI/U_kUiATfDpE/s1600/2010-12-20&amp;#43;17.28.40.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/TUt4z3AGryI/AAAAAAAAAdI/U_kUiATfDpE/s320/2010-12-20&amp;#43;17.28.40.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUt4r7LY36I/AAAAAAAAAdE/MVa8701kLnA/s1600/2010-12-20&amp;#43;16.45.57.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUt4r7LY36I/AAAAAAAAAdE/MVa8701kLnA/s320/2010-12-20&amp;#43;16.45.57.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Kind of a sexy little machine.  Using CF card for hard drive, Atom processor, and 2 gigs of ram.  Decent setup really.  &lt;/p&gt;
+&lt;p&gt;I then spent the better part of a week designing a custom linux install, based on &lt;a href=&#34;http://www.linuxmint.com/&#34;target=&#34;_blank&#34;&gt;linuxmint&lt;/a&gt;.  Went through the process of actually making my own install CD.  Very cool stuff!  In the near future I plan on writing a post on doing this.  But for now sticking with Project Opacity, the Hardware side.  Believe me, plenty enough to write about!&lt;/p&gt;
+&lt;p&gt;So tested it got everything working.  Then, a shocking thing happened.  My boss opened the case, looking for a better way to mount the CF to SATA adapter. &lt;em&gt;BOOM!&lt;/em&gt; &lt;em&gt;POP&lt;/em&gt; &lt;em&gt;POP&lt;/em&gt;  Ok, so maybe an exaggeration, but the power supply blew.
+  
+Long story short, verified it was the power supply, and ordered new one.  Around the same time also ordering parts, for the eight needed to replace all the Opac&amp;rsquo;s, in both branches of the library.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TUtyU1WevII/AAAAAAAAAaw/5CKTthN9qgg/s1600/2010-12-29&amp;#43;12.55.53.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TUtyU1WevII/AAAAAAAAAaw/5CKTthN9qgg/s320/2010-12-29&amp;#43;12.55.53.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Cart full of parts for all eight Opac&amp;rsquo;s.&lt;/p&gt;
+&lt;p&gt;Then we started building them.  Here are some pictures of the parts and putting them together.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzYqZBsqI/AAAAAAAAAbY/-bCJlQxZP50/s1600/2011-01-06&amp;#43;12.19.07.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzYqZBsqI/AAAAAAAAAbY/-bCJlQxZP50/s320/2011-01-06&amp;#43;12.19.07.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;8gb CF card.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzoyzIuSI/AAAAAAAAAbk/2ENjFGeInGU/s1600/2011-01-06&amp;#43;12.18.52.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzoyzIuSI/AAAAAAAAAbk/2ENjFGeInGU/s320/2011-01-06&amp;#43;12.18.52.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The CF to SATA converter.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzgiX52MI/AAAAAAAAAbg/qMRMPVImJqE/s1600/2011-01-06&amp;#43;12.19.00.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzgiX52MI/AAAAAAAAAbg/qMRMPVImJqE/s320/2011-01-06&amp;#43;12.19.00.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2GB Ram.  Yeah I know just ram.  But I took a pic.. &lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TUtzPCPAWfI/AAAAAAAAAbU/3pWrGRJI19g/s1600/2011-01-06&amp;#43;12.19.30.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TUtzPCPAWfI/AAAAAAAAAbU/3pWrGRJI19g/s320/2011-01-06&amp;#43;12.19.30.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Motherboard with Atom processor on it.&lt;/p&gt;
+&lt;p&gt;Now laying the parts out and actually building them.  Yeah I know, some of you are saying, &amp;ldquo;So what?  Been there done that.&amp;rdquo;  If you&amp;rsquo;re that person, go read something else.  Others that don&amp;rsquo;t get the chance to build computers, carry on.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUty2xLkk-I/AAAAAAAAAbE/8EHQUSU_D1g/s1600/2011-01-04&amp;#43;12.51.45.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUty2xLkk-I/AAAAAAAAAbE/8EHQUSU_D1g/s320/2011-01-04&amp;#43;12.51.45.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Laid them out.  Ain&amp;rsquo;t it so purdy?  &lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TUty-YVRM-I/AAAAAAAAAbI/QpsEkDAfuQk/s1600/2011-01-06&amp;#43;11.58.04.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TUty-YVRM-I/AAAAAAAAAbI/QpsEkDAfuQk/s320/2011-01-06&amp;#43;11.58.04.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;GAh! Wow that was hard.  We went and removed the cases from the box!  :-O&lt;br&gt;
+Actually in this same step we inventoried them.  I guess that is the significance.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzGqnqu6I/AAAAAAAAAbM/4qGsU2rOEN4/s1600/2011-01-06&amp;#43;12.18.47.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzGqnqu6I/AAAAAAAAAbM/4qGsU2rOEN4/s320/2011-01-06&amp;#43;12.18.47.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Open case.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/TUtz4k0huiI/AAAAAAAAAbw/PHvYHqteIRw/s1600/2011-01-06&amp;#43;12.39.23.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/TUtz4k0huiI/AAAAAAAAAbw/PHvYHqteIRw/s320/2011-01-06&amp;#43;12.39.23.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The motherboard in, and power supply in place.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzwsal6qI/AAAAAAAAAbs/O0vjdicS1VY/s1600/2011-01-06&amp;#43;12.39.16.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzwsal6qI/AAAAAAAAAbs/O0vjdicS1VY/s320/2011-01-06&amp;#43;12.39.16.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Everything hooked up and ready.  Well almost..&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://3.bp.blogspot.com/_BMKBVRf6mio/TUt0BddxyJI/AAAAAAAAAb0/VVhcAmYjMmQ/s1600/2011-01-06&amp;#43;14.34.58.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://3.bp.blogspot.com/_BMKBVRf6mio/TUt0BddxyJI/AAAAAAAAAb0/VVhcAmYjMmQ/s320/2011-01-06&amp;#43;14.34.58.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;CF to SATA adapter mounted. Using power tools as an IT Assistant?? Who would have thought?&lt;/p&gt;
+&lt;p&gt;To mount the adapter, we drilled three holes through the top of the CD/Hard-drive bay. Then we used motherboard standoffs, nuts, and screws to raise it away from the metal, preventing shorting.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUt0UeGloxI/AAAAAAAAAcA/0pO-7kBFyJA/s1600/2011-01-06&amp;#43;15.21.32.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TUt0UeGloxI/AAAAAAAAAcA/0pO-7kBFyJA/s320/2011-01-06&amp;#43;15.21.32.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Done?  No, not exactly.  One thing we forgot about completely, was how it would be fit into the cabinet.  Turns out, it didn&amp;rsquo;t fit like we thought it would. So for the ones mounted on the poles(4 of them), we had to make some modifications.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TUtydKPai0I/AAAAAAAAAa0/BEMk6Z1k5TM/s1600/2011-01-13&amp;#43;17.26.43.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TUtydKPai0I/AAAAAAAAAa0/BEMk6Z1k5TM/s320/2011-01-13&amp;#43;17.26.43.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Two holes drilled where the legs normally would be glued.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TUtylkLXiqI/AAAAAAAAAa4/i7IOKSjHDZI/s1600/2011-01-13&amp;#43;17.37.59.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TUtylkLXiqI/AAAAAAAAAa4/i7IOKSjHDZI/s320/2011-01-13&amp;#43;17.37.59.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Nuts &amp;amp; Bolts through strips of copper&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/TUt0jkuSwuI/AAAAAAAAAcI/Kkr0k9_mNQ4/s1600/2011-01-14&amp;#43;14.07.03.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/TUt0jkuSwuI/AAAAAAAAAcI/Kkr0k9_mNQ4/s320/2011-01-14&amp;#43;14.07.03.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;View from the inside.  Yes had to remove the motherboard&amp;rsquo;s.
+Was kind of annoying.  But you do what you got to do.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/TUt0y6bxc4I/AAAAAAAAAcU/6qI2jAFPpVk/s1600/2011-01-14&amp;#43;17.04.58.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/TUt0y6bxc4I/AAAAAAAAAcU/6qI2jAFPpVk/s320/2011-01-14&amp;#43;17.04.58.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Then we hung these bad boys!&lt;/p&gt;
+&lt;p&gt;A lot of hacking, but we got them in.  Next I had to flash/clone the CF cards.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/TUt0rrjvOoI/AAAAAAAAAcM/nFuaM450E04/s1600/2011-01-07&amp;#43;13.45.57.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/TUt0rrjvOoI/AAAAAAAAAcM/nFuaM450E04/s320/2011-01-07&amp;#43;13.45.57.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Prototype, being prototype?&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/TUt1S5mX96I/AAAAAAAAAco/Jv7ixJ6FkTg/s1600/2011-01-07&amp;#43;16.57.25.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/TUt1S5mX96I/AAAAAAAAAco/Jv7ixJ6FkTg/s320/2011-01-07&amp;#43;16.57.25.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;First attempt.&lt;/p&gt;
+&lt;p&gt;As with anything in this project, cloning the cards was a learning experience. At first we planned on using the CD I created and installing on each.  Which would have worked fine.  After turning it on, no interaction was needed for installation.  But still that&amp;rsquo;s a lot of work, and lets face it.  CD drives are fast&amp;hellip; But they are still so, slow!&lt;/p&gt;
+&lt;p&gt;So the cloning route seemed more appealing.  As seen in the screenshot, I booted from a cd, created a disc image, compressed it, then uncompressed and DD(the disk copy command in linux) to card.  Not sure why this didn&amp;rsquo;t work.  Next just copied directly from one disc to another.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/TUt1IhYqK8I/AAAAAAAAAcg/FNczc8hWaJM/s1600/2011-01-07&amp;#43;16.18.16.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/TUt1IhYqK8I/AAAAAAAAAcg/FNczc8hWaJM/s320/2011-01-07&amp;#43;16.18.16.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Direct copying from sda to sdb.
+Worked great!  Done using:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;dd if=/dev/sda bs=256M of=/dev/sdb
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For those that don&amp;rsquo;t know how dd works.  if=/dev/sda  &amp;ldquo;if&amp;rdquo; stands for input
+file.  Everything in linux is a file.  Topic for another time.  &amp;ldquo;/dev/sda&amp;rdquo;
+is the path or file where the source disc that you want to copy from is.  
+&amp;ldquo;bs=256M&amp;rdquo;  aka byte size equals 256 megabytes.  The size of the blocks you want copied.  Seems the bigger byte size the faster it transfers.  It transfers
+it in 256mb chunks.  Finally &amp;ldquo;of=/dev/sdb&amp;rdquo;. Like the first parameter &amp;ldquo;of&amp;rdquo; is output file, and &amp;ldquo;/dev/sdb&amp;rdquo; is the output file or destination disc.  &lt;/p&gt;
+&lt;p&gt;If you have only two discs first disc being in SATA1 and second in SATA2 this is probably correct for you.  Check first!!! You get these backwards and you&amp;rsquo;re gonna wipe out your source
+disc.  Be careful!&lt;/p&gt;
+&lt;p&gt;Think before you do, and you&amp;rsquo;ll be fine.  Now we just simply installed the CF cards.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/TUt1dAOuXqI/AAAAAAAAAcs/VdeUjzHcA0A/s1600/2011-01-12&amp;#43;13.43.19.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/TUt1dAOuXqI/AAAAAAAAAcs/VdeUjzHcA0A/s320/2011-01-12&amp;#43;13.43.19.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;CF card being put in.
+Finally!  Power them up!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TUtyAN1SkAI/AAAAAAAAAas/seTsepqF-84/s1600/2011-01-18&amp;#43;14.34.02.jpg&#34;target=&#34;_blank&#34;&gt;&lt;img  src=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TUtyAN1SkAI/AAAAAAAAAas/seTsepqF-84/s320/2011-01-18&amp;#43;14.34.02.jpg&#34;
+        alt/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Opac interface Software fully operational.  Still making some little tweaks to make the experience better. &lt;/p&gt;
+&lt;p&gt;A couple of the key things that make this solution ideal:&lt;/p&gt;
+&lt;p&gt;Its linux!  The sky is the limit.  With just a few clicks was able to fully lock this down.  Can&amp;rsquo;t close the window, log out, or do malicious things to the system.&lt;/p&gt;
+&lt;p&gt;All and all, I think we did an excellent job!&lt;/p&gt;
+&lt;p&gt;Next, figuring out how to update them all at once.  &lt;a href=&#34;http://www.puppetlabs.com/&#34;target=&#34;_blank&#34;&gt;Puppet&lt;/a&gt; maybe? Been dying to try it out&lt;/p&gt;
+&lt;h4 id=&#34;updates&#34;&gt;Updates&lt;/h4&gt;
+&lt;p&gt;09/30/2019: Switched images links to https&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>Destroying a hard drive</title>
+      
+      <link>http://geekgonecrazy.com/2011/01/04/destroying-a-hard-drive/</link>
+      <pubDate>Tue, 04 Jan 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2011/01/04/destroying-a-hard-drive/</guid>
+      <description>
+          &lt;p&gt;Not very often do I get to be destructive at work. So when I do get to I get slightly excited! Had an old pentium 3 desktop they planned to give away. But it their copy of xp on it as well as some somewhat sensitive information. At first we were going to put the linux distribution of our fancy on it(this changes from day to day). But it wouldn&amp;rsquo;t boot from the cd. Thought the cd drive was shot. Tried it and an external neither work. After 30 minutes of messing with it my boss gives up. Told me to just pull the hard drive out and trash it! :D&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;I&amp;rsquo;m sure we could&amp;rsquo;ve used a floppy to boot from the cd. But, this was much more enjoyable.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://3.bp.blogspot.com/_BMKBVRf6mio/TSPTkxv1F1I/AAAAAAAAAZc/KvnyXO1JRxQ/s320/2011-01-04&amp;#43;11.57.46.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TSPTqNfBCdI/AAAAAAAAAZg/IlegdVicZKc/s320/2011-01-04&amp;#43;12.00.22.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TSPTwD_uVUI/AAAAAAAAAZk/YBV6Aj8fl24/s320/2011-01-04&amp;#43;12.01.20.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TSPT2B85xnI/AAAAAAAAAZo/5yaAokOvAjQ/s320/2011-01-04&amp;#43;12.01.58.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/TSPT6lE6FjI/AAAAAAAAAZs/NAKFZ92ZQMI/s320/2011-01-04&amp;#43;12.04.07.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TSPT_k5sBiI/AAAAAAAAAZw/6M7mHPkWNt4/s320/2011-01-04&amp;#43;12.04.12.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TSPUFhUNeLI/AAAAAAAAAZ0/NKjteIC7epM/s320/2011-01-04&amp;#43;12.06.06.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;h4 id=&#34;updates&#34;&gt;Updates&lt;/h4&gt;
+&lt;p&gt;09/30/2019: Switching image links to https&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>Dedicated Virtualbox Host</title>
+      
+      <link>http://geekgonecrazy.com/2010/11/16/dedicated-virtualbox-host/</link>
+      <pubDate>Tue, 16 Nov 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2010/11/16/dedicated-virtualbox-host/</guid>
+      <description>
+          &lt;p&gt;A while back I posted about &lt;a href=&#34;http://geekgonecrazy.com/2010/03/24/building-first-computer&#34;&gt;Building first desktop from scratch&lt;/a&gt;.  In it I mentioned installing Xenserver.  I have no doubt that it is amazing.  Just wasn&amp;rsquo;t exactly what I had in mind.&lt;/p&gt;
+&lt;p&gt;Long story cut extremely short, I went with virtualbox.  Reasons being: Its fast, so far has supported everything I throw at it, stable, cross platform, live migration, snapshots make backup easy, easy to use, and I like it. &lt;/p&gt;
+&lt;p&gt;Now for the exciting part.  How I set it up.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;First you obviously need to pick your host operating system.  I picked Ubuntu Server.  This is just a personal preference.  I have had good experience with it.   Most of this should work on any linux distro.&lt;/p&gt;
+&lt;p&gt;I would recommend installing ssh on the server and going headless right off.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt-get install ssh
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then ssh in from your desktop computer to do the rest.  Copy and paste works this way :D&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TQoBIQzXW5I/AAAAAAAAAY0/g6Tdv1MrmvY/s320/Screenshot.png&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;Not generally a good practice.  But lets start out by becoming root.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo su
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Next install virtualbox.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;echo &#39;deb http://download.virtualbox.org/virtualbox/debian maverick non-free&#39; &amp;gt;&amp;gt; /etc/apt/sources.list
+
+wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | apt-key add -
+
+apt-get update 
+apt-get install virtualbox-3.2 dkms
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Modify to suit your distro.  Virtualbox.org if you just want to download and install it that way.&lt;/p&gt;
+&lt;p&gt;Next we need to add the virtualbox drivers to our linux kernel.  Before you can do this you need to download your kernel headers.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;apt-get install linux-headers-server
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Pretty straight forward.&lt;/p&gt;
+&lt;p&gt;Now we need to compile and load the driver into the kernel.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/etc/init.d/vboxdrv setup
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now virtualbox is pretty much setup.  But if you&amp;rsquo;re like me and running this server headless..  Virtualbox is useless at this point.&lt;/p&gt;
+&lt;p&gt;So we need a web gui.  If you don&amp;rsquo;t have it already install apache2 or your preferred web server package.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;apt-get install apache2 php5 libapache2-mod-php5
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now to install the interface..&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd /var/www/  
+wget http://phpvirtualbox.googlecode.com/files/phpvirtualbox-0.5.zip  
+unzip phpvirtualbox-0.5.zip  
+mv phpvirtualbox-0.5 phpvirtualbox
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now for even more fun.  In my setup I wanted all virtual machines to be ran as a user called vm-user.  So we need to create that user.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;adduser --ingroup vboxusers vm-user
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Followed by a somewhat secure password.  Remember this password you will need it.&lt;/p&gt;
+&lt;p&gt;Almost forgot.  Need to now add this user info to the phpvirtualbox config.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nano /var/www/phpvirtualbox/config.php
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Change the username &amp;amp; password variables to the user you just created.  Ctrl+X to exit. Make sure to hit enter to save.&lt;/p&gt;
+&lt;p&gt;Now to create virtualbox as a service that will start up as this new user upon every boot.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nano /etc/init.d/vm-manage
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In this file put the contents of this &lt;a href=&#34;https://pastebin.com/fgMC20b8&#34;target=&#34;_blank&#34;&gt;link&lt;/a&gt;. Ctrl+X to exit.  Make sure it saves again.&lt;/p&gt;
+&lt;p&gt;Then make executable, and add to startup.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;chmod +x /etc/init.d/vm-manage  
+update-rc.d vm-manage defaults
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now give up your admin rights!  Do it!  No but seriously your done being super admin.  Might be a good idea to give them up.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;exit
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Should return you to normal &amp;lsquo;ol you!&lt;/p&gt;
+&lt;p&gt;Now you should be able to access the web interface from the machines ip. In this case it is: http://10.10.1.180/phpvirtualbox&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://3.bp.blogspot.com/_BMKBVRf6mio/TQoBXvaX-GI/AAAAAAAAAY4/Dw8D9wLEEE4/s320/phpvirtualbox.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;Now you can start setting up your virtual machines.  If you want to be able to route traffic to them like I am in my setup.  Make sure to set the network interface to bridged.&lt;/p&gt;
+&lt;p&gt;As long as you don&amp;rsquo;t have your router pointing at this ip you should be safe.  If you&amp;rsquo;re paranoid setup password protection.   I will do this in a later post.&lt;/p&gt;
+&lt;h4 id=&#34;updates&#34;&gt;Updates&lt;/h4&gt;
+&lt;p&gt;09/30/2019: Switch image links to https&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>Monitor Repair</title>
+      
+      <link>http://geekgonecrazy.com/2010/10/12/monitor-repair/</link>
+      <pubDate>Tue, 12 Oct 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2010/10/12/monitor-repair/</guid>
+      <description>
+          &lt;p&gt;A few days ago I found a 22&amp;rdquo; Lcd screen that was being tossed out because it didn&amp;rsquo;t work.  The thought of the beauty being thrown away didn&amp;rsquo;t set well with me.  So I picked it up.&lt;/p&gt;
+&lt;p&gt;Before messing with it.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TLUvMNCoJTI/AAAAAAAAAXU/MUP5lRIfsek/s320/2010-10-11&amp;#43;14.38.55.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;When turning it on, it would show its gateway logo and then go blank.  Which was a good sign.  But none of the inputs worked.&lt;/p&gt;
+&lt;p&gt;So I took it apart.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img  src=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TLUvUOIDMqI/AAAAAAAAAXY/ywpjjsZHr7E/s320/2010-10-11&amp;#43;14.47.26.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;Front panel off&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TLUvcxq9tDI/AAAAAAAAAXc/KGlyAZJpIY0/s320/2010-10-11&amp;#43;14.48.59.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;The guts exposed.&lt;/p&gt;
+&lt;p&gt;I took off the box there on the back then removed the power board and the video input board.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/TLUvlwKCR_I/AAAAAAAAAXg/LuA2-EsHiLk/s320/2010-10-11&amp;#43;15.11.19.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;Video board.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TLUvvHjZS-I/AAAAAAAAAXk/xUEQgACC1Do/s320/2010-10-11&amp;#43;15.12.32.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;Another view of the video board.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TLUwAirVnxI/AAAAAAAAAXs/Pc5tDXK3gEU/s320/2010-10-12&amp;#43;19.38.17.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;Power board.
+I don&amp;rsquo;t know if you can see it or not but capacitor is domed at the top. A sign that its busted.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TLUv4RSSGUI/AAAAAAAAAXo/sy-kNp0u48o/s320/2010-10-11&amp;#43;18.23.18.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;A better shot of the busted capacitor. 
+It was a 25v 1000uF capacitor.  So I made a trip to Radio Shack this afternoon.  They didn&amp;rsquo;t have 25v so I picked up a 35v 1000uF capacitor.   The voltage doesn&amp;rsquo;t matter too much.  Of course you&amp;rsquo;ll want to be safe and stay close to the old voltage.  But keeping it at 1000uF is a must.  According to Google.  :)&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TLUwKL0-WNI/AAAAAAAAAXw/SHrr-xES74U/s320/2010-10-12&amp;#43;19.38.32.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;Bottom view of the power board.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TLUwVB9WufI/AAAAAAAAAX0/Xcy0dtjZ9cs/s320/2010-10-12&amp;#43;19.38.47.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;New capacitor.
+ 
+I removed the old capacitor, and put the new one in.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TLUwe001zAI/AAAAAAAAAX4/s1yMnZSJU88/s320/2010-10-12&amp;#43;19.45.32.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;The new capacitor in place.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://3.bp.blogspot.com/_BMKBVRf6mio/TLUwooEsVrI/AAAAAAAAAX8/7fqwhDoOswY/s320/2010-10-12&amp;#43;19.45.43.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;Top view of the new capacitor.
+Woot!  Put it together and hooked it up to my mac.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/TLUwv626tkI/AAAAAAAAAYA/Q_pN5mNgoO8/s320/2010-10-12&amp;#43;21.40.31.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;Booom!
+It&amp;rsquo;s humongous!&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/TLUw5JlnOeI/AAAAAAAAAYE/UEdMMVSyxDc/s320/2010-10-12&amp;#43;22.01.45.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;Cool feature takes the second input and shows it in another window.
+So there you have it.  Just because  your lcd screen won&amp;rsquo;t show anything or power up doesn&amp;rsquo;t mean its dead.&lt;/p&gt;
+&lt;h4 id=&#34;updates&#34;&gt;Updates&lt;/h4&gt;
+&lt;p&gt;09/30/2019: Changed links to https&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      
+      <title>Building first desktop from scratch</title>
+      
+      <link>http://geekgonecrazy.com/2010/03/24/building-first-desktop-from-scratch/</link>
+      <pubDate>Wed, 24 Mar 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://geekgonecrazy.com/2010/03/24/building-first-desktop-from-scratch/</guid>
+      <description>
+          &lt;p&gt;Most of my childhood I have built computers.  But it was always from parts laying around.  A motherboard/CPU from here, case from another one etc.&lt;/p&gt;
+&lt;p&gt;I finally saved up and planned out my own build from scratch.  I&amp;rsquo;m posting to my blog because its a geeky milestone that every little geek must go through. A rite of passage if you will.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;I ran into a couple of problems along the way.  A case/power supply combo I ordered online was a dud!  I sent it back and got a refund.  Future advice for self and anyone building a computer&amp;hellip;  &lt;strong&gt;Buy your power supply locally!&lt;/strong&gt;  It&amp;rsquo;s a lot easier to run back to the store and exchange it than to buy it online and wait on shipping. Especially when you are this eager to get it finished.&lt;/p&gt;
+&lt;p&gt;For most of my parts I went to MicroCenter, one of my favorite computer stores.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://3.bp.blogspot.com/_BMKBVRf6mio/S6rVDC0a1nI/AAAAAAAAAUU/BDEDNhj2_aw/s320/IMG_0329.JPG&#34;
+        alt=&#34;Parts I picked up&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;I picked up:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Extra case fans&lt;/li&gt;
+&lt;li&gt;Tool set (Update 09/30/2019: I still have and use this set)&lt;/li&gt;
+&lt;li&gt;Motherboard&lt;/li&gt;
+&lt;li&gt;Processor&lt;/li&gt;
+&lt;li&gt;4GB RAM (Update 09/30/2019: Oh the good &amp;lsquo;ol days.. I upgraded RAM several times after this)&lt;/li&gt;
+&lt;li&gt;500GB Hard Drive&lt;/li&gt;
+&lt;li&gt;USB Headset (Update 09/30/2019: I don&amp;rsquo;t recall this headset lasting any time at all)&lt;/li&gt;
+&lt;li&gt;Green wig - Yup spent the rest of the day wearing that&lt;/li&gt;
+&lt;li&gt;Code Red - You know gotta keep up the energy&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img  src=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/S6rVP-l2s6I/AAAAAAAAAUc/ubPHhdZQSnM/s320/IMG_0332.JPG&#34;
+        alt=&#34;Motherboard and CPU installed&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;Couple of pictures of the case.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://3.bp.blogspot.com/_BMKBVRf6mio/S6rVtEFKYfI/AAAAAAAAAU0/U53hJ6a2yF0/s320/IMG_0352.JPG&#34;
+        alt=&#34;Case pic 1&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/S6rVk8flUHI/AAAAAAAAAUs/9dRVbAWPai0/s320/IMG_0351.JPG&#34;
+        alt=&#34;Case pic 2&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://1.bp.blogspot.com/_BMKBVRf6mio/S6rWMXvrpdI/AAAAAAAAAVE/rNAeaNWC-aE/s320/IMG_0355.JPG&#34;
+        alt=&#34;Case pic 3&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;The slots are for hot swappable hard drives.  I can pop a new drive in at any time with out having to power down.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://4.bp.blogspot.com/_BMKBVRf6mio/S6rWDlFtBHI/AAAAAAAAAU8/8d7m2HpjKMA/s320/IMG_0354.JPG&#34;
+        alt=&#34;Hot swappable bays&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;I installed XenServer on it at first&amp;hellip; But as awesome as it was&amp;hellip; I like having an operating system I can easily get around.  So I installed Ubuntu 64bit 9.10. Btw&amp;hellip; XFCE is a beautiful desktop environment. &lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://2.bp.blogspot.com/_BMKBVRf6mio/S6rt0Tesd3I/AAAAAAAAAVM/3hhSd4nm14g/s320/Screenshot.png&#34;
+        alt=&#34;Screenshot of OS&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;Any questions or comments hit me up.&lt;/p&gt;
+&lt;h4 id=&#34;updates&#34;&gt;Updates&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;09/30/2019 - Fixed links to https, formatted and cleaned up some wording.&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

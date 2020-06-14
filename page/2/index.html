@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.72.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Aaron&#39;s Ramblings</title><link rel="stylesheet" href="/css/core.min.51a44d5b8886c4d68322a4e7f2c4d3a9ae730b123178c37858c71c49e9bba12bcf142960b0cfe957684d097b1bbfb40d.css" integrity="sha384-UaRNW4iGxNaDIqTn8sTTqa5zCxIxeMN4WMccSem7oSvPFClgsM/pV2hNCXsbv7QN"><link rel="alternate" type="application/rss+xml" href="/index.xml" title="Aaron's Ramblings" /><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Aaron&#39;s Ramblings" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Aaron's Ramblings</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/">Home</a><a class="nav item" href="/about">About</a></nav></div></span></div></section><section id="content"><ul class="note list"><li class="item"><a class="note" href="/2012/08/20/format-machine-over-ssh/">
+            <p class="note title">Format Machine over ssh</p><p class="note date">2012-08-20</p><p class="note content">Lets say you have data on a remote linux machine, and for what ever reason you need to format the drive. Like for instance you decide to switch VPS hosts. If you just let them delete it, you have no way of knowing what really happens to your data. So providing you have ssh access here is a way to eliminate your data.
+One of the beauties of linux is that everything is represented as a file or folder.<span class="mldr">&mldr;</span></p></a><p class="note labels"><a class="tag" href="/tags/tips/">tips</a><a class="tag" href="/tags/linux/">linux</a></p></li><li class="item"><a class="note" href="/2012/05/16/getting-public-ip-from-cli/">
+            <p class="note title">Getting public ip from CLI</p><p class="note date">2012-05-16</p><p class="note content">I&rsquo;ve found my self on occasion needing to find the public IP of a machine while in commandline(CLI). Most of the time its just because i&rsquo;ve spoiled my self with DNS entries, and haven&rsquo;t memorized it.
+You need to have curl installed. If you don&rsquo;t have it, it should be in your package manager. In Ubuntu its easily installed via:
+sudo apt-get install curl Then just simply run:
+curl ifconfig.me I figured since I hadn&rsquo;t posted in a while, this is a useful enough tidbit to share.<span class="mldr">&mldr;</span></p></a><p class="note labels"><a class="tag" href="/tags/tips/">tips</a><a class="tag" href="/tags/linux/">linux</a></p></li><li class="item"><a class="note" href="/2012/05/10/childrens-distro-sneak-peak/">
+            <p class="note title">Childrens Distro sneak peak</p><p class="note date">2012-05-10</p><p class="note content">I was assigned the task of creating a children&rsquo;s linux distro for use here at the library(where I work). Here&rsquo;s a sneak peak:
+I&rsquo;m basing it on Linux Mint for now. I think i&rsquo;ll probably move it all over to straight Ubuntu before finalizing. The dock is called docky. Can be installed from apt-get.
+As you can see I&rsquo;ve loaded it up with games. Once i&rsquo;ve finished i&rsquo;ll give a better break down of what i&rsquo;ve done.<span class="mldr">&mldr;</span></p></a><p class="note labels"><a class="tag" href="/tags/ipv6/">ipv6</a></p></li><li class="item"><a class="note" href="/2011/02/28/ipv6-keeping-tunnel-connected/">
+            <p class="note title">IPv6 keeping tunnel connected</p><p class="note date">2011-02-28</p><p class="note content">Put together a script to keep your ip updated for the tunnel. This is for Hurricane Electric. Just plug in your info from your tunnel info page.
+If Ubuntu, copy this file to: /etc/init.d/updateip
+Then, sudo ln -s /etc/init.d/updateip /etc/rc2.d/S95updateip 
+Will now start up with the computer.
+Hope it helps someone.</p></a><p class="note labels"><a class="tag" href="/tags/ipv6/">ipv6</a></p></li><li class="item"><a class="note" href="/2011/02/20/ipv6-connectivity-in-ubuntu-setting-up/">
+            <p class="note title">IPv6 Connectivity in Ubuntu: Setting up</p><p class="note date">2011-02-20</p><p class="note content">With ICANN recently announcing the end of IPv4 addresses to allocate, its time to take a look at the future.
+What is IPv6? According to Cisco IPv6 is:
+ IP Version 6. Replacement for IPv4. A next generation IP protocol. IPv6 is backward compatible with and is designed to fix the shortcomings of IPv4, such as data security and maximum number of user addresses. IPv6 increases the address space from 32 to 128 bits, providing for an unlimited number of networks and systems.<span class="mldr">&mldr;</span></p></a><p class="note labels"><a class="tag" href="/tags/ipv6/">ipv6</a></p></li><li class="item"><a class="note" href="/2011/02/03/project-opacity-prototype-to-production/">
+            <p class="note title">Project Opacity: Prototype to Production</p><p class="note date">2011-02-03</p><p class="note content">About a month ago at work we started a project internally known as Project Opacity.
+ Opacity by definition: is the quality of being opaque to a degree; the degree to which something reduces the passage of light
+ Anyways, on to what Project Opacity actually is. Through out the library there are computer stations from which patrons can access the library catalog. Which we call Opac&rsquo;s or kiosks. Come to think of it, this probably is where the name comes from.<span class="mldr">&mldr;</span></p></a><p class="note labels"><a class="tag" href="/tags/hardware/">hardware</a></p></li><li class="item"><a class="note" href="/2011/01/04/destroying-a-hard-drive/">
+            <p class="note title">Destroying a hard drive</p><p class="note date">2011-01-04</p><p class="note content">Not very often do I get to be destructive at work. So when I do get to I get slightly excited! Had an old pentium 3 desktop they planned to give away. But it their copy of xp on it as well as some somewhat sensitive information. At first we were going to put the linux distribution of our fancy on it(this changes from day to day). But it wouldn&rsquo;t boot from the cd.<span class="mldr">&mldr;</span></p></a><p class="note labels"><a class="tag" href="/tags/hardware/">hardware</a><a class="tag" href="/tags/fun/">fun</a></p></li><li class="item"><a class="note" href="/2010/11/16/dedicated-virtualbox-host/">
+            <p class="note title">Dedicated Virtualbox Host</p><p class="note date">2010-11-16</p><p class="note content">A while back I posted about Building first desktop from scratch. In it I mentioned installing Xenserver. I have no doubt that it is amazing. Just wasn&rsquo;t exactly what I had in mind.
+Long story cut extremely short, I went with virtualbox. Reasons being: Its fast, so far has supported everything I throw at it, stable, cross platform, live migration, snapshots make backup easy, easy to use, and I like it.<span class="mldr">&mldr;</span></p></a><p class="note labels"><a class="tag" href="/tags/virtualization/">virtualization</a></p></li><li class="item"><a class="note" href="/2010/10/12/monitor-repair/">
+            <p class="note title">Monitor Repair</p><p class="note date">2010-10-12</p><p class="note content">A few days ago I found a 22&rdquo; Lcd screen that was being tossed out because it didn&rsquo;t work. The thought of the beauty being thrown away didn&rsquo;t set well with me. So I picked it up.
+Before messing with it.
+When turning it on, it would show its gateway logo and then go blank. Which was a good sign. But none of the inputs worked.
+So I took it apart.<span class="mldr">&mldr;</span></p></a><p class="note labels"><a class="tag" href="/tags/hardware/">hardware</a></p></li><li class="item"><a class="note" href="/2010/03/24/building-first-desktop-from-scratch/">
+            <p class="note title">Building first desktop from scratch</p><p class="note date">2010-03-24</p><p class="note content">Most of my childhood I have built computers. But it was always from parts laying around. A motherboard/CPU from here, case from another one etc.
+I finally saved up and planned out my own build from scratch. I&rsquo;m posting to my blog because its a geeky milestone that every little geek must go through. A rite of passage if you will.
+I ran into a couple of problems along the way.<span class="mldr">&mldr;</span></p></a><p class="note labels"><a class="tag" href="/tags/hardware/">hardware</a></p></li></ul><div class="pagination">
+    <ul><li><a class="" href="/">1</a></li><li><a class="active" href="/page/2/">2</a></li></ul>
+</div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">Aaron's Ramblings</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></body>
+
+</html>

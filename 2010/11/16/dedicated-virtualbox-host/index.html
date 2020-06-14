@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.72.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Dedicated Virtualbox Host&nbsp;&ndash;&nbsp;Aaron&#39;s Ramblings</title><link rel="stylesheet" href="/css/core.min.51a44d5b8886c4d68322a4e7f2c4d3a9ae730b123178c37858c71c49e9bba12bcf142960b0cfe957684d097b1bbfb40d.css" integrity="sha384-UaRNW4iGxNaDIqTn8sTTqa5zCxIxeMN4WMccSem7oSvPFClgsM/pV2hNCXsbv7QN"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Dedicated Virtualbox Host" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Aaron's Ramblings</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/">Home</a><a class="nav item" href="/about">About</a></nav></div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Dedicated Virtualbox Host</h1><p class="article date">2010-11-16</p></section><article class="article markdown-body"><p>A while back I posted about <a href="/2010/03/24/building-first-computer">Building first desktop from scratch</a>.  In it I mentioned installing Xenserver.  I have no doubt that it is amazing.  Just wasn&rsquo;t exactly what I had in mind.</p>
+<p>Long story cut extremely short, I went with virtualbox.  Reasons being: Its fast, so far has supported everything I throw at it, stable, cross platform, live migration, snapshots make backup easy, easy to use, and I like it. </p>
+<p>Now for the exciting part.  How I set it up.</p>
+<!-- raw HTML omitted -->
+<p>First you obviously need to pick your host operating system.  I picked Ubuntu Server.  This is just a personal preference.  I have had good experience with it.   Most of this should work on any linux distro.</p>
+<p>I would recommend installing ssh on the server and going headless right off.</p>
+<pre><code>sudo apt-get install ssh
+</code></pre><p>Then ssh in from your desktop computer to do the rest.  Copy and paste works this way :D</p>
+<p><img  src="https://4.bp.blogspot.com/_BMKBVRf6mio/TQoBIQzXW5I/AAAAAAAAAY0/g6Tdv1MrmvY/s320/Screenshot.png"
+        alt/></p>
+<p>Not generally a good practice.  But lets start out by becoming root.</p>
+<pre><code>sudo su
+</code></pre><p>Next install virtualbox.</p>
+<pre><code>echo 'deb http://download.virtualbox.org/virtualbox/debian maverick non-free' &gt;&gt; /etc/apt/sources.list
+
+wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | apt-key add -
+
+apt-get update 
+apt-get install virtualbox-3.2 dkms
+</code></pre><p>Modify to suit your distro.  Virtualbox.org if you just want to download and install it that way.</p>
+<p>Next we need to add the virtualbox drivers to our linux kernel.  Before you can do this you need to download your kernel headers.</p>
+<pre><code>apt-get install linux-headers-server
+</code></pre><p>Pretty straight forward.</p>
+<p>Now we need to compile and load the driver into the kernel.</p>
+<pre><code>/etc/init.d/vboxdrv setup
+</code></pre><p>Now virtualbox is pretty much setup.  But if you&rsquo;re like me and running this server headless..  Virtualbox is useless at this point.</p>
+<p>So we need a web gui.  If you don&rsquo;t have it already install apache2 or your preferred web server package.</p>
+<pre><code>apt-get install apache2 php5 libapache2-mod-php5
+</code></pre><p>Now to install the interface..</p>
+<pre><code>cd /var/www/  
+wget http://phpvirtualbox.googlecode.com/files/phpvirtualbox-0.5.zip  
+unzip phpvirtualbox-0.5.zip  
+mv phpvirtualbox-0.5 phpvirtualbox
+</code></pre><p>Now for even more fun.  In my setup I wanted all virtual machines to be ran as a user called vm-user.  So we need to create that user.</p>
+<pre><code>adduser --ingroup vboxusers vm-user
+</code></pre><p>Followed by a somewhat secure password.  Remember this password you will need it.</p>
+<p>Almost forgot.  Need to now add this user info to the phpvirtualbox config.</p>
+<pre><code>nano /var/www/phpvirtualbox/config.php
+</code></pre><p>Change the username &amp; password variables to the user you just created.  Ctrl+X to exit. Make sure to hit enter to save.</p>
+<p>Now to create virtualbox as a service that will start up as this new user upon every boot.</p>
+<pre><code>nano /etc/init.d/vm-manage
+</code></pre><p>In this file put the contents of this <a href="https://pastebin.com/fgMC20b8"target="_blank">link</a>. Ctrl+X to exit.  Make sure it saves again.</p>
+<p>Then make executable, and add to startup.</p>
+<pre><code>chmod +x /etc/init.d/vm-manage  
+update-rc.d vm-manage defaults
+</code></pre><p>Now give up your admin rights!  Do it!  No but seriously your done being super admin.  Might be a good idea to give them up.</p>
+<pre><code>exit
+</code></pre><p>Should return you to normal &lsquo;ol you!</p>
+<p>Now you should be able to access the web interface from the machines ip. In this case it is: http://10.10.1.180/phpvirtualbox</p>
+<p><img  src="https://3.bp.blogspot.com/_BMKBVRf6mio/TQoBXvaX-GI/AAAAAAAAAY4/Dw8D9wLEEE4/s320/phpvirtualbox.jpg"
+        alt/></p>
+<p>Now you can start setting up your virtual machines.  If you want to be able to route traffic to them like I am in my setup.  Make sure to set the network interface to bridged.</p>
+<p>As long as you don&rsquo;t have your router pointing at this ip you should be safe.  If you&rsquo;re paranoid setup password protection.   I will do this in a later post.</p>
+<h4 id="updates">Updates</h4>
+<p>09/30/2019: Switch image links to https</p>
+</article><section class="article labels"><a class="tag" href=/tags/virtualization/>virtualization</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/2011/01/04/destroying-a-hard-drive/"><span class="iconfont icon-article"></span>Destroying a hard drive</a></p><p><a class="link" href="/2010/10/12/monitor-repair/"><span class="iconfont icon-article"></span>Monitor Repair</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">Aaron's Ramblings</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section></body>
+
+</html>
