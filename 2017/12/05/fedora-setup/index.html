@@ -1,72 +1,25 @@
-<!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.72.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>Fedora Setup&nbsp;&ndash;&nbsp;Aaron&#39;s Ramblings</title><link rel="stylesheet" href="/css/core.min.51a44d5b8886c4d68322a4e7f2c4d3a9ae730b123178c37858c71c49e9bba12bcf142960b0cfe957684d097b1bbfb40d.css" integrity="sha384-UaRNW4iGxNaDIqTn8sTTqa5zCxIxeMN4WMccSem7oSvPFClgsM/pV2hNCXsbv7QN"><meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Fedora Setup" /><body><section id="header">
-    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Aaron's Ramblings</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/">Home</a><a class="nav item" href="/about">About</a></nav></div></span></div></section><section id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">Fedora Setup</h1><p class="article date">2017-12-05</p></section><article class="article markdown-body"><p>Install nvidia drivers (oss drivers on this card fail miserably)</p>
-<p>Install gnome tweak tool
-<code>sudo dnf install gnome-tweak-tool</code></p>
-<p>Enable global dark theme</p>
-<p>Enable minamize and maximize buttons</p>
-<p>Enable workspaces span displays</p>
-<p>Set screenshot area to clipboard to ctrl+shift+4</p>
-<p>Install tilix</p>
-<p><code>sudo dnf install tilix</code></p>
-<p><code>sudo dnf install tmux</code></p>
-<pre><code>sudo dnf groupinstall &quot;Development Tools&quot;
+<!doctype html><html lang=en><meta charset=utf-8><meta name=generator content="Hugo 0.72.0"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name=color-scheme content="light dark"><meta name=supported-color-schemes content="light dark"><title>Fedora Setup&nbsp;&ndash;&nbsp;Aaron's Ramblings</title><link rel=stylesheet href=/css/core.min.51a44d5b8886c4d68322a4e7f2c4d3a9ae730b123178c37858c71c49e9bba12bcf142960b0cfe957684d097b1bbfb40d.css integrity=sha384-UaRNW4iGxNaDIqTn8sTTqa5zCxIxeMN4WMccSem7oSvPFClgsM/pV2hNCXsbv7QN><meta name=twitter:card content="summary"><meta name=twitter:title content="Fedora Setup"><body><section id=header><div class="header wrap"><span class="header left-side"><a class="site home" href=/><span class="site name">Aaron's Ramblings</span></a></span>
+<span class="header right-side"><div class="nav wrap"><nav class=nav><a class="nav item" href=/>Home</a><a class="nav item" href=/about>About</a></nav></div></span></div></section><section id=content><div class=article-container><section class="article header"><h1 class="article title">Fedora Setup</h1><p class="article date">2017-12-05</p></section><article class="article markdown-body"><p>Install nvidia drivers (oss drivers on this card fail miserably)</p><p>Install gnome tweak tool
+<code>sudo dnf install gnome-tweak-tool</code></p><p>Enable global dark theme</p><p>Enable minamize and maximize buttons</p><p>Enable workspaces span displays</p><p>Set screenshot area to clipboard to ctrl+shift+4</p><p>Install tilix</p><p><code>sudo dnf install tilix</code></p><p><code>sudo dnf install tmux</code></p><pre><code>sudo dnf groupinstall &quot;Development Tools&quot;
 sudo dnf groupinstall &quot;C Development Tools and Libraries&quot;
-</code></pre><p>sudo dnf install zsh</p>
-<p>Install oh my zsh
-<code>sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;</code></p>
-<p>restore dotfiles</p>
-<p>Install Docker
-<code>sudo dnf -y install dnf-plugins-core</code></p>
-<pre><code>sudo dnf config-manager \
+</code></pre><p>sudo dnf install zsh</p><p>Install oh my zsh
+<code>sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"</code></p><p>restore dotfiles</p><p>Install Docker
+<code>sudo dnf -y install dnf-plugins-core</code></p><pre><code>sudo dnf config-manager \
     --add-repo \
     https://download.docker.com/linux/fedora/docker-ce.repo
-</code></pre><p><code>sudo dnf install docker-ce</code></p>
-<p>At time of writing have to actually hop in: <code>/etc/yum.repos.d/docker-ci.repo</code> and set version to 26 since docker doesn&rsquo;t have fedora 27</p>
-<pre><code>baseurl=https://download.docker.com/linux/fedora/26/$basearch/stable
+</code></pre><p><code>sudo dnf install docker-ce</code></p><p>At time of writing have to actually hop in: <code>/etc/yum.repos.d/docker-ci.repo</code> and set version to 26 since docker doesn&rsquo;t have fedora 27</p><pre><code>baseurl=https://download.docker.com/linux/fedora/26/$basearch/stable
 </code></pre><p>add user to group
-<code>sudo usermod -G docker aaron</code></p>
-<p>too lazy to restart to make sure things are working&hellip; <code>newgrp docker</code></p>
-<p>Install golang
-<code>sudo dnf install golang-bin</code></p>
-<p><code>sudo dnf install nodejs</code></p>
-<p>Drop in .gitconfig</p>
-<p>Add gpg key for signing
-<a href="https://www.debuntu.org/how-to-importexport-gpg-key-pair/">https://www.debuntu.org/how-to-importexport-gpg-key-pair/</a>
+<code>sudo usermod -G docker aaron</code></p><p>too lazy to restart to make sure things are working&mldr; <code>newgrp docker</code></p><p>Install golang
+<code>sudo dnf install golang-bin</code></p><p><code>sudo dnf install nodejs</code></p><p>Drop in .gitconfig</p><p>Add gpg key for signing
+<a href=https://www.debuntu.org/how-to-importexport-gpg-key-pair/>https://www.debuntu.org/how-to-importexport-gpg-key-pair/</a>
 Install Rocket.Chat
-<code>flatpak install flathub chat.rocket.RocketChat</code></p>
-<p>Install Google Chrome</p>
-<p>Install Google Play Music Desktop Player
-<code>flatpak install --from https://flathub.org/repo/appstream/com.googleplaymusicdesktopplayer.GPMDP.flatpakref</code></p>
-<p>Install Visual Studio Code
-<code>flatpak install --from https://flathub.org/repo/appstream/com.visualstudio.code.flatpakref</code></p>
-<p>Actually switched to from repo due to terminal limitation</p>
-<p>Install Enpass</p>
-<p>Install Corebird
-<code>flatpak install --from https://flathub.org/repo/appstream/org.baedert.corebird.flatpakref</code></p>
-<p>GNOME Extensions
-<code>sudo dnf install chrome-gnome-shell</code></p>
-<p>Dash to panel - <a href="https://extensions.gnome.org/extension/1160/dash-to-panel/">https://extensions.gnome.org/extension/1160/dash-to-panel/</a>
-Top Icons Plus - <a href="https://extensions.gnome.org/extension/1031/topicons/">https://extensions.gnome.org/extension/1031/topicons/</a></p>
-<p>Download minio hook up to s3 buckets (digitalocean)
-<a href="https://minio.io/downloads.html#download-client">https://minio.io/downloads.html#download-client</a></p>
-<p>yubikey u2f setup
-<a href="https://www.yubico.com/support/knowledge-base/categories/articles/can-set-linux-system-use-u2f/">https://www.yubico.com/support/knowledge-base/categories/articles/can-set-linux-system-use-u2f/</a></p>
-<p>Install keybase
-<code>sudo yum install https://prerelease.keybase.io/keybase_amd64.rpm</code></p>
-<p>Install kubectl
-<a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">https://kubernetes.io/docs/tasks/tools/install-kubectl/</a></p>
-</article><section class="article labels"><a class="tag" href=/tags/osx/>osx</a></section></div>
-<div class="article bottom"><section class="article navigation"><p><a class="link" href="/2020/02/20/rocket.chat-kubernetes-traefik-heart/"><span class="iconfont icon-article"></span>Rocket.Chat + Kubernetes + Traefik = :heart:</a></p><p><a class="link" href="/2015/09/19/my-osx-setup/"><span class="iconfont icon-article"></span>My OSX Setup</a></p></section></div></section><section id="footer"><div class="footer-wrap">
-    <p class="copyright">Aaron's Ramblings</p>
-    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
-        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
-        target="_blank">Notepadium</a></p>
-</div></section></body>
-
-</html>
+<code>flatpak install flathub chat.rocket.RocketChat</code></p><p>Install Google Chrome</p><p>Install Google Play Music Desktop Player
+<code>flatpak install --from https://flathub.org/repo/appstream/com.googleplaymusicdesktopplayer.GPMDP.flatpakref</code></p><p>Install Visual Studio Code
+<code>flatpak install --from https://flathub.org/repo/appstream/com.visualstudio.code.flatpakref</code></p><p>Actually switched to from repo due to terminal limitation</p><p>Install Enpass</p><p>Install Corebird
+<code>flatpak install --from https://flathub.org/repo/appstream/org.baedert.corebird.flatpakref</code></p><p>GNOME Extensions
+<code>sudo dnf install chrome-gnome-shell</code></p><p>Dash to panel - <a href=https://extensions.gnome.org/extension/1160/dash-to-panel/>https://extensions.gnome.org/extension/1160/dash-to-panel/</a>
+Top Icons Plus - <a href=https://extensions.gnome.org/extension/1031/topicons/>https://extensions.gnome.org/extension/1031/topicons/</a></p><p>Download minio hook up to s3 buckets (digitalocean)
+<a href=https://minio.io/downloads.html#download-client>https://minio.io/downloads.html#download-client</a></p><p>yubikey u2f setup
+<a href=https://www.yubico.com/support/knowledge-base/categories/articles/can-set-linux-system-use-u2f/>https://www.yubico.com/support/knowledge-base/categories/articles/can-set-linux-system-use-u2f/</a></p><p>Install keybase
+<code>sudo yum install https://prerelease.keybase.io/keybase_amd64.rpm</code></p><p>Install kubectl
+<a href=https://kubernetes.io/docs/tasks/tools/install-kubectl/>https://kubernetes.io/docs/tasks/tools/install-kubectl/</a></p></article><section class="article labels"><a class=tag href=/tags/osx/>osx</a></section></div><div class="article bottom"><section class="article navigation"><p><a class=link href=/2020/02/20/rocket.chat-kubernetes-traefik-heart/><span class="iconfont icon-article"></span>Rocket.Chat + Kubernetes + Traefik = :heart:</a></p><p><a class=link href=/2015/09/19/my-osx-setup/><span class="iconfont icon-article"></span>My OSX Setup</a></p></section></div></section><section id=footer><div class=footer-wrap><p class=copyright>Aaron's Ramblings</p><p class=powerby><span>Powered by </span><a href=https://gohugo.io target=_blank>Hugo</a><span> and the </span><a href=https://themes.gohugo.io/hugo-notepadium/ target=_blank>Notepadium</a></p></div></section></body></html>

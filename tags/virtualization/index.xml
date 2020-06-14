@@ -1,26 +1,2 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>virtualization on Aaron&#39;s Ramblings</title>
-    <link>/tags/virtualization/</link>
-    <description>Recent content in virtualization on Aaron&#39;s Ramblings</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Tue, 16 Nov 2010 00:00:00 +0000</lastBuildDate>
-    
-        <atom:link href="/tags/virtualization/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Dedicated Virtualbox Host</title>
-      <link>/2010/11/16/dedicated-virtualbox-host/</link>
-      <pubDate>Tue, 16 Nov 2010 00:00:00 +0000</pubDate>
-      
-      <guid>/2010/11/16/dedicated-virtualbox-host/</guid>
-      <description>A while back I posted about Building first desktop from scratch. In it I mentioned installing Xenserver. I have no doubt that it is amazing. Just wasn&amp;rsquo;t exactly what I had in mind.
-Long story cut extremely short, I went with virtualbox. Reasons being: Its fast, so far has supported everything I throw at it, stable, cross platform, live migration, snapshots make backup easy, easy to use, and I like it.</description>
-      
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>virtualization on Aaron's Ramblings</title><link>/tags/virtualization/</link><description>Recent content in virtualization on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 16 Nov 2010 00:00:00 +0000</lastBuildDate><atom:link href="/tags/virtualization/index.xml" rel="self" type="application/rss+xml"/><item><title>Dedicated Virtualbox Host</title><link>/2010/11/16/dedicated-virtualbox-host/</link><pubDate>Tue, 16 Nov 2010 00:00:00 +0000</pubDate><guid>/2010/11/16/dedicated-virtualbox-host/</guid><description>A while back I posted about Building first desktop from scratch. In it I mentioned installing Xenserver. I have no doubt that it is amazing. Just wasn&amp;rsquo;t exactly what I had in mind.
+Long story cut extremely short, I went with virtualbox. Reasons being: Its fast, so far has supported everything I throw at it, stable, cross platform, live migration, snapshots make backup easy, easy to use, and I like it.</description></item></channel></rss>

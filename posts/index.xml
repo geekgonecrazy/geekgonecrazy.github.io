@@ -1,113 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Posts on Aaron&#39;s Ramblings</title>
-    <link>/posts/</link>
-    <description>Recent content in Posts on Aaron&#39;s Ramblings</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Fri, 01 May 2020 00:00:00 +0000</lastBuildDate>
-    
-        <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>A k8s Migration Concept</title>
-      <link>/2020/05/01/a-k8s-migration-concept/</link>
-      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/05/01/a-k8s-migration-concept/</guid>
-      <description>Surprisingly I don’t have a lot of kubernetes related content on my blog yet. This might just because I’m too busy using it to talk about it. But i’m a heavy user of it. To me it just makes orchestrating work loads easier.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on Aaron's Ramblings</title><link>/posts/</link><description>Recent content in Posts on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 01 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>A k8s Migration Concept</title><link>/2020/05/01/a-k8s-migration-concept/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>/2020/05/01/a-k8s-migration-concept/</guid><description>Surprisingly I don’t have a lot of kubernetes related content on my blog yet. This might just because I’m too busy using it to talk about it. But i’m a heavy user of it. To me it just makes orchestrating work loads easier.
 One thing in general I don’t see a lot of talk about is migrating between infrastructure. Especially don’t see much for kubernetes.
-So I wanted to share a high level concept set of steps that i’ve followed a couple of times to migrate between a couple of kubernetes clusters with minimal to no downtime.</description>
-      
-    </item>
-    
-    <item>
-      <title>Quarantainment</title>
-      <link>/2020/05/01/quarantainment/</link>
-      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/05/01/quarantainment/</guid>
-      <description>I don’t think its likely a surprise to anyone if I say I’m typically an introvert. I stay at and around home a lot in general. But when its no longer by choice.. kinda takes the fun out of it.
+So I wanted to share a high level concept set of steps that i’ve followed a couple of times to migrate between a couple of kubernetes clusters with minimal to no downtime.</description></item><item><title>Quarantainment</title><link>/2020/05/01/quarantainment/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>/2020/05/01/quarantainment/</guid><description>I don’t think its likely a surprise to anyone if I say I’m typically an introvert. I stay at and around home a lot in general. But when its no longer by choice.. kinda takes the fun out of it.
 We identified early on that we needed to keep our selves busy and entertained.
-Started out the quarantine with me teaching my wife to play chess. So pulled out the ‘ol Mario chess set.</description>
-      
-    </item>
-    
-    <item>
-      <title>Respecting Privacy in Analytics</title>
-      <link>/2020/04/29/respecting-privacy-in-analytics/</link>
-      <pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/04/29/respecting-privacy-in-analytics/</guid>
-      <description>There is a reason why people tend to add analytics to sites. I&amp;rsquo;d say most people add for completely honest reasoning. They just want to be able to see how their site is doing and if anyone actually shows up.
-But its really important to go down the path with caution. If you dont carefully select and think through your analytics… You end up spying on your users likely without even realizing it.</description>
-      
-    </item>
-    
-    <item>
-      <title>De-Googling: My Progress</title>
-      <link>/2020/04/28/de-googling-my-progress/</link>
-      <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/04/28/de-googling-my-progress/</guid>
-      <description>I wrote a bit about my reasoning to De-Google here. Now I want to write a bit about my progress, the struggles and what I ended up with.
-Search Or Google as many think of it. This one I have toyed with off and on with over the years. But a while back probably around a year ago.. I was listening to a podcast. I think either Ask Noah Show or one of the Jupiter Broadcast Linux podcasts and was inspired to challenge my self to switch and see how it went.</description>
-      
-    </item>
-    
-    <item>
-      <title>De-Googling</title>
-      <link>/2020/04/27/de-googling/</link>
-      <pubDate>Mon, 27 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/04/27/de-googling/</guid>
-      <description>This is not by any means a new idea. A quick search around the web will return many results of people doing this. My reasons are likely similar to many others. Privacy being the most common shared reason.
+Started out the quarantine with me teaching my wife to play chess. So pulled out the ‘ol Mario chess set.</description></item><item><title>Respecting Privacy in Analytics</title><link>/2020/04/29/respecting-privacy-in-analytics/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate><guid>/2020/04/29/respecting-privacy-in-analytics/</guid><description>There is a reason why people tend to add analytics to sites. I&amp;rsquo;d say most people add for completely honest reasoning. They just want to be able to see how their site is doing and if anyone actually shows up.
+But its really important to go down the path with caution. If you dont carefully select and think through your analytics… You end up spying on your users likely without even realizing it.</description></item><item><title>De-Googling: My Progress</title><link>/2020/04/28/de-googling-my-progress/</link><pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate><guid>/2020/04/28/de-googling-my-progress/</guid><description>I wrote a bit about my reasoning to De-Google here. Now I want to write a bit about my progress, the struggles and what I ended up with.
+Search Or Google as many think of it. This one I have toyed with off and on with over the years. But a while back probably around a year ago.. I was listening to a podcast. I think either Ask Noah Show or one of the Jupiter Broadcast Linux podcasts and was inspired to challenge my self to switch and see how it went.</description></item><item><title>De-Googling</title><link>/2020/04/27/de-googling/</link><pubDate>Mon, 27 Apr 2020 00:00:00 +0000</pubDate><guid>/2020/04/27/de-googling/</guid><description>This is not by any means a new idea. A quick search around the web will return many results of people doing this. My reasons are likely similar to many others. Privacy being the most common shared reason.
 Ok that&amp;rsquo;s it I spoiled it! Now you don&amp;rsquo;t need to read on 😜 But I&amp;rsquo;ll explain anyways.
-Privacy Google gives their applications and services away for free. This is extreeemly attractive! We humans are cheap!</description>
-      
-    </item>
-    
-    <item>
-      <title>Hacking in the Physical World</title>
-      <link>/2020/04/26/hacking-in-the-physical-world/</link>
-      <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/04/26/hacking-in-the-physical-world/</guid>
-      <description>Hacking is often a term used to mean malicious behavior. But I believe hacking is a mindset. It&amp;rsquo;s about trying to be creative.. Taking things and making them work in a different way. It&amp;rsquo;s about not letting your self be your own limiter. Just because you&amp;rsquo;ve never done something before… doesn&amp;rsquo;t mean you shouldn&amp;rsquo;t try.
-I don&amp;rsquo;t consider my self good at carpentry. Or using screws, hammers, power tools etc.. I&amp;rsquo;m also sure some most of the work makes professionals cringe just like I do at code by a novice.</description>
-      
-    </item>
-    
-    <item>
-      <title>100 Day writing challenge</title>
-      <link>/2020/04/25/100-day-writing-challenge/</link>
-      <pubDate>Sat, 25 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/04/25/100-day-writing-challenge/</guid>
-      <description>Hello its me again your friendly neighborhood Geek Gone Crazy.😜 Its been a bit less time since my last post than normal. Recently I came across a challenge on mastodon to do a 100 day writing challenge. Inspired by the 100 days of code.
-The idea being much like 100 days of code it encourages a person to sit down to write more often. Of course by doing this you get better at it.</description>
-      
-    </item>
-    
-    <item>
-      <title>Rocket.Chat &#43; Kubernetes &#43; Traefik = :heart:</title>
-      <link>/2020/02/20/rocket.chat-kubernetes-traefik-heart/</link>
-      <pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/02/20/rocket.chat-kubernetes-traefik-heart/</guid>
-      <description>You could say I&amp;rsquo;ve been a docker / container fanboy for a while now&amp;hellip; I started working with containers in a couple of previous jobs. Primarily only as aids for the build process or for maintaining the same environment between dev and production. But at my current job I got the opportunity to really go all in. At Rocket.Chat we wanted to build a cloud offering to allow people to quickly and easily deploy Rocket.</description>
-      
-    </item>
-    
-    <item>
-      <title>Fedora Setup</title>
-      <link>/2017/12/05/fedora-setup/</link>
-      <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/05/fedora-setup/</guid>
-      <description>Install nvidia drivers (oss drivers on this card fail miserably)
+Privacy Google gives their applications and services away for free. This is extreeemly attractive! We humans are cheap!</description></item><item><title>Hacking in the Physical World</title><link>/2020/04/26/hacking-in-the-physical-world/</link><pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate><guid>/2020/04/26/hacking-in-the-physical-world/</guid><description>Hacking is often a term used to mean malicious behavior. But I believe hacking is a mindset. It&amp;rsquo;s about trying to be creative.. Taking things and making them work in a different way. It&amp;rsquo;s about not letting your self be your own limiter. Just because you&amp;rsquo;ve never done something before… doesn&amp;rsquo;t mean you shouldn&amp;rsquo;t try.
+I don&amp;rsquo;t consider my self good at carpentry. Or using screws, hammers, power tools etc.. I&amp;rsquo;m also sure some most of the work makes professionals cringe just like I do at code by a novice.</description></item><item><title>100 Day writing challenge</title><link>/2020/04/25/100-day-writing-challenge/</link><pubDate>Sat, 25 Apr 2020 00:00:00 +0000</pubDate><guid>/2020/04/25/100-day-writing-challenge/</guid><description>Hello its me again your friendly neighborhood Geek Gone Crazy.😜 Its been a bit less time since my last post than normal. Recently I came across a challenge on mastodon to do a 100 day writing challenge. Inspired by the 100 days of code.
+The idea being much like 100 days of code it encourages a person to sit down to write more often. Of course by doing this you get better at it.</description></item><item><title>Rocket.Chat + Kubernetes + Traefik = :heart:</title><link>/2020/02/20/rocket.chat-kubernetes-traefik-heart/</link><pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate><guid>/2020/02/20/rocket.chat-kubernetes-traefik-heart/</guid><description>You could say I&amp;rsquo;ve been a docker / container fanboy for a while now&amp;hellip; I started working with containers in a couple of previous jobs. Primarily only as aids for the build process or for maintaining the same environment between dev and production. But at my current job I got the opportunity to really go all in. At Rocket.Chat we wanted to build a cloud offering to allow people to quickly and easily deploy Rocket.</description></item><item><title>Fedora Setup</title><link>/2017/12/05/fedora-setup/</link><pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate><guid>/2017/12/05/fedora-setup/</guid><description>Install nvidia drivers (oss drivers on this card fail miserably)
 Install gnome tweak tool sudo dnf install gnome-tweak-tool
 Enable global dark theme
 Enable minamize and maximize buttons
@@ -117,141 +18,26 @@ Install tilix
 sudo dnf install tilix
 sudo dnf install tmux
 sudo dnf groupinstall &amp;quot;Development Tools&amp;quot; sudo dnf groupinstall &amp;quot;C Development Tools and Libraries&amp;quot; sudo dnf install zsh
-Install oh my zsh sh -c &amp;quot;$(curl -fsSL https://raw.</description>
-      
-    </item>
-    
-    <item>
-      <title>My OSX Setup</title>
-      <link>/2015/09/19/my-osx-setup/</link>
-      <pubDate>Sat, 19 Sep 2015 00:00:00 +0000</pubDate>
-      
-      <guid>/2015/09/19/my-osx-setup/</guid>
-      <description>I&amp;rsquo;m an on again off again macOS / OSX user. This started off at some point as a blog post, but its grown into more of a living page of the programs I install when on macOS / OSX.
+Install oh my zsh sh -c &amp;quot;$(curl -fsSL https://raw.</description></item><item><title>My OSX Setup</title><link>/2015/09/19/my-osx-setup/</link><pubDate>Sat, 19 Sep 2015 00:00:00 +0000</pubDate><guid>/2015/09/19/my-osx-setup/</guid><description>I&amp;rsquo;m an on again off again macOS / OSX user. This started off at some point as a blog post, but its grown into more of a living page of the programs I install when on macOS / OSX.
 OS tweaks Changed Scroll Direction If using a normal mouse with a scroll wheel. The default &amp;ldquo;natural&amp;rdquo; feels very un-natural.
-Unchecked &amp;ldquo;Scroll direction: natural&amp;rdquo; Change Modifier keys If not using an apple keyboard.</description>
-      
-    </item>
-    
-    <item>
-      <title>Format Machine over ssh</title>
-      <link>/2012/08/20/format-machine-over-ssh/</link>
-      <pubDate>Mon, 20 Aug 2012 00:00:00 +0000</pubDate>
-      
-      <guid>/2012/08/20/format-machine-over-ssh/</guid>
-      <description>Lets say you have data on a remote linux machine, and for what ever reason you need to format the drive. Like for instance you decide to switch VPS hosts. If you just let them delete it, you have no way of knowing what really happens to your data. So providing you have ssh access here is a way to eliminate your data.
-One of the beauties of linux is that everything is represented as a file or folder.</description>
-      
-    </item>
-    
-    <item>
-      <title>Getting public ip from CLI</title>
-      <link>/2012/05/16/getting-public-ip-from-cli/</link>
-      <pubDate>Wed, 16 May 2012 00:00:00 +0000</pubDate>
-      
-      <guid>/2012/05/16/getting-public-ip-from-cli/</guid>
-      <description>I&amp;rsquo;ve found my self on occasion needing to find the public IP of a machine while in commandline(CLI). Most of the time its just because i&amp;rsquo;ve spoiled my self with DNS entries, and haven&amp;rsquo;t memorized it.
+Unchecked &amp;ldquo;Scroll direction: natural&amp;rdquo; Change Modifier keys If not using an apple keyboard.</description></item><item><title>Format Machine over ssh</title><link>/2012/08/20/format-machine-over-ssh/</link><pubDate>Mon, 20 Aug 2012 00:00:00 +0000</pubDate><guid>/2012/08/20/format-machine-over-ssh/</guid><description>Lets say you have data on a remote linux machine, and for what ever reason you need to format the drive. Like for instance you decide to switch VPS hosts. If you just let them delete it, you have no way of knowing what really happens to your data. So providing you have ssh access here is a way to eliminate your data.
+One of the beauties of linux is that everything is represented as a file or folder.</description></item><item><title>Getting public ip from CLI</title><link>/2012/05/16/getting-public-ip-from-cli/</link><pubDate>Wed, 16 May 2012 00:00:00 +0000</pubDate><guid>/2012/05/16/getting-public-ip-from-cli/</guid><description>I&amp;rsquo;ve found my self on occasion needing to find the public IP of a machine while in commandline(CLI). Most of the time its just because i&amp;rsquo;ve spoiled my self with DNS entries, and haven&amp;rsquo;t memorized it.
 You need to have curl installed. If you don&amp;rsquo;t have it, it should be in your package manager. In Ubuntu its easily installed via:
 sudo apt-get install curl Then just simply run:
-curl ifconfig.me I figured since I hadn&amp;rsquo;t posted in a while, this is a useful enough tidbit to share.</description>
-      
-    </item>
-    
-    <item>
-      <title>Childrens Distro sneak peak</title>
-      <link>/2012/05/10/childrens-distro-sneak-peak/</link>
-      <pubDate>Thu, 10 May 2012 00:00:00 +0000</pubDate>
-      
-      <guid>/2012/05/10/childrens-distro-sneak-peak/</guid>
-      <description>I was assigned the task of creating a children&amp;rsquo;s linux distro for use here at the library(where I work). Here&amp;rsquo;s a sneak peak:
+curl ifconfig.me I figured since I hadn&amp;rsquo;t posted in a while, this is a useful enough tidbit to share.</description></item><item><title>Childrens Distro sneak peak</title><link>/2012/05/10/childrens-distro-sneak-peak/</link><pubDate>Thu, 10 May 2012 00:00:00 +0000</pubDate><guid>/2012/05/10/childrens-distro-sneak-peak/</guid><description>I was assigned the task of creating a children&amp;rsquo;s linux distro for use here at the library(where I work). Here&amp;rsquo;s a sneak peak:
 I&amp;rsquo;m basing it on Linux Mint for now. I think i&amp;rsquo;ll probably move it all over to straight Ubuntu before finalizing. The dock is called docky. Can be installed from apt-get.
-As you can see I&amp;rsquo;ve loaded it up with games. Once i&amp;rsquo;ve finished i&amp;rsquo;ll give a better break down of what i&amp;rsquo;ve done.</description>
-      
-    </item>
-    
-    <item>
-      <title>IPv6 keeping tunnel connected</title>
-      <link>/2011/02/28/ipv6-keeping-tunnel-connected/</link>
-      <pubDate>Mon, 28 Feb 2011 00:00:00 +0000</pubDate>
-      
-      <guid>/2011/02/28/ipv6-keeping-tunnel-connected/</guid>
-      <description>Put together a script to keep your ip updated for the tunnel. This is for Hurricane Electric. Just plug in your info from your tunnel info page.
+As you can see I&amp;rsquo;ve loaded it up with games. Once i&amp;rsquo;ve finished i&amp;rsquo;ll give a better break down of what i&amp;rsquo;ve done.</description></item><item><title>IPv6 keeping tunnel connected</title><link>/2011/02/28/ipv6-keeping-tunnel-connected/</link><pubDate>Mon, 28 Feb 2011 00:00:00 +0000</pubDate><guid>/2011/02/28/ipv6-keeping-tunnel-connected/</guid><description>Put together a script to keep your ip updated for the tunnel. This is for Hurricane Electric. Just plug in your info from your tunnel info page.
 If Ubuntu, copy this file to: /etc/init.d/updateip
-Then, sudo ln -s /etc/init.d/updateip /etc/rc2.d/S95updateip 
+Then, sudo ln -s /etc/init.d/updateip /etc/rc2.d/S95updateip
 Will now start up with the computer.
-Hope it helps someone.</description>
-      
-    </item>
-    
-    <item>
-      <title>IPv6 Connectivity in Ubuntu: Setting up</title>
-      <link>/2011/02/20/ipv6-connectivity-in-ubuntu-setting-up/</link>
-      <pubDate>Sun, 20 Feb 2011 00:00:00 +0000</pubDate>
-      
-      <guid>/2011/02/20/ipv6-connectivity-in-ubuntu-setting-up/</guid>
-      <description>With ICANN recently announcing the end of IPv4 addresses to allocate, its time to take a look at the future.
+Hope it helps someone.</description></item><item><title>IPv6 Connectivity in Ubuntu: Setting up</title><link>/2011/02/20/ipv6-connectivity-in-ubuntu-setting-up/</link><pubDate>Sun, 20 Feb 2011 00:00:00 +0000</pubDate><guid>/2011/02/20/ipv6-connectivity-in-ubuntu-setting-up/</guid><description>With ICANN recently announcing the end of IPv4 addresses to allocate, its time to take a look at the future.
 What is IPv6? According to Cisco IPv6 is:
- IP Version 6. Replacement for IPv4. A next generation IP protocol. IPv6 is backward compatible with and is designed to fix the shortcomings of IPv4, such as data security and maximum number of user addresses. IPv6 increases the address space from 32 to 128 bits, providing for an unlimited number of networks and systems.</description>
-      
-    </item>
-    
-    <item>
-      <title>Project Opacity: Prototype to Production</title>
-      <link>/2011/02/03/project-opacity-prototype-to-production/</link>
-      <pubDate>Thu, 03 Feb 2011 00:00:00 +0000</pubDate>
-      
-      <guid>/2011/02/03/project-opacity-prototype-to-production/</guid>
-      <description>About a month ago at work we started a project internally known as Project Opacity.
- Opacity by definition: is the quality of being opaque to a degree; the degree to which something reduces the passage of light
- Anyways, on to what Project Opacity actually is. Through out the library there are computer stations from which patrons can access the library catalog. Which we call Opac&amp;rsquo;s or kiosks. Come to think of it, this probably is where the name comes from.</description>
-      
-    </item>
-    
-    <item>
-      <title>Destroying a hard drive</title>
-      <link>/2011/01/04/destroying-a-hard-drive/</link>
-      <pubDate>Tue, 04 Jan 2011 00:00:00 +0000</pubDate>
-      
-      <guid>/2011/01/04/destroying-a-hard-drive/</guid>
-      <description>Not very often do I get to be destructive at work. So when I do get to I get slightly excited! Had an old pentium 3 desktop they planned to give away. But it their copy of xp on it as well as some somewhat sensitive information. At first we were going to put the linux distribution of our fancy on it(this changes from day to day). But it wouldn&amp;rsquo;t boot from the cd.</description>
-      
-    </item>
-    
-    <item>
-      <title>Dedicated Virtualbox Host</title>
-      <link>/2010/11/16/dedicated-virtualbox-host/</link>
-      <pubDate>Tue, 16 Nov 2010 00:00:00 +0000</pubDate>
-      
-      <guid>/2010/11/16/dedicated-virtualbox-host/</guid>
-      <description>A while back I posted about Building first desktop from scratch. In it I mentioned installing Xenserver. I have no doubt that it is amazing. Just wasn&amp;rsquo;t exactly what I had in mind.
-Long story cut extremely short, I went with virtualbox. Reasons being: Its fast, so far has supported everything I throw at it, stable, cross platform, live migration, snapshots make backup easy, easy to use, and I like it.</description>
-      
-    </item>
-    
-    <item>
-      <title>Monitor Repair</title>
-      <link>/2010/10/12/monitor-repair/</link>
-      <pubDate>Tue, 12 Oct 2010 00:00:00 +0000</pubDate>
-      
-      <guid>/2010/10/12/monitor-repair/</guid>
-      <description>A few days ago I found a 22&amp;rdquo; Lcd screen that was being tossed out because it didn&amp;rsquo;t work. The thought of the beauty being thrown away didn&amp;rsquo;t set well with me. So I picked it up.
+IP Version 6. Replacement for IPv4. A next generation IP protocol. IPv6 is backward compatible with and is designed to fix the shortcomings of IPv4, such as data security and maximum number of user addresses. IPv6 increases the address space from 32 to 128 bits, providing for an unlimited number of networks and systems.</description></item><item><title>Project Opacity: Prototype to Production</title><link>/2011/02/03/project-opacity-prototype-to-production/</link><pubDate>Thu, 03 Feb 2011 00:00:00 +0000</pubDate><guid>/2011/02/03/project-opacity-prototype-to-production/</guid><description>About a month ago at work we started a project internally known as Project Opacity.
+Opacity by definition: is the quality of being opaque to a degree; the degree to which something reduces the passage of light
+Anyways, on to what Project Opacity actually is. Through out the library there are computer stations from which patrons can access the library catalog. Which we call Opac&amp;rsquo;s or kiosks. Come to think of it, this probably is where the name comes from.</description></item><item><title>Destroying a hard drive</title><link>/2011/01/04/destroying-a-hard-drive/</link><pubDate>Tue, 04 Jan 2011 00:00:00 +0000</pubDate><guid>/2011/01/04/destroying-a-hard-drive/</guid><description>Not very often do I get to be destructive at work. So when I do get to I get slightly excited! Had an old pentium 3 desktop they planned to give away. But it their copy of xp on it as well as some somewhat sensitive information. At first we were going to put the linux distribution of our fancy on it(this changes from day to day). But it wouldn&amp;rsquo;t boot from the cd.</description></item><item><title>Dedicated Virtualbox Host</title><link>/2010/11/16/dedicated-virtualbox-host/</link><pubDate>Tue, 16 Nov 2010 00:00:00 +0000</pubDate><guid>/2010/11/16/dedicated-virtualbox-host/</guid><description>A while back I posted about Building first desktop from scratch. In it I mentioned installing Xenserver. I have no doubt that it is amazing. Just wasn&amp;rsquo;t exactly what I had in mind.
+Long story cut extremely short, I went with virtualbox. Reasons being: Its fast, so far has supported everything I throw at it, stable, cross platform, live migration, snapshots make backup easy, easy to use, and I like it.</description></item><item><title>Monitor Repair</title><link>/2010/10/12/monitor-repair/</link><pubDate>Tue, 12 Oct 2010 00:00:00 +0000</pubDate><guid>/2010/10/12/monitor-repair/</guid><description>A few days ago I found a 22&amp;rdquo; Lcd screen that was being tossed out because it didn&amp;rsquo;t work. The thought of the beauty being thrown away didn&amp;rsquo;t set well with me. So I picked it up.
 Before messing with it.
 When turning it on, it would show its gateway logo and then go blank. Which was a good sign. But none of the inputs worked.
-So I took it apart.</description>
-      
-    </item>
-    
-    <item>
-      <title>Building first desktop from scratch</title>
-      <link>/2010/03/24/building-first-desktop-from-scratch/</link>
-      <pubDate>Wed, 24 Mar 2010 00:00:00 +0000</pubDate>
-      
-      <guid>/2010/03/24/building-first-desktop-from-scratch/</guid>
-      <description>Most of my childhood I have built computers. But it was always from parts laying around. A motherboard/CPU from here, case from another one etc.
+So I took it apart.</description></item><item><title>Building first desktop from scratch</title><link>/2010/03/24/building-first-desktop-from-scratch/</link><pubDate>Wed, 24 Mar 2010 00:00:00 +0000</pubDate><guid>/2010/03/24/building-first-desktop-from-scratch/</guid><description>Most of my childhood I have built computers. But it was always from parts laying around. A motherboard/CPU from here, case from another one etc.
 I finally saved up and planned out my own build from scratch. I&amp;rsquo;m posting to my blog because its a geeky milestone that every little geek must go through. A rite of passage if you will.
-I ran into a couple of problems along the way.</description>
-      
-    </item>
-    
-  </channel>
-</rss>
+I ran into a couple of problems along the way.</description></item></channel></rss>

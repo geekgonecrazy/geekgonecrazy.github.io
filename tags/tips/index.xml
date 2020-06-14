@@ -1,39 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>tips on Aaron&#39;s Ramblings</title>
-    <link>/tags/tips/</link>
-    <description>Recent content in tips on Aaron&#39;s Ramblings</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Mon, 20 Aug 2012 00:00:00 +0000</lastBuildDate>
-    
-        <atom:link href="/tags/tips/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Format Machine over ssh</title>
-      <link>/2012/08/20/format-machine-over-ssh/</link>
-      <pubDate>Mon, 20 Aug 2012 00:00:00 +0000</pubDate>
-      
-      <guid>/2012/08/20/format-machine-over-ssh/</guid>
-      <description>Lets say you have data on a remote linux machine, and for what ever reason you need to format the drive. Like for instance you decide to switch VPS hosts. If you just let them delete it, you have no way of knowing what really happens to your data. So providing you have ssh access here is a way to eliminate your data.
-One of the beauties of linux is that everything is represented as a file or folder.</description>
-      
-    </item>
-    
-    <item>
-      <title>Getting public ip from CLI</title>
-      <link>/2012/05/16/getting-public-ip-from-cli/</link>
-      <pubDate>Wed, 16 May 2012 00:00:00 +0000</pubDate>
-      
-      <guid>/2012/05/16/getting-public-ip-from-cli/</guid>
-      <description>I&amp;rsquo;ve found my self on occasion needing to find the public IP of a machine while in commandline(CLI). Most of the time its just because i&amp;rsquo;ve spoiled my self with DNS entries, and haven&amp;rsquo;t memorized it.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>tips on Aaron's Ramblings</title><link>/tags/tips/</link><description>Recent content in tips on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 20 Aug 2012 00:00:00 +0000</lastBuildDate><atom:link href="/tags/tips/index.xml" rel="self" type="application/rss+xml"/><item><title>Format Machine over ssh</title><link>/2012/08/20/format-machine-over-ssh/</link><pubDate>Mon, 20 Aug 2012 00:00:00 +0000</pubDate><guid>/2012/08/20/format-machine-over-ssh/</guid><description>Lets say you have data on a remote linux machine, and for what ever reason you need to format the drive. Like for instance you decide to switch VPS hosts. If you just let them delete it, you have no way of knowing what really happens to your data. So providing you have ssh access here is a way to eliminate your data.
+One of the beauties of linux is that everything is represented as a file or folder.</description></item><item><title>Getting public ip from CLI</title><link>/2012/05/16/getting-public-ip-from-cli/</link><pubDate>Wed, 16 May 2012 00:00:00 +0000</pubDate><guid>/2012/05/16/getting-public-ip-from-cli/</guid><description>I&amp;rsquo;ve found my self on occasion needing to find the public IP of a machine while in commandline(CLI). Most of the time its just because i&amp;rsquo;ve spoiled my self with DNS entries, and haven&amp;rsquo;t memorized it.
 You need to have curl installed. If you don&amp;rsquo;t have it, it should be in your package manager. In Ubuntu its easily installed via:
 sudo apt-get install curl Then just simply run:
-curl ifconfig.me I figured since I hadn&amp;rsquo;t posted in a while, this is a useful enough tidbit to share.</description>
-      
-    </item>
-    
-  </channel>
-</rss>
+curl ifconfig.me I figured since I hadn&amp;rsquo;t posted in a while, this is a useful enough tidbit to share.</description></item></channel></rss>
