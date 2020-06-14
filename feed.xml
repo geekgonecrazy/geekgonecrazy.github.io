@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 01 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://geekgonecrazy.com/index.xml" rel="self" type="application/rss+xml"/><item><title>A k8s Migration Concept</title><link>https://geekgonecrazy.com/2020/05/01/a-k8s-migration-concept/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/05/01/a-k8s-migration-concept/</guid><description>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 01 May 2020 00:00:00 +0000</lastBuildDate><item><title>A k8s Migration Concept</title><link>https://geekgonecrazy.com/2020/05/01/a-k8s-migration-concept/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/05/01/a-k8s-migration-concept/</guid><description>
 &lt;p>Surprisingly I don’t have a lot of kubernetes related content on my blog yet. This might just because I’m too busy using it to talk about it. But i’m a heavy user of it. To me it just makes orchestrating work loads easier.&lt;/p>
 &lt;p>One thing in general I don’t see a lot of talk about is migrating between infrastructure. Especially don’t see much for kubernetes.&lt;/p>
 &lt;!-- raw HTML omitted -->
@@ -237,7 +237,7 @@ alt/>&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;p>We started this journey off with a couple of my collegues actually putting together a quick proof of concept using a wildcard cert, hipache and a solution that was at the time called tutum. Tutum was later aquired by docker.. and shutdown.&lt;/p>
 &lt;p>This solution worked great as a quick proof of concept. We were able to setup a page on our website and people could come in and try Rocket.Chat out. It would provision a docker container using tutum and proxy traffic through with hipache and the user would have a Rocket.Chat instance to play with in just a few minutes.&lt;/p>
-&lt;p>&lt;img src="https://geekgonecrazy.com/images/2020-02-20/deploy.png"
+&lt;p>&lt;img src="/images/2020-02-20/deploy.png"
 alt="screenshot"/>&lt;/p>
 &lt;p>The problem with this solution is it just wouldn&amp;rsquo;t scale that well. Tutum wasn&amp;rsquo;t really great to work with and had a lot of weird quirks. It seemed to perform worse the more containers we had running. Lots of network issues, lower level docker issues etc. Hipache while doing the job didn&amp;rsquo;t really fit that nicely with this dynamic load. We had to setup a redis cluster just for hipache and inject new records every time we wanted to handle traffic for a new subdomain.&lt;/p>
 &lt;p>We started to evaluate a few other options. At the time the orchestration landscape was rather scarce. Kubernetes already existed and looked super promising, but it was a bit young. We looked at adapting a few other solutions to fit our needs.. We checked out Juju charms and LXD containers.. But.. after some prototyping felt that it was going to take a lot of work to make work as we invisioned.&lt;/p>
@@ -333,28 +333,28 @@ Top Icons Plus - &lt;a href="https://extensions.gnome.org/extension/1031/topicon
 &lt;h3 id="changed-scroll-direction">Changed Scroll Direction&lt;/h3>
 &lt;p>If using a normal mouse with a scroll wheel. The default &amp;ldquo;natural&amp;rdquo; feels very un-natural.&lt;/p>
 &lt;p>Unchecked &amp;ldquo;Scroll direction: natural&amp;rdquo;
-&lt;img src="https://geekgonecrazy.com/images/2015-09-19/scroll-dir.png"
+&lt;img src="/images/2015-09-19/scroll-dir.png"
 alt="Scroll Direction"/>&lt;/p>
 &lt;h3 id="change-modifier-keys">Change Modifier keys&lt;/h3>
 &lt;p>If not using an apple keyboard.&lt;/p>
-&lt;p>&lt;img src="https://geekgonecrazy.com/images/2015-09-19/modifier-keys.png"
+&lt;p>&lt;img src="/images/2015-09-19/modifier-keys.png"
 alt="Modifier Keys"/>&lt;/p>
 &lt;p>Map the windows key to the command key.&lt;/p>
 &lt;h3 id="auto-hide-dock">Auto hide dock&lt;/h3>
 &lt;p>I like the maximum amount of screen space I can get. So of course I hide the dock.&lt;/p>
-&lt;p>&lt;img src="https://geekgonecrazy.com/images/2015-09-19/dock-autohide.png"
+&lt;p>&lt;img src="/images/2015-09-19/dock-autohide.png"
 alt="Dock Auto Hide"/>&lt;/p>
 &lt;h3 id="hot-corner">Hot Corner&lt;/h3>
 &lt;p>If i&amp;rsquo;m at a normal mouse and keyboard I like to turn this on. Also if coming from Fedora/Gnome3 this helps feel more at home.&lt;/p>
-&lt;p>&lt;img src="https://geekgonecrazy.com/images/2015-09-19/hot-corner.png"
+&lt;p>&lt;img src="/images/2015-09-19/hot-corner.png"
 alt="Hot Corner"/>&lt;/p>
 &lt;h3 id="finder-config">Finder config&lt;/h3>
 &lt;p>Very much personal preference.&lt;/p>
 &lt;p>I like having the hard drive icons on my desktop. Its convenient.
-&lt;img src="https://geekgonecrazy.com/images/2015-09-19/finder-desktop.png"
+&lt;img src="/images/2015-09-19/finder-desktop.png"
 alt="Finder Desktop"/>&lt;/p>
 &lt;p>Also like being able to quickly get to my home folder.
-&lt;img src="https://geekgonecrazy.com/images/2015-09-19/finder-sidebar.png"
+&lt;img src="/images/2015-09-19/finder-sidebar.png"
 alt="Finder Sidebar"/>&lt;/p>
 &lt;h3 id="screenshot-directory">Screenshot Directory&lt;/h3>
 &lt;p>I take a lot of screenshots. So I don&amp;rsquo;t want them cluttering my desktop. So I change the folder they are saved to.&lt;/p>
@@ -364,7 +364,7 @@ alt="Finder Sidebar"/>&lt;/p>
 &lt;/code>&lt;/pre>&lt;p>Then to reload so this takes its followed by:&lt;/p>
 &lt;pre>&lt;code>killall SystemUIServer
 &lt;/code>&lt;/pre>&lt;p>For extra convenience I drag the folder into my dock so I have quick access to them.&lt;/p>
-&lt;p>&lt;img src="https://geekgonecrazy.com/images/2015-09-19/Screenshots-dock.png"
+&lt;p>&lt;img src="/images/2015-09-19/Screenshots-dock.png"
 alt="Screenshots in dock"/>&lt;/p>
 &lt;h2 id="applications">Applications&lt;/h2>
 &lt;p>A few of the apps I always seem to download.&lt;/p>
@@ -382,7 +382,7 @@ alt="Vs Code"/>&lt;/p>
 &lt;p>&lt;img src="https://code.visualstudio.com/assets/docs/setup/mac/shell-command.png"
 alt="vscode Commands"/>&lt;/p>
 &lt;p>Also will need to set the git path. The path if installed from xcode is: &lt;code>/usr/bin/git&lt;/code>. Simply typing git in the terminal will trigger a popup to install from xcode.&lt;/p>
-&lt;p>&lt;img src="https://geekgonecrazy.com/images/2015-09-19/git-path.png"
+&lt;p>&lt;img src="/images/2015-09-19/git-path.png"
 alt="vscode git setting"/>&lt;/p>
 &lt;p>&lt;a href="https://code.visualstudio.com/"target="_blank">Download Here&lt;/a>&lt;/p>
 &lt;h3 id="rocketchat">Rocket.Chat&lt;/h3>
@@ -430,7 +430,7 @@ alt="vscode git setting"/>&lt;/p>
 &lt;p>Change the line near the top. That starts with &lt;code>ZSH_THEME&lt;/code>&lt;/p>
 &lt;pre>&lt;code>ZSH_THEME=&amp;quot;ys&amp;quot;
 &lt;/code>&lt;/pre>&lt;p>I changed to &lt;code>ys&lt;/code> which looks like this:&lt;/p>
-&lt;p>&lt;img src="https://geekgonecrazy.com/images/2015-09-19/zsh-prompt.png"
+&lt;p>&lt;img src="/images/2015-09-19/zsh-prompt.png"
 alt="ZSH Prompt"/>&lt;/p>
 &lt;p>Using &lt;code>source ~/.zshrc&lt;/code> will reload your zsh config.&lt;/p>
 &lt;h3 id="setup-git-info">Setup git Info&lt;/h3>
@@ -444,7 +444,7 @@ git config --global user.name &amp;quot;Your Name&amp;quot;
 &lt;pre>&lt;code>gem install jekyll
 &lt;/code>&lt;/pre>&lt;h2 id="summary">Summary&lt;/h2>
 &lt;p>Great OS. Lots of tools for developers. If you have some program you can&amp;rsquo;t live with out. Would be glad to hear it.&lt;/p>
-&lt;p>&lt;img src="https://geekgonecrazy.com/images/2015-09-19/final.png"
+&lt;p>&lt;img src="/images/2015-09-19/final.png"
 alt="Final"/>&lt;/p>
 &lt;h3 id="updates">Updates&lt;/h3>
 &lt;h4 id="06152018">06/15/2018&lt;/h4>
@@ -697,7 +697,7 @@ alt/>&lt;/p>
 alt/>&lt;/p>
 &lt;h4 id="updates">Updates&lt;/h4>
 &lt;p>09/30/2019: Switching image links to https&lt;/p></description></item><item><title>Dedicated Virtualbox Host</title><link>https://geekgonecrazy.com/2010/11/16/dedicated-virtualbox-host/</link><pubDate>Tue, 16 Nov 2010 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2010/11/16/dedicated-virtualbox-host/</guid><description>
-&lt;p>A while back I posted about &lt;a href="https://geekgonecrazy.com/2010/03/24/building-first-computer">Building first desktop from scratch&lt;/a>.  In it I mentioned installing Xenserver.  I have no doubt that it is amazing.  Just wasn&amp;rsquo;t exactly what I had in mind.&lt;/p>
+&lt;p>A while back I posted about &lt;a href="/2010/03/24/building-first-computer">Building first desktop from scratch&lt;/a>.  In it I mentioned installing Xenserver.  I have no doubt that it is amazing.  Just wasn&amp;rsquo;t exactly what I had in mind.&lt;/p>
 &lt;p>Long story cut extremely short, I went with virtualbox.  Reasons being: Its fast, so far has supported everything I throw at it, stable, cross platform, live migration, snapshots make backup easy, easy to use, and I like it. &lt;/p>
 &lt;p>Now for the exciting part.  How I set it up.&lt;/p>
 &lt;!-- raw HTML omitted -->
