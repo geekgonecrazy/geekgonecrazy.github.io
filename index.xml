@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>http://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 01 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://geekgonecrazy.com/index.xml" rel="self" type="application/rss+xml"/><item><title>A k8s Migration Concept</title><link>http://geekgonecrazy.com/2020/05/01/a-k8s-migration-concept/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2020/05/01/a-k8s-migration-concept/</guid><description>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 01 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://geekgonecrazy.com/index.xml" rel="self" type="application/rss+xml"/><item><title>A k8s Migration Concept</title><link>https://geekgonecrazy.com/2020/05/01/a-k8s-migration-concept/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/05/01/a-k8s-migration-concept/</guid><description>
 &lt;p>Surprisingly I don’t have a lot of kubernetes related content on my blog yet. This might just because I’m too busy using it to talk about it. But i’m a heavy user of it. To me it just makes orchestrating work loads easier.&lt;/p>
 &lt;p>One thing in general I don’t see a lot of talk about is migrating between infrastructure. Especially don’t see much for kubernetes.&lt;/p>
 &lt;!-- raw HTML omitted -->
@@ -33,7 +33,7 @@
 &lt;p>Once it was all over only thing left to do was to clean up.&lt;/p>
 &lt;p>To me the magic here is in being able to change the DNS and traffic still be working with some minimal latency increase.&lt;/p>
 &lt;p>Things can definitely go wrong. You have to plan for them. This is also why giving your self a maintenance window is also extremely important.&lt;/p>
-&lt;p>Also if you know anything about working with the kubernetes api.. consider writing something to do this.&lt;/p></description></item><item><title>Quarantainment</title><link>http://geekgonecrazy.com/2020/05/01/quarantainment/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2020/05/01/quarantainment/</guid><description>
+&lt;p>Also if you know anything about working with the kubernetes api.. consider writing something to do this.&lt;/p></description></item><item><title>Quarantainment</title><link>https://geekgonecrazy.com/2020/05/01/quarantainment/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/05/01/quarantainment/</guid><description>
 &lt;p>I don’t think its likely a surprise to anyone if I say I’m typically an introvert. I stay at and around home a lot in general. But when its no longer by choice.. kinda takes the fun out of it.&lt;/p>
 &lt;p>We identified early on that we needed to keep our selves busy and entertained.&lt;/p>
 &lt;!-- raw HTML omitted -->
@@ -58,7 +58,7 @@ alt/>&lt;/p>
 &lt;p>I also bought some controllers and loaded a raspberry pi up with &lt;a href="https://retropie.org.uk/"target="_blank">retropie&lt;/a>.&lt;/p>
 &lt;p>&lt;img src="https://paper-attachments.dropbox.com/s_5B8DDF11035244A7AC92669A93E624BCD7D0866F945EF2DF2F75C708AABAABDC_1588365556279_file.jpeg"
 alt/>&lt;/p>
-&lt;p>So far its working. We have stayed fairly sane and we are coming out the other side a bit better then we went in.&lt;/p></description></item><item><title>Respecting Privacy in Analytics</title><link>http://geekgonecrazy.com/2020/04/29/respecting-privacy-in-analytics/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2020/04/29/respecting-privacy-in-analytics/</guid><description>
+&lt;p>So far its working. We have stayed fairly sane and we are coming out the other side a bit better then we went in.&lt;/p></description></item><item><title>Respecting Privacy in Analytics</title><link>https://geekgonecrazy.com/2020/04/29/respecting-privacy-in-analytics/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/04/29/respecting-privacy-in-analytics/</guid><description>
 &lt;p>There is a reason why people tend to add analytics to sites. I&amp;rsquo;d say most people add for completely honest reasoning. They just want to be able to see how their site is doing and if anyone actually shows up.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;p>But its really important to go down the path with caution. If you dont carefully select and think through your analytics… You end up spying on your users likely without even realizing it.&lt;/p>
@@ -86,7 +86,7 @@ Saved: &lt;a href="https://github.com/usefathom/fathom/blob/8f7c6d2e45ebb2865120
 &lt;p>Here is a sample of my brief moment on hackernews yesterday. But what you see there is it. Super simple, but does the job.&lt;/p>
 &lt;p>&lt;img src="https://paper-attachments.dropbox.com/s_3A770CD59D00AB3A931B3BF5D654149EDE7875E5917677E7CC0A064B28BBDD07_1588216208662_file.jpeg"
 alt/>&lt;/p>
-&lt;p>Think about privacy the next time you start adding analytics to your website. Think about what you are making your users give up in exchange. Do the right thing 🙂&lt;/p></description></item><item><title>De-Googling: My Progress</title><link>http://geekgonecrazy.com/2020/04/28/de-googling-my-progress/</link><pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2020/04/28/de-googling-my-progress/</guid><description>
+&lt;p>Think about privacy the next time you start adding analytics to your website. Think about what you are making your users give up in exchange. Do the right thing 🙂&lt;/p></description></item><item><title>De-Googling: My Progress</title><link>https://geekgonecrazy.com/2020/04/28/de-googling-my-progress/</link><pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/04/28/de-googling-my-progress/</guid><description>
 &lt;p>I wrote a bit about my reasoning to De-Google &lt;a href="https://geekgonecrazy.com/2020/04/27/de-googling/"target="_blank">here&lt;/a>. Now I want to write a bit about my progress, the struggles and what I ended up with.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;h1 id="search">Search&lt;/h1>
@@ -160,7 +160,7 @@ alt/>&lt;/p>
 &lt;p>Looking through my phone at the Google Apps installed.&lt;/p>
 &lt;p>Youtube is the only app/service I visit any more for personal use. I&amp;rsquo;ve tried using invidious.. But I don&amp;rsquo;t know how much this really helps. Also if I self host then the data is then tied to me… so kinda defeats the purposes.&lt;/p>
 &lt;p>When ever I do find my self having to access Google I do so in a separate Firefox Container.&lt;/p>
-&lt;p>Overall I feel like I&amp;rsquo;ve done a great job removing my reliance on Google! I have a feeling I will be self hosting a lot more in the future. Maybe more on that another time. 😉&lt;/p></description></item><item><title>De-Googling</title><link>http://geekgonecrazy.com/2020/04/27/de-googling/</link><pubDate>Mon, 27 Apr 2020 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2020/04/27/de-googling/</guid><description>
+&lt;p>Overall I feel like I&amp;rsquo;ve done a great job removing my reliance on Google! I have a feeling I will be self hosting a lot more in the future. Maybe more on that another time. 😉&lt;/p></description></item><item><title>De-Googling</title><link>https://geekgonecrazy.com/2020/04/27/de-googling/</link><pubDate>Mon, 27 Apr 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/04/27/de-googling/</guid><description>
 &lt;p>This is not by any means a new idea. A quick search around the web will return many results of people doing this. My reasons are likely similar to many others. Privacy being the most common shared reason.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;p>Ok that&amp;rsquo;s it I spoiled it! Now you don&amp;rsquo;t need to read on 😜 But I&amp;rsquo;ll explain anyways.&lt;/p>
@@ -195,7 +195,7 @@ alt/>&lt;/p>
 &lt;p>What if a company went out of business and took all of your data with them? This has happened.&lt;/p>
 &lt;p>Diversifying the companies you use for services you can&amp;rsquo;t host your self is like hedging your bets.&lt;/p>
 &lt;hr>
-&lt;p>Thats it folks! Hopefully my perspective is different enough to be interesting. 😜 I might follow this up with how I have de-googled.&lt;/p></description></item><item><title>Hacking in the Physical World</title><link>http://geekgonecrazy.com/2020/04/26/hacking-in-the-physical-world/</link><pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2020/04/26/hacking-in-the-physical-world/</guid><description>
+&lt;p>Thats it folks! Hopefully my perspective is different enough to be interesting. 😜 I might follow this up with how I have de-googled.&lt;/p></description></item><item><title>Hacking in the Physical World</title><link>https://geekgonecrazy.com/2020/04/26/hacking-in-the-physical-world/</link><pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/04/26/hacking-in-the-physical-world/</guid><description>
 &lt;p>Hacking is often a term used to mean malicious behavior. But I believe hacking is a mindset. It&amp;rsquo;s about trying to be creative.. Taking things and making them work in a different way. It&amp;rsquo;s about not letting your self be your own limiter. Just because you&amp;rsquo;ve never done something before… doesn&amp;rsquo;t mean you shouldn&amp;rsquo;t try.&lt;/p>
 &lt;p>I don&amp;rsquo;t consider my self good at carpentry. Or using screws, hammers, power tools etc.. I&amp;rsquo;m also sure &lt;del>some&lt;/del> most of the work makes professionals cringe just like I do at code by a novice.&lt;/p>
 &lt;!-- raw HTML omitted -->
@@ -226,18 +226,18 @@ alt/>&lt;/p>
 alt/>&lt;/p>
 &lt;p>Once they were as straight as I could.. cut a few spare 2x4s put them in as square as I could and then removed the bowed pieces.&lt;/p>
 &lt;p>Anyways… it&amp;rsquo;s not pretty. But it will last a little longer until I can do it right.&lt;/p>
-&lt;p>Hopefully interesting in some way! If not we’ll try again. I&amp;rsquo;ve got several more projects needing done 🙂&lt;/p></description></item><item><title>100 Day writing challenge</title><link>http://geekgonecrazy.com/2020/04/25/100-day-writing-challenge/</link><pubDate>Sat, 25 Apr 2020 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2020/04/25/100-day-writing-challenge/</guid><description>
+&lt;p>Hopefully interesting in some way! If not we’ll try again. I&amp;rsquo;ve got several more projects needing done 🙂&lt;/p></description></item><item><title>100 Day writing challenge</title><link>https://geekgonecrazy.com/2020/04/25/100-day-writing-challenge/</link><pubDate>Sat, 25 Apr 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/04/25/100-day-writing-challenge/</guid><description>
 &lt;p>Hello its me again your friendly neighborhood Geek Gone Crazy.😜 Its been a bit less time since my last post than normal. Recently I came across a challenge on mastodon to do a 100 day writing challenge. Inspired by the 100 days of code.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;!-- raw HTML omitted -->
 &lt;p>The idea being much like 100 days of code it encourages a person to sit down to write more often. Of course by doing this you get better at it.&lt;/p>
 &lt;p>As you can see from my posting history here.. I don&amp;rsquo;t post a lot. But I do enjoy writing, I do a fair amount of writing for work and have always wanted to post a bit more. So.. here goes nothing!&lt;/p>
-&lt;p>Here&amp;rsquo;s to hopefully a few more posts!&lt;/p></description></item><item><title>Rocket.Chat + Kubernetes + Traefik = :heart:</title><link>http://geekgonecrazy.com/2020/02/20/rocket.chat-kubernetes-traefik-heart/</link><pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2020/02/20/rocket.chat-kubernetes-traefik-heart/</guid><description>
+&lt;p>Here&amp;rsquo;s to hopefully a few more posts!&lt;/p></description></item><item><title>Rocket.Chat + Kubernetes + Traefik = :heart:</title><link>https://geekgonecrazy.com/2020/02/20/rocket.chat-kubernetes-traefik-heart/</link><pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/02/20/rocket.chat-kubernetes-traefik-heart/</guid><description>
 &lt;p>You could say I&amp;rsquo;ve been a docker / container fanboy for a while now&amp;hellip; I started working with containers in a couple of previous jobs. Primarily only as aids for the build process or for maintaining the same environment between dev and production. But at my current job I got the opportunity to really go all in. At Rocket.Chat we wanted to build a cloud offering to allow people to quickly and easily deploy Rocket.Chat.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;p>We started this journey off with a couple of my collegues actually putting together a quick proof of concept using a wildcard cert, hipache and a solution that was at the time called tutum. Tutum was later aquired by docker.. and shutdown.&lt;/p>
 &lt;p>This solution worked great as a quick proof of concept. We were able to setup a page on our website and people could come in and try Rocket.Chat out. It would provision a docker container using tutum and proxy traffic through with hipache and the user would have a Rocket.Chat instance to play with in just a few minutes.&lt;/p>
-&lt;p>&lt;img src="http://geekgonecrazy.com/images/2020-02-20/deploy.png"
+&lt;p>&lt;img src="https://geekgonecrazy.com/images/2020-02-20/deploy.png"
 alt="screenshot"/>&lt;/p>
 &lt;p>The problem with this solution is it just wouldn&amp;rsquo;t scale that well. Tutum wasn&amp;rsquo;t really great to work with and had a lot of weird quirks. It seemed to perform worse the more containers we had running. Lots of network issues, lower level docker issues etc. Hipache while doing the job didn&amp;rsquo;t really fit that nicely with this dynamic load. We had to setup a redis cluster just for hipache and inject new records every time we wanted to handle traffic for a new subdomain.&lt;/p>
 &lt;p>We started to evaluate a few other options. At the time the orchestration landscape was rather scarce. Kubernetes already existed and looked super promising, but it was a bit young. We looked at adapting a few other solutions to fit our needs.. We checked out Juju charms and LXD containers.. But.. after some prototyping felt that it was going to take a lot of work to make work as we invisioned.&lt;/p>
@@ -270,7 +270,7 @@ alt="traefik mascot"/>&lt;/p>
 &lt;li>We let our customers bring their own custom domains and provide Letsencrypt certificates for them&lt;/li>
 &lt;li>We still love Golang for our infrastructure needs. But thats a topic for another time. :smile:&lt;/li>
 &lt;/ul>
-&lt;p>We are still very thankful to have discovered 2 key pieces. Kubernetes and Traefik&lt;/p></description></item><item><title>Fedora Setup</title><link>http://geekgonecrazy.com/2017/12/05/fedora-setup/</link><pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2017/12/05/fedora-setup/</guid><description>
+&lt;p>We are still very thankful to have discovered 2 key pieces. Kubernetes and Traefik&lt;/p></description></item><item><title>Fedora Setup</title><link>https://geekgonecrazy.com/2017/12/05/fedora-setup/</link><pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2017/12/05/fedora-setup/</guid><description>
 &lt;p>Install nvidia drivers (oss drivers on this card fail miserably)&lt;/p>
 &lt;p>Install gnome tweak tool
 &lt;code>sudo dnf install gnome-tweak-tool&lt;/code>&lt;/p>
@@ -326,35 +326,35 @@ Top Icons Plus - &lt;a href="https://extensions.gnome.org/extension/1031/topicon
 &lt;p>Install keybase
 &lt;code>sudo yum install https://prerelease.keybase.io/keybase_amd64.rpm&lt;/code>&lt;/p>
 &lt;p>Install kubectl
-&lt;a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">https://kubernetes.io/docs/tasks/tools/install-kubectl/&lt;/a>&lt;/p></description></item><item><title>My OSX Setup</title><link>http://geekgonecrazy.com/2015/09/19/my-osx-setup/</link><pubDate>Sat, 19 Sep 2015 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2015/09/19/my-osx-setup/</guid><description>
+&lt;a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">https://kubernetes.io/docs/tasks/tools/install-kubectl/&lt;/a>&lt;/p></description></item><item><title>My OSX Setup</title><link>https://geekgonecrazy.com/2015/09/19/my-osx-setup/</link><pubDate>Sat, 19 Sep 2015 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2015/09/19/my-osx-setup/</guid><description>
 &lt;p>I&amp;rsquo;m an on again off again macOS / OSX user. This started off at some point as a blog post, but its grown into more of a living page of the programs I install when on macOS / OSX.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;h2 id="os-tweaks">OS tweaks&lt;/h2>
 &lt;h3 id="changed-scroll-direction">Changed Scroll Direction&lt;/h3>
 &lt;p>If using a normal mouse with a scroll wheel. The default &amp;ldquo;natural&amp;rdquo; feels very un-natural.&lt;/p>
 &lt;p>Unchecked &amp;ldquo;Scroll direction: natural&amp;rdquo;
-&lt;img src="http://geekgonecrazy.com/images/2015-09-19/scroll-dir.png"
+&lt;img src="https://geekgonecrazy.com/images/2015-09-19/scroll-dir.png"
 alt="Scroll Direction"/>&lt;/p>
 &lt;h3 id="change-modifier-keys">Change Modifier keys&lt;/h3>
 &lt;p>If not using an apple keyboard.&lt;/p>
-&lt;p>&lt;img src="http://geekgonecrazy.com/images/2015-09-19/modifier-keys.png"
+&lt;p>&lt;img src="https://geekgonecrazy.com/images/2015-09-19/modifier-keys.png"
 alt="Modifier Keys"/>&lt;/p>
 &lt;p>Map the windows key to the command key.&lt;/p>
 &lt;h3 id="auto-hide-dock">Auto hide dock&lt;/h3>
 &lt;p>I like the maximum amount of screen space I can get. So of course I hide the dock.&lt;/p>
-&lt;p>&lt;img src="http://geekgonecrazy.com/images/2015-09-19/dock-autohide.png"
+&lt;p>&lt;img src="https://geekgonecrazy.com/images/2015-09-19/dock-autohide.png"
 alt="Dock Auto Hide"/>&lt;/p>
 &lt;h3 id="hot-corner">Hot Corner&lt;/h3>
 &lt;p>If i&amp;rsquo;m at a normal mouse and keyboard I like to turn this on. Also if coming from Fedora/Gnome3 this helps feel more at home.&lt;/p>
-&lt;p>&lt;img src="http://geekgonecrazy.com/images/2015-09-19/hot-corner.png"
+&lt;p>&lt;img src="https://geekgonecrazy.com/images/2015-09-19/hot-corner.png"
 alt="Hot Corner"/>&lt;/p>
 &lt;h3 id="finder-config">Finder config&lt;/h3>
 &lt;p>Very much personal preference.&lt;/p>
 &lt;p>I like having the hard drive icons on my desktop. Its convenient.
-&lt;img src="http://geekgonecrazy.com/images/2015-09-19/finder-desktop.png"
+&lt;img src="https://geekgonecrazy.com/images/2015-09-19/finder-desktop.png"
 alt="Finder Desktop"/>&lt;/p>
 &lt;p>Also like being able to quickly get to my home folder.
-&lt;img src="http://geekgonecrazy.com/images/2015-09-19/finder-sidebar.png"
+&lt;img src="https://geekgonecrazy.com/images/2015-09-19/finder-sidebar.png"
 alt="Finder Sidebar"/>&lt;/p>
 &lt;h3 id="screenshot-directory">Screenshot Directory&lt;/h3>
 &lt;p>I take a lot of screenshots. So I don&amp;rsquo;t want them cluttering my desktop. So I change the folder they are saved to.&lt;/p>
@@ -364,7 +364,7 @@ alt="Finder Sidebar"/>&lt;/p>
 &lt;/code>&lt;/pre>&lt;p>Then to reload so this takes its followed by:&lt;/p>
 &lt;pre>&lt;code>killall SystemUIServer
 &lt;/code>&lt;/pre>&lt;p>For extra convenience I drag the folder into my dock so I have quick access to them.&lt;/p>
-&lt;p>&lt;img src="http://geekgonecrazy.com/images/2015-09-19/Screenshots-dock.png"
+&lt;p>&lt;img src="https://geekgonecrazy.com/images/2015-09-19/Screenshots-dock.png"
 alt="Screenshots in dock"/>&lt;/p>
 &lt;h2 id="applications">Applications&lt;/h2>
 &lt;p>A few of the apps I always seem to download.&lt;/p>
@@ -382,7 +382,7 @@ alt="Vs Code"/>&lt;/p>
 &lt;p>&lt;img src="https://code.visualstudio.com/assets/docs/setup/mac/shell-command.png"
 alt="vscode Commands"/>&lt;/p>
 &lt;p>Also will need to set the git path. The path if installed from xcode is: &lt;code>/usr/bin/git&lt;/code>. Simply typing git in the terminal will trigger a popup to install from xcode.&lt;/p>
-&lt;p>&lt;img src="http://geekgonecrazy.com/images/2015-09-19/git-path.png"
+&lt;p>&lt;img src="https://geekgonecrazy.com/images/2015-09-19/git-path.png"
 alt="vscode git setting"/>&lt;/p>
 &lt;p>&lt;a href="https://code.visualstudio.com/"target="_blank">Download Here&lt;/a>&lt;/p>
 &lt;h3 id="rocketchat">Rocket.Chat&lt;/h3>
@@ -430,7 +430,7 @@ alt="vscode git setting"/>&lt;/p>
 &lt;p>Change the line near the top. That starts with &lt;code>ZSH_THEME&lt;/code>&lt;/p>
 &lt;pre>&lt;code>ZSH_THEME=&amp;quot;ys&amp;quot;
 &lt;/code>&lt;/pre>&lt;p>I changed to &lt;code>ys&lt;/code> which looks like this:&lt;/p>
-&lt;p>&lt;img src="http://geekgonecrazy.com/images/2015-09-19/zsh-prompt.png"
+&lt;p>&lt;img src="https://geekgonecrazy.com/images/2015-09-19/zsh-prompt.png"
 alt="ZSH Prompt"/>&lt;/p>
 &lt;p>Using &lt;code>source ~/.zshrc&lt;/code> will reload your zsh config.&lt;/p>
 &lt;h3 id="setup-git-info">Setup git Info&lt;/h3>
@@ -444,7 +444,7 @@ git config --global user.name &amp;quot;Your Name&amp;quot;
 &lt;pre>&lt;code>gem install jekyll
 &lt;/code>&lt;/pre>&lt;h2 id="summary">Summary&lt;/h2>
 &lt;p>Great OS. Lots of tools for developers. If you have some program you can&amp;rsquo;t live with out. Would be glad to hear it.&lt;/p>
-&lt;p>&lt;img src="http://geekgonecrazy.com/images/2015-09-19/final.png"
+&lt;p>&lt;img src="https://geekgonecrazy.com/images/2015-09-19/final.png"
 alt="Final"/>&lt;/p>
 &lt;h3 id="updates">Updates&lt;/h3>
 &lt;h4 id="06152018">06/15/2018&lt;/h4>
@@ -465,7 +465,7 @@ alt="Final"/>&lt;/p>
 &lt;li>Swapped out spotify for Google Play Music Desktop Player&lt;/li>
 &lt;li>Removed teamviewer and join.me&lt;/li>
 &lt;li>Added golang and gpg to those installed with brew&lt;/li>
-&lt;/ul></description></item><item><title>Format Machine over ssh</title><link>http://geekgonecrazy.com/2012/08/20/format-machine-over-ssh/</link><pubDate>Mon, 20 Aug 2012 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2012/08/20/format-machine-over-ssh/</guid><description>
+&lt;/ul></description></item><item><title>Format Machine over ssh</title><link>https://geekgonecrazy.com/2012/08/20/format-machine-over-ssh/</link><pubDate>Mon, 20 Aug 2012 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2012/08/20/format-machine-over-ssh/</guid><description>
 &lt;p>Lets say you have data on a remote linux machine, and for what ever reason you need to format the drive.  Like for instance you decide to switch VPS hosts. If you just let them delete it, you have no way of knowing what really happens to your data. So providing you have ssh access here is a way to eliminate your data.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;p>One of the beauties of linux is that everything is represented as a file or folder.  So if you need to store something in the RAM you can do so by copying it to: &lt;code>/dev/shm&lt;/code>.&lt;/p>
@@ -486,14 +486,14 @@ mount /proc /dev/shm/proc -t proc
 &lt;p>Once this is done its time to put the machine to rest.&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-Bash" data-lang="Bash">echo &lt;span style="color:#ae81ff">1&lt;/span> &amp;gt; proc/sys/kernel/sysrq
 echo o &amp;gt; proc/sysrq-trigger
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>And next time it starts up you will have nada!  Everything is gone.  You might want to fire up a VM and give this a go before you go and try it.&lt;/p></description></item><item><title>Getting public ip from CLI</title><link>http://geekgonecrazy.com/2012/05/16/getting-public-ip-from-cli/</link><pubDate>Wed, 16 May 2012 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2012/05/16/getting-public-ip-from-cli/</guid><description>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>And next time it starts up you will have nada!  Everything is gone.  You might want to fire up a VM and give this a go before you go and try it.&lt;/p></description></item><item><title>Getting public ip from CLI</title><link>https://geekgonecrazy.com/2012/05/16/getting-public-ip-from-cli/</link><pubDate>Wed, 16 May 2012 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2012/05/16/getting-public-ip-from-cli/</guid><description>
 &lt;p>I&amp;rsquo;ve found my self on occasion needing to find the public IP of a machine while in commandline(CLI).  Most of the time its just because i&amp;rsquo;ve spoiled my self with DNS entries, and haven&amp;rsquo;t memorized it.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;p>You need to have curl installed.  If you don&amp;rsquo;t have it, it should be in your package manager.  In Ubuntu its easily installed via:&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-Bash" data-lang="Bash">sudo apt-get install curl
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Then just simply run:&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-Bash" data-lang="Bash">curl ifconfig.me
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>I figured since I hadn&amp;rsquo;t posted in a while, this is a useful enough tidbit to share.&lt;/p></description></item><item><title>Childrens Distro sneak peak</title><link>http://geekgonecrazy.com/2012/05/10/childrens-distro-sneak-peak/</link><pubDate>Thu, 10 May 2012 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2012/05/10/childrens-distro-sneak-peak/</guid><description>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>I figured since I hadn&amp;rsquo;t posted in a while, this is a useful enough tidbit to share.&lt;/p></description></item><item><title>Childrens Distro sneak peak</title><link>https://geekgonecrazy.com/2012/05/10/childrens-distro-sneak-peak/</link><pubDate>Thu, 10 May 2012 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2012/05/10/childrens-distro-sneak-peak/</guid><description>
 &lt;p>I was assigned the task of creating a children&amp;rsquo;s linux distro for use here at the library(where I work).  Here&amp;rsquo;s a sneak peak:&lt;/p>
 &lt;p>&lt;img src="https://lh5.ggpht.com/_BMKBVRf6mio/TcmQfVPmMbI/AAAAAAAAAh4/EKEKmhMUn5s/2011-05-10%2014.20.35.png"
 alt/>&lt;/p>
@@ -502,14 +502,14 @@ alt/>&lt;/p>
 &lt;p>As you can see I&amp;rsquo;ve loaded it up with games.  Once i&amp;rsquo;ve finished i&amp;rsquo;ll give a better break down of what i&amp;rsquo;ve done.&lt;/p>
 &lt;p>[edit 04/11/2014] It actually turned out looking nothing like this at all. We called the project rachel. You can find out more about it on its &lt;a href="https://github.com/geekgonecrazy/rachel"target="_blank">github page&lt;/a>.&lt;/p>
 &lt;h4 id="updates">Updates&lt;/h4>
-&lt;p>09/30/2019: Changed image link to https&lt;/p></description></item><item><title>IPv6 keeping tunnel connected</title><link>http://geekgonecrazy.com/2011/02/28/ipv6-keeping-tunnel-connected/</link><pubDate>Mon, 28 Feb 2011 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2011/02/28/ipv6-keeping-tunnel-connected/</guid><description>
+&lt;p>09/30/2019: Changed image link to https&lt;/p></description></item><item><title>IPv6 keeping tunnel connected</title><link>https://geekgonecrazy.com/2011/02/28/ipv6-keeping-tunnel-connected/</link><pubDate>Mon, 28 Feb 2011 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2011/02/28/ipv6-keeping-tunnel-connected/</guid><description>
 &lt;p>Put together a script to keep your ip updated for the tunnel.  This is for Hurricane Electric.  Just plug in your info from your tunnel info page.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;!-- raw HTML omitted -->
 &lt;p>If Ubuntu, copy this file to:  /etc/init.d/updateip&lt;br>
 Then, &lt;code>sudo ln -s /etc/init.d/updateip /etc/rc2.d/S95updateip &lt;/code>&lt;/p>
 &lt;p>Will now start up with the computer.&lt;br>
-Hope it helps someone.&lt;/p></description></item><item><title>IPv6 Connectivity in Ubuntu: Setting up</title><link>http://geekgonecrazy.com/2011/02/20/ipv6-connectivity-in-ubuntu-setting-up/</link><pubDate>Sun, 20 Feb 2011 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2011/02/20/ipv6-connectivity-in-ubuntu-setting-up/</guid><description>
+Hope it helps someone.&lt;/p></description></item><item><title>IPv6 Connectivity in Ubuntu: Setting up</title><link>https://geekgonecrazy.com/2011/02/20/ipv6-connectivity-in-ubuntu-setting-up/</link><pubDate>Sun, 20 Feb 2011 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2011/02/20/ipv6-connectivity-in-ubuntu-setting-up/</guid><description>
 &lt;p>With ICANN recently announcing &lt;a href="http://www.bbc.co.uk/news/technology-12367484"target="_blank">the end of IPv4 addresses to allocate&lt;/a>, its time to take a look at the future.&lt;/p>
 &lt;p>What is IPv6? According to &lt;a href="http://www.cisco.com/en/US/docs/ios_xr_sw/iosxr_r3.0/interfaces/configuration/guide/hc3gloss.html"target="_blank">Cisco&lt;/a> IPv6 is:&lt;/p>
 &lt;blockquote>
@@ -561,7 +561,7 @@ IPv6: 2001:470:20::2
 &lt;p>I&amp;rsquo;ve enabled IPv6 access to my whole network, and will be continuing in several following posts showing the steps i&amp;rsquo;ve taken.&lt;/p>
 &lt;p>If you have questions/problems, let me know i&amp;rsquo;d be happy to help in any way I can.&lt;/p>
 &lt;h4 id="updates">Updates&lt;/h4>
-&lt;p>09/30/2019: Removed link to my subdomain that has since been shutdown&lt;/p></description></item><item><title>Project Opacity: Prototype to Production</title><link>http://geekgonecrazy.com/2011/02/03/project-opacity-prototype-to-production/</link><pubDate>Thu, 03 Feb 2011 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2011/02/03/project-opacity-prototype-to-production/</guid><description>
+&lt;p>09/30/2019: Removed link to my subdomain that has since been shutdown&lt;/p></description></item><item><title>Project Opacity: Prototype to Production</title><link>https://geekgonecrazy.com/2011/02/03/project-opacity-prototype-to-production/</link><pubDate>Thu, 03 Feb 2011 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2011/02/03/project-opacity-prototype-to-production/</guid><description>
 &lt;p>About a month ago at work we started a project internally known as Project Opacity.&lt;/p>
 &lt;blockquote>
 &lt;p>Opacity by definition: is the quality of being opaque to a degree; the degree to which something reduces the passage of light&lt;/p>
@@ -677,7 +677,7 @@ alt/>&lt;/a>&lt;/p>
 &lt;p>All and all, I think we did an excellent job!&lt;/p>
 &lt;p>Next, figuring out how to update them all at once.  &lt;a href="http://www.puppetlabs.com/"target="_blank">Puppet&lt;/a> maybe? Been dying to try it out&lt;/p>
 &lt;h4 id="updates">Updates&lt;/h4>
-&lt;p>09/30/2019: Switched images links to https&lt;/p></description></item><item><title>Destroying a hard drive</title><link>http://geekgonecrazy.com/2011/01/04/destroying-a-hard-drive/</link><pubDate>Tue, 04 Jan 2011 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2011/01/04/destroying-a-hard-drive/</guid><description>
+&lt;p>09/30/2019: Switched images links to https&lt;/p></description></item><item><title>Destroying a hard drive</title><link>https://geekgonecrazy.com/2011/01/04/destroying-a-hard-drive/</link><pubDate>Tue, 04 Jan 2011 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2011/01/04/destroying-a-hard-drive/</guid><description>
 &lt;p>Not very often do I get to be destructive at work. So when I do get to I get slightly excited! Had an old pentium 3 desktop they planned to give away. But it their copy of xp on it as well as some somewhat sensitive information. At first we were going to put the linux distribution of our fancy on it(this changes from day to day). But it wouldn&amp;rsquo;t boot from the cd. Thought the cd drive was shot. Tried it and an external neither work. After 30 minutes of messing with it my boss gives up. Told me to just pull the hard drive out and trash it! :D&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;p>I&amp;rsquo;m sure we could&amp;rsquo;ve used a floppy to boot from the cd. But, this was much more enjoyable.&lt;/p>
@@ -696,8 +696,8 @@ alt/>&lt;/p>
 &lt;p>&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TSPUFhUNeLI/AAAAAAAAAZ0/NKjteIC7epM/s320/2011-01-04&amp;#43;12.06.06.jpg"
 alt/>&lt;/p>
 &lt;h4 id="updates">Updates&lt;/h4>
-&lt;p>09/30/2019: Switching image links to https&lt;/p></description></item><item><title>Dedicated Virtualbox Host</title><link>http://geekgonecrazy.com/2010/11/16/dedicated-virtualbox-host/</link><pubDate>Tue, 16 Nov 2010 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2010/11/16/dedicated-virtualbox-host/</guid><description>
-&lt;p>A while back I posted about &lt;a href="http://geekgonecrazy.com/2010/03/24/building-first-computer">Building first desktop from scratch&lt;/a>.  In it I mentioned installing Xenserver.  I have no doubt that it is amazing.  Just wasn&amp;rsquo;t exactly what I had in mind.&lt;/p>
+&lt;p>09/30/2019: Switching image links to https&lt;/p></description></item><item><title>Dedicated Virtualbox Host</title><link>https://geekgonecrazy.com/2010/11/16/dedicated-virtualbox-host/</link><pubDate>Tue, 16 Nov 2010 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2010/11/16/dedicated-virtualbox-host/</guid><description>
+&lt;p>A while back I posted about &lt;a href="https://geekgonecrazy.com/2010/03/24/building-first-computer">Building first desktop from scratch&lt;/a>.  In it I mentioned installing Xenserver.  I have no doubt that it is amazing.  Just wasn&amp;rsquo;t exactly what I had in mind.&lt;/p>
 &lt;p>Long story cut extremely short, I went with virtualbox.  Reasons being: Its fast, so far has supported everything I throw at it, stable, cross platform, live migration, snapshots make backup easy, easy to use, and I like it. &lt;/p>
 &lt;p>Now for the exciting part.  How I set it up.&lt;/p>
 &lt;!-- raw HTML omitted -->
@@ -749,7 +749,7 @@ alt/>&lt;/p>
 &lt;p>Now you can start setting up your virtual machines.  If you want to be able to route traffic to them like I am in my setup.  Make sure to set the network interface to bridged.&lt;/p>
 &lt;p>As long as you don&amp;rsquo;t have your router pointing at this ip you should be safe.  If you&amp;rsquo;re paranoid setup password protection.   I will do this in a later post.&lt;/p>
 &lt;h4 id="updates">Updates&lt;/h4>
-&lt;p>09/30/2019: Switch image links to https&lt;/p></description></item><item><title>Monitor Repair</title><link>http://geekgonecrazy.com/2010/10/12/monitor-repair/</link><pubDate>Tue, 12 Oct 2010 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2010/10/12/monitor-repair/</guid><description>
+&lt;p>09/30/2019: Switch image links to https&lt;/p></description></item><item><title>Monitor Repair</title><link>https://geekgonecrazy.com/2010/10/12/monitor-repair/</link><pubDate>Tue, 12 Oct 2010 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2010/10/12/monitor-repair/</guid><description>
 &lt;p>A few days ago I found a 22&amp;rdquo; Lcd screen that was being tossed out because it didn&amp;rsquo;t work.  The thought of the beauty being thrown away didn&amp;rsquo;t set well with me.  So I picked it up.&lt;/p>
 &lt;p>Before messing with it.&lt;/p>
 &lt;p>&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TLUvMNCoJTI/AAAAAAAAAXU/MUP5lRIfsek/s320/2010-10-11&amp;#43;14.38.55.jpg"
@@ -802,7 +802,7 @@ alt/>&lt;/p>
 &lt;p>Cool feature takes the second input and shows it in another window.
 So there you have it.  Just because  your lcd screen won&amp;rsquo;t show anything or power up doesn&amp;rsquo;t mean its dead.&lt;/p>
 &lt;h4 id="updates">Updates&lt;/h4>
-&lt;p>09/30/2019: Changed links to https&lt;/p></description></item><item><title>Building first desktop from scratch</title><link>http://geekgonecrazy.com/2010/03/24/building-first-desktop-from-scratch/</link><pubDate>Wed, 24 Mar 2010 00:00:00 +0000</pubDate><guid>http://geekgonecrazy.com/2010/03/24/building-first-desktop-from-scratch/</guid><description>
+&lt;p>09/30/2019: Changed links to https&lt;/p></description></item><item><title>Building first desktop from scratch</title><link>https://geekgonecrazy.com/2010/03/24/building-first-desktop-from-scratch/</link><pubDate>Wed, 24 Mar 2010 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2010/03/24/building-first-desktop-from-scratch/</guid><description>
 &lt;p>Most of my childhood I have built computers. But it was always from parts laying around. A motherboard/CPU from here, case from another one etc.&lt;/p>
 &lt;p>I finally saved up and planned out my own build from scratch. I&amp;rsquo;m posting to my blog because its a geeky milestone that every little geek must go through. A rite of passage if you will.&lt;/p>
 &lt;!-- raw HTML omitted -->
