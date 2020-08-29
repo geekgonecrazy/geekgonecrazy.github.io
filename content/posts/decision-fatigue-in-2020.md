@@ -1,9 +1,8 @@
 +++
 comments = false
 date = 2020-08-28T05:00:00Z
-draft = true
 layout = "post"
-publish = false
+publish = true
 tags = []
 title = "Decision Fatigue in 2020"
 
