@@ -5,12 +5,15 @@ fields:
 - type: text
   name: layout
   label: layout
+  default: post
 - type: text
   name: title
   label: title
 - type: datetime
   name: date
   label: date
+  config:
+    export_format: YYYY-MM-DD
 - type: boolean
   name: comments
   label: comments
