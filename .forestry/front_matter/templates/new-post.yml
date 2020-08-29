@@ -1,0 +1,22 @@
+---
+label: New Post
+hide_body: false
+fields:
+- type: text
+  name: layout
+  label: layout
+- type: text
+  name: title
+  label: title
+- type: datetime
+  name: date
+  label: date
+- type: boolean
+  name: comments
+  label: comments
+- type: boolean
+  name: publish
+  label: publish
+- type: list
+  name: tags
+  label: tags
