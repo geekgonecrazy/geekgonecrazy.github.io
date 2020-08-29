@@ -1,10 +1,10 @@
 +++
-comments = false
-date = 2020-08-28T05:00:00Z
-layout = "post"
-publish = true
-tags = []
-title = "Decision Fatigue in 2020"
+comments: false
+date: 2020-08-28
+layout: "post"
+publish: true
+tags: []
+title: "Decision Fatigue in 2020"
 
 +++
 This last couple of weeks I finally took some time off of work to try and reset. I’m not always the greatest at taking time off.  I take an extra day or two combined with the weekend for a mini-vacation around the Holidays to see family and it’s often the minimum time needed. This year with everything going on really had to force my self to step back and try to reset with a staycation.
