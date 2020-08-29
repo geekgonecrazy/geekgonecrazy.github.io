@@ -20,3 +20,5 @@ fields:
 - type: list
   name: tags
   label: tags
+pages:
+- content/posts/decision-fatigue-in-2020.md
