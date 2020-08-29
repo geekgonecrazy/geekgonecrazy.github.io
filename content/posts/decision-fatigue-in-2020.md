@@ -45,8 +45,8 @@ Reducing decision fatigue doesn’t have a silver bullet.  But one way I’m han
 But long term my approach:
 
 * Cut down / Cut out Social Media - it’s filled with a lot of toxicity.
-* Avoid News - I admit I don’t do this as well as I’d like.  It’s hard to keep informed of things one needs to know while avoiding the depressing stuff.  Otherwise you will be forced to spend more time reading both sides and making a decision.
-* Simple and structured morning routine including Bullet Journaling.
+* Avoid too much News - I admit I don’t do this as well as I’d like.  If you spend too much time reading news, you will be forced to spend more time reading both sides and making a decision.
+* Simple and structured morning routine - for me this includes Bullet Journaling.
 * Organization - being organized helps decision fatigue a lot.
 * Value your own time.  Just because someone DM’s you asking for something doesn’t mean you need to stop what you are doing now and respond.  In fact busy mode / do not disturb is your best friend here.  Not even seeing it prevents you from having to make a decision.
 
