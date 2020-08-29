@@ -8,8 +8,6 @@ tags = []
 title = "Decision Fatigue in 2020"
 
 +++
-# Decision Fatigue in 2020
-
 This last couple of weeks I finally took some time off of work to try and reset. Typically I take an extra day or two combined with the weekend for a bit of a mini-vacation and usually just around the Holidays to see family and it’s the minimum amount of time possible. This year with everything going on really had to force my self to step back and try to reset.
 
 It’s all too easy now days to get overwhelmed and stressed out.  A couple of key contributors now days:
