@@ -1,4 +1,37 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 01 May 2020 00:00:00 +0000</lastBuildDate><item><title>A k8s Migration Concept</title><link>https://geekgonecrazy.com/2020/05/01/a-k8s-migration-concept/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/05/01/a-k8s-migration-concept/</guid><description>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 28 Aug 2020 05:00:00 +0000</lastBuildDate><item><title>Decision Fatigue in 2020</title><link>https://geekgonecrazy.com/2020/08/28/decision-fatigue-in-2020/</link><pubDate>Fri, 28 Aug 2020 05:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/08/28/decision-fatigue-in-2020/</guid><description>
+&lt;p>This last couple of weeks I finally took some time off of work to try and reset. I’m not always the greatest at taking time off. I take an extra day or two combined with the weekend for a mini-vacation around the Holidays to see family and it’s often the minimum time needed. This year with everything going on really had to force my self to step back and try to reset with a staycation.&lt;/p>
+&lt;p>It’s all too easy now days to get overwhelmed and stressed out. A couple of key contributors now days:&lt;/p>
+&lt;ul>
+&lt;li>Decision Fatigue&lt;/li>
+&lt;li>World Circumstances&lt;/li>
+&lt;/ul>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="decision-fatigue">Decision Fatigue&lt;/h2>
+&lt;p>There are many articles written about this topic that do a much better job than I could to describe this. A couple that &lt;a href="https://duckduckgo.com/?q=decision&amp;#43;fatigue"target="_blank">a quick DuckDuckGo uncovered&lt;/a>:&lt;/p>
+&lt;p>&lt;a href="https://www.healthline.com/health/decision-fatigue"title="https://www.healthline.com/health/decision-fatigue"target="_blank">https://www.healthline.com/health/decision-fatigue&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://blog.rescuetime.com/decision-fatigue/"title="https://blog.rescuetime.com/decision-fatigue/"target="_blank">https://blog.rescuetime.com/decision-fatigue/&lt;/a>&lt;/p>
+&lt;p>But in short.. if you are constantly having to make decision after decision. There is a point when it just gets mentally taxing to have to keep making decisions.&lt;/p>
+&lt;p>I personally loop into this what I guess you would call Context Switching Fatigue. It boils down to some of the same things. But basically if you are constantly having to switch between tasks it can also lead to fatigue.&lt;/p>
+&lt;h2 id="world-circumstances">World Circumstances&lt;/h2>
+&lt;p>It’s super easy to look at everything happening in the world and worry about things you can’t control.&lt;/p>
+&lt;ul>
+&lt;li>Covid19 - We watch as the number of reported cases climb.. people can’t agree on how it’s reported and it’s politicized. With so much conflicting reporting&amp;hellip; We are faced with more of decision fatigue. What info is correct?&lt;/li>
+&lt;li>Protesting and Riots - same thing.. mixed reporting. While the initial reason for protesting feels like a no brainer&amp;hellip; everyone is taking extreme views on how to solve it. We see a lot of reports on who is doing what&amp;hellip; and here we are stuck with making sense of everything.&lt;/li>
+&lt;li>Social Media chaos and unrest - a longer topic.. but everyone seems to be looking for a cause. They just pick a side in a fight with little to no research and shame anyone with an opposing view. You don’t have to scroll far in your feed to see someone post something political.. then in the comments you see anyone that opposes the view point or even question it.. dog piled on. Peaceful debating is long gone.&lt;/li>
+&lt;li>Deaths - as if it’s not a hard enough year.. people still get older and still die from varying causes&lt;/li>
+&lt;li>Hurricanes - In my part of the world it’s in the middle of hurricane season.&lt;/li>
+&lt;/ul>
+&lt;h2 id="resetting-and-handling">Resetting and Handling&lt;/h2>
+&lt;p>Reducing decision fatigue doesn’t have a silver bullet. But one way I’m handling it on my staycation is taking it easy and making as little decisions as possible. Spent the first week blasting through my honey-do-list and generally cleaning. Then just taking it easy, avoiding news and social media(except Hurricane Laura updates).&lt;/p>
+&lt;p>But long term:&lt;/p>
+&lt;ul>
+&lt;li>Cut down / Cut out Social Media - it’s filled with a lot of toxicity.&lt;/li>
+&lt;li>Avoid News - I admit I don’t do this as well as I’d like. It’s hard to keep informed of things one needs to know while avoiding the depressing stuff. Otherwise you will be forced to spend more time reading both sides and making a decision.&lt;/li>
+&lt;li>Simple and structured morning routine including Bullet Journaling.&lt;/li>
+&lt;li>Organization - being organized helps decision fatigue a lot.&lt;/li>
+&lt;li>Value your own time. Just because someone DM’s you asking for something doesn’t mean you need to stop what you are doing now and respond. In fact busy mode / do not disturb is your best friend here. Not even seeing it prevents you from having to make a decision.&lt;/li>
+&lt;/ul>
+&lt;p>Don’t be afraid to take time off to reset! It’s hard to take time off. But it’s important to take care of your self!&lt;/p></description></item><item><title>A k8s Migration Concept</title><link>https://geekgonecrazy.com/2020/05/01/a-k8s-migration-concept/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/05/01/a-k8s-migration-concept/</guid><description>
 &lt;p>Surprisingly I don’t have a lot of kubernetes related content on my blog yet. This might just because I’m too busy using it to talk about it. But i’m a heavy user of it. To me it just makes orchestrating work loads easier.&lt;/p>
 &lt;p>One thing in general I don’t see a lot of talk about is migrating between infrastructure. Especially don’t see much for kubernetes.&lt;/p>
 &lt;!-- raw HTML omitted -->
@@ -802,43 +835,4 @@ alt/>&lt;/p>
 &lt;p>Cool feature takes the second input and shows it in another window.
 So there you have it.  Just because  your lcd screen won&amp;rsquo;t show anything or power up doesn&amp;rsquo;t mean its dead.&lt;/p>
 &lt;h4 id="updates">Updates&lt;/h4>
-&lt;p>09/30/2019: Changed links to https&lt;/p></description></item><item><title>Building first desktop from scratch</title><link>https://geekgonecrazy.com/2010/03/24/building-first-desktop-from-scratch/</link><pubDate>Wed, 24 Mar 2010 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2010/03/24/building-first-desktop-from-scratch/</guid><description>
-&lt;p>Most of my childhood I have built computers. But it was always from parts laying around. A motherboard/CPU from here, case from another one etc.&lt;/p>
-&lt;p>I finally saved up and planned out my own build from scratch. I&amp;rsquo;m posting to my blog because its a geeky milestone that every little geek must go through. A rite of passage if you will.&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;p>I ran into a couple of problems along the way. A case/power supply combo I ordered online was a dud!  I sent it back and got a refund.  Future advice for self and anyone building a computer&amp;hellip;  &lt;strong>Buy your power supply locally!&lt;/strong>  It&amp;rsquo;s a lot easier to run back to the store and exchange it than to buy it online and wait on shipping. Especially when you are this eager to get it finished.&lt;/p>
-&lt;p>For most of my parts I went to MicroCenter, one of my favorite computer stores.&lt;/p>
-&lt;p>&lt;img src="https://3.bp.blogspot.com/_BMKBVRf6mio/S6rVDC0a1nI/AAAAAAAAAUU/BDEDNhj2_aw/s320/IMG_0329.JPG"
-alt="Parts I picked up"/>&lt;/p>
-&lt;p>I picked up:&lt;/p>
-&lt;ul>
-&lt;li>Extra case fans&lt;/li>
-&lt;li>Tool set (Update 09/30/2019: I still have and use this set)&lt;/li>
-&lt;li>Motherboard&lt;/li>
-&lt;li>Processor&lt;/li>
-&lt;li>4GB RAM (Update 09/30/2019: Oh the good &amp;lsquo;ol days.. I upgraded RAM several times after this)&lt;/li>
-&lt;li>500GB Hard Drive&lt;/li>
-&lt;li>USB Headset (Update 09/30/2019: I don&amp;rsquo;t recall this headset lasting any time at all)&lt;/li>
-&lt;li>Green wig - Yup spent the rest of the day wearing that&lt;/li>
-&lt;li>Code Red - You know gotta keep up the energy&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="https://2.bp.blogspot.com/_BMKBVRf6mio/S6rVP-l2s6I/AAAAAAAAAUc/ubPHhdZQSnM/s320/IMG_0332.JPG"
-alt="Motherboard and CPU installed"/>&lt;/p>
-&lt;p>Couple of pictures of the case.&lt;/p>
-&lt;p>&lt;img src="https://3.bp.blogspot.com/_BMKBVRf6mio/S6rVtEFKYfI/AAAAAAAAAU0/U53hJ6a2yF0/s320/IMG_0352.JPG"
-alt="Case pic 1"/>&lt;/p>
-&lt;p>&lt;img src="https://1.bp.blogspot.com/_BMKBVRf6mio/S6rVk8flUHI/AAAAAAAAAUs/9dRVbAWPai0/s320/IMG_0351.JPG"
-alt="Case pic 2"/>&lt;/p>
-&lt;p>&lt;img src="https://1.bp.blogspot.com/_BMKBVRf6mio/S6rWMXvrpdI/AAAAAAAAAVE/rNAeaNWC-aE/s320/IMG_0355.JPG"
-alt="Case pic 3"/>&lt;/p>
-&lt;p>The slots are for hot swappable hard drives. I can pop a new drive in at any time with out having to power down.&lt;/p>
-&lt;p>&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/S6rWDlFtBHI/AAAAAAAAAU8/8d7m2HpjKMA/s320/IMG_0354.JPG"
-alt="Hot swappable bays"/>&lt;/p>
-&lt;p>I installed XenServer on it at first&amp;hellip; But as awesome as it was&amp;hellip; I like having an operating system I can easily get around.  So I installed Ubuntu 64bit 9.10. Btw&amp;hellip; XFCE is a beautiful desktop environment. &lt;/p>
-&lt;p>&lt;img src="https://2.bp.blogspot.com/_BMKBVRf6mio/S6rt0Tesd3I/AAAAAAAAAVM/3hhSd4nm14g/s320/Screenshot.png"
-alt="Screenshot of OS"/>&lt;/p>
-&lt;p>Any questions or comments hit me up.&lt;/p>
-&lt;h4 id="updates">Updates&lt;/h4>
-&lt;ul>
-&lt;li>09/30/2019 - Fixed links to https, formatted and cleaned up some wording.&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;p>09/30/2019: Changed links to https&lt;/p></description></item></channel></rss>
