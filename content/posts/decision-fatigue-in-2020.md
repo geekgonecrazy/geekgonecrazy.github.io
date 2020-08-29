@@ -8,7 +8,7 @@ tags = []
 title = "Decision Fatigue in 2020"
 
 +++
-# Decision Fatigue in 2020 
+# Decision Fatigue in 2020
 
 This last couple of weeks I finally took some time off of work to try and reset. Typically I take an extra day or two combined with the weekend for a bit of a mini-vacation and usually just around the Holidays to see family and it’s the minimum amount of time possible. This year with everything going on really had to force my self to step back and try to reset.
 
@@ -29,7 +29,6 @@ There are many articles written about this topic that do a much better job than 
 
 But in short.. if you are constantly having to make decision after decision. There is a point when it just gets mentally taxing to have to keep making decisions.
 
-  
 I personally loop into this what I guess you would call Context Switching Fatigue. It boils down to some of the same things.  But basically if you are constantly having to switch between tasks it can also lead to fatigue.
 
 ## World Circumstances
