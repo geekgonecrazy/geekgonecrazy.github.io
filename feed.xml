@@ -42,11 +42,6 @@ GRUB_TERMINAL=&amp;quot;console serial&amp;quot;
 GRUB_SERIAL_COMMAND=&amp;quot;serial --unit=1 --speed=115200 --word=8 --parity=no --stop=1&amp;quot;
 &lt;/code>&lt;/pre>
 &lt;p>This will both set the default linux command args, but also will let you interract with grub over the serial console as well.&lt;/p>
-&lt;p>If you do want to be able to interact you will need to add to /boot/grub/menu.lst&lt;/p>
-&lt;pre>&lt;code>serial --unit=1 --speed=115200
-terminal --timeout=5 serial console
-&lt;/code>&lt;/pre>
-&lt;p>To give you a chance to interact over serial console to grub.&lt;/p>
 &lt;p>To make sure takes effect:&lt;/p>
 &lt;pre>&lt;code> sudo update-grub
 &lt;/code>&lt;/pre>
