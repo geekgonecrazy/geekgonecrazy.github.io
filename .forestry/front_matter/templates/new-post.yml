@@ -25,3 +25,4 @@ fields:
   label: tags
 pages:
 - content/posts/decision-fatigue-in-2020.md
+- content/posts/ovh-serial-over-lan-sol.md
