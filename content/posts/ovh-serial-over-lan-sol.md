@@ -48,7 +48,7 @@ Out of the box when you connect all you get is:
         Opening lanplus connection to node 10.245.29.163 ...
         [SOL session is running, use '~.' to end, '~?' for help.]
 
-Hitting enter here should drop you to a login prompt to login to the console. But nothing happens. Turns out this is because out of the box on OVH the linux kernel isn't spinning up a console on the serial port.
+Hitting enter here should drop you to a login prompt to login to the console. But nothing happens. Turns out this is because out of the box on OVH the linux kernel isn't outputting or opening a tty on the serial port.
 
 ## Solution
 
