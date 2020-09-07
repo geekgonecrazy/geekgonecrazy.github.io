@@ -26,3 +26,4 @@ fields:
 pages:
 - content/posts/decision-fatigue-in-2020.md
 - content/posts/ovh-serial-over-lan-sol.md
+- content/posts/tinkerbell-or-ipxe-boot-on-ovh.md
