@@ -68,13 +68,6 @@ and add:
 
 This will both set the default linux command args, but also will let you interract with grub over the serial console as well. 
 
-If you do want to be able to interact you will need to add to /boot/grub/menu.lst
-
-    serial --unit=1 --speed=115200
-    terminal --timeout=5 serial console
-
-To give you a chance to interact over serial console to grub.
-
 To make sure takes effect:
 
         sudo update-grub
