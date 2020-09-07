@@ -7,7 +7,7 @@ tags = []
 title = "OVH Serial over LAN (SOL)"
 
 +++
-Its been a while since I've worked with physical servers and typically when something happened I could pretty quickly get physical access to the box if things got complicated.
+Its been a while since I've worked with physical servers and typically when something happened I could pretty quickly get physical access to the box if things went pear shaped.
 
 But when you buy or lease servers from a provider like OVH.  Those servers might be sitting half way around the world.  So if something goes wrong you need to some how virtually be in front of the keyboard.
 
