@@ -25,6 +25,8 @@ This way is by far the best.  But seems for some reason, i'm not completely sure
 
 This way is probably the most easy to work with.  Can access over ssh from any device that can ssh.  Which is pretty much anywhere, so very appealing.
 
+So I really wanted to be able to get Serial over LAN working.
+
 ## The Problem
 
 ***
