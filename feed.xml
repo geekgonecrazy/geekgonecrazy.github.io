@@ -30,7 +30,7 @@ Connecting to node 10.245.29.163
 Opening lanplus connection to node 10.245.29.163 ...
 [SOL session is running, use '~.' to end, '~?' for help.]
 &lt;/code>&lt;/pre>
-&lt;p>Hitting enter here should drop you to a login prompt to login to the console. But nothing happens. Turns out this is because out of the box on OVH the linux kernel isn&amp;rsquo;t spinning up a console on the serial port.&lt;/p>
+&lt;p>Hitting enter here should drop you to a login prompt to login to the console. But nothing happens. Turns out this is because out of the box on OVH the linux kernel isn&amp;rsquo;t outputting or opening a tty on the serial port.&lt;/p>
 &lt;h2 id="solution">Solution&lt;/h2>
 &lt;p>To make the linux kernel output console output and open a tty on the serial port as needed by Serial Over Lan you need to ssh into your server and modify your grub settings to instruct the kernel to open a tty on that serial port. Also to tell it the baud rate to use. The &lt;a href="https://wiki.archlinux.org/index.php/Working_with_the_serial_console"target="_blank">arch wiki&lt;/a> is useful here.&lt;/p>
 &lt;p>From what I can tell this is typically /dev/ttyS1. But if it doesn&amp;rsquo;t work for you try /dev/ttyS0.&lt;/p>
