@@ -1,4 +1,61 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 28 Aug 2020 00:00:00 +0000</lastBuildDate><item><title>Decision Fatigue in 2020</title><link>https://geekgonecrazy.com/2020/08/28/decision-fatigue-in-2020/</link><pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/08/28/decision-fatigue-in-2020/</guid><description>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 07 Sep 2020 00:00:00 +0000</lastBuildDate><item><title>OVH Serial over LAN (SOL)</title><link>https://geekgonecrazy.com/2020/09/07/ovh-serial-over-lan-sol/</link><pubDate>Mon, 07 Sep 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/09/07/ovh-serial-over-lan-sol/</guid><description>
+&lt;p>Its been a while since I&amp;rsquo;ve worked with physical servers and typically when something happened I could pretty quickly get physical access to the box if things got complicated.&lt;/p>
+&lt;p>But when you buy or lease servers from a provider like OVH. Those servers might be sitting half way around the world. So if something goes wrong you need to some how virtually be in front of the keyboard.&lt;/p>
+&lt;p>OVH has a few different ways to access your servers console to interact with the machine directly.&lt;/p>
+&lt;ul>
+&lt;li>From a Java applet (KVM)&lt;/li>
+&lt;/ul>
+&lt;p>This way while works across all of the servers.. requires Java Runtime.. Yuck. Not to mention it isn&amp;rsquo;t necessarily going to work on every machine.&lt;/p>
+&lt;ul>
+&lt;li>Via your web browser (KVM)&lt;/li>
+&lt;/ul>
+&lt;p>This way is by far the best. But seems for some reason, i&amp;rsquo;m not completely sure why.. its not available for all of their servers. So its not really a consistent option&lt;/p>
+&lt;ul>
+&lt;li>Serial over LAN (SOL)&lt;/li>
+&lt;/ul>
+&lt;p>This way is probably the most easy to work with. Can access over ssh from any device that can ssh. Which is pretty much anywhere, so very appealing.&lt;/p>
+&lt;h2 id="the-problem">The Problem&lt;/h2>
+&lt;hr>
+&lt;p>Out of the box when you connect all you get is:&lt;/p>
+&lt;pre>&lt;code> Could not chdir to home directory /home/ipmi: No such file or directory
+OVH
+IPMI Serial Over Lan gateway
+IPMI SOL on [Omitted ;-)].us
+ipmiutil ver 2.93
+isol ver 2.93
+Opening lan connection to node 10.245.29.163 ...
+Connecting to node 10.245.29.163
+-- BMC version 2.00, IPMI version 2.0
+Opening lanplus connection to node 10.245.29.163 ...
+[SOL session is running, use '~.' to end, '~?' for help.]
+&lt;/code>&lt;/pre>
+&lt;p>Hitting enter here should drop you to a login prompt to login to the console. But nothing happens. Turns out this is because out of the box on OVH the linux kernel isn&amp;rsquo;t spinning up a console on the serial port.&lt;/p>
+&lt;h2 id="solution">Solution&lt;/h2>
+&lt;p>To make the linux kernel output console output and open a tty on the serial port as needed by Serial Over Lan you need to ssh into your server and modify your grub settings to instruct the kernel to open a tty on that serial port. Also to tell it the baud rate to use. The &lt;a href="https://wiki.archlinux.org/index.php/Working_with_the_serial_console"target="_blank">arch wiki&lt;/a> is useful here.&lt;/p>
+&lt;p>From what I can tell this is typically /dev/ttyS1. But if it doesn&amp;rsquo;t work for you try /dev/ttyS0.&lt;/p>
+&lt;p>In the bios you can confirm the baud/bit rate. But in my case it was: 115200 and looking around that seems to be the most common.&lt;/p>
+&lt;p>First hop into: /etc/default/grub&lt;/p>
+&lt;p>and add:&lt;/p>
+&lt;pre>&lt;code> GRUB_CMDLINE_LINUX_DEFAULT=&amp;quot;nomodeset console=tty0 console=ttyS1,115200&amp;quot;
+GRUB_TERMINAL=&amp;quot;console serial&amp;quot;
+GRUB_SERIAL_COMMAND=&amp;quot;serial --unit=1 --speed=115200 --word=8 --parity=no --stop=1&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>This will both set the default linux command args, but also will let you interract with grub over the serial console as well.&lt;/p>
+&lt;p>If you do want to be able to interact you will need to add to /boot/grub/menu.lst&lt;/p>
+&lt;pre>&lt;code>serial --unit=1 --speed=115200
+terminal --timeout=5 serial console
+&lt;/code>&lt;/pre>
+&lt;p>To give you a chance to interact over serial console to grub.&lt;/p>
+&lt;p>To make sure takes effect:&lt;/p>
+&lt;pre>&lt;code> sudo update-grub
+&lt;/code>&lt;/pre>
+&lt;p>If you want to verify take a peak in /boot/grub/grub.cfg and see if the kernel options are there.&lt;/p>
+&lt;p>If you would like to also be able to interact with bios and everything after POST you can also hop into bios via one of the KVM solutions and set this setting to enabled:&lt;/p>
+&lt;p>&lt;img src="/images/2020-09-:day/screen-shot-2020-09-07-at-14-28-07.png"
+alt/>&lt;/p>
+&lt;p>&lt;img src="/images/2020-09-:day/screen-shot-2020-09-07-at-14-29-20.png"
+alt/>&lt;/p>
+&lt;p>I want to thank the author of this blog post for setting me on the right track: &lt;a href="http://divideoverflow.com/2016/07/Configuring_IPMI_on_OVH_server/">http://divideoverflow.com/2016/07/Configuring_IPMI_on_OVH_server/&lt;/a>&lt;/p></description></item><item><title>Decision Fatigue in 2020</title><link>https://geekgonecrazy.com/2020/08/28/decision-fatigue-in-2020/</link><pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/08/28/decision-fatigue-in-2020/</guid><description>
 &lt;p>This last couple of weeks I finally took some time off of work to try and reset. I’m not always the greatest at taking time off. I take an extra day or two combined with the weekend for a mini-vacation around the Holidays to see family and it’s often the minimum time needed. This year with everything going on really had to force my self to step back and try to reset with a staycation.&lt;/p>
 &lt;p>It’s all too easy now days to get overwhelmed and stressed out. A couple of key contributors now days:&lt;/p>
 &lt;ul>
@@ -782,57 +839,4 @@ alt/>&lt;/p>
 &lt;p>Now you can start setting up your virtual machines.  If you want to be able to route traffic to them like I am in my setup.  Make sure to set the network interface to bridged.&lt;/p>
 &lt;p>As long as you don&amp;rsquo;t have your router pointing at this ip you should be safe.  If you&amp;rsquo;re paranoid setup password protection.   I will do this in a later post.&lt;/p>
 &lt;h4 id="updates">Updates&lt;/h4>
-&lt;p>09/30/2019: Switch image links to https&lt;/p></description></item><item><title>Monitor Repair</title><link>https://geekgonecrazy.com/2010/10/12/monitor-repair/</link><pubDate>Tue, 12 Oct 2010 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2010/10/12/monitor-repair/</guid><description>
-&lt;p>A few days ago I found a 22&amp;rdquo; Lcd screen that was being tossed out because it didn&amp;rsquo;t work.  The thought of the beauty being thrown away didn&amp;rsquo;t set well with me.  So I picked it up.&lt;/p>
-&lt;p>Before messing with it.&lt;/p>
-&lt;p>&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TLUvMNCoJTI/AAAAAAAAAXU/MUP5lRIfsek/s320/2010-10-11&amp;#43;14.38.55.jpg"
-alt/>&lt;/p>
-&lt;p>When turning it on, it would show its gateway logo and then go blank.  Which was a good sign.  But none of the inputs worked.&lt;/p>
-&lt;p>So I took it apart.&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;p>&lt;img src="https://1.bp.blogspot.com/_BMKBVRf6mio/TLUvUOIDMqI/AAAAAAAAAXY/ywpjjsZHr7E/s320/2010-10-11&amp;#43;14.47.26.jpg"
-alt/>&lt;/p>
-&lt;p>Front panel off&lt;/p>
-&lt;p>&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TLUvcxq9tDI/AAAAAAAAAXc/KGlyAZJpIY0/s320/2010-10-11&amp;#43;14.48.59.jpg"
-alt/>&lt;/p>
-&lt;p>The guts exposed.&lt;/p>
-&lt;p>I took off the box there on the back then removed the power board and the video input board.&lt;/p>
-&lt;p>&lt;img src="https://2.bp.blogspot.com/_BMKBVRf6mio/TLUvlwKCR_I/AAAAAAAAAXg/LuA2-EsHiLk/s320/2010-10-11&amp;#43;15.11.19.jpg"
-alt/>&lt;/p>
-&lt;p>Video board.&lt;/p>
-&lt;p>&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TLUvvHjZS-I/AAAAAAAAAXk/xUEQgACC1Do/s320/2010-10-11&amp;#43;15.12.32.jpg"
-alt/>&lt;/p>
-&lt;p>Another view of the video board.&lt;/p>
-&lt;p>&lt;img src="https://1.bp.blogspot.com/_BMKBVRf6mio/TLUwAirVnxI/AAAAAAAAAXs/Pc5tDXK3gEU/s320/2010-10-12&amp;#43;19.38.17.jpg"
-alt/>&lt;/p>
-&lt;p>Power board.
-I don&amp;rsquo;t know if you can see it or not but capacitor is domed at the top. A sign that its busted.&lt;/p>
-&lt;p>&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TLUv4RSSGUI/AAAAAAAAAXo/sy-kNp0u48o/s320/2010-10-11&amp;#43;18.23.18.jpg"
-alt/>&lt;/p>
-&lt;p>A better shot of the busted capacitor. 
-It was a 25v 1000uF capacitor.  So I made a trip to Radio Shack this afternoon.  They didn&amp;rsquo;t have 25v so I picked up a 35v 1000uF capacitor.   The voltage doesn&amp;rsquo;t matter too much.  Of course you&amp;rsquo;ll want to be safe and stay close to the old voltage.  But keeping it at 1000uF is a must.  According to Google.  :)&lt;/p>
-&lt;p>&lt;img src="https://1.bp.blogspot.com/_BMKBVRf6mio/TLUwKL0-WNI/AAAAAAAAAXw/SHrr-xES74U/s320/2010-10-12&amp;#43;19.38.32.jpg"
-alt/>&lt;/p>
-&lt;p>Bottom view of the power board.&lt;/p>
-&lt;p>&lt;img src="https://1.bp.blogspot.com/_BMKBVRf6mio/TLUwVB9WufI/AAAAAAAAAX0/Xcy0dtjZ9cs/s320/2010-10-12&amp;#43;19.38.47.jpg"
-alt/>&lt;/p>
-&lt;p>New capacitor.
- 
-I removed the old capacitor, and put the new one in.&lt;/p>
-&lt;p>&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TLUwe001zAI/AAAAAAAAAX4/s1yMnZSJU88/s320/2010-10-12&amp;#43;19.45.32.jpg"
-alt/>&lt;/p>
-&lt;p>The new capacitor in place.&lt;/p>
-&lt;p>&lt;img src="https://3.bp.blogspot.com/_BMKBVRf6mio/TLUwooEsVrI/AAAAAAAAAX8/7fqwhDoOswY/s320/2010-10-12&amp;#43;19.45.43.jpg"
-alt/>&lt;/p>
-&lt;p>Top view of the new capacitor.
-Woot!  Put it together and hooked it up to my mac.&lt;/p>
-&lt;p>&lt;img src="https://1.bp.blogspot.com/_BMKBVRf6mio/TLUwv626tkI/AAAAAAAAAYA/Q_pN5mNgoO8/s320/2010-10-12&amp;#43;21.40.31.jpg"
-alt/>&lt;/p>
-&lt;p>Booom!
-It&amp;rsquo;s humongous!&lt;/p>
-&lt;p>&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TLUw5JlnOeI/AAAAAAAAAYE/UEdMMVSyxDc/s320/2010-10-12&amp;#43;22.01.45.jpg"
-alt/>&lt;/p>
-&lt;p>Cool feature takes the second input and shows it in another window.
-So there you have it.  Just because  your lcd screen won&amp;rsquo;t show anything or power up doesn&amp;rsquo;t mean its dead.&lt;/p>
-&lt;h4 id="updates">Updates&lt;/h4>
-&lt;p>09/30/2019: Changed links to https&lt;/p></description></item></channel></rss>
+&lt;p>09/30/2019: Switch image links to https&lt;/p></description></item></channel></rss>
