@@ -14,6 +14,7 @@
 &lt;li>Serial over LAN (SOL)&lt;/li>
 &lt;/ul>
 &lt;p>This way is probably the most easy to work with. Can access over ssh from any device that can ssh. Which is pretty much anywhere, so very appealing.&lt;/p>
+&lt;p>So I really wanted to be able to get Serial over LAN working.&lt;/p>
 &lt;h2 id="the-problem">The Problem&lt;/h2>
 &lt;hr>
 &lt;p>Out of the box when you connect all you get is:&lt;/p>
