@@ -108,14 +108,18 @@ Now you need to load the environment variables into the current shell so we can 
 Now you need to run:
 
     ./setup.sh
-    
+
 Once that finishes you will then be able to startup the components needed:
 
-```
-cd deploy
-docker-compose up -d
-```
+    cd deploy
+    docker-compose up -d
 
 **Note:** If you happen to come back and want to interact with the docker-compose in the future make sure to first load the `envrc` file.  If in the deploy folder can just do: `source ../envrc`
 
 Wala the stack is up and running!
+
+### Tweak boots service
+
+I hope to be able to replace this section.  But at the time of this writing.. the boots service uses a command in the ipxe script called "params" which can be found here: [https://github.com/tinkerbell/boots/blob/1e1d60ac32bac18d9b3f1c07611cd3b3613ecec7/ipxe/script.go#L34](https://github.com/tinkerbell/boots/blob/1e1d60ac32bac18d9b3f1c07611cd3b3613ecec7/ipxe/script.go#L34 "https://github.com/tinkerbell/boots/blob/1e1d60ac32bac18d9b3f1c07611cd3b3613ecec7/ipxe/script.go#L34")
+
+In the version of ipxe my servers are running this command causes things to error out.
