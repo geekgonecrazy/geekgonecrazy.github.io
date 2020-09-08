@@ -216,6 +216,8 @@ You need to create and inject a couple of files
             }
     }
 
+You'll need to swap out the ip and mac address.
+
 Add this hardware with: `tink hardware push --file hardware.json`
 
 #### hello-world.tmpl
@@ -235,7 +237,9 @@ Add the template with: `tink template create -p hello-world.tmpl`
 
 It'll spit out an id.
 
-Now we need to create a job to run this template.  So we need to create a workflow: `tink workflow create -t {template_id} -r '{"device_1":"d0:_0:99:d7:63:20"}'`
+Now we need to create a job to run this template.  So we need to create a workflow: `tink workflow create -t {template_id} -r '{"device_1":"d0:50:99:d7:63:20"}'`
+
+Swap out the mac address for the same address used in your hardware.json above.
 
 ### Try it
 
