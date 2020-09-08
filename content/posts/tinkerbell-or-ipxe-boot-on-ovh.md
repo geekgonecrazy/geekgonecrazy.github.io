@@ -68,15 +68,11 @@ Their examples use ubuntu 18.04 so I also chose ubuntu 18.04.  20.04 seems to al
 
 Once you have that we need to ssh in and start configuring tinkerbell.
 
-```
-    git clone https://github.com/tinkerbell/sandbox.git
-```
+        git clone https://github.com/tinkerbell/sandbox.git
 
 Now we need to hop in to the sandbox folder to start configuring:
 
-```
-    cd sandbox
-```
+        cd sandbox
 
 Now we need to generate the environment variables used for all of the rest of the configuration.
 
@@ -84,53 +80,43 @@ Identify the interface attached to the private interface.  You can use `ip addr`
 
 Then you need to run:
 
-```
-    ./generate-envrc.sh ens18 > envrc
-```
+        ./generate-envrc.sh ens18 > envrc
 
 Then you need to edit the file output unless your network choice is 192.168.1.1/24 in which case you can leave alone
 
 If not you'll need to change the following lines to two ips you wish to use:
 
-```
-    # Decide on a subnet for provisioning. Tinkerbell should "own" this
-    # network space. Its subnet should be just large enough to be able
-    # to provision your hardware.
-    export TINKERBELL_CIDR=16
-    
-    # Host IP is used by provisioner to expose different services such as
-    # tink, boots, etc.
-    #
-    # The host IP should the first IP in the range, and the Nginx IP
-    # should be the second address.
-    export TINKERBELL_HOST_IP=10.0.5.1
-    
-    # NGINX IP is used by provisioner to serve files required for iPXE boot
-    export TINKERBELL_NGINX_IP=10.0.5.2
-```
+        # Decide on a subnet for provisioning. Tinkerbell should "own" this
+        # network space. Its subnet should be just large enough to be able
+        # to provision your hardware.
+        export TINKERBELL_CIDR=16
+        
+        # Host IP is used by provisioner to expose different services such as
+        # tink, boots, etc.
+        #
+        # The host IP should the first IP in the range, and the Nginx IP
+        # should be the second address.
+        export TINKERBELL_HOST_IP=10.0.5.1
+        
+        # NGINX IP is used by provisioner to serve files required for iPXE boot
+        export TINKERBELL_NGINX_IP=10.0.5.2
 
 Now you need to load the environment variables into the current shell so we can continue executing.
 
-```
-    source ./envrc
-```
+        source ./envrc
 
 Now you need to run:
 
-```
-    ./setup.sh
-```
+        ./setup.sh
 
 Once that finishes you will then be able to startup the components needed:
 
-```
-    cd deploy
-    docker-compose up -d
-```
+        cd deploy
+        docker-compose up -d
 
 **Note:** If you happen to come back and want to interact with the docker-compose in the future make sure to first load the `envrc` file.  If in the deploy folder can just do: `source ../envrc`
 
-Wala the stack is up and running! 
+Wala the stack is up and running!
 
 ### Tweak boots service
 
@@ -142,33 +128,121 @@ You can track this issue here: https://github.com/tinkerbell/boots/issues/78
 
 To make it work on OVH first follow pre-reqs listed here: https://github.com/tinkerbell/boots/tree/1e1d60ac32bac18d9b3f1c07611cd3b3613ecec7#local-setup you'll need go installed from package manager as well.
 
+    cd ~
+    git clone https://github.com/tinkerbell/boots.git
+    curl https://clbin.com/12XhH -o /tmp/ovh-boots-ipxe.patch
+    make
+    docker build -t quay.io/tinkerbell/boots:local-ovh-params-fix .
+
+Then modify: docker-compose.yaml in sandbox/deploy/docker-compose.yaml and change tag to `local-ovh-params-fix`
+
+Then in the sandbox/deploy folder run: `source ../envrc; docker-compose up -d`
+
+### Prepare OVH machine
+
+In OVH by default they have an ipxe server listening on the public interface, and intercept all requests.  So we need to setup a script through them to bootstrap things so we can boot from our LAN.
+
+You'll need API access from here: https://api.us.ovhcloud.com/console
+
+Go down to: `POST /me/ipxeScript` and insert:
+
+    #!ipxe
+    
+    ifclose net0
+    dhcp net1
+    set iface net1
+    
+    chain --autofree http://10.0.5.1/auto.ipxe || exit
+
+![](/images/2020-09-:day/screen-shot-2020-09-07-at-22-18-28.png)
+
+This script will: 
+
+* close net0 the public interface. 
+* get dhcp on net1
+* set net1 as the iface
+* chain and try to boot the ipxe script from boots.  If it gives 404 then exit.
+
+Then grab the name of machine you wish to use and goto `GET `[`/dedicated/server/{serviceName}/boot`](https://api.us.ovhcloud.com/console/#/dedicated/server/{serviceName}/boot#GET)
+
+Set bootType=ipxeCustomerScript
+
+You'll get an array back.  If you aren't sure which one is which you can call: `GET `[`/dedicated/server/{serviceName}/boot/{bootId}`](https://api.us.ovhcloud.com/console/#/dedicated/server/{serviceName}/boot/{bootId}#GET)
+
+This will tell you the name of the script so you can make sure it matches
+
+  
+Now we need to set our server up to boot this script: `PUT /dedicated/server/{serviceName}`
+
+![](/images/2020-09-:day/screen-shot-2020-09-07-at-22-27-32.png)
+
+### Add info to tinkerbell
+
+Go back to your sandbox/deploy folder and run: `source ../envrc; docker-compose exec tink-cli sh`
+
+Now you have the tink cli available to you.
+
+You need to create and inject a couple of files
+
+#### hardware.json
 ```
-cd ~
-git clone https://github.com/tinkerbell/boots.git
-curl https://clbin.com/12XhH -o /tmp/ovh-boots-ipxe.patch
-make
-docker build -t quay.io/tinkerbell/boots:local-ovh-params-fix .
- ```
- 
- Then modify: docker-compose.yaml in sandbox/deploy/docker-compose.yaml and change tag to `local-ovh-params-fix`
- 
- Then in the sandbox/deploy folder run: `source ../envrc; docker-compose up -d`
- 
- ### Prepare OVH machine
- 
- In OVH by default they have an ipxe server listening on the public interface, and intercept all requests.  So we need to setup a script through them to bootstrap things so we can boot from our LAN.
- 
- You'll need API access from here: https://api.us.ovhcloud.com/console
- 
- Go down to: `POST /me/ipxeScript` and insert:
- 
- ```
-#!ipxe
-
-ifclose net0
-dhcp net1
-set iface net1
-
-chain --autofree http://10.0.5.1/auto.ipxe || exit
+{ "id":"0fba0bf8-3772-4b4a-ab9f-6ebe93b90a94",
+        "metadata":{
+                "facility":{
+                        "facility_code":"ewr1",
+                        "plan_slug":"c2.medium.x86",
+                        "plan_version_slug":""
+                },
+                "instance":{},
+                "state":"provisioning"
+        },
+        "network":{
+                "interfaces":[
+                        {
+                                "dhcp":{
+                                        "arch":"x86_64",
+                                        "ip":{
+                                                "address":"10.0.6.3",
+                                                "gateway":"10.0.0.1",
+                                                "netmask":"255.255.0.0"
+                                        },
+                                        "mac":"d0:50:99:d7:63:20",
+                                        "uefi":true
+                                },
+                                "netboot":{
+                                        "allow_pxe":true,
+                                        "allow_workflow":true
+                                }
+                        }
+                ]
+        }
+}
 ```
 
+Add this hardware with: `tink hardware push --file hardware.json`
+
+#### hello-world.tmpl
+```
+version: "0.1"
+name: hello_world_workflow
+global_timeout: 600
+tasks:
+  - name: "hello world"
+    worker: "{{.device_1}}"
+    actions:
+      - name: "hello_world"
+        image: hello-world
+        timeout: 60
+```
+
+Add the template with: `tink template create -p hello-world.tmpl`
+
+It'll spit out an id.
+
+Now we need to create a job to run this template.  So we need to create a workflow: `tink workflow create -t {template_id} -r '{"device_1":"d0:50:99:d7:63:20"}'
+
+### Try it
+
+Now for the fun part.  Connect to KVM console for your machine and then reboot it.
+
+If all went well you should see it boot up
