@@ -205,6 +205,7 @@ alt/>&lt;/p>
 }
 }
 &lt;/code>&lt;/pre>
+&lt;p>You&amp;rsquo;ll need to swap out the ip and mac address.&lt;/p>
 &lt;p>Add this hardware with: &lt;code>tink hardware push --file hardware.json&lt;/code>&lt;/p>
 &lt;h4 id="hello-worldtmpl">hello-world.tmpl&lt;/h4>
 &lt;pre>&lt;code>version: &amp;quot;0.1&amp;quot;
@@ -220,7 +221,8 @@ timeout: 60
 &lt;/code>&lt;/pre>
 &lt;p>Add the template with: &lt;code>tink template create -p hello-world.tmpl&lt;/code>&lt;/p>
 &lt;p>It&amp;rsquo;ll spit out an id.&lt;/p>
-&lt;p>Now we need to create a job to run this template. So we need to create a workflow: &lt;code>tink workflow create -t {template_id} -r '{&amp;quot;device_1&amp;quot;:&amp;quot;d0:_0:99:d7:63:20&amp;quot;}'&lt;/code>&lt;/p>
+&lt;p>Now we need to create a job to run this template. So we need to create a workflow: &lt;code>tink workflow create -t {template_id} -r '{&amp;quot;device_1&amp;quot;:&amp;quot;d0:50:99:d7:63:20&amp;quot;}'&lt;/code>&lt;/p>
+&lt;p>Swap out the mac address for the same address used in your hardware.json above.&lt;/p>
 &lt;h3 id="try-it">Try it&lt;/h3>
 &lt;p>Now for the fun part. Connect to KVM console for your machine and then reboot it.&lt;/p>
 &lt;p>If all went well you should see it boot up&lt;/p></description></item><item><title>Decision Fatigue in 2020</title><link>https://geekgonecrazy.com/2020/08/28/decision-fatigue-in-2020/</link><pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/08/28/decision-fatigue-in-2020/</guid><description>
