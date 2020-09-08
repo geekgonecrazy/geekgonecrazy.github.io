@@ -155,22 +155,21 @@ Go down to: `POST /me/ipxeScript` and insert:
 
 ![](/images/2020-09-:day/screen-shot-2020-09-07-at-22-18-28.png)
 
-This script will: 
+This script will:
 
-* close net0 the public interface. 
+* close net0 the public interface.
 * get dhcp on net1
 * set net1 as the iface
 * chain and try to boot the ipxe script from boots.  If it gives 404 then exit.
 
-Then grab the name of machine you wish to use and goto `GET `[`/dedicated/server/{serviceName}/boot`](https://api.us.ovhcloud.com/console/#/dedicated/server/{serviceName}/boot#GET)
+Then grab the name of machine you wish to use and goto `GET`[`/dedicated/server/{serviceName}/boot`](https://api.us.ovhcloud.com/console/#/dedicated/server/{serviceName}/boot#GET)
 
 Set bootType=ipxeCustomerScript
 
-You'll get an array back.  If you aren't sure which one is which you can call: `GET `[`/dedicated/server/{serviceName}/boot/{bootId}`](https://api.us.ovhcloud.com/console/#/dedicated/server/{serviceName}/boot/{bootId}#GET)
+You'll get an array back.  If you aren't sure which one is which you can call: `GET`[`/dedicated/server/{serviceName}/boot/{bootId}`](https://api.us.ovhcloud.com/console/#/dedicated/server/{serviceName}/boot/{bootId}#GET)
 
 This will tell you the name of the script so you can make sure it matches
 
-  
 Now we need to set our server up to boot this script: `PUT /dedicated/server/{serviceName}`
 
 ![](/images/2020-09-:day/screen-shot-2020-09-07-at-22-27-32.png)
@@ -184,61 +183,59 @@ Now you have the tink cli available to you.
 You need to create and inject a couple of files
 
 #### hardware.json
-```
-{ "id":"0fba0bf8-3772-4b4a-ab9f-6ebe93b90a94",
-        "metadata":{
-                "facility":{
-                        "facility_code":"ewr1",
-                        "plan_slug":"c2.medium.x86",
-                        "plan_version_slug":""
-                },
-                "instance":{},
-                "state":"provisioning"
-        },
-        "network":{
-                "interfaces":[
-                        {
-                                "dhcp":{
-                                        "arch":"x86_64",
-                                        "ip":{
-                                                "address":"10.0.6.3",
-                                                "gateway":"10.0.0.1",
-                                                "netmask":"255.255.0.0"
-                                        },
-                                        "mac":"d0:50:99:d7:63:20",
-                                        "uefi":true
-                                },
-                                "netboot":{
-                                        "allow_pxe":true,
-                                        "allow_workflow":true
-                                }
-                        }
-                ]
-        }
-}
-```
+
+    { "id":"0fba0bf8-3772-4b4a-ab9f-6ebe93b90a94",
+            "metadata":{
+                    "facility":{
+                            "facility_code":"ewr1",
+                            "plan_slug":"c2.medium.x86",
+                            "plan_version_slug":""
+                    },
+                    "instance":{},
+                    "state":"provisioning"
+            },
+            "network":{
+                    "interfaces":[
+                            {
+                                    "dhcp":{
+                                            "arch":"x86_64",
+                                            "ip":{
+                                                    "address":"10.0.6.3",
+                                                    "gateway":"10.0.0.1",
+                                                    "netmask":"255.255.0.0"
+                                            },
+                                            "mac":"d0:50:99:d7:63:20",
+                                            "uefi":true
+                                    },
+                                    "netboot":{
+                                            "allow_pxe":true,
+                                            "allow_workflow":true
+                                    }
+                            }
+                    ]
+            }
+    }
 
 Add this hardware with: `tink hardware push --file hardware.json`
 
 #### hello-world.tmpl
-```
-version: "0.1"
-name: hello_world_workflow
-global_timeout: 600
-tasks:
-  - name: "hello world"
-    worker: "{{.device_1}}"
-    actions:
-      - name: "hello_world"
-        image: hello-world
-        timeout: 60
-```
+
+    version: "0.1"
+    name: hello_world_workflow
+    global_timeout: 600
+    tasks:
+      - name: "hello world"
+        worker: "{{.device_1}}"
+        actions:
+          - name: "hello_world"
+            image: hello-world
+            timeout: 60
 
 Add the template with: `tink template create -p hello-world.tmpl`
 
 It'll spit out an id.
 
-Now we need to create a job to run this template.  So we need to create a workflow: `tink workflow create -t {template_id} -r '{"device_1":"d0:50:99:d7:63:20"}'
+Now we need to create a job to run this template.  So we need to create a workflow: `tink workflow create -t {template_id} -r '{"device_1":"d0:_0:99:d7:63:20"}'`
 
 ### Try it
 
