@@ -213,7 +213,7 @@ actions:
 image: hello-world
 timeout: 60
 &lt;/code>&lt;/pre>
-&lt;p>Add the template with: &lt;code>tink template create -p hello-world.tmpl&lt;/code>&lt;/p>
+&lt;p>Add the template with: &lt;code>tink template create -n hello-world -p hello-world.tmpl&lt;/code>&lt;/p>
 &lt;p>It&amp;rsquo;ll spit out an id.&lt;/p>
 &lt;p>Now we need to create a job to run this template. So we need to create a workflow: &lt;code>tink workflow create -t {template_id} -r '{&amp;quot;device_1&amp;quot;:&amp;quot;d0:50:99:d7:63:20&amp;quot;}'&lt;/code>&lt;/p>
 &lt;p>Swap out the mac address for the same address used in your hardware.json above.&lt;/p>
