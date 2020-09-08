@@ -59,17 +59,11 @@ alt/>&lt;/p>
 &lt;p>Tinkerbell is made up of a few components:&lt;/p>
 &lt;h3 id="tink-server">tink-server&lt;/h3>
 &lt;p>This provides the state. It is made up of:&lt;/p>
-&lt;ul>
-&lt;li>templates&lt;/li>
-&lt;/ul>
+&lt;h4 id="templates">templates&lt;/h4>
 &lt;p>Templates have a series of actions that are docker images to be ran.&lt;/p>
-&lt;ul>
-&lt;li>hardware&lt;/li>
-&lt;/ul>
+&lt;h4 id="hardware">hardware&lt;/h4>
 &lt;p>This is a json representation of the machine, metadata, nics with their interface definition ip/mac address.&lt;/p>
-&lt;ul>
-&lt;li>workflows&lt;/li>
-&lt;/ul>
+&lt;h4 id="workflows">workflows&lt;/h4>
 &lt;p>Workflows are essentially just a job. A match up of hardware and template for it to run. The state is updated as the job runs.&lt;/p>
 &lt;h3 id="boots">boots&lt;/h3>
 &lt;p>This provides dhcp and the ipxe script to the server so it can boot. When it receives a request from the server for an ip, it talks to tink-server to find a record of that hardware. If it finds it then it returns it the ip given to it in the hardware definition and returns the ipxe script based on info from that hardware template.&lt;/p>
