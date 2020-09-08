@@ -1,9 +1,8 @@
 +++
 comments = false
 date = 2020-09-07T00:00:00Z
-draft = true
 layout = "post"
-publish = false
+publish = true
 tags = []
 title = "Tinkerbell or iPXE boot on OVH"
 
