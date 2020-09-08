@@ -1,0 +1,76 @@
+<!doctype html><html lang=en><meta charset=utf-8><meta name=generator content="Hugo 0.72.0"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name=color-scheme content="light dark"><meta name=supported-color-schemes content="light dark"><title>Tinkerbell or iPXE boot on OVH&nbsp;&ndash;&nbsp;Aaron's Ramblings</title><link rel=stylesheet href=/css/core.min.51a44d5b8886c4d68322a4e7f2c4d3a9ae730b123178c37858c71c49e9bba12bcf142960b0cfe957684d097b1bbfb40d.css integrity=sha384-UaRNW4iGxNaDIqTn8sTTqa5zCxIxeMN4WMccSem7oSvPFClgsM/pV2hNCXsbv7QN><meta name=twitter:card content="summary"><meta name=twitter:title content="Tinkerbell or iPXE boot on OVH"><script>(function(f,a,t,h,o,m){a[h]=a[h]||function(){(a[h].q=a[h].q||[]).push(arguments)};o=f.createElement('script'),m=f.getElementsByTagName('script')[0];o.async=1;o.src=t;o.id='fathom-script';m.parentNode.insertBefore(o,m)})(document,window,'//s.geekgonecrazy.com/tracker.js','fathom');fathom('set','siteId','EVTBC');fathom('trackPageview');</script><body><section id=header><div class="header wrap"><span class="header left-side"><a class="site home" href=/><span class="site name">Aaron's Ramblings</span></a></span>
+<span class="header right-side"><div class="nav wrap"><nav class=nav><a class="nav item" href=/>Home</a><a class="nav item" href=/about>About</a></nav></div></span></div></section><section id=content><div class=article-container><section class="article header"><h1 class="article title">Tinkerbell or iPXE boot on OVH</h1><p class="article date">2020-09-07</p></section><article class="article markdown-body"><p>Recently have had to work with a number of physical servers that need to be treated more cattle like than a bunch of pets. I need to be able to quickly and easily provision servers to fit a specific role with out having to go through a complicated setup process.</p><p>For this type of thing PXE or iPXE comes to the rescue. Allowing you to boot over the network. Simply rebooting the machine and then having it pick up its instructions and be provisioned like needed.</p><h2 id=tinkerbell>Tinkerbell</h2><p>Because of this need a project called tinkerbell has come to my attention. Project website is: <a href=https://tinkerbell.org>https://tinkerbell.org</a>. Seems packet uses this or a variation of this inside of their infrastructure.</p><p>Tinkerbell is made up of a few components:</p><h3 id=tink-server>tink-server</h3><p>This provides the state. It is made up of:</p><ul><li>templates</li></ul><p>Templates have a series of actions that are docker images to be ran.</p><ul><li>hardware</li></ul><p>This is a json representation of the machine, metadata, nics with their interface definition ip/mac address.</p><ul><li>workflows</li></ul><p>Workflows are essentially just a job. A match up of hardware and template for it to run. The state is updated as the job runs.</p><h3 id=boots>boots</h3><p>This provides dhcp and the ipxe script to the server so it can boot. When it receives a request from the server for an ip, it talks to tink-server to find a record of that hardware. If it finds it then it returns it the ip given to it in the hardware definition and returns the ipxe script based on info from that hardware template.</p><h3 id=osie>osie</h3><p>When boots gives the server an image to boot it gives it the osie image. When this image boots up. It has tink-worker. Tink worker talks back to tink-server to fetch any workflows meant for this device. It then runs these workflows in series of docker containers. So you can package all of your scripts/dependencies in a nice neat docker container.</p><h3 id=hegel>hegel</h3><p>Hegel seems to mostly just be a tiny little service sitting over tink-server to return to the server its metadata. Pretty much like you are probably familar with if you&rsquo;ve used AWS. The metadata service.</p><h2 id=setting-up-tinkerbell>Setting up tinkerbell</h2><p>The easiest way to get started on your local machine is to goto: <a href=https://tinkerbell.org/docs/setup/local-with-vagrant/ title=https://tinkerbell.org/docs/setup/local-with-vagrant/ target=_blank>https://tinkerbell.org/docs/setup/local-with-vagrant/</a> and get started with their vagrant stack.</p><p>Of course if you are going to be running in OVH.. This won&rsquo;t really be an option.</p><h3 id=pre-reqs>Pre-reqs</h3><p>So first off you need a couple of things:</p><ul><li>A place to run tinkerbell. I personally had a proxmox setup for little VM&rsquo;s on a couple of baremetal machines. But if I didn&rsquo;t I would run a sandbox VM on the public cloud.</li><li>A machine you want to boot over the network</li><li>A vRack. You&rsquo;re going to want a private network to conduct your experiment on.</li><li>Your machines connected to that vRack. Make sure you don&rsquo;t turn on dhcp on that vRack doing public cloud.</li><li>An ip range selected. Personally I tend to over provision: 10.1.0.0/16</li></ul><h3 id=install-tinkerbell-machine>Install tinkerbell machine</h3><p>Their examples use ubuntu 18.04 so I also chose ubuntu 18.04. 20.04 seems to also work just fine.</p><p>Once you have that we need to ssh in and start configuring tinkerbell.</p><pre><code>    git clone https://github.com/tinkerbell/sandbox.git
+</code></pre><p>Now we need to hop in to the sandbox folder to start configuring:</p><pre><code>    cd sandbox
+</code></pre><p>Now we need to generate the environment variables used for all of the rest of the configuration.</p><p>Identify the interface attached to the private interface. You can use <code>ip addr</code> and find the interface with no ip. Mine was ens18</p><p>Then you need to run:</p><pre><code>    ./generate-envrc.sh ens18 &gt; envrc
+</code></pre><p>Then you need to edit the file output unless your network choice is 192.168.1.1/24 in which case you can leave alone</p><p>If not you&rsquo;ll need to change the following lines to two ips you wish to use:</p><pre><code>    # Decide on a subnet for provisioning. Tinkerbell should &quot;own&quot; this
+    # network space. Its subnet should be just large enough to be able
+    # to provision your hardware.
+    export TINKERBELL_CIDR=16
+    
+    # Host IP is used by provisioner to expose different services such as
+    # tink, boots, etc.
+    #
+    # The host IP should the first IP in the range, and the Nginx IP
+    # should be the second address.
+    export TINKERBELL_HOST_IP=10.0.5.1
+    
+    # NGINX IP is used by provisioner to serve files required for iPXE boot
+    export TINKERBELL_NGINX_IP=10.0.5.2
+</code></pre><p>Now you need to load the environment variables into the current shell so we can continue executing.</p><pre><code>    source ./envrc
+</code></pre><p>Now you need to run:</p><pre><code>    ./setup.sh
+</code></pre><p>Once that finishes you will then be able to startup the components needed:</p><pre><code>    cd deploy
+    docker-compose up -d
+</code></pre><p><strong>Note:</strong> If you happen to come back and want to interact with the docker-compose in the future make sure to first load the <code>envrc</code> file. If in the deploy folder can just do: <code>source ../envrc</code></p><p>Wala the stack is up and running!</p><h3 id=tweak-boots-service>Tweak boots service</h3><p>I hope to be able to replace this section. But at the time of this writing.. the boots service uses a command in the ipxe script called &ldquo;params&rdquo; which can be found here: <a href=https://github.com/tinkerbell/boots/blob/1e1d60ac32bac18d9b3f1c07611cd3b3613ecec7/ipxe/script.go#L34 target=_blank>https://github.com/tinkerbell/boots/blob/1e1d60ac32bac18d9b3f1c07611cd3b3613ecec7/ipxe/script.go#L34</a></p><p>In the version of ipxe my servers are running the param command causes things to error out. From what I can tell this just means that ipxe was built with out <a href=https://ipxe.org/buildcfg/param_cmd target=_blank>PARAM_CMD</a> build option. But since these are OVH servers there isn&rsquo;t really anything I can do to ensure its added.</p><p>You can track this issue here: <a href=https://github.com/tinkerbell/boots/issues/78>https://github.com/tinkerbell/boots/issues/78</a></p><p>To make it work on OVH first follow pre-reqs listed here: <a href=https://github.com/tinkerbell/boots/tree/1e1d60ac32bac18d9b3f1c07611cd3b3613ecec7#local-setup>https://github.com/tinkerbell/boots/tree/1e1d60ac32bac18d9b3f1c07611cd3b3613ecec7#local-setup</a> you&rsquo;ll need go installed from package manager as well.</p><pre><code>cd ~
+git clone https://github.com/tinkerbell/boots.git
+curl https://clbin.com/12XhH -o /tmp/ovh-boots-ipxe.patch
+make
+docker build -t quay.io/tinkerbell/boots:local-ovh-params-fix .
+</code></pre><p>Then modify: docker-compose.yaml in sandbox/deploy/docker-compose.yaml and change tag to <code>local-ovh-params-fix</code></p><p>Then in the sandbox/deploy folder run: <code>source ../envrc; docker-compose up -d</code></p><h3 id=prepare-ovh-machine>Prepare OVH machine</h3><p>In OVH by default they have an ipxe server listening on the public interface, and intercept all requests. So we need to setup a script through them to bootstrap things so we can boot from our LAN.</p><p>You&rsquo;ll need API access from here: <a href=https://api.us.ovhcloud.com/console>https://api.us.ovhcloud.com/console</a></p><p>Go down to: <code>POST /me/ipxeScript</code> and insert:</p><pre><code>#!ipxe
+
+ifclose net0
+dhcp net1
+set iface net1
+
+chain --autofree http://10.0.5.1/auto.ipxe || exit
+</code></pre><p><img src=/images/2020-09-:day/screen-shot-2020-09-07-at-22-18-28.png alt></p><p>This script will:</p><ul><li>close net0 the public interface.</li><li>get dhcp on net1</li><li>set net1 as the iface</li><li>chain and try to boot the ipxe script from boots. If it gives 404 then exit.</li></ul><p>Then grab the name of machine you wish to use and goto <code>GET </code><a href=https://api.us.ovhcloud.com/console/#/dedicated/server/%7bserviceName%7d/boot#GET target=_blank><code>/dedicated/server/{serviceName}/boot</code></a></p><p>Set bootType=ipxeCustomerScript</p><p>You&rsquo;ll get an array back. If you aren&rsquo;t sure which one is which you can call: <code>GET </code><a href=https://api.us.ovhcloud.com/console/#/dedicated/server/%7bserviceName%7d/boot/%7bbootId%7d#GET target=_blank><code>/dedicated/server/{serviceName}/boot/{bootId}</code></a></p><p>This will tell you the name of the script so you can make sure it matches</p><p>Now we need to set our server up to boot this script: <code>PUT /dedicated/server/{serviceName}</code></p><p><img src=/images/2020-09-:day/screen-shot-2020-09-07-at-22-27-32.png alt></p><h3 id=add-info-to-tinkerbell>Add info to tinkerbell</h3><p>Go back to your sandbox/deploy folder and run: <code>source ../envrc; docker-compose exec tink-cli sh</code></p><p>Now you have the tink cli available to you.</p><p>You need to create and inject a couple of files</p><h4 id=hardwarejson>hardware.json</h4><pre><code>{ &quot;id&quot;:&quot;0fba0bf8-3772-4b4a-ab9f-6ebe93b90a94&quot;,
+        &quot;metadata&quot;:{
+                &quot;facility&quot;:{
+                        &quot;facility_code&quot;:&quot;ewr1&quot;,
+                        &quot;plan_slug&quot;:&quot;c2.medium.x86&quot;,
+                        &quot;plan_version_slug&quot;:&quot;&quot;
+                },
+                &quot;instance&quot;:{},
+                &quot;state&quot;:&quot;provisioning&quot;
+        },
+        &quot;network&quot;:{
+                &quot;interfaces&quot;:[
+                        {
+                                &quot;dhcp&quot;:{
+                                        &quot;arch&quot;:&quot;x86_64&quot;,
+                                        &quot;ip&quot;:{
+                                                &quot;address&quot;:&quot;10.0.6.3&quot;,
+                                                &quot;gateway&quot;:&quot;10.0.0.1&quot;,
+                                                &quot;netmask&quot;:&quot;255.255.0.0&quot;
+                                        },
+                                        &quot;mac&quot;:&quot;d0:50:99:d7:63:20&quot;,
+                                        &quot;uefi&quot;:true
+                                },
+                                &quot;netboot&quot;:{
+                                        &quot;allow_pxe&quot;:true,
+                                        &quot;allow_workflow&quot;:true
+                                }
+                        }
+                ]
+        }
+}
+</code></pre><p>Add this hardware with: <code>tink hardware push --file hardware.json</code></p><h4 id=hello-worldtmpl>hello-world.tmpl</h4><pre><code>version: &quot;0.1&quot;
+name: hello_world_workflow
+global_timeout: 600
+tasks:
+  - name: &quot;hello world&quot;
+    worker: &quot;{{.device_1}}&quot;
+    actions:
+      - name: &quot;hello_world&quot;
+        image: hello-world
+        timeout: 60
+</code></pre><p>Add the template with: <code>tink template create -p hello-world.tmpl</code></p><p>It&rsquo;ll spit out an id.</p><p>Now we need to create a job to run this template. So we need to create a workflow: `tink workflow create -t {template_id} -r &lsquo;{&ldquo;device_1&rdquo;:&ldquo;d0:50:99:d7:63:20&rdquo;}&rsquo;</p><h3 id=try-it>Try it</h3><p>Now for the fun part. Connect to KVM console for your machine and then reboot it.</p><p>If all went well you should see it boot up</p></article></div><div class="article bottom"><section class="article navigation"><p><a class=link href=/2020/09/07/ovh-serial-over-lan-sol/><span class="iconfont icon-article"></span>OVH Serial over LAN (SOL)</a></p><p><a class=link href=/2020/08/28/decision-fatigue-in-2020/><span class="iconfont icon-article"></span>Decision Fatigue in 2020</a></p></section></div></section><section id=footer><div class=footer-wrap><p class=copyright>Aaron's Ramblings</p><p class=powerby><span>Powered by </span><a href=https://gohugo.io target=_blank>Hugo</a><span> and the </span><a href=https://themes.gohugo.io/hugo-notepadium/ target=_blank>Notepadium</a></p></div></section></body></html>

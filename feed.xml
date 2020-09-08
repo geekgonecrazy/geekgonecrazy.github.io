@@ -51,7 +51,177 @@ GRUB_SERIAL_COMMAND=&amp;quot;serial --unit=1 --speed=115200 --word=8 --parity=n
 alt/>&lt;/p>
 &lt;p>&lt;img src="/images/2020-09-:day/screen-shot-2020-09-07-at-14-29-20.png"
 alt/>&lt;/p>
-&lt;p>I want to thank the author of this blog post for setting me on the right track: &lt;a href="http://divideoverflow.com/2016/07/Configuring_IPMI_on_OVH_server/">http://divideoverflow.com/2016/07/Configuring_IPMI_on_OVH_server/&lt;/a>&lt;/p></description></item><item><title>Decision Fatigue in 2020</title><link>https://geekgonecrazy.com/2020/08/28/decision-fatigue-in-2020/</link><pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/08/28/decision-fatigue-in-2020/</guid><description>
+&lt;p>I want to thank the author of this blog post for setting me on the right track: &lt;a href="http://divideoverflow.com/2016/07/Configuring_IPMI_on_OVH_server/">http://divideoverflow.com/2016/07/Configuring_IPMI_on_OVH_server/&lt;/a>&lt;/p></description></item><item><title>Tinkerbell or iPXE boot on OVH</title><link>https://geekgonecrazy.com/2020/09/07/tinkerbell-or-ipxe-boot-on-ovh/</link><pubDate>Mon, 07 Sep 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/09/07/tinkerbell-or-ipxe-boot-on-ovh/</guid><description>
+&lt;p>Recently have had to work with a number of physical servers that need to be treated more cattle like than a bunch of pets. I need to be able to quickly and easily provision servers to fit a specific role with out having to go through a complicated setup process.&lt;/p>
+&lt;p>For this type of thing PXE or iPXE comes to the rescue. Allowing you to boot over the network. Simply rebooting the machine and then having it pick up its instructions and be provisioned like needed.&lt;/p>
+&lt;h2 id="tinkerbell">Tinkerbell&lt;/h2>
+&lt;p>Because of this need a project called tinkerbell has come to my attention. Project website is: &lt;a href="https://tinkerbell.org">https://tinkerbell.org&lt;/a>. Seems packet uses this or a variation of this inside of their infrastructure.&lt;/p>
+&lt;p>Tinkerbell is made up of a few components:&lt;/p>
+&lt;h3 id="tink-server">tink-server&lt;/h3>
+&lt;p>This provides the state. It is made up of:&lt;/p>
+&lt;ul>
+&lt;li>templates&lt;/li>
+&lt;/ul>
+&lt;p>Templates have a series of actions that are docker images to be ran.&lt;/p>
+&lt;ul>
+&lt;li>hardware&lt;/li>
+&lt;/ul>
+&lt;p>This is a json representation of the machine, metadata, nics with their interface definition ip/mac address.&lt;/p>
+&lt;ul>
+&lt;li>workflows&lt;/li>
+&lt;/ul>
+&lt;p>Workflows are essentially just a job. A match up of hardware and template for it to run. The state is updated as the job runs.&lt;/p>
+&lt;h3 id="boots">boots&lt;/h3>
+&lt;p>This provides dhcp and the ipxe script to the server so it can boot. When it receives a request from the server for an ip, it talks to tink-server to find a record of that hardware. If it finds it then it returns it the ip given to it in the hardware definition and returns the ipxe script based on info from that hardware template.&lt;/p>
+&lt;h3 id="osie">osie&lt;/h3>
+&lt;p>When boots gives the server an image to boot it gives it the osie image. When this image boots up. It has tink-worker. Tink worker talks back to tink-server to fetch any workflows meant for this device. It then runs these workflows in series of docker containers. So you can package all of your scripts/dependencies in a nice neat docker container.&lt;/p>
+&lt;h3 id="hegel">hegel&lt;/h3>
+&lt;p>Hegel seems to mostly just be a tiny little service sitting over tink-server to return to the server its metadata. Pretty much like you are probably familar with if you&amp;rsquo;ve used AWS. The metadata service.&lt;/p>
+&lt;h2 id="setting-up-tinkerbell">Setting up tinkerbell&lt;/h2>
+&lt;p>The easiest way to get started on your local machine is to goto: &lt;a href="https://tinkerbell.org/docs/setup/local-with-vagrant/"title="https://tinkerbell.org/docs/setup/local-with-vagrant/"target="_blank">https://tinkerbell.org/docs/setup/local-with-vagrant/&lt;/a> and get started with their vagrant stack.&lt;/p>
+&lt;p>Of course if you are going to be running in OVH.. This won&amp;rsquo;t really be an option.&lt;/p>
+&lt;h3 id="pre-reqs">Pre-reqs&lt;/h3>
+&lt;p>So first off you need a couple of things:&lt;/p>
+&lt;ul>
+&lt;li>A place to run tinkerbell. I personally had a proxmox setup for little VM&amp;rsquo;s on a couple of baremetal machines. But if I didn&amp;rsquo;t I would run a sandbox VM on the public cloud.&lt;/li>
+&lt;li>A machine you want to boot over the network&lt;/li>
+&lt;li>A vRack. You&amp;rsquo;re going to want a private network to conduct your experiment on.&lt;/li>
+&lt;li>Your machines connected to that vRack. Make sure you don&amp;rsquo;t turn on dhcp on that vRack doing public cloud.&lt;/li>
+&lt;li>An ip range selected. Personally I tend to over provision: 10.1.0.0/16&lt;/li>
+&lt;/ul>
+&lt;h3 id="install-tinkerbell-machine">Install tinkerbell machine&lt;/h3>
+&lt;p>Their examples use ubuntu 18.04 so I also chose ubuntu 18.04. 20.04 seems to also work just fine.&lt;/p>
+&lt;p>Once you have that we need to ssh in and start configuring tinkerbell.&lt;/p>
+&lt;pre>&lt;code> git clone https://github.com/tinkerbell/sandbox.git
+&lt;/code>&lt;/pre>
+&lt;p>Now we need to hop in to the sandbox folder to start configuring:&lt;/p>
+&lt;pre>&lt;code> cd sandbox
+&lt;/code>&lt;/pre>
+&lt;p>Now we need to generate the environment variables used for all of the rest of the configuration.&lt;/p>
+&lt;p>Identify the interface attached to the private interface. You can use &lt;code>ip addr&lt;/code> and find the interface with no ip. Mine was ens18&lt;/p>
+&lt;p>Then you need to run:&lt;/p>
+&lt;pre>&lt;code> ./generate-envrc.sh ens18 &amp;gt; envrc
+&lt;/code>&lt;/pre>
+&lt;p>Then you need to edit the file output unless your network choice is 192.168.1.1/24 in which case you can leave alone&lt;/p>
+&lt;p>If not you&amp;rsquo;ll need to change the following lines to two ips you wish to use:&lt;/p>
+&lt;pre>&lt;code> # Decide on a subnet for provisioning. Tinkerbell should &amp;quot;own&amp;quot; this
+# network space. Its subnet should be just large enough to be able
+# to provision your hardware.
+export TINKERBELL_CIDR=16
+# Host IP is used by provisioner to expose different services such as
+# tink, boots, etc.
+#
+# The host IP should the first IP in the range, and the Nginx IP
+# should be the second address.
+export TINKERBELL_HOST_IP=10.0.5.1
+# NGINX IP is used by provisioner to serve files required for iPXE boot
+export TINKERBELL_NGINX_IP=10.0.5.2
+&lt;/code>&lt;/pre>
+&lt;p>Now you need to load the environment variables into the current shell so we can continue executing.&lt;/p>
+&lt;pre>&lt;code> source ./envrc
+&lt;/code>&lt;/pre>
+&lt;p>Now you need to run:&lt;/p>
+&lt;pre>&lt;code> ./setup.sh
+&lt;/code>&lt;/pre>
+&lt;p>Once that finishes you will then be able to startup the components needed:&lt;/p>
+&lt;pre>&lt;code> cd deploy
+docker-compose up -d
+&lt;/code>&lt;/pre>
+&lt;p>&lt;strong>Note:&lt;/strong> If you happen to come back and want to interact with the docker-compose in the future make sure to first load the &lt;code>envrc&lt;/code> file. If in the deploy folder can just do: &lt;code>source ../envrc&lt;/code>&lt;/p>
+&lt;p>Wala the stack is up and running!&lt;/p>
+&lt;h3 id="tweak-boots-service">Tweak boots service&lt;/h3>
+&lt;p>I hope to be able to replace this section. But at the time of this writing.. the boots service uses a command in the ipxe script called &amp;ldquo;params&amp;rdquo; which can be found here: &lt;a href="https://github.com/tinkerbell/boots/blob/1e1d60ac32bac18d9b3f1c07611cd3b3613ecec7/ipxe/script.go#L34"target="_blank">https://github.com/tinkerbell/boots/blob/1e1d60ac32bac18d9b3f1c07611cd3b3613ecec7/ipxe/script.go#L34&lt;/a>&lt;/p>
+&lt;p>In the version of ipxe my servers are running the param command causes things to error out. From what I can tell this just means that ipxe was built with out &lt;a href="https://ipxe.org/buildcfg/param_cmd"target="_blank">PARAM_CMD&lt;/a> build option. But since these are OVH servers there isn&amp;rsquo;t really anything I can do to ensure its added.&lt;/p>
+&lt;p>You can track this issue here: &lt;a href="https://github.com/tinkerbell/boots/issues/78">https://github.com/tinkerbell/boots/issues/78&lt;/a>&lt;/p>
+&lt;p>To make it work on OVH first follow pre-reqs listed here: &lt;a href="https://github.com/tinkerbell/boots/tree/1e1d60ac32bac18d9b3f1c07611cd3b3613ecec7#local-setup">https://github.com/tinkerbell/boots/tree/1e1d60ac32bac18d9b3f1c07611cd3b3613ecec7#local-setup&lt;/a> you&amp;rsquo;ll need go installed from package manager as well.&lt;/p>
+&lt;pre>&lt;code>cd ~
+git clone https://github.com/tinkerbell/boots.git
+curl https://clbin.com/12XhH -o /tmp/ovh-boots-ipxe.patch
+make
+docker build -t quay.io/tinkerbell/boots:local-ovh-params-fix .
+&lt;/code>&lt;/pre>
+&lt;p>Then modify: docker-compose.yaml in sandbox/deploy/docker-compose.yaml and change tag to &lt;code>local-ovh-params-fix&lt;/code>&lt;/p>
+&lt;p>Then in the sandbox/deploy folder run: &lt;code>source ../envrc; docker-compose up -d&lt;/code>&lt;/p>
+&lt;h3 id="prepare-ovh-machine">Prepare OVH machine&lt;/h3>
+&lt;p>In OVH by default they have an ipxe server listening on the public interface, and intercept all requests. So we need to setup a script through them to bootstrap things so we can boot from our LAN.&lt;/p>
+&lt;p>You&amp;rsquo;ll need API access from here: &lt;a href="https://api.us.ovhcloud.com/console">https://api.us.ovhcloud.com/console&lt;/a>&lt;/p>
+&lt;p>Go down to: &lt;code>POST /me/ipxeScript&lt;/code> and insert:&lt;/p>
+&lt;pre>&lt;code>#!ipxe
+ifclose net0
+dhcp net1
+set iface net1
+chain --autofree http://10.0.5.1/auto.ipxe || exit
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="/images/2020-09-:day/screen-shot-2020-09-07-at-22-18-28.png"
+alt/>&lt;/p>
+&lt;p>This script will:&lt;/p>
+&lt;ul>
+&lt;li>close net0 the public interface.&lt;/li>
+&lt;li>get dhcp on net1&lt;/li>
+&lt;li>set net1 as the iface&lt;/li>
+&lt;li>chain and try to boot the ipxe script from boots. If it gives 404 then exit.&lt;/li>
+&lt;/ul>
+&lt;p>Then grab the name of machine you wish to use and goto &lt;code>GET &lt;/code>&lt;a href="https://api.us.ovhcloud.com/console/#/dedicated/server/%7bserviceName%7d/boot#GET"target="_blank">&lt;code>/dedicated/server/{serviceName}/boot&lt;/code>&lt;/a>&lt;/p>
+&lt;p>Set bootType=ipxeCustomerScript&lt;/p>
+&lt;p>You&amp;rsquo;ll get an array back. If you aren&amp;rsquo;t sure which one is which you can call: &lt;code>GET &lt;/code>&lt;a href="https://api.us.ovhcloud.com/console/#/dedicated/server/%7bserviceName%7d/boot/%7bbootId%7d#GET"target="_blank">&lt;code>/dedicated/server/{serviceName}/boot/{bootId}&lt;/code>&lt;/a>&lt;/p>
+&lt;p>This will tell you the name of the script so you can make sure it matches&lt;/p>
+&lt;p>Now we need to set our server up to boot this script: &lt;code>PUT /dedicated/server/{serviceName}&lt;/code>&lt;/p>
+&lt;p>&lt;img src="/images/2020-09-:day/screen-shot-2020-09-07-at-22-27-32.png"
+alt/>&lt;/p>
+&lt;h3 id="add-info-to-tinkerbell">Add info to tinkerbell&lt;/h3>
+&lt;p>Go back to your sandbox/deploy folder and run: &lt;code>source ../envrc; docker-compose exec tink-cli sh&lt;/code>&lt;/p>
+&lt;p>Now you have the tink cli available to you.&lt;/p>
+&lt;p>You need to create and inject a couple of files&lt;/p>
+&lt;h4 id="hardwarejson">hardware.json&lt;/h4>
+&lt;pre>&lt;code>{ &amp;quot;id&amp;quot;:&amp;quot;0fba0bf8-3772-4b4a-ab9f-6ebe93b90a94&amp;quot;,
+&amp;quot;metadata&amp;quot;:{
+&amp;quot;facility&amp;quot;:{
+&amp;quot;facility_code&amp;quot;:&amp;quot;ewr1&amp;quot;,
+&amp;quot;plan_slug&amp;quot;:&amp;quot;c2.medium.x86&amp;quot;,
+&amp;quot;plan_version_slug&amp;quot;:&amp;quot;&amp;quot;
+},
+&amp;quot;instance&amp;quot;:{},
+&amp;quot;state&amp;quot;:&amp;quot;provisioning&amp;quot;
+},
+&amp;quot;network&amp;quot;:{
+&amp;quot;interfaces&amp;quot;:[
+{
+&amp;quot;dhcp&amp;quot;:{
+&amp;quot;arch&amp;quot;:&amp;quot;x86_64&amp;quot;,
+&amp;quot;ip&amp;quot;:{
+&amp;quot;address&amp;quot;:&amp;quot;10.0.6.3&amp;quot;,
+&amp;quot;gateway&amp;quot;:&amp;quot;10.0.0.1&amp;quot;,
+&amp;quot;netmask&amp;quot;:&amp;quot;255.255.0.0&amp;quot;
+},
+&amp;quot;mac&amp;quot;:&amp;quot;d0:50:99:d7:63:20&amp;quot;,
+&amp;quot;uefi&amp;quot;:true
+},
+&amp;quot;netboot&amp;quot;:{
+&amp;quot;allow_pxe&amp;quot;:true,
+&amp;quot;allow_workflow&amp;quot;:true
+}
+}
+]
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Add this hardware with: &lt;code>tink hardware push --file hardware.json&lt;/code>&lt;/p>
+&lt;h4 id="hello-worldtmpl">hello-world.tmpl&lt;/h4>
+&lt;pre>&lt;code>version: &amp;quot;0.1&amp;quot;
+name: hello_world_workflow
+global_timeout: 600
+tasks:
+- name: &amp;quot;hello world&amp;quot;
+worker: &amp;quot;{{.device_1}}&amp;quot;
+actions:
+- name: &amp;quot;hello_world&amp;quot;
+image: hello-world
+timeout: 60
+&lt;/code>&lt;/pre>&lt;p>Add the template with: &lt;code>tink template create -p hello-world.tmpl&lt;/code>&lt;/p>
+&lt;p>It&amp;rsquo;ll spit out an id.&lt;/p>
+&lt;p>Now we need to create a job to run this template. So we need to create a workflow: `tink workflow create -t {template_id} -r &amp;lsquo;{&amp;ldquo;device_1&amp;rdquo;:&amp;ldquo;d0:50:99:d7:63:20&amp;rdquo;}&amp;rsquo;&lt;/p>
+&lt;h3 id="try-it">Try it&lt;/h3>
+&lt;p>Now for the fun part. Connect to KVM console for your machine and then reboot it.&lt;/p>
+&lt;p>If all went well you should see it boot up&lt;/p></description></item><item><title>Decision Fatigue in 2020</title><link>https://geekgonecrazy.com/2020/08/28/decision-fatigue-in-2020/</link><pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/08/28/decision-fatigue-in-2020/</guid><description>
 &lt;p>This last couple of weeks I finally took some time off of work to try and reset. I’m not always the greatest at taking time off. I take an extra day or two combined with the weekend for a mini-vacation around the Holidays to see family and it’s often the minimum time needed. This year with everything going on really had to force my self to step back and try to reset with a staycation.&lt;/p>
 &lt;p>It’s all too easy now days to get overwhelmed and stressed out. A couple of key contributors now days:&lt;/p>
 &lt;ul>
@@ -782,57 +952,4 @@ alt/>&lt;/p>
 &lt;p>&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TSPUFhUNeLI/AAAAAAAAAZ0/NKjteIC7epM/s320/2011-01-04&amp;#43;12.06.06.jpg"
 alt/>&lt;/p>
 &lt;h4 id="updates">Updates&lt;/h4>
-&lt;p>09/30/2019: Switching image links to https&lt;/p></description></item><item><title>Dedicated Virtualbox Host</title><link>https://geekgonecrazy.com/2010/11/16/dedicated-virtualbox-host/</link><pubDate>Tue, 16 Nov 2010 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2010/11/16/dedicated-virtualbox-host/</guid><description>
-&lt;p>A while back I posted about &lt;a href="/2010/03/24/building-first-computer">Building first desktop from scratch&lt;/a>.  In it I mentioned installing Xenserver.  I have no doubt that it is amazing.  Just wasn&amp;rsquo;t exactly what I had in mind.&lt;/p>
-&lt;p>Long story cut extremely short, I went with virtualbox.  Reasons being: Its fast, so far has supported everything I throw at it, stable, cross platform, live migration, snapshots make backup easy, easy to use, and I like it. &lt;/p>
-&lt;p>Now for the exciting part.  How I set it up.&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;p>First you obviously need to pick your host operating system.  I picked Ubuntu Server.  This is just a personal preference.  I have had good experience with it.   Most of this should work on any linux distro.&lt;/p>
-&lt;p>I would recommend installing ssh on the server and going headless right off.&lt;/p>
-&lt;pre>&lt;code>sudo apt-get install ssh
-&lt;/code>&lt;/pre>&lt;p>Then ssh in from your desktop computer to do the rest.  Copy and paste works this way :D&lt;/p>
-&lt;p>&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TQoBIQzXW5I/AAAAAAAAAY0/g6Tdv1MrmvY/s320/Screenshot.png"
-alt/>&lt;/p>
-&lt;p>Not generally a good practice.  But lets start out by becoming root.&lt;/p>
-&lt;pre>&lt;code>sudo su
-&lt;/code>&lt;/pre>&lt;p>Next install virtualbox.&lt;/p>
-&lt;pre>&lt;code>echo 'deb http://download.virtualbox.org/virtualbox/debian maverick non-free' &amp;gt;&amp;gt; /etc/apt/sources.list
-wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | apt-key add -
-apt-get update 
-apt-get install virtualbox-3.2 dkms
-&lt;/code>&lt;/pre>&lt;p>Modify to suit your distro.  Virtualbox.org if you just want to download and install it that way.&lt;/p>
-&lt;p>Next we need to add the virtualbox drivers to our linux kernel.  Before you can do this you need to download your kernel headers.&lt;/p>
-&lt;pre>&lt;code>apt-get install linux-headers-server
-&lt;/code>&lt;/pre>&lt;p>Pretty straight forward.&lt;/p>
-&lt;p>Now we need to compile and load the driver into the kernel.&lt;/p>
-&lt;pre>&lt;code>/etc/init.d/vboxdrv setup
-&lt;/code>&lt;/pre>&lt;p>Now virtualbox is pretty much setup.  But if you&amp;rsquo;re like me and running this server headless..  Virtualbox is useless at this point.&lt;/p>
-&lt;p>So we need a web gui.  If you don&amp;rsquo;t have it already install apache2 or your preferred web server package.&lt;/p>
-&lt;pre>&lt;code>apt-get install apache2 php5 libapache2-mod-php5
-&lt;/code>&lt;/pre>&lt;p>Now to install the interface..&lt;/p>
-&lt;pre>&lt;code>cd /var/www/
-wget http://phpvirtualbox.googlecode.com/files/phpvirtualbox-0.5.zip
-unzip phpvirtualbox-0.5.zip
-mv phpvirtualbox-0.5 phpvirtualbox
-&lt;/code>&lt;/pre>&lt;p>Now for even more fun.  In my setup I wanted all virtual machines to be ran as a user called vm-user.  So we need to create that user.&lt;/p>
-&lt;pre>&lt;code>adduser --ingroup vboxusers vm-user
-&lt;/code>&lt;/pre>&lt;p>Followed by a somewhat secure password.  Remember this password you will need it.&lt;/p>
-&lt;p>Almost forgot.  Need to now add this user info to the phpvirtualbox config.&lt;/p>
-&lt;pre>&lt;code>nano /var/www/phpvirtualbox/config.php
-&lt;/code>&lt;/pre>&lt;p>Change the username &amp;amp; password variables to the user you just created.  Ctrl+X to exit. Make sure to hit enter to save.&lt;/p>
-&lt;p>Now to create virtualbox as a service that will start up as this new user upon every boot.&lt;/p>
-&lt;pre>&lt;code>nano /etc/init.d/vm-manage
-&lt;/code>&lt;/pre>&lt;p>In this file put the contents of this &lt;a href="https://pastebin.com/fgMC20b8"target="_blank">link&lt;/a>. Ctrl+X to exit.  Make sure it saves again.&lt;/p>
-&lt;p>Then make executable, and add to startup.&lt;/p>
-&lt;pre>&lt;code>chmod +x /etc/init.d/vm-manage
-update-rc.d vm-manage defaults
-&lt;/code>&lt;/pre>&lt;p>Now give up your admin rights!  Do it!  No but seriously your done being super admin.  Might be a good idea to give them up.&lt;/p>
-&lt;pre>&lt;code>exit
-&lt;/code>&lt;/pre>&lt;p>Should return you to normal &amp;lsquo;ol you!&lt;/p>
-&lt;p>Now you should be able to access the web interface from the machines ip. In this case it is: http://10.10.1.180/phpvirtualbox&lt;/p>
-&lt;p>&lt;img src="https://3.bp.blogspot.com/_BMKBVRf6mio/TQoBXvaX-GI/AAAAAAAAAY4/Dw8D9wLEEE4/s320/phpvirtualbox.jpg"
-alt/>&lt;/p>
-&lt;p>Now you can start setting up your virtual machines.  If you want to be able to route traffic to them like I am in my setup.  Make sure to set the network interface to bridged.&lt;/p>
-&lt;p>As long as you don&amp;rsquo;t have your router pointing at this ip you should be safe.  If you&amp;rsquo;re paranoid setup password protection.   I will do this in a later post.&lt;/p>
-&lt;h4 id="updates">Updates&lt;/h4>
-&lt;p>09/30/2019: Switch image links to https&lt;/p></description></item></channel></rss>
+&lt;p>09/30/2019: Switching image links to https&lt;/p></description></item></channel></rss>
