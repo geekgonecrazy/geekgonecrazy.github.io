@@ -68,11 +68,15 @@ Their examples use ubuntu 18.04 so I also chose ubuntu 18.04.  20.04 seems to al
 
 Once you have that we need to ssh in and start configuring tinkerbell.
 
+```
     git clone https://github.com/tinkerbell/sandbox.git
+```
 
 Now we need to hop in to the sandbox folder to start configuring:
 
+```
     cd sandbox
+```
 
 Now we need to generate the environment variables used for all of the rest of the configuration.
 
@@ -80,12 +84,15 @@ Identify the interface attached to the private interface.  You can use `ip addr`
 
 Then you need to run:
 
+```
     ./generate-envrc.sh ens18 > envrc
+```
 
 Then you need to edit the file output unless your network choice is 192.168.1.1/24 in which case you can leave alone
 
 If not you'll need to change the following lines to two ips you wish to use:
 
+```
     # Decide on a subnet for provisioning. Tinkerbell should "own" this
     # network space. Its subnet should be just large enough to be able
     # to provision your hardware.
@@ -100,26 +107,68 @@ If not you'll need to change the following lines to two ips you wish to use:
     
     # NGINX IP is used by provisioner to serve files required for iPXE boot
     export TINKERBELL_NGINX_IP=10.0.5.2
+```
 
 Now you need to load the environment variables into the current shell so we can continue executing.
 
+```
     source ./envrc
+```
 
 Now you need to run:
 
+```
     ./setup.sh
+```
 
 Once that finishes you will then be able to startup the components needed:
 
+```
     cd deploy
     docker-compose up -d
+```
 
 **Note:** If you happen to come back and want to interact with the docker-compose in the future make sure to first load the `envrc` file.  If in the deploy folder can just do: `source ../envrc`
 
-Wala the stack is up and running!
+Wala the stack is up and running! 
 
 ### Tweak boots service
 
-I hope to be able to replace this section.  But at the time of this writing.. the boots service uses a command in the ipxe script called "params" which can be found here: [https://github.com/tinkerbell/boots/blob/1e1d60ac32bac18d9b3f1c07611cd3b3613ecec7/ipxe/script.go#L34](https://github.com/tinkerbell/boots/blob/1e1d60ac32bac18d9b3f1c07611cd3b3613ecec7/ipxe/script.go#L34 "https://github.com/tinkerbell/boots/blob/1e1d60ac32bac18d9b3f1c07611cd3b3613ecec7/ipxe/script.go#L34")
+I hope to be able to replace this section.  But at the time of this writing.. the boots service uses a command in the ipxe script called "params" which can be found here: [https://github.com/tinkerbell/boots/blob/1e1d60ac32bac18d9b3f1c07611cd3b3613ecec7/ipxe/script.go#L34](https://github.com/tinkerbell/boots/blob/1e1d60ac32bac18d9b3f1c07611cd3b3613ecec7/ipxe/script.go#L34)
 
-In the version of ipxe my servers are running this command causes things to error out.
+In the version of ipxe my servers are running the param command causes things to error out. From what I can tell this just means that ipxe was built with out [PARAM_CMD](https://ipxe.org/buildcfg/param_cmd) build option.  But since these are OVH servers there isn't really anything I can do to ensure its added.
+
+You can track this issue here: https://github.com/tinkerbell/boots/issues/78
+
+To make it work on OVH first follow pre-reqs listed here: https://github.com/tinkerbell/boots/tree/1e1d60ac32bac18d9b3f1c07611cd3b3613ecec7#local-setup you'll need go installed from package manager as well.
+
+```
+cd ~
+git clone https://github.com/tinkerbell/boots.git
+curl https://clbin.com/12XhH -o /tmp/ovh-boots-ipxe.patch
+make
+docker build -t quay.io/tinkerbell/boots:local-ovh-params-fix .
+ ```
+ 
+ Then modify: docker-compose.yaml in sandbox/deploy/docker-compose.yaml and change tag to `local-ovh-params-fix`
+ 
+ Then in the sandbox/deploy folder run: `source ../envrc; docker-compose up -d`
+ 
+ ### Prepare OVH machine
+ 
+ In OVH by default they have an ipxe server listening on the public interface, and intercept all requests.  So we need to setup a script through them to bootstrap things so we can boot from our LAN.
+ 
+ You'll need API access from here: https://api.us.ovhcloud.com/console
+ 
+ Go down to: `POST /me/ipxeScript` and insert:
+ 
+ ```
+#!ipxe
+
+ifclose net0
+dhcp net1
+set iface net1
+
+chain --autofree http://10.0.5.1/auto.ipxe || exit
+```
+
