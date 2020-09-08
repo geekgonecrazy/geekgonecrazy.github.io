@@ -233,7 +233,7 @@ Add this hardware with: `tink hardware push --file hardware.json`
             image: hello-world
             timeout: 60
 
-Add the template with: `tink template create -p hello-world.tmpl`
+Add the template with: `tink template create -n hello-world -p hello-world.tmpl`
 
 It'll spit out an id.
 
