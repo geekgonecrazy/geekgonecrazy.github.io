@@ -21,15 +21,15 @@ Tinkerbell is made up of a few components:
 
 This provides the state. It is made up of:
 
-* templates
+#### templates
 
 Templates have a series of actions that are docker images to be ran.
 
-* hardware
+#### hardware
 
 This is a json representation of the machine, metadata, nics with their interface definition ip/mac address.
 
-* workflows
+#### workflows
 
 Workflows are essentially just a job.  A match up of hardware and template for it to run. The state is updated as the job runs.
 
