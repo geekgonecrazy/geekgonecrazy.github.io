@@ -76,8 +76,8 @@ If you want to verify take a peak in /boot/grub/grub.cfg and see if the kernel o
 
 If you would like to also be able to interact with bios and everything after POST you can also hop into bios via one of the KVM solutions and set this setting to enabled:
 
-![](/images/2020-09-:day/screen-shot-2020-09-07-at-14-28-07.png)
+![](/images/2020-09-07/screen-shot-2020-09-07-at-14-28-07.png)
 
-![](/images/2020-09-:day/screen-shot-2020-09-07-at-14-29-20.png)
+![](/images/2020-09-07/screen-shot-2020-09-07-at-14-29-20.png)
 
 I want to thank the author of this blog post for setting me on the right track: http://divideoverflow.com/2016/07/Configuring_IPMI_on_OVH_server/ 

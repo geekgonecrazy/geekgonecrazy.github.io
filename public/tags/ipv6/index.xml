@@ -1,52 +1,45 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ipv6 on Aaron&#39;s Ramblings</title>
-    <link>/tags/ipv6/</link>
+    <link>https://geekgonecrazy.com/tags/ipv6/</link>
     <description>Recent content in ipv6 on Aaron&#39;s Ramblings</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 10 May 2012 00:00:00 +0000</lastBuildDate>
-    
-        <atom:link href="/tags/ipv6/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 10 May 2012 00:00:00 +0000</lastBuildDate><atom:link href="https://geekgonecrazy.com/tags/ipv6/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Childrens Distro sneak peak</title>
-      <link>/2012/05/10/childrens-distro-sneak-peak/</link>
+      <link>https://geekgonecrazy.com/2012/05/10/childrens-distro-sneak-peak/</link>
       <pubDate>Thu, 10 May 2012 00:00:00 +0000</pubDate>
       
-      <guid>/2012/05/10/childrens-distro-sneak-peak/</guid>
+      <guid>https://geekgonecrazy.com/2012/05/10/childrens-distro-sneak-peak/</guid>
       <description>I was assigned the task of creating a children&amp;rsquo;s linux distro for use here at the library(where I work). Here&amp;rsquo;s a sneak peak:
 I&amp;rsquo;m basing it on Linux Mint for now. I think i&amp;rsquo;ll probably move it all over to straight Ubuntu before finalizing. The dock is called docky. Can be installed from apt-get.
 As you can see I&amp;rsquo;ve loaded it up with games. Once i&amp;rsquo;ve finished i&amp;rsquo;ll give a better break down of what i&amp;rsquo;ve done.</description>
-      
     </item>
     
     <item>
       <title>IPv6 keeping tunnel connected</title>
-      <link>/2011/02/28/ipv6-keeping-tunnel-connected/</link>
+      <link>https://geekgonecrazy.com/2011/02/28/ipv6-keeping-tunnel-connected/</link>
       <pubDate>Mon, 28 Feb 2011 00:00:00 +0000</pubDate>
       
-      <guid>/2011/02/28/ipv6-keeping-tunnel-connected/</guid>
+      <guid>https://geekgonecrazy.com/2011/02/28/ipv6-keeping-tunnel-connected/</guid>
       <description>Put together a script to keep your ip updated for the tunnel. This is for Hurricane Electric. Just plug in your info from your tunnel info page.
 If Ubuntu, copy this file to: /etc/init.d/updateip
 Then, sudo ln -s /etc/init.d/updateip /etc/rc2.d/S95updateip 
 Will now start up with the computer.
 Hope it helps someone.</description>
-      
     </item>
     
     <item>
       <title>IPv6 Connectivity in Ubuntu: Setting up</title>
-      <link>/2011/02/20/ipv6-connectivity-in-ubuntu-setting-up/</link>
+      <link>https://geekgonecrazy.com/2011/02/20/ipv6-connectivity-in-ubuntu-setting-up/</link>
       <pubDate>Sun, 20 Feb 2011 00:00:00 +0000</pubDate>
       
-      <guid>/2011/02/20/ipv6-connectivity-in-ubuntu-setting-up/</guid>
+      <guid>https://geekgonecrazy.com/2011/02/20/ipv6-connectivity-in-ubuntu-setting-up/</guid>
       <description>With ICANN recently announcing the end of IPv4 addresses to allocate, its time to take a look at the future.
 What is IPv6? According to Cisco IPv6 is:
  IP Version 6. Replacement for IPv4. A next generation IP protocol. IPv6 is backward compatible with and is designed to fix the shortcomings of IPv4, such as data security and maximum number of user addresses. IPv6 increases the address space from 32 to 128 bits, providing for an unlimited number of networks and systems.</description>
-      
     </item>
     
   </channel>

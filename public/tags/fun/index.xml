@@ -1,24 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>fun on Aaron&#39;s Ramblings</title>
-    <link>/tags/fun/</link>
+    <link>https://geekgonecrazy.com/tags/fun/</link>
     <description>Recent content in fun on Aaron&#39;s Ramblings</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 04 Jan 2011 00:00:00 +0000</lastBuildDate>
-    
-        <atom:link href="/tags/fun/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 04 Jan 2011 00:00:00 +0000</lastBuildDate><atom:link href="https://geekgonecrazy.com/tags/fun/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Destroying a hard drive</title>
-      <link>/2011/01/04/destroying-a-hard-drive/</link>
+      <link>https://geekgonecrazy.com/2011/01/04/destroying-a-hard-drive/</link>
       <pubDate>Tue, 04 Jan 2011 00:00:00 +0000</pubDate>
       
-      <guid>/2011/01/04/destroying-a-hard-drive/</guid>
+      <guid>https://geekgonecrazy.com/2011/01/04/destroying-a-hard-drive/</guid>
       <description>Not very often do I get to be destructive at work. So when I do get to I get slightly excited! Had an old pentium 3 desktop they planned to give away. But it their copy of xp on it as well as some somewhat sensitive information. At first we were going to put the linux distribution of our fancy on it(this changes from day to day). But it wouldn&amp;rsquo;t boot from the cd.</description>
-      
     </item>
     
   </channel>

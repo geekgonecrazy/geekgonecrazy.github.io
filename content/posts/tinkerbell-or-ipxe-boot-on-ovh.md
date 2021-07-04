@@ -153,7 +153,7 @@ Go down to: `POST /me/ipxeScript` and insert:
     
     chain --autofree http://10.0.5.1/auto.ipxe || exit
 
-![](/images/2020-09-:day/screen-shot-2020-09-07-at-22-18-28.png)
+![](/images/2020-09-07/screen-shot-2020-09-07-at-22-18-28.png)
 
 This script will:
 
@@ -172,7 +172,7 @@ This will tell you the name of the script so you can make sure it matches
 
 Now we need to set our server up to boot this script: `PUT /dedicated/server/{serviceName}`
 
-![](/images/2020-09-:day/screen-shot-2020-09-07-at-22-27-32.png)
+![](/images/2020-09-07/screen-shot-2020-09-07-at-22-27-32.png)
 
 ### Add info to tinkerbell
 

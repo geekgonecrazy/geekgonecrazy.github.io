@@ -1,61 +1,53 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>hardware on Aaron&#39;s Ramblings</title>
-    <link>/tags/hardware/</link>
+    <link>https://geekgonecrazy.com/tags/hardware/</link>
     <description>Recent content in hardware on Aaron&#39;s Ramblings</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 03 Feb 2011 00:00:00 +0000</lastBuildDate>
-    
-        <atom:link href="/tags/hardware/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 03 Feb 2011 00:00:00 +0000</lastBuildDate><atom:link href="https://geekgonecrazy.com/tags/hardware/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Project Opacity: Prototype to Production</title>
-      <link>/2011/02/03/project-opacity-prototype-to-production/</link>
+      <link>https://geekgonecrazy.com/2011/02/03/project-opacity-prototype-to-production/</link>
       <pubDate>Thu, 03 Feb 2011 00:00:00 +0000</pubDate>
       
-      <guid>/2011/02/03/project-opacity-prototype-to-production/</guid>
+      <guid>https://geekgonecrazy.com/2011/02/03/project-opacity-prototype-to-production/</guid>
       <description>About a month ago at work we started a project internally known as Project Opacity.
  Opacity by definition: is the quality of being opaque to a degree; the degree to which something reduces the passage of light
  Anyways, on to what Project Opacity actually is. Through out the library there are computer stations from which patrons can access the library catalog. Which we call Opac&amp;rsquo;s or kiosks. Come to think of it, this probably is where the name comes from.</description>
-      
     </item>
     
     <item>
       <title>Destroying a hard drive</title>
-      <link>/2011/01/04/destroying-a-hard-drive/</link>
+      <link>https://geekgonecrazy.com/2011/01/04/destroying-a-hard-drive/</link>
       <pubDate>Tue, 04 Jan 2011 00:00:00 +0000</pubDate>
       
-      <guid>/2011/01/04/destroying-a-hard-drive/</guid>
+      <guid>https://geekgonecrazy.com/2011/01/04/destroying-a-hard-drive/</guid>
       <description>Not very often do I get to be destructive at work. So when I do get to I get slightly excited! Had an old pentium 3 desktop they planned to give away. But it their copy of xp on it as well as some somewhat sensitive information. At first we were going to put the linux distribution of our fancy on it(this changes from day to day). But it wouldn&amp;rsquo;t boot from the cd.</description>
-      
     </item>
     
     <item>
       <title>Monitor Repair</title>
-      <link>/2010/10/12/monitor-repair/</link>
+      <link>https://geekgonecrazy.com/2010/10/12/monitor-repair/</link>
       <pubDate>Tue, 12 Oct 2010 00:00:00 +0000</pubDate>
       
-      <guid>/2010/10/12/monitor-repair/</guid>
-      <description>A few days ago I found a 22&amp;rdquo; Lcd screen that was being tossed out because it didn&amp;rsquo;t work. The thought of the beauty being thrown away didn&amp;rsquo;t set well with me. So I picked it up.
+      <guid>https://geekgonecrazy.com/2010/10/12/monitor-repair/</guid>
+      <description>A few days ago I found a 22&amp;quot; Lcd screen that was being tossed out because it didn&amp;rsquo;t work. The thought of the beauty being thrown away didn&amp;rsquo;t set well with me. So I picked it up.
 Before messing with it.
 When turning it on, it would show its gateway logo and then go blank. Which was a good sign. But none of the inputs worked.
 So I took it apart.</description>
-      
     </item>
     
     <item>
       <title>Building first desktop from scratch</title>
-      <link>/2010/03/24/building-first-desktop-from-scratch/</link>
+      <link>https://geekgonecrazy.com/2010/03/24/building-first-desktop-from-scratch/</link>
       <pubDate>Wed, 24 Mar 2010 00:00:00 +0000</pubDate>
       
-      <guid>/2010/03/24/building-first-desktop-from-scratch/</guid>
+      <guid>https://geekgonecrazy.com/2010/03/24/building-first-desktop-from-scratch/</guid>
       <description>Most of my childhood I have built computers. But it was always from parts laying around. A motherboard/CPU from here, case from another one etc.
 I finally saved up and planned out my own build from scratch. I&amp;rsquo;m posting to my blog because its a geeky milestone that every little geek must go through. A rite of passage if you will.
 I ran into a couple of problems along the way.</description>
-      
     </item>
     
   </channel>
