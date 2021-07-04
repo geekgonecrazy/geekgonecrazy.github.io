@@ -1,4 +1,171 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 07 Sep 2020 00:00:00 +0000</lastBuildDate><item><title>OVH Serial over LAN (SOL)</title><link>https://geekgonecrazy.com/2020/09/07/ovh-serial-over-lan-sol/</link><pubDate>Mon, 07 Sep 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/09/07/ovh-serial-over-lan-sol/</guid><description>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 04 Jul 2021 00:03:00 +0000</lastBuildDate><item><title>Rover Project: Update 3</title><link>https://geekgonecrazy.com/2021/07/04/rover-project-update-3/</link><pubDate>Sun, 04 Jul 2021 00:03:00 +0000</pubDate><guid>https://geekgonecrazy.com/2021/07/04/rover-project-update-3/</guid><description>
+&lt;p>Finally a more eventful update!&lt;/p>
+&lt;p>Last time I worked with building parts in CAD I was using solidworks or AutoCAD. I have no desire to buy either one of those right now plus I need something that will run on linux. So started investing some time into learning my way around FreeCAD.&lt;/p>
+&lt;p>Creating first iteration of the wheel
+&lt;img src="/images/2021-07-04/wheel-1-freecad.png"
+alt/>&lt;/p>
+&lt;p>50mm radius for a 10cm/100mm diameter wheel&lt;/p>
+&lt;p>3mm thick&lt;/p>
+&lt;p>Based on the specs of the motor:&lt;/p>
+&lt;pre>&lt;code>Features:
+Rated voltage: DC 3V
+Rated speed: 15000 RPM
+Motor size: 38 x 20 x 15 mm/1.5&amp;quot; x 0.8&amp;quot; x 0.6&amp;quot;
+Shaft diameter: 2 mm/0.08&amp;quot;
+Shaft length: 10 mm/0.4&amp;quot;
+Material: metal
+&lt;/code>&lt;/pre>&lt;p>The hole is 1mm radius for a 2mm diameter hole&lt;/p>
+&lt;p>Print time was going to take 2 hours and 9 minutes. So time to reduce some material because we don&amp;rsquo;t want to wait that long&lt;/p>
+&lt;p>&lt;img src="/images/2021-07-04/wheel-2-freecad.png"
+alt/>&lt;/p>
+&lt;p>This takes it down to 1 hour 21 minutes&lt;/p>
+&lt;p>After lots of wrestling with bed leveling and things not sticking..
+&lt;img src="/images/2021-07-04/wheel-2-printing.jpg"
+alt/>&lt;/p>
+&lt;p>While this printed we started looking at how we want the body to look. Designing a caster for the 3 wheeled robot we realized was a little harder then we really wanted. Plus we were inspired by a rover&amp;hellip; so we are leaning towards a 4 wheel design with a box to house the brain in&amp;hellip; and surface area on top for mounting things in the future&lt;/p>
+&lt;p>&lt;img src="https://i.imgur.com/rz8tl0g.png"
+alt/>
+&lt;a href="https://www.google.com/url?sa=i&amp;amp;url=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F3319875%2Fisolated_robot_robotic_rover_space_icon&amp;amp;psig=AOvVaw2DQonss07C0LenXgaGbjZn&amp;amp;ust=1619650814026000&amp;amp;source=images&amp;amp;cd=vfe&amp;amp;ved=0CAIQjRxqFwoTCMjnvs3Dn_ACFQAAAAAdAAAAABAN"target="_blank">source&lt;/a>&lt;/p>
+&lt;p>The wheel finished printing!&lt;/p>
+&lt;p>&lt;img src="/images/2021-07-04/wheel-2-finished.jpg"
+alt/>&lt;/p>
+&lt;p>So&amp;hellip; we had to try it!&lt;/p>
+&lt;p>&lt;img src="/images/2021-07-04/wheel-spinning.gif"
+alt/>&lt;/p>
+&lt;p>Woot!&lt;/p>
+&lt;p>Queue the other wheels!&lt;/p>
+&lt;p>While we waited did a bit of soldering and put antennas on the 433mhz chips&lt;/p>
+&lt;p>&lt;img src="/images/2021-07-04/soldering-433-antenna.jpg"
+alt/>
+&lt;img src="/images/2021-07-04/433-soldered.jpg"
+alt/>&lt;/p>
+&lt;p>Then set about figuring out basic programs and getting everything hooked up to breadboards.&lt;/p>
+&lt;p>Got the L239D H-Bridge working doing speed control.&lt;/p>
+&lt;p>Then after a long period of debugging&amp;hellip; finally got the 433mhz transmitter and receiver talking. Ended up getting it working with the virtualwire library.&lt;/p>
+&lt;p>&lt;img src="/images/2021-07-04/workbench-with-basic-electronics-working.jpg"
+alt/>&lt;/p>
+&lt;p>Next step get the chassis designed and printed!&lt;/p></description></item><item><title>Rover Project: Update 2</title><link>https://geekgonecrazy.com/2021/07/04/rover-project-update-2/</link><pubDate>Sun, 04 Jul 2021 00:02:00 +0000</pubDate><guid>https://geekgonecrazy.com/2021/07/04/rover-project-update-2/</guid><description>
+&lt;p>So the robot parts sat in my closet for a few months. I kind of forgot to order the parts.&lt;/p>
+&lt;p>Recently realized I really need to disconnect more fully from work in my off hours. When your hobby includes coding and in same language as you write for work.. Its a bit harder to keep your brain from making that jump to thinking about work.&lt;/p>
+&lt;p>So i&amp;rsquo;ve been on the look out for new hobbies.&lt;/p>
+&lt;p>I don&amp;rsquo;t recall where, but I saw someone making something with a 3D printer. Made me wonder how much they were now days. After some research I realized some where actually extremely affordable. After even more research.. I was able to determine that at least a couple of those affordable printers actually were decent.&lt;/p>
+&lt;p>The possibilities to prototype things seem endless. Not to mention.. I actually spent the first 2 years of my post highschool schooling at a VoTech school learning CAD. So this is perfect! Those 12+ year old skill can actually be put to use. I say that. But really i&amp;rsquo;ve identified lots of areas that those skills actually have helped me out in how I approach problems. But still.. To actually to use CAD.&lt;/p>
+&lt;p>So I bought a 3d printer.&lt;/p>
+&lt;p>I&amp;rsquo;ve already printed kids items and been praised as it being a great decision by my kids. Even my wife had me print several things for her baking projects.&lt;/p>
+&lt;p>The purchase of the 3D printer has me inspired to push forward with the robot project. Being able to draw up in CAD and print the wheels and chassis will help greatly in moving this foward.&lt;/p>
+&lt;p>Time to pick up where we left off.&lt;/p>
+&lt;p>When it got shelved we had realized we had the wrong motors and controllers. So first we need to correct that.&lt;/p>
+&lt;p>We needed a controller. From reading around looks like this is called an H-Bridge.&lt;/p>
+&lt;p>I found a couple of examples using the &lt;code>L293D&lt;/code> seemed like a low cost chip that didn&amp;rsquo;t need a lot of additional components to work with. Also found this great write up about the chip set:&lt;/p>
+&lt;p>&lt;a href="https://maker.pro/custom/projects/all-you-need-to-know-about-l293d">https://maker.pro/custom/projects/all-you-need-to-know-about-l293d&lt;/a>&lt;/p>
+&lt;p>So picked up a few of those from Amazon.&lt;/p>
+&lt;p>Now we&amp;rsquo;ve got to find some DC motors. This might be a point i&amp;rsquo;ll have to iterate on. But as long as I can power them and they will move I think we will be good. Ordered a pack of DC Motor 1.5V-3V 15000RPM.&lt;/p>
+&lt;p>&lt;a href="https://www.amazon.com/gp/product/B07JYM8H18/ref=ppx_yo_dt_b_asin_title_o01_s01?ie=UTF8&amp;amp;psc=1">https://www.amazon.com/gp/product/B07JYM8H18/ref=ppx_yo_dt_b_asin_title_o01_s01?ie=UTF8&amp;amp;psc=1&lt;/a>&lt;/p>
+&lt;p>I&amp;rsquo;m not 100% positive on these.. But looks like operates between 1.5-6V. Also claims 3 hours running on 2 x 1.5V AA batteries. So with 4 and other components maybe we can get at least 30 minutes?&lt;/p>
+&lt;p>A couple of articles I found on working with this H-Bridge:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://dumblebots.com/2019/09/29/controlling-motors-with-arduino-and-h-bridges/">https://dumblebots.com/2019/09/29/controlling-motors-with-arduino-and-h-bridges/&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://bc-robotics.com/tutorials/controlling-dc-motor-arduino/">https://bc-robotics.com/tutorials/controlling-dc-motor-arduino/&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://maker.pro/custom/projects/all-you-need-to-know-about-l293d">https://maker.pro/custom/projects/all-you-need-to-know-about-l293d&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>Now to wait on these parts to arrive. Plus some tools needed to build out my electronics work area. Has been pretty barebones since Harvey. Time to fix that :)&lt;/p></description></item><item><title>Rover Project: Update 1</title><link>https://geekgonecrazy.com/2021/07/04/rover-project-update-1/</link><pubDate>Sun, 04 Jul 2021 00:01:00 +0000</pubDate><guid>https://geekgonecrazy.com/2021/07/04/rover-project-update-1/</guid><description>
+&lt;p>Parts came in!&lt;/p>
+&lt;p>&lt;img src="/images/2021-07-04/parts-1.jpg"
+alt/>
+&lt;img src="/images/2021-07-04/parts-2.jpg"
+alt/>&lt;/p>
+&lt;p>Finally got time to work on it again. We wired everything up.&lt;/p>
+&lt;p>&lt;img src="/images/2021-07-04/parts-hookup-1.jpg"
+alt/>&lt;/p>
+&lt;p>We gathered up some cardboard. We found something to trace and cut out 4 wheels. (you&amp;rsquo;ll notice this is defintely a deviation from the original sketch. But this was insisted on once the additional motors were spotted).&lt;/p>
+&lt;p>&lt;img src="/images/2021-07-04/parts-hookup-2.jpg"
+alt/>&lt;/p>
+&lt;p>We also put together the transmitter on another breadboard&lt;/p>
+&lt;p>&lt;img src="/images/2021-07-04/parts-hookup-3.jpg"
+alt/>&lt;/p>
+&lt;p>Now if you do electronics seriously at all you&amp;rsquo;ll probably notice straight away two different issues. I was tempted to omit it and just have the build log with final parts.. But this is part of the journey. I think it was important for kids to go through as well. Not everything works first time around. In fact probably doesn&amp;rsquo;t most of the time.&lt;/p>
+&lt;p>Issue 1: Those are stepper motors and drivers. 🙈 Yeah.. I don&amp;rsquo;t even know how I did that. I did place the order late.. but I even have some articles stashed away specifically for working with those drivers. So its not like I didn&amp;rsquo;t research the parts. We&amp;rsquo;ll chock it up to lesson learned though.&lt;/p>
+&lt;p>Issue 2: Those 433Mhz Transmitter / Receivers don&amp;rsquo;t have even their basic included antenna&amp;rsquo;s soldered on. Reading later.. with out an antenna range is like a few centemeters.&lt;/p>
+&lt;p>Needless to say we discovered both of these issues after several hours. I pretty quickly wrote up the arduino code for both. I wrote the code that would send a simple signal that would include a signal for both the left and the right side tank style.&lt;/p>
+&lt;p>My Plan was:&lt;/p>
+&lt;ul>
+&lt;li>Forward: 01 FF 01FF&lt;/li>
+&lt;li>Backward: 02 FF 02 FF&lt;/li>
+&lt;li>Forward Left: 01 FF 01 99&lt;/li>
+&lt;li>Forward Right: 01 99 01 FF&lt;/li>
+&lt;/ul>
+&lt;p>Pattern being: {Left Motor Polarity} {Left Motor Speed} {Right Motor Polarity} {Right Motor Speed}&lt;/p>
+&lt;p>With the speed being 0-255 represented in hex. No CRC or anything at first.&lt;/p>
+&lt;p>This didn&amp;rsquo;t work.&lt;/p>
+&lt;p>So figured maybe I was being too clever and switch to transmitting strings and probably 10x variations.&lt;/p>
+&lt;p>So after still not even a hum from the motors.. I figured it must be just something wrong with the 433Mhz pair. I wanted to at least validate the motors worked. So I found an example program for those motors show them working. It was here and getting this to work&amp;hellip; I realized these aren&amp;rsquo;t really the right motors for the wheels.&lt;/p>
+&lt;p>So we shelved it until I could go and order the right motors.&lt;/p>
+&lt;p>It wasn&amp;rsquo;t until later I actually realized I some how completely spazzed on putting antenna&amp;rsquo;s on and their range was only centimeters with out one.&lt;/p></description></item><item><title>Rover Project</title><link>https://geekgonecrazy.com/2021/07/04/rover-project/</link><pubDate>Sun, 04 Jul 2021 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2021/07/04/rover-project/</guid><description>
+&lt;p>My family is very STEM oriented. I grew up learning hands on at home. Taking things apart. Questioning how things worked and eventually learning how to actually fix those things I took apart. As much as possible we&amp;rsquo;re trying to encourage this for our kids.&lt;/p>
+&lt;p>They are pretty fortunate as they have good examples of this on both sides of the family. So they come by their curiousity about the world around them very naturally. Now days its not surprising to get asked questions about things even we don&amp;rsquo;t know or remember the answer to.&lt;/p>
+&lt;p>Not going to pretend some times the constant questions doesn&amp;rsquo;t get a little annoying. But just have to stop and appreciate the curiousity and help them learn more about the things they are actually curious about.&lt;/p>
+&lt;p>Anyways we often watch Rocket Launches together. Now days thanks to the likes of SpaceX, Rocket Labs and even the old school ULA and others.. we frequently get to watch something launch.&lt;/p>
+&lt;p>About a year ago on 07/30/2020 we watched the Mars Perseverance mission take off. This kicked off a flurry of questions.&lt;/p>
+&lt;p>What is it launching? What is the rover? What does it do? How will it land? How does it work?&lt;/p>
+&lt;p>Then after spending some time showing them and answering. I was left with one statement:&lt;/p>
+&lt;blockquote>
+&lt;p>I wish kids like us could make robots&lt;/p>
+&lt;/blockquote>
+&lt;p>I like making things.. and I used to help a highschool robotics team build their robot for competition every year. I really missed it. So really this was a win-win-win:&lt;/p>
+&lt;ul>
+&lt;li>I get to teach my kids how to approach engineering problems as best I know how.&lt;/li>
+&lt;li>They are really excited&lt;/li>
+&lt;li>I get to work on building something too&lt;/li>
+&lt;/ul>
+&lt;p>So off began the process!&lt;/p>
+&lt;h2 id="brainstorming">Brainstorming&lt;/h2>
+&lt;p>So we started right off with brainstorming. During brainstorming we came up with a quick sketch of some that it could look like:&lt;/p>
+&lt;p>&lt;img src="/images/2021-07-04/rover-sketch-1.png"
+alt/>&lt;/p>
+&lt;p>A couple of things to note:&lt;/p>
+&lt;ol>
+&lt;li>There is an arm&lt;/li>
+&lt;li>In the left corner there is a tablet controlling&lt;/li>
+&lt;/ol>
+&lt;p>We&amp;rsquo;re considering these stretch goals. We agreed that the first priority was getting a basic robot built.&lt;/p>
+&lt;p>But through brainstorming we identified the main pieces that will be needed:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>2 motors to drive the wheels&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>2 wheels&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>A base to act as chassis and to put the electronics on&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Transmitter / Receiver&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Bread boards - I didn’t have any more.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Batteries&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>A brain - some sort of microcontroller&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>We also identified that we would need some buttons and a way to control. So we needed some buttons.&lt;/p>
+&lt;p>We weren’t too certain on the construction of it. We figured maybe CD’s would make ok wheels. We’ve seen robots with CD wheels. Also we have plenty of cardboard. Might work as a prototype.&lt;/p>
+&lt;p>I tried to involve the kids as much as possible on the research behind the parts to choose. But this part quickly bored them. So I went off and spent a few hours that evening locating all of the parts.&lt;/p>
+&lt;p>Landed on using the Ardunio Nano. This is mostly because info for arduino is a lot easier to come by. I don’t want to waste too much time on the code portion. I want to be able to explain and the kids be able to follow along with the code and how it works.&lt;/p>
+&lt;p>For the batteries I’m a noob on batteries. I didn’t want to go off and order some rechargable battery and it be wrong for our circuit. From what I could tell for the Arduino nano everything seemed to be 1.5V compatible so just picked up battery pack to put AA batteries in.&lt;/p>
+&lt;p>&lt;strong>Motors… I’m writing this in retrospect… so I don’t really know why I ended up purchasing stepper motors and the controllers. Its of course not a waste… But it did delay the project.&lt;/strong>&lt;/p>
+&lt;p>Parts Ordered:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://www.amazon.com/gp/product/B087B5NWY4/ref=ppx_yo_dt_b_asin_title_o03_s03?ie=UTF8&amp;amp;psc=1"target="_blank">Motors&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.amazon.com/gp/product/B07G99NNXL/ref=ppx_yo_dt_b_asin_title_o03_s01?ie=UTF8&amp;amp;psc=1"target="_blank">Arduino Nano&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.amazon.com/gp/product/B086ZL8W1W/ref=ppx_yo_dt_b_asin_title_o03_s00?ie=UTF8&amp;amp;psc=1"target="_blank">433Mhz Transmitter / Receivers&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.amazon.com/gp/product/B07C6T6YCZ/ref=ppx_yo_dt_b_asin_title_o03_s00?ie=UTF8&amp;amp;psc=1"target="_blank">AA Battery box&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>Now we waited on the parts to arrive.&lt;/p></description></item><item><title>OVH Serial over LAN (SOL)</title><link>https://geekgonecrazy.com/2020/09/07/ovh-serial-over-lan-sol/</link><pubDate>Mon, 07 Sep 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/09/07/ovh-serial-over-lan-sol/</guid><description>
 &lt;p>Its been a while since I&amp;rsquo;ve worked with physical servers and typically when something happened I could pretty quickly get physical access to the box if things went pear shaped.&lt;/p>
 &lt;p>But when you buy or lease servers from a provider like OVH. Those servers might be sitting half way around the world. So if something goes wrong you need to some how virtually be in front of the keyboard.&lt;/p>
 &lt;p>OVH has a few different ways to access your servers console to interact with the machine directly.&lt;/p>
@@ -47,9 +214,9 @@ GRUB_SERIAL_COMMAND=&amp;quot;serial --unit=1 --speed=115200 --word=8 --parity=n
 &lt;/code>&lt;/pre>
 &lt;p>If you want to verify take a peak in /boot/grub/grub.cfg and see if the kernel options are there.&lt;/p>
 &lt;p>If you would like to also be able to interact with bios and everything after POST you can also hop into bios via one of the KVM solutions and set this setting to enabled:&lt;/p>
-&lt;p>&lt;img src="/images/2020-09-:day/screen-shot-2020-09-07-at-14-28-07.png"
+&lt;p>&lt;img src="/images/2020-09-07/screen-shot-2020-09-07-at-14-28-07.png"
 alt/>&lt;/p>
-&lt;p>&lt;img src="/images/2020-09-:day/screen-shot-2020-09-07-at-14-29-20.png"
+&lt;p>&lt;img src="/images/2020-09-07/screen-shot-2020-09-07-at-14-29-20.png"
 alt/>&lt;/p>
 &lt;p>I want to thank the author of this blog post for setting me on the right track: &lt;a href="http://divideoverflow.com/2016/07/Configuring_IPMI_on_OVH_server/">http://divideoverflow.com/2016/07/Configuring_IPMI_on_OVH_server/&lt;/a>&lt;/p></description></item><item><title>Tinkerbell or iPXE boot on OVH</title><link>https://geekgonecrazy.com/2020/09/07/tinkerbell-or-ipxe-boot-on-ovh/</link><pubDate>Mon, 07 Sep 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/09/07/tinkerbell-or-ipxe-boot-on-ovh/</guid><description>
 &lt;p>Recently have had to work with a number of physical servers that need to be treated more cattle like than a bunch of pets. I need to be able to quickly and easily provision servers to fit a specific role with out having to go through a complicated setup process.&lt;/p>
@@ -146,7 +313,7 @@ dhcp net1
 set iface net1
 chain --autofree http://10.0.5.1/auto.ipxe || exit
 &lt;/code>&lt;/pre>
-&lt;p>&lt;img src="/images/2020-09-:day/screen-shot-2020-09-07-at-22-18-28.png"
+&lt;p>&lt;img src="/images/2020-09-07/screen-shot-2020-09-07-at-22-18-28.png"
 alt/>&lt;/p>
 &lt;p>This script will:&lt;/p>
 &lt;ul>
@@ -160,7 +327,7 @@ alt/>&lt;/p>
 &lt;p>You&amp;rsquo;ll get an array back. If you aren&amp;rsquo;t sure which one is which you can call: &lt;code>GET&lt;/code>&lt;a href="https://api.us.ovhcloud.com/console/#/dedicated/server/%7bserviceName%7d/boot/%7bbootId%7d#GET"target="_blank">&lt;code>/dedicated/server/{serviceName}/boot/{bootId}&lt;/code>&lt;/a>&lt;/p>
 &lt;p>This will tell you the name of the script so you can make sure it matches&lt;/p>
 &lt;p>Now we need to set our server up to boot this script: &lt;code>PUT /dedicated/server/{serviceName}&lt;/code>&lt;/p>
-&lt;p>&lt;img src="/images/2020-09-:day/screen-shot-2020-09-07-at-22-27-32.png"
+&lt;p>&lt;img src="/images/2020-09-07/screen-shot-2020-09-07-at-22-27-32.png"
 alt/>&lt;/p>
 &lt;h3 id="add-info-to-tinkerbell">Add info to tinkerbell&lt;/h3>
 &lt;p>Go back to your sandbox/deploy folder and run: &lt;code>source ../envrc; docker-compose exec tink-cli sh&lt;/code>&lt;/p>
@@ -756,198 +923,4 @@ alt/>&lt;/p>
 &lt;p>As you can see I&amp;rsquo;ve loaded it up with games.  Once i&amp;rsquo;ve finished i&amp;rsquo;ll give a better break down of what i&amp;rsquo;ve done.&lt;/p>
 &lt;p>[edit 04/11/2014] It actually turned out looking nothing like this at all. We called the project rachel. You can find out more about it on its &lt;a href="https://github.com/geekgonecrazy/rachel"target="_blank">github page&lt;/a>.&lt;/p>
 &lt;h4 id="updates">Updates&lt;/h4>
-&lt;p>09/30/2019: Changed image link to https&lt;/p></description></item><item><title>IPv6 keeping tunnel connected</title><link>https://geekgonecrazy.com/2011/02/28/ipv6-keeping-tunnel-connected/</link><pubDate>Mon, 28 Feb 2011 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2011/02/28/ipv6-keeping-tunnel-connected/</guid><description>
-&lt;p>Put together a script to keep your ip updated for the tunnel.  This is for Hurricane Electric.  Just plug in your info from your tunnel info page.&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;!-- raw HTML omitted -->
-&lt;p>If Ubuntu, copy this file to:  /etc/init.d/updateip&lt;br>
-Then, &lt;code>sudo ln -s /etc/init.d/updateip /etc/rc2.d/S95updateip &lt;/code>&lt;/p>
-&lt;p>Will now start up with the computer.&lt;br>
-Hope it helps someone.&lt;/p></description></item><item><title>IPv6 Connectivity in Ubuntu: Setting up</title><link>https://geekgonecrazy.com/2011/02/20/ipv6-connectivity-in-ubuntu-setting-up/</link><pubDate>Sun, 20 Feb 2011 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2011/02/20/ipv6-connectivity-in-ubuntu-setting-up/</guid><description>
-&lt;p>With ICANN recently announcing &lt;a href="http://www.bbc.co.uk/news/technology-12367484"target="_blank">the end of IPv4 addresses to allocate&lt;/a>, its time to take a look at the future.&lt;/p>
-&lt;p>What is IPv6? According to &lt;a href="http://www.cisco.com/en/US/docs/ios_xr_sw/iosxr_r3.0/interfaces/configuration/guide/hc3gloss.html"target="_blank">Cisco&lt;/a> IPv6 is:&lt;/p>
-&lt;blockquote>
-&lt;p>IP Version 6. Replacement for IPv4. A next generation IP protocol. IPv6 is
-backward compatible with and is designed to fix the shortcomings of IPv4, such
-as data security and maximum number of user addresses. IPv6 increases the address
-space from 32 to 128 bits, providing for an unlimited number of networks and
-systems. It also supports quality of service (QoS) parameters for real-time
-audio and video.&lt;/p>
-&lt;/blockquote>
-&lt;p>A typical IPv4 address looked something like this: 74.125.225.17 (One of google&amp;rsquo;s)&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;p>An IPv6 Address: &lt;/p>
-&lt;pre>&lt;code>2a00:1450:8006:0000:0000:0000:0000:0068
-&lt;/code>&lt;/pre>&lt;p>This can also be wrote as:&lt;/p>
-&lt;pre>&lt;code>2a00:1450:8006::68
-&lt;/code>&lt;/pre>&lt;p>The multiple sets of zeros can be represented with an extra colon.&lt;/p>
-&lt;p>Yeah&amp;hellip; Not pretty, not pretty at all. Do I need to switch to IPv6? No you don&amp;rsquo;t. I don&amp;rsquo;t think we&amp;rsquo;ll ever see a complete switch. Your current setup is fine. This is for those of you that actually like learning technology. Learn hands on.&lt;/p>
-&lt;p>Lets get started! First you will need to choose a tunnel provider. Personally I chose &lt;a href="http://tunnelbroker.net/"target="_blank">Hurricane Electric&amp;rsquo;s Tunnel Broker&lt;/a>. There is also &lt;a href="http://sixxs.com/"target="_blank">Sixxs&lt;/a>, &lt;a href="http://gogo6.net/"target="_blank">Gogo6&lt;/a>, &lt;a href="http://technet.microsoft.com/en-us/library/bb457011.aspx"target="_blank">Teredo&lt;/a>/&lt;a href="http://www.remlab.net/miredo/"target="_blank">Miredo&lt;/a> etc.. This guide, only applies to Hurricane Electric&amp;rsquo;s as the rest use a different approach. If you only want to check IPv6 enabled websites out. Go with one of the others. Teredo/Miredo is pretty much point and click.&lt;/p>
-&lt;p>Once you sign up for an account and sign in, click &lt;a href="http://tunnelbroker.net/ipv6_normal.php"target="_blank">Create Regular Tunnel&lt;/a>.&lt;/p>
-&lt;p>&lt;a href="https://lh5.googleusercontent.com/-HCsf0YcS7NU/TYWNH1NAG3I/AAAAAAAAAgs/2yWlVZfhELc/s1600/Screen&amp;#43;shot&amp;#43;2011-03-20&amp;#43;at&amp;#43;12.03.15&amp;#43;AM.png"target="_blank">&lt;img src="https://lh5.googleusercontent.com/-HCsf0YcS7NU/TYWNH1NAG3I/AAAAAAAAAgs/2yWlVZfhELc/s320/Screen&amp;#43;shot&amp;#43;2011-03-20&amp;#43;at&amp;#43;12.03.15&amp;#43;AM.png"
-alt/>&lt;/a>&lt;/p>
-&lt;p>You should see something similar.  &lt;/p>
-&lt;p>Where it says the IP you are view from.  Copy and paste that into the IPv4 endpoint Box.  Select a server nearest you.  For me Chicago is the closest. Click Submit.&lt;/p>
-&lt;p>If it gives you an error about not being able to reach the ipv4 address.  
-You will need to login to your router and allow ICMP packets through.  If you need help finding this let me know.&lt;/p>
-&lt;p>Once complete you will receive a list of Information for your tunnel. Write this all down.  Important for the next step.  You should have the information
-similar to this:&lt;/p>
-&lt;pre>&lt;code>#Tunnel Connection
-Server End IPv4:  209.51.191.5
-IPv6: 2001:470:d51e:f35::1/64
-Client End IPv4: (Your IP)
-IPv6: 2001:470:d51e:f35::2/64
-#DNS
-IPv4: 74.82.42.42
-IPv6: 2001:470:20::2
-#Routed
-2001:470:d51f:f35::1/64
-&lt;/code>&lt;/pre>&lt;p>Note: This is not my information.  Made the addresses up.  But yours should look very similar.&lt;/p>
-&lt;p>It also has the option to allocate a /48.  If you want to setup a firewalled network with clients and servers on different subnets like I am.  Go ahead and allocate one.&lt;/p>
-&lt;p>Now open up a terminal issue:  &lt;/p>
-&lt;pre>&lt;code>sudo nano /etc/network/interfaces
-&lt;/code>&lt;/pre>&lt;!-- raw HTML omitted -->
-&lt;p>Should then look something like that.  Run:&lt;/p>
-&lt;pre>&lt;code>sudo /etc/init.d/networking restart
-&lt;/code>&lt;/pre>&lt;p>You should now have access.  Try browsing &lt;a href="http://ipv6.google.com/"target="_blank">http://ipv6.google.com&lt;/a> or &lt;a href="http://www.v6.facebook.com/"target="_blank">http://www.v6.facebook.com&lt;/a>&lt;/p>
-&lt;p>Its important to note, that the bridge Ip and your actual ip are only slightly different.  So make sure to keep them straight.  As the bridge does no more than connect you.  The other is your routed subnet of /64. A /64 can have &lt;/p>
-&lt;p>&lt;em>18,446,744,073,709,551,616&lt;/em> Hosts or devices.  Insane right?  Compared to IPv4, where your ISP will charge you $10+ for 1 static.&lt;/p>
-&lt;p>I&amp;rsquo;ve enabled IPv6 access to my whole network, and will be continuing in several following posts showing the steps i&amp;rsquo;ve taken.&lt;/p>
-&lt;p>If you have questions/problems, let me know i&amp;rsquo;d be happy to help in any way I can.&lt;/p>
-&lt;h4 id="updates">Updates&lt;/h4>
-&lt;p>09/30/2019: Removed link to my subdomain that has since been shutdown&lt;/p></description></item><item><title>Project Opacity: Prototype to Production</title><link>https://geekgonecrazy.com/2011/02/03/project-opacity-prototype-to-production/</link><pubDate>Thu, 03 Feb 2011 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2011/02/03/project-opacity-prototype-to-production/</guid><description>
-&lt;p>About a month ago at work we started a project internally known as Project Opacity.&lt;/p>
-&lt;blockquote>
-&lt;p>Opacity by definition: is the quality of being opaque to a degree; the degree to which something reduces the passage of light&lt;/p>
-&lt;/blockquote>
-&lt;!-- raw HTML omitted -->
-&lt;p>Anyways, on to what Project Opacity actually is.  Through out the library there are computer stations from which patrons can access the library catalog.  Which we call Opac&amp;rsquo;s or kiosks.  Come to think of it, this probably is where the name comes from.&lt;/p>
-&lt;p>An Old Opac Station
-&lt;a href="https://4.bp.blogspot.com/_BMKBVRf6mio/TUtyudbUbaI/AAAAAAAAAbA/9uBkOxQ8fQU/s1600/2011-01-04&amp;#43;10.45.14.jpg"target="_blank">&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TUtyudbUbaI/AAAAAAAAAbA/9uBkOxQ8fQU/s320/2011-01-04&amp;#43;10.45.14.jpg"
-alt="An Old Opac Station"/>&lt;/a>&lt;/p>
-&lt;p>This was one of the old Opac&amp;rsquo;s.  They were becoming extremely unreliable. Half the time they weren&amp;rsquo;t working.  The graphics on the web page wouldn&amp;rsquo;t show.  Pages took a long time to load.  Most of this is due to the browser being something along the lines of IE4(Ok maybe not. Honestly not sure).  It was winCE based.&lt;/p>
-&lt;p>This is the cabinet space below where the thin client was kept.
-&lt;a href="https://3.bp.blogspot.com/_BMKBVRf6mio/TUt07O6PkbI/AAAAAAAAAcY/2aH_4lCzdC0/s1600/2011-01-14&amp;#43;16.33.45.jpg"target="_blank">&lt;img src="https://3.bp.blogspot.com/_BMKBVRf6mio/TUt07O6PkbI/AAAAAAAAAcY/2aH_4lCzdC0/s320/2011-01-14&amp;#43;16.33.45.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://4.bp.blogspot.com/_BMKBVRf6mio/TUt1BoiuV6I/AAAAAAAAAcc/g3zITIoJPPM/s1600/2011-01-14&amp;#43;14.14.27.jpg"target="_blank">&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TUt1BoiuV6I/AAAAAAAAAcc/g3zITIoJPPM/s320/2011-01-14&amp;#43;14.14.27.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>They were using old WYSE thin clients.  I&amp;rsquo;m sure these could have been updated or something.  But I can imagine licensing would have been a pain.  As well has who knows might not have supported this hardware.  Personally really glad to not have to deal with winCE, being a linux guy.&lt;/p>
-&lt;p>So my boss hunted around looking into upgrading these.  Custom clients vs updated WYSE type thin clients.  Custom clients won!  Thankfully!  I believe they were same price, if not cheaper with twice the hardware specs.  Operating system:
-Linux.  WOOT!  Needless to say,  I got excited about this project.&lt;/p>
-&lt;p>So low and behold we have a prototype!!&lt;/p>
-&lt;p>&lt;a href="https://2.bp.blogspot.com/_BMKBVRf6mio/TUt4z3AGryI/AAAAAAAAAdI/U_kUiATfDpE/s1600/2010-12-20&amp;#43;17.28.40.jpg"target="_blank">&lt;img src="https://2.bp.blogspot.com/_BMKBVRf6mio/TUt4z3AGryI/AAAAAAAAAdI/U_kUiATfDpE/s320/2010-12-20&amp;#43;17.28.40.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://4.bp.blogspot.com/_BMKBVRf6mio/TUt4r7LY36I/AAAAAAAAAdE/MVa8701kLnA/s1600/2010-12-20&amp;#43;16.45.57.jpg"target="_blank">&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TUt4r7LY36I/AAAAAAAAAdE/MVa8701kLnA/s320/2010-12-20&amp;#43;16.45.57.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>Kind of a sexy little machine.  Using CF card for hard drive, Atom processor, and 2 gigs of ram.  Decent setup really.  &lt;/p>
-&lt;p>I then spent the better part of a week designing a custom linux install, based on &lt;a href="http://www.linuxmint.com/"target="_blank">linuxmint&lt;/a>.  Went through the process of actually making my own install CD.  Very cool stuff!  In the near future I plan on writing a post on doing this.  But for now sticking with Project Opacity, the Hardware side. Believe me, plenty enough to write about!&lt;/p>
-&lt;p>So tested it got everything working.  Then, a shocking thing happened. My boss opened the case, looking for a better way to mount the CF to SATA adapter. &lt;em>BOOM!&lt;/em> &lt;em>POP&lt;/em> &lt;em>POP&lt;/em>  Ok, so maybe an exaggeration, but the power supply blew.
-  
-Long story short, verified it was the power supply, and ordered new one. Around the same time also ordering parts, for the eight needed to replace all the Opac&amp;rsquo;s, in both branches of the library.&lt;/p>
-&lt;p>&lt;a href="https://1.bp.blogspot.com/_BMKBVRf6mio/TUtyU1WevII/AAAAAAAAAaw/5CKTthN9qgg/s1600/2010-12-29&amp;#43;12.55.53.jpg"target="_blank">&lt;img src="https://1.bp.blogspot.com/_BMKBVRf6mio/TUtyU1WevII/AAAAAAAAAaw/5CKTthN9qgg/s320/2010-12-29&amp;#43;12.55.53.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>Cart full of parts for all eight Opac&amp;rsquo;s.&lt;/p>
-&lt;p>Then we started building them.  Here are some pictures of the parts and putting them together.&lt;/p>
-&lt;p>&lt;a href="https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzYqZBsqI/AAAAAAAAAbY/-bCJlQxZP50/s1600/2011-01-06&amp;#43;12.19.07.jpg"target="_blank">&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzYqZBsqI/AAAAAAAAAbY/-bCJlQxZP50/s320/2011-01-06&amp;#43;12.19.07.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>8gb CF card.&lt;/p>
-&lt;p>&lt;a href="https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzoyzIuSI/AAAAAAAAAbk/2ENjFGeInGU/s1600/2011-01-06&amp;#43;12.18.52.jpg"target="_blank">&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzoyzIuSI/AAAAAAAAAbk/2ENjFGeInGU/s320/2011-01-06&amp;#43;12.18.52.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>The CF to SATA converter.&lt;/p>
-&lt;p>&lt;a href="https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzgiX52MI/AAAAAAAAAbg/qMRMPVImJqE/s1600/2011-01-06&amp;#43;12.19.00.jpg"target="_blank">&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzgiX52MI/AAAAAAAAAbg/qMRMPVImJqE/s320/2011-01-06&amp;#43;12.19.00.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>2GB Ram.  Yeah I know just ram.  But I took a pic.. &lt;/p>
-&lt;p>&lt;a href="https://1.bp.blogspot.com/_BMKBVRf6mio/TUtzPCPAWfI/AAAAAAAAAbU/3pWrGRJI19g/s1600/2011-01-06&amp;#43;12.19.30.jpg"target="_blank">&lt;img src="https://1.bp.blogspot.com/_BMKBVRf6mio/TUtzPCPAWfI/AAAAAAAAAbU/3pWrGRJI19g/s320/2011-01-06&amp;#43;12.19.30.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>Motherboard with Atom processor on it.&lt;/p>
-&lt;p>Now laying the parts out and actually building them.  Yeah I know, some of you are saying, &amp;ldquo;So what?  Been there done that.&amp;rdquo;  If you&amp;rsquo;re that person, go read something else.  Others that don&amp;rsquo;t get the chance to build computers, carry on.&lt;/p>
-&lt;p>&lt;a href="https://4.bp.blogspot.com/_BMKBVRf6mio/TUty2xLkk-I/AAAAAAAAAbE/8EHQUSU_D1g/s1600/2011-01-04&amp;#43;12.51.45.jpg"target="_blank">&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TUty2xLkk-I/AAAAAAAAAbE/8EHQUSU_D1g/s320/2011-01-04&amp;#43;12.51.45.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>Laid them out.  Ain&amp;rsquo;t it so purdy?  &lt;/p>
-&lt;p>&lt;a href="https://1.bp.blogspot.com/_BMKBVRf6mio/TUty-YVRM-I/AAAAAAAAAbI/QpsEkDAfuQk/s1600/2011-01-06&amp;#43;11.58.04.jpg"target="_blank">&lt;img src="https://1.bp.blogspot.com/_BMKBVRf6mio/TUty-YVRM-I/AAAAAAAAAbI/QpsEkDAfuQk/s320/2011-01-06&amp;#43;11.58.04.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>GAh! Wow that was hard.  We went and removed the cases from the box!  :-O&lt;br>
-Actually in this same step we inventoried them.  I guess that is the significance.&lt;/p>
-&lt;p>&lt;a href="https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzGqnqu6I/AAAAAAAAAbM/4qGsU2rOEN4/s1600/2011-01-06&amp;#43;12.18.47.jpg"target="_blank">&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzGqnqu6I/AAAAAAAAAbM/4qGsU2rOEN4/s320/2011-01-06&amp;#43;12.18.47.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>Open case.&lt;/p>
-&lt;p>&lt;a href="https://2.bp.blogspot.com/_BMKBVRf6mio/TUtz4k0huiI/AAAAAAAAAbw/PHvYHqteIRw/s1600/2011-01-06&amp;#43;12.39.23.jpg"target="_blank">&lt;img src="https://2.bp.blogspot.com/_BMKBVRf6mio/TUtz4k0huiI/AAAAAAAAAbw/PHvYHqteIRw/s320/2011-01-06&amp;#43;12.39.23.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>The motherboard in, and power supply in place.&lt;/p>
-&lt;p>&lt;a href="https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzwsal6qI/AAAAAAAAAbs/O0vjdicS1VY/s1600/2011-01-06&amp;#43;12.39.16.jpg"target="_blank">&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TUtzwsal6qI/AAAAAAAAAbs/O0vjdicS1VY/s320/2011-01-06&amp;#43;12.39.16.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>Everything hooked up and ready.  Well almost..&lt;/p>
-&lt;p>&lt;a href="https://3.bp.blogspot.com/_BMKBVRf6mio/TUt0BddxyJI/AAAAAAAAAb0/VVhcAmYjMmQ/s1600/2011-01-06&amp;#43;14.34.58.jpg"target="_blank">&lt;img src="https://3.bp.blogspot.com/_BMKBVRf6mio/TUt0BddxyJI/AAAAAAAAAb0/VVhcAmYjMmQ/s320/2011-01-06&amp;#43;14.34.58.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>CF to SATA adapter mounted. Using power tools as an IT Assistant?? Who would have thought?&lt;/p>
-&lt;p>To mount the adapter, we drilled three holes through the top of the CD/Hard-drive bay. Then we used motherboard standoffs, nuts, and screws to raise it away from the metal, preventing shorting.&lt;/p>
-&lt;p>&lt;a href="https://4.bp.blogspot.com/_BMKBVRf6mio/TUt0UeGloxI/AAAAAAAAAcA/0pO-7kBFyJA/s1600/2011-01-06&amp;#43;15.21.32.jpg"target="_blank">&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TUt0UeGloxI/AAAAAAAAAcA/0pO-7kBFyJA/s320/2011-01-06&amp;#43;15.21.32.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>Done?  No, not exactly.  One thing we forgot about completely, was how it would be fit into the cabinet.  Turns out, it didn&amp;rsquo;t fit like we thought it would. So for the ones mounted on the poles(4 of them), we had to make some modifications.&lt;/p>
-&lt;p>&lt;a href="https://1.bp.blogspot.com/_BMKBVRf6mio/TUtydKPai0I/AAAAAAAAAa0/BEMk6Z1k5TM/s1600/2011-01-13&amp;#43;17.26.43.jpg"target="_blank">&lt;img src="https://1.bp.blogspot.com/_BMKBVRf6mio/TUtydKPai0I/AAAAAAAAAa0/BEMk6Z1k5TM/s320/2011-01-13&amp;#43;17.26.43.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>Two holes drilled where the legs normally would be glued.&lt;/p>
-&lt;p>&lt;a href="https://1.bp.blogspot.com/_BMKBVRf6mio/TUtylkLXiqI/AAAAAAAAAa4/i7IOKSjHDZI/s1600/2011-01-13&amp;#43;17.37.59.jpg"target="_blank">&lt;img src="https://1.bp.blogspot.com/_BMKBVRf6mio/TUtylkLXiqI/AAAAAAAAAa4/i7IOKSjHDZI/s320/2011-01-13&amp;#43;17.37.59.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>Nuts &amp;amp; Bolts through strips of copper&lt;/p>
-&lt;p>&lt;a href="https://2.bp.blogspot.com/_BMKBVRf6mio/TUt0jkuSwuI/AAAAAAAAAcI/Kkr0k9_mNQ4/s1600/2011-01-14&amp;#43;14.07.03.jpg"target="_blank">&lt;img src="https://2.bp.blogspot.com/_BMKBVRf6mio/TUt0jkuSwuI/AAAAAAAAAcI/Kkr0k9_mNQ4/s320/2011-01-14&amp;#43;14.07.03.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>View from the inside.  Yes had to remove the motherboard&amp;rsquo;s.
-Was kind of annoying.  But you do what you got to do.&lt;/p>
-&lt;p>&lt;a href="https://2.bp.blogspot.com/_BMKBVRf6mio/TUt0y6bxc4I/AAAAAAAAAcU/6qI2jAFPpVk/s1600/2011-01-14&amp;#43;17.04.58.jpg"target="_blank">&lt;img src="https://2.bp.blogspot.com/_BMKBVRf6mio/TUt0y6bxc4I/AAAAAAAAAcU/6qI2jAFPpVk/s320/2011-01-14&amp;#43;17.04.58.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>Then we hung these bad boys!&lt;/p>
-&lt;p>A lot of hacking, but we got them in.  Next I had to flash/clone the CF cards.&lt;/p>
-&lt;p>&lt;a href="https://2.bp.blogspot.com/_BMKBVRf6mio/TUt0rrjvOoI/AAAAAAAAAcM/nFuaM450E04/s1600/2011-01-07&amp;#43;13.45.57.jpg"target="_blank">&lt;img src="https://2.bp.blogspot.com/_BMKBVRf6mio/TUt0rrjvOoI/AAAAAAAAAcM/nFuaM450E04/s320/2011-01-07&amp;#43;13.45.57.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>Prototype, being prototype?&lt;/p>
-&lt;p>&lt;a href="https://2.bp.blogspot.com/_BMKBVRf6mio/TUt1S5mX96I/AAAAAAAAAco/Jv7ixJ6FkTg/s1600/2011-01-07&amp;#43;16.57.25.jpg"target="_blank">&lt;img src="https://2.bp.blogspot.com/_BMKBVRf6mio/TUt1S5mX96I/AAAAAAAAAco/Jv7ixJ6FkTg/s320/2011-01-07&amp;#43;16.57.25.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>First attempt.&lt;/p>
-&lt;p>As with anything in this project, cloning the cards was a learning experience. At first we planned on using the CD I created and installing on each. Which would have worked fine.  After turning it on, no interaction was needed for installation.  But still that&amp;rsquo;s a lot of work, and lets face it.  CD drives are fast&amp;hellip; But they are still so, slow!&lt;/p>
-&lt;p>So the cloning route seemed more appealing.  As seen in the screenshot, I booted from a cd, created a disc image, compressed it, then uncompressed and DD(the disk copy command in linux) to card.  Not sure why this didn&amp;rsquo;t work.  Next just copied directly from one disc to another.&lt;/p>
-&lt;p>&lt;a href="https://2.bp.blogspot.com/_BMKBVRf6mio/TUt1IhYqK8I/AAAAAAAAAcg/FNczc8hWaJM/s1600/2011-01-07&amp;#43;16.18.16.jpg"target="_blank">&lt;img src="https://2.bp.blogspot.com/_BMKBVRf6mio/TUt1IhYqK8I/AAAAAAAAAcg/FNczc8hWaJM/s320/2011-01-07&amp;#43;16.18.16.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>Direct copying from sda to sdb.
-Worked great!  Done using:&lt;/p>
-&lt;pre>&lt;code>dd if=/dev/sda bs=256M of=/dev/sdb
-&lt;/code>&lt;/pre>&lt;p>For those that don&amp;rsquo;t know how dd works.  if=/dev/sda  &amp;ldquo;if&amp;rdquo; stands for input
-file.  Everything in linux is a file.  Topic for another time.  &amp;ldquo;/dev/sda&amp;rdquo;
-is the path or file where the source disc that you want to copy from is.  
-&amp;ldquo;bs=256M&amp;rdquo;  aka byte size equals 256 megabytes.  The size of the blocks you want copied.  Seems the bigger byte size the faster it transfers.  It transfers
-it in 256mb chunks.  Finally &amp;ldquo;of=/dev/sdb&amp;rdquo;. Like the first parameter &amp;ldquo;of&amp;rdquo; is output file, and &amp;ldquo;/dev/sdb&amp;rdquo; is the output file or destination disc.  &lt;/p>
-&lt;p>If you have only two discs first disc being in SATA1 and second in SATA2 this is probably correct for you.  Check first!!! You get these backwards and you&amp;rsquo;re gonna wipe out your source
-disc.  Be careful!&lt;/p>
-&lt;p>Think before you do, and you&amp;rsquo;ll be fine.  Now we just simply installed the CF cards.&lt;/p>
-&lt;p>&lt;a href="https://2.bp.blogspot.com/_BMKBVRf6mio/TUt1dAOuXqI/AAAAAAAAAcs/VdeUjzHcA0A/s1600/2011-01-12&amp;#43;13.43.19.jpg"target="_blank">&lt;img src="https://2.bp.blogspot.com/_BMKBVRf6mio/TUt1dAOuXqI/AAAAAAAAAcs/VdeUjzHcA0A/s320/2011-01-12&amp;#43;13.43.19.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>CF card being put in.
-Finally!  Power them up!&lt;/p>
-&lt;p>&lt;a href="https://1.bp.blogspot.com/_BMKBVRf6mio/TUtyAN1SkAI/AAAAAAAAAas/seTsepqF-84/s1600/2011-01-18&amp;#43;14.34.02.jpg"target="_blank">&lt;img src="https://1.bp.blogspot.com/_BMKBVRf6mio/TUtyAN1SkAI/AAAAAAAAAas/seTsepqF-84/s320/2011-01-18&amp;#43;14.34.02.jpg"
-alt/>&lt;/a>&lt;/p>
-&lt;p>Opac interface Software fully operational.  Still making some little tweaks to make the experience better. &lt;/p>
-&lt;p>A couple of the key things that make this solution ideal:&lt;/p>
-&lt;p>Its linux!  The sky is the limit.  With just a few clicks was able to fully lock this down.  Can&amp;rsquo;t close the window, log out, or do malicious things to the system.&lt;/p>
-&lt;p>All and all, I think we did an excellent job!&lt;/p>
-&lt;p>Next, figuring out how to update them all at once.  &lt;a href="http://www.puppetlabs.com/"target="_blank">Puppet&lt;/a> maybe? Been dying to try it out&lt;/p>
-&lt;h4 id="updates">Updates&lt;/h4>
-&lt;p>09/30/2019: Switched images links to https&lt;/p></description></item><item><title>Destroying a hard drive</title><link>https://geekgonecrazy.com/2011/01/04/destroying-a-hard-drive/</link><pubDate>Tue, 04 Jan 2011 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2011/01/04/destroying-a-hard-drive/</guid><description>
-&lt;p>Not very often do I get to be destructive at work. So when I do get to I get slightly excited! Had an old pentium 3 desktop they planned to give away. But it their copy of xp on it as well as some somewhat sensitive information. At first we were going to put the linux distribution of our fancy on it(this changes from day to day). But it wouldn&amp;rsquo;t boot from the cd. Thought the cd drive was shot. Tried it and an external neither work. After 30 minutes of messing with it my boss gives up. Told me to just pull the hard drive out and trash it! :D&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;p>I&amp;rsquo;m sure we could&amp;rsquo;ve used a floppy to boot from the cd. But, this was much more enjoyable.&lt;/p>
-&lt;p>&lt;img src="https://3.bp.blogspot.com/_BMKBVRf6mio/TSPTkxv1F1I/AAAAAAAAAZc/KvnyXO1JRxQ/s320/2011-01-04&amp;#43;11.57.46.jpg"
-alt/>&lt;/p>
-&lt;p>&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TSPTqNfBCdI/AAAAAAAAAZg/IlegdVicZKc/s320/2011-01-04&amp;#43;12.00.22.jpg"
-alt/>&lt;/p>
-&lt;p>&lt;img src="https://1.bp.blogspot.com/_BMKBVRf6mio/TSPTwD_uVUI/AAAAAAAAAZk/YBV6Aj8fl24/s320/2011-01-04&amp;#43;12.01.20.jpg"
-alt/>&lt;/p>
-&lt;p>&lt;img src="https://1.bp.blogspot.com/_BMKBVRf6mio/TSPT2B85xnI/AAAAAAAAAZo/5yaAokOvAjQ/s320/2011-01-04&amp;#43;12.01.58.jpg"
-alt/>&lt;/p>
-&lt;p>&lt;img src="https://2.bp.blogspot.com/_BMKBVRf6mio/TSPT6lE6FjI/AAAAAAAAAZs/NAKFZ92ZQMI/s320/2011-01-04&amp;#43;12.04.07.jpg"
-alt/>&lt;/p>
-&lt;p>&lt;img src="https://1.bp.blogspot.com/_BMKBVRf6mio/TSPT_k5sBiI/AAAAAAAAAZw/6M7mHPkWNt4/s320/2011-01-04&amp;#43;12.04.12.jpg"
-alt/>&lt;/p>
-&lt;p>&lt;img src="https://4.bp.blogspot.com/_BMKBVRf6mio/TSPUFhUNeLI/AAAAAAAAAZ0/NKjteIC7epM/s320/2011-01-04&amp;#43;12.06.06.jpg"
-alt/>&lt;/p>
-&lt;h4 id="updates">Updates&lt;/h4>
-&lt;p>09/30/2019: Switching image links to https&lt;/p></description></item></channel></rss>
+&lt;p>09/30/2019: Changed image link to https&lt;/p></description></item></channel></rss>
