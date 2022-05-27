@@ -55,14 +55,14 @@ server_name matrix.geekgone.dev chat.geekgone.dev geekgone.dev;
 return 404;
 }
 server {
-listen 443;
+listen 443 ssl;
 ssl_certificate /etc/letsencrypt/live/geekgone.dev/fullchain.pem;
 ssl_certificate_key /etc/letsencrypt/live/geekgone.dev/privkey.pem;
 include /etc/letsencrypt/options-ssl-nginx.conf;
 ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 root /var/www/html;
 server_name geekgone.dev;
-location .well-known/matrix/ {
+location /.well-known/matrix/ {
 proxy_set_header Host $host;
 proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -72,7 +72,7 @@ proxy_read_timeout 90;
 }
 }
 server {
-listen 443;
+listen 443 ssl;
 ssl_certificate /etc/letsencrypt/live/geekgone.dev/fullchain.pem;
 ssl_certificate_key /etc/letsencrypt/live/geekgone.dev/privkey.pem;
 include /etc/letsencrypt/options-ssl-nginx.conf;
@@ -89,7 +89,7 @@ proxy_read_timeout 90;
 }
 }
 server {
-listen 443;
+listen 443 ssl;
 ssl_certificate /etc/letsencrypt/live/geekgone.dev/fullchain.pem;
 ssl_certificate_key /etc/letsencrypt/live/geekgone.dev/privkey.pem;
 include /etc/letsencrypt/options-ssl-nginx.conf;
