@@ -16,8 +16,8 @@ Rocket.Chat recently introduced support for Matrix via a built in bridge.  I'm g
 
 If your Rocket.Chat workspace will only support a few users you can generally get away with a machine like:
 
-1GB of RAM
-1CPU
+2GB of RAM
+2CPU
 20GB of Storage
 
 If you start using it more heavily you'll probably want to increase to a couple of CPU and more ram.  See the [Rocket.Chat Documentation](https://docs.rocket.chat) for more details.
@@ -198,7 +198,7 @@ Now goto: Admin->Settings->Federation and expand the Matrix Bridge section
 
 In the Homeserver URL section use:
 ```
-http://monolith:8008
+http://dendrite:8008
 ```
 
 In the Homeserver Domain use your federation domain.  In my case:
