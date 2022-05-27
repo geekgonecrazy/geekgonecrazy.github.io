@@ -4,8 +4,8 @@
 &lt;strong>This guide also uses Dendrite which is also alpha&lt;/strong>&lt;/p>
 &lt;h2 id="compute-requirements">Compute Requirements&lt;/h2>
 &lt;p>If your Rocket.Chat workspace will only support a few users you can generally get away with a machine like:&lt;/p>
-&lt;p>1GB of RAM
-1CPU
+&lt;p>2GB of RAM
+2CPU
 20GB of Storage&lt;/p>
 &lt;p>If you start using it more heavily you&amp;rsquo;ll probably want to increase to a couple of CPU and more ram. See the &lt;a href="https://docs.rocket.chat"target="_blank">Rocket.Chat Documentation&lt;/a> for more details.&lt;/p>
 &lt;p>In this case i&amp;rsquo;ve selected this digitalocean droplet:
@@ -117,7 +117,7 @@ cd matrix
 &lt;/code>&lt;/pre>&lt;p>Goto your Rocket.Chat install and finish the initial setup. In my case it was available at &lt;a href="https://chat.geekgone.dev">https://chat.geekgone.dev&lt;/a>&lt;/p>
 &lt;p>Now goto: Admin-&amp;gt;Settings-&amp;gt;Federation and expand the Matrix Bridge section&lt;/p>
 &lt;p>In the Homeserver URL section use:&lt;/p>
-&lt;pre>&lt;code>http://monolith:8008
+&lt;pre>&lt;code>http://dendrite:8008
 &lt;/code>&lt;/pre>&lt;p>In the Homeserver Domain use your federation domain. In my case:&lt;/p>
 &lt;pre>&lt;code>geekgone.dev
 &lt;/code>&lt;/pre>&lt;p>Now flip to enabled and click save changes.&lt;/p>
