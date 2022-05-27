@@ -9,23 +9,25 @@ title = "Connecting Rocket.Chat to matrix"
 +++
 Rocket.Chat recently introduced support for Matrix via a built in bridge.  I'm going to outline a quick and simple guide to getting this up and running.
 
-**Matrix support in Rocket.Chat is currently considered alpha.  Expect things to break**
-**This guide also uses Dendrite which is also alpha**
+- **Matrix support in Rocket.Chat is currently considered alpha.  Expect things to break**
+- **This guide also uses Dendrite which is also alpha**
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/oQhIH8kql9I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+{{< youtube id="oQhIH8kql9I" >}}
 
 ## Compute Requirements
 
 If your Rocket.Chat workspace will only support a few users you can generally get away with a machine like:
 
-2GB of RAM
-2CPU
-20GB of Storage
+- 2GB of RAM
+- 2CPU
+- 20GB of Storage
 
 If you start using it more heavily you'll probably want to increase to a couple of CPU and more ram.  See the [Rocket.Chat Documentation](https://docs.rocket.chat) for more details.
 
 In this case i've selected this digitalocean droplet:
-![image](https://user-images.githubusercontent.com/51996/170782480-d3356be1-11b3-4fdb-a95b-f42e19e74e70.png)
+<img width="841" alt="image" src="https://user-images.githubusercontent.com/51996/170799991-4bb5b9fd-645d-4f1a-835d-79bd358f96bb.png">
 
 I've also selected Ubuntu 20.04 as the distro.
 
