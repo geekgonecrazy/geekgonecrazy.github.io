@@ -1,4 +1,147 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 04 Jul 2021 00:03:00 +0000</lastBuildDate><item><title>Rover Project: Update 3</title><link>https://geekgonecrazy.com/2021/07/04/rover-project-update-3/</link><pubDate>Sun, 04 Jul 2021 00:03:00 +0000</pubDate><guid>https://geekgonecrazy.com/2021/07/04/rover-project-update-3/</guid><description>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 27 May 2022 00:00:00 +0000</lastBuildDate><item><title>Connecting Rocket.Chat to matrix</title><link>https://geekgonecrazy.com/2022/05/27/connecting-rocket.chat-to-matrix/</link><pubDate>Fri, 27 May 2022 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2022/05/27/connecting-rocket.chat-to-matrix/</guid><description>
+&lt;p>Rocket.Chat recently introduced support for Matrix via a built in bridge. I&amp;rsquo;m going to outline a quick and simple guide to getting this up and running.&lt;/p>
+&lt;p>&lt;strong>This support is currently alpha quality. Expect things to break&lt;/strong>
+&lt;strong>This guide also uses Dendrite which is also alpha&lt;/strong>&lt;/p>
+&lt;h2 id="compute-requirements">Compute Requirements&lt;/h2>
+&lt;p>If your Rocket.Chat workspace will only support a few users you can generally get away with a machine like:&lt;/p>
+&lt;p>1GB of RAM
+1CPU
+20GB of Storage&lt;/p>
+&lt;p>If you start using it more heavily you&amp;rsquo;ll probably want to increase to a couple of CPU and more ram. See the &lt;a href="https://docs.rocket.chat"target="_blank">Rocket.Chat Documentation&lt;/a> for more details.&lt;/p>
+&lt;p>In this case i&amp;rsquo;ve selected this digitalocean droplet:
+&lt;img src="https://user-images.githubusercontent.com/51996/170782480-d3356be1-11b3-4fdb-a95b-f42e19e74e70.png"
+alt="image"/>&lt;/p>
+&lt;p>I&amp;rsquo;ve also selected Ubuntu 20.04 as the distro.&lt;/p>
+&lt;h2 id="domain-requirements">Domain Requirements&lt;/h2>
+&lt;p>You&amp;rsquo;ll need a domain you control. In this case i&amp;rsquo;m going to use geekgone.dev.&lt;/p>
+&lt;p>For federation generally the idea is that you are accessed much like you are by email.&lt;br>
+So if I was to be reached at aaron [at] geekgone.dev then I would also be reached at @aaron:geekgone.dev.&lt;/p>
+&lt;p>Either way you need to decide what domain will you be reached at? We&amp;rsquo;ll call this the federated domain. Then you&amp;rsquo;ll also need to expose matrix and Rocket.Chat on their perspective domains.&lt;/p>
+&lt;p>In my case i&amp;rsquo;m going to use:
+Federated Domain: geekgone.dev
+Rocket.Chat Domain: chat.geekgone.dev
+Matrix Domain: matrix.geekgone.dev&lt;/p>
+&lt;p>Go ahead and point those all at the machine you&amp;rsquo;ve provisioned.&lt;/p>
+&lt;p>&lt;img src="https://user-images.githubusercontent.com/51996/170783824-d8afd20a-2aae-4dd2-8ce6-9b1173eb45d8.png"
+alt="image"/>&lt;/p>
+&lt;h2 id="install-some-pre-reqs">Install some pre-reqs&lt;/h2>
+&lt;p>We need a reverse proxy. I&amp;rsquo;m going to use nginx:&lt;/p>
+&lt;pre>&lt;code>sudo apt update &amp;amp;&amp;amp; sudo apt install -y nginx
+&lt;/code>&lt;/pre>&lt;p>Now we need docker:&lt;/p>
+&lt;pre>&lt;code>curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+&lt;/code>&lt;/pre>&lt;p>Now for ease we&amp;rsquo;ll add our self to the docker group and assume it:&lt;/p>
+&lt;pre>&lt;code>sudo usermod -a -G docker ubuntu
+newgrp docker
+&lt;/code>&lt;/pre>&lt;p>Finally we need certbot. This is one of the quickest and easiest way to install it currently:&lt;/p>
+&lt;pre>&lt;code>sudo snap install --classic certbot
+&lt;/code>&lt;/pre>&lt;h2 id="configure-lets-encrypt-certificates">Configure Lets Encrypt Certificates&lt;/h2>
+&lt;pre>&lt;code>certbot certonly --nginx -d geekgone.dev,chat.geekgone.dev,matrix.geekgone.dev
+&lt;/code>&lt;/pre>&lt;h2 id="setup-nginx-rules">Setup Nginx Rules&lt;/h2>
+&lt;p>Edit /etc/nginx/sites-available/default&lt;/p>
+&lt;pre>&lt;code>server {
+listen 80 ;
+listen [::]:80 ;
+if ($host = geekgone.dev) {
+return 301 https://$host$request_uri;
+}
+if ($host = chat.geekgone.dev) {
+return 301 https://$host$request_uri;
+}
+if ($host = matrix.geekgone.dev) {
+return 301 https://$host$request_uri;
+}
+server_name matrix.geekgone.dev chat.geekgone.dev geekgone.dev;
+return 404;
+}
+server {
+listen 443;
+ssl_certificate /etc/letsencrypt/live/geekgone.dev/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/live/geekgone.dev/privkey.pem;
+include /etc/letsencrypt/options-ssl-nginx.conf;
+ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+root /var/www/html;
+server_name geekgone.dev;
+location .well-known/matrix/ {
+proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Proto $scheme;
+proxy_pass http://localhost:8008;
+proxy_read_timeout 90;
+}
+}
+server {
+listen 443;
+ssl_certificate /etc/letsencrypt/live/geekgone.dev/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/live/geekgone.dev/privkey.pem;
+include /etc/letsencrypt/options-ssl-nginx.conf;
+ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+root /var/www/html;
+server_name chat.geekgone.dev;
+location / {
+proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Proto $scheme;
+proxy_pass http://localhost:3000;
+proxy_read_timeout 90;
+}
+}
+server {
+listen 443;
+ssl_certificate /etc/letsencrypt/live/geekgone.dev/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/live/geekgone.dev/privkey.pem;
+include /etc/letsencrypt/options-ssl-nginx.conf;
+ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+root /var/www/html;
+server_name matrix.geekgone.dev;
+location / {
+proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Proto $scheme;
+proxy_pass http://localhost:8008;
+proxy_read_timeout 90;
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Do a &lt;code>nginx -t&lt;/code> just to make sure everything is ok.&lt;/p>
+&lt;p>Then:&lt;/p>
+&lt;pre>&lt;code>systemctl reload nginx
+&lt;/code>&lt;/pre>&lt;h2 id="install-rocketchat-and-dendrite">Install Rocket.Chat and Dendrite&lt;/h2>
+&lt;p>I&amp;rsquo;ve commited a docker-compose and config file in a public repo. So will start off with grabbing that:&lt;/p>
+&lt;pre>&lt;code>git clone https://github.com/geekgonecrazy/rocketchat-matrix-federation-example.git matrix
+cd matrix
+&lt;/code>&lt;/pre>&lt;p>Lets bring Rocket.Chat up:&lt;/p>
+&lt;pre>&lt;code>docker compose up -d rocketchat mongo mongo-init-replica
+&lt;/code>&lt;/pre>&lt;p>Goto your Rocket.Chat install and finish the initial setup. In my case it was available at &lt;a href="https://chat.geekgone.dev">https://chat.geekgone.dev&lt;/a>&lt;/p>
+&lt;p>Now goto: Admin-&amp;gt;Settings-&amp;gt;Federation and expand the Matrix Bridge section&lt;/p>
+&lt;p>In the Homeserver URL section use:&lt;/p>
+&lt;pre>&lt;code>http://monolith:8008
+&lt;/code>&lt;/pre>&lt;p>In the Homeserver Domain use your federation domain. In my case:&lt;/p>
+&lt;pre>&lt;code>geekgone.dev
+&lt;/code>&lt;/pre>&lt;p>Now flip to enabled and click save changes.&lt;/p>
+&lt;p>Grab the Homeserver Token and the AppService Token and put them some place safe for a moment.&lt;/p>
+&lt;p>Rocket.Chat is ready. Now lets go back to the terminal and look at dendrite.&lt;/p>
+&lt;p>We need to edit the dendrite config file. Edit: &lt;code>config/dendrite.yaml&lt;/code>&lt;/p>
+&lt;p>Replace geekgone.dev in this section with your federation domain:&lt;/p>
+&lt;pre>&lt;code>global:
+# The domain name of this homeserver.
+server_name: geekgone.dev
+&lt;/code>&lt;/pre>&lt;p>Replace matrix.geekgone.dev in this section with your matrix domain:&lt;/p>
+&lt;pre>&lt;code> # The server name to delegate server-server communications to, with optional port
+# e.g. localhost:443
+well_known_server_name: &amp;quot;matrix.geekgone.dev:443&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>Now we need to edit: &lt;code>config/rocketchat-registration.yaml&lt;/code>
+Replace: &lt;code>hs_token&lt;/code> value with the Homeserver Token you got from Rocket.Chat
+Replace: &lt;code>as_token&lt;/code> value with the AppService Token you got from Rocket.Chat&lt;/p>
+&lt;p>Finally now we can start matrix up:&lt;/p>
+&lt;pre>&lt;code>docker compose up -d dendrite
+&lt;/code>&lt;/pre>&lt;h2 id="lets-try-talking-to-matrix">Lets try talking to matrix&lt;/h2>
+&lt;p>Now that we have dendrite up and Rocket.Chat up. Lets go into Rocket.Chat and try sending a message out to a matrix user out there. Can be another Rocket.Chat server, dendrite, synapse etc.&lt;/p>
+&lt;p>In this case i&amp;rsquo;m going to use @geekgonedev-demo:matrix.org&lt;/p>
+&lt;p>Create a channel in Rocket.Chat and then do: &lt;code>/bridge invite @geekgonedev-demo:matrix.org&lt;/code>&lt;/p>
+&lt;p>In the client you have connected there you will receive an invite. Once accepted you can now type a message on either side and if all went well you should receive the message on the other side!&lt;/p></description></item><item><title>Rover Project: Update 3</title><link>https://geekgonecrazy.com/2021/07/04/rover-project-update-3/</link><pubDate>Sun, 04 Jul 2021 00:03:00 +0000</pubDate><guid>https://geekgonecrazy.com/2021/07/04/rover-project-update-3/</guid><description>
 &lt;p>Finally a more eventful update!&lt;/p>
 &lt;p>Last time I worked with building parts in CAD I was using solidworks or AutoCAD. I have no desire to buy either one of those right now plus I need something that will run on linux. So started investing some time into learning my way around FreeCAD.&lt;/p>
 &lt;p>Creating first iteration of the wheel
@@ -914,13 +1057,4 @@ echo o &amp;gt; proc/sysrq-trigger
 &lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-Bash" data-lang="Bash">sudo apt-get install curl
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Then just simply run:&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-Bash" data-lang="Bash">curl ifconfig.me
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>I figured since I hadn&amp;rsquo;t posted in a while, this is a useful enough tidbit to share.&lt;/p></description></item><item><title>Childrens Distro sneak peak</title><link>https://geekgonecrazy.com/2012/05/10/childrens-distro-sneak-peak/</link><pubDate>Thu, 10 May 2012 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2012/05/10/childrens-distro-sneak-peak/</guid><description>
-&lt;p>I was assigned the task of creating a children&amp;rsquo;s linux distro for use here at the library(where I work).  Here&amp;rsquo;s a sneak peak:&lt;/p>
-&lt;p>&lt;img src="https://lh5.ggpht.com/_BMKBVRf6mio/TcmQfVPmMbI/AAAAAAAAAh4/EKEKmhMUn5s/2011-05-10%2014.20.35.png"
-alt/>&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;p>I&amp;rsquo;m basing it on Linux Mint for now.  I think i&amp;rsquo;ll probably move it all over to straight Ubuntu before finalizing.  The dock is called docky.  Can be installed from apt-get.&lt;/p>
-&lt;p>As you can see I&amp;rsquo;ve loaded it up with games.  Once i&amp;rsquo;ve finished i&amp;rsquo;ll give a better break down of what i&amp;rsquo;ve done.&lt;/p>
-&lt;p>[edit 04/11/2014] It actually turned out looking nothing like this at all. We called the project rachel. You can find out more about it on its &lt;a href="https://github.com/geekgonecrazy/rachel"target="_blank">github page&lt;/a>.&lt;/p>
-&lt;h4 id="updates">Updates&lt;/h4>
-&lt;p>09/30/2019: Changed image link to https&lt;/p></description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>I figured since I hadn&amp;rsquo;t posted in a while, this is a useful enough tidbit to share.&lt;/p></description></item></channel></rss>

@@ -1,0 +1,119 @@
+<!doctype html><html lang=en><meta charset=utf-8><meta name=generator content="Hugo 0.72.0"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name=color-scheme content="light dark"><meta name=supported-color-schemes content="light dark"><title>Connecting Rocket.Chat to matrix&nbsp;&ndash;&nbsp;Aaron's Ramblings</title><link rel=stylesheet href=/css/core.min.51a44d5b8886c4d68322a4e7f2c4d3a9ae730b123178c37858c71c49e9bba12bcf142960b0cfe957684d097b1bbfb40d.css integrity=sha384-UaRNW4iGxNaDIqTn8sTTqa5zCxIxeMN4WMccSem7oSvPFClgsM/pV2hNCXsbv7QN><meta name=twitter:card content="summary"><meta name=twitter:title content="Connecting Rocket.Chat to matrix"><script async defer data-website-id=258570bf-2ff8-4af6-b739-89e886752918 src=https://uem.fidetech.io/umami.js></script><body><section id=header><div class="header wrap"><span class="header left-side"><a class="site home" href=/><span class="site name">Aaron's Ramblings</span></a></span>
+<span class="header right-side"><div class="nav wrap"><nav class=nav><a class="nav item" href=/>Home</a><a class="nav item" href=/about>About</a></nav></div></span></div></section><section id=content><div class=article-container><section class="article header"><h1 class="article title">Connecting Rocket.Chat to matrix</h1><p class="article date">2022-05-27</p></section><article class="article markdown-body"><p>Rocket.Chat recently introduced support for Matrix via a built in bridge. I&rsquo;m going to outline a quick and simple guide to getting this up and running.</p><p><strong>This support is currently alpha quality. Expect things to break</strong>
+<strong>This guide also uses Dendrite which is also alpha</strong></p><h2 id=compute-requirements>Compute Requirements</h2><p>If your Rocket.Chat workspace will only support a few users you can generally get away with a machine like:</p><p>1GB of RAM
+1CPU
+20GB of Storage</p><p>If you start using it more heavily you&rsquo;ll probably want to increase to a couple of CPU and more ram. See the <a href=https://docs.rocket.chat target=_blank>Rocket.Chat Documentation</a> for more details.</p><p>In this case i&rsquo;ve selected this digitalocean droplet:
+<img src=https://user-images.githubusercontent.com/51996/170782480-d3356be1-11b3-4fdb-a95b-f42e19e74e70.png alt=image></p><p>I&rsquo;ve also selected Ubuntu 20.04 as the distro.</p><h2 id=domain-requirements>Domain Requirements</h2><p>You&rsquo;ll need a domain you control. In this case i&rsquo;m going to use geekgone.dev.</p><p>For federation generally the idea is that you are accessed much like you are by email.<br>So if I was to be reached at aaron [at] geekgone.dev then I would also be reached at @aaron:geekgone.dev.</p><p>Either way you need to decide what domain will you be reached at? We&rsquo;ll call this the federated domain. Then you&rsquo;ll also need to expose matrix and Rocket.Chat on their perspective domains.</p><p>In my case i&rsquo;m going to use:
+Federated Domain: geekgone.dev
+Rocket.Chat Domain: chat.geekgone.dev
+Matrix Domain: matrix.geekgone.dev</p><p>Go ahead and point those all at the machine you&rsquo;ve provisioned.</p><p><img src=https://user-images.githubusercontent.com/51996/170783824-d8afd20a-2aae-4dd2-8ce6-9b1173eb45d8.png alt=image></p><h2 id=install-some-pre-reqs>Install some pre-reqs</h2><p>We need a reverse proxy. I&rsquo;m going to use nginx:</p><pre><code>sudo apt update &amp;&amp; sudo apt install -y nginx 
+</code></pre><p>Now we need docker:</p><pre><code>curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+</code></pre><p>Now for ease we&rsquo;ll add our self to the docker group and assume it:</p><pre><code>sudo usermod -a -G docker ubuntu
+newgrp docker
+</code></pre><p>Finally we need certbot. This is one of the quickest and easiest way to install it currently:</p><pre><code>sudo snap install --classic certbot
+</code></pre><h2 id=configure-lets-encrypt-certificates>Configure Lets Encrypt Certificates</h2><pre><code>certbot certonly --nginx -d geekgone.dev,chat.geekgone.dev,matrix.geekgone.dev
+</code></pre><h2 id=setup-nginx-rules>Setup Nginx Rules</h2><p>Edit /etc/nginx/sites-available/default</p><pre><code>server {
+    listen 80 ;
+    listen [::]:80 ;
+
+    if ($host = geekgone.dev) {
+        return 301 https://$host$request_uri;
+    } 
+
+
+    if ($host = chat.geekgone.dev) {
+        return 301 https://$host$request_uri;
+    } 
+    
+    if ($host = matrix.geekgone.dev) {
+        return 301 https://$host$request_uri;
+    } 
+        
+    server_name matrix.geekgone.dev chat.geekgone.dev geekgone.dev;
+    return 404; 
+}
+
+server {
+    listen 443; 
+    ssl_certificate /etc/letsencrypt/live/geekgone.dev/fullchain.pem; 
+    ssl_certificate_key /etc/letsencrypt/live/geekgone.dev/privkey.pem; 
+    include /etc/letsencrypt/options-ssl-nginx.conf; 
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; 
+
+    root /var/www/html;
+
+    server_name geekgone.dev; 
+
+    location .well-known/matrix/ {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_pass http://localhost:8008;
+        proxy_read_timeout 90;
+    }
+
+}
+
+server {
+
+    listen 443; 
+    ssl_certificate /etc/letsencrypt/live/geekgone.dev/fullchain.pem; 
+    ssl_certificate_key /etc/letsencrypt/live/geekgone.dev/privkey.pem; 
+    include /etc/letsencrypt/options-ssl-nginx.conf; 
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; 
+
+    root /var/www/html;
+
+    server_name chat.geekgone.dev; 
+
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_pass http://localhost:3000;
+        proxy_read_timeout 90;
+    }
+
+}
+
+server {
+
+    listen 443; 
+    ssl_certificate /etc/letsencrypt/live/geekgone.dev/fullchain.pem; 
+    ssl_certificate_key /etc/letsencrypt/live/geekgone.dev/privkey.pem; 
+    include /etc/letsencrypt/options-ssl-nginx.conf; 
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; 
+
+    root /var/www/html;
+
+    server_name matrix.geekgone.dev; 
+
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_pass http://localhost:8008;
+        proxy_read_timeout 90;
+    }
+
+}
+</code></pre><p>Do a <code>nginx -t</code> just to make sure everything is ok.</p><p>Then:</p><pre><code>systemctl reload nginx
+</code></pre><h2 id=install-rocketchat-and-dendrite>Install Rocket.Chat and Dendrite</h2><p>I&rsquo;ve commited a docker-compose and config file in a public repo. So will start off with grabbing that:</p><pre><code>git clone https://github.com/geekgonecrazy/rocketchat-matrix-federation-example.git matrix
+cd matrix
+</code></pre><p>Lets bring Rocket.Chat up:</p><pre><code>docker compose up -d rocketchat mongo mongo-init-replica
+</code></pre><p>Goto your Rocket.Chat install and finish the initial setup. In my case it was available at <a href=https://chat.geekgone.dev>https://chat.geekgone.dev</a></p><p>Now goto: Admin->Settings->Federation and expand the Matrix Bridge section</p><p>In the Homeserver URL section use:</p><pre><code>http://monolith:8008
+</code></pre><p>In the Homeserver Domain use your federation domain. In my case:</p><pre><code>geekgone.dev
+</code></pre><p>Now flip to enabled and click save changes.</p><p>Grab the Homeserver Token and the AppService Token and put them some place safe for a moment.</p><p>Rocket.Chat is ready. Now lets go back to the terminal and look at dendrite.</p><p>We need to edit the dendrite config file. Edit: <code>config/dendrite.yaml</code></p><p>Replace geekgone.dev in this section with your federation domain:</p><pre><code>global:
+  # The domain name of this homeserver.
+  server_name: geekgone.dev
+</code></pre><p>Replace matrix.geekgone.dev in this section with your matrix domain:</p><pre><code>  # The server name to delegate server-server communications to, with optional port
+  # e.g. localhost:443
+  well_known_server_name: &quot;matrix.geekgone.dev:443&quot;
+</code></pre><p>Now we need to edit: <code>config/rocketchat-registration.yaml</code>
+Replace: <code>hs_token</code> value with the Homeserver Token you got from Rocket.Chat
+Replace: <code>as_token</code> value with the AppService Token you got from Rocket.Chat</p><p>Finally now we can start matrix up:</p><pre><code>docker compose up -d dendrite
+</code></pre><h2 id=lets-try-talking-to-matrix>Lets try talking to matrix</h2><p>Now that we have dendrite up and Rocket.Chat up. Lets go into Rocket.Chat and try sending a message out to a matrix user out there. Can be another Rocket.Chat server, dendrite, synapse etc.</p><p>In this case i&rsquo;m going to use @geekgonedev-demo:matrix.org</p><p>Create a channel in Rocket.Chat and then do: <code>/bridge invite @geekgonedev-demo:matrix.org</code></p><p>In the client you have connected there you will receive an invite. Once accepted you can now type a message on either side and if all went well you should receive the message on the other side!</p></article></div><div class="article bottom"><section class="article navigation"><p><a class=link href=/2021/07/04/rover-project-update-3/><span class="iconfont icon-article"></span>Rover Project: Update 3</a></p></section></div></section><section id=footer><div class=footer-wrap><p class=copyright>Aaron's Ramblings</p><p class=powerby><span>Powered by </span><a href=https://gohugo.io target=_blank>Hugo</a><span> and the </span><a href=https://themes.gohugo.io/hugo-notepadium/ target=_blank>Notepadium</a></p></div></section></body></html>
