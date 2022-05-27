@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 27 May 2022 00:00:00 +0000</lastBuildDate><item><title>Connecting Rocket.Chat to matrix</title><link>https://geekgonecrazy.com/2022/05/27/connecting-rocket.chat-to-matrix/</link><pubDate>Fri, 27 May 2022 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2022/05/27/connecting-rocket.chat-to-matrix/</guid><description>
 &lt;p>Rocket.Chat recently introduced support for Matrix via a built in bridge. I&amp;rsquo;m going to outline a quick and simple guide to getting this up and running.&lt;/p>
-&lt;p>&lt;strong>This support is currently alpha quality. Expect things to break&lt;/strong>
+&lt;p>&lt;strong>Matrix support in Rocket.Chat is currently considered alpha. Expect things to break&lt;/strong>
 &lt;strong>This guide also uses Dendrite which is also alpha&lt;/strong>&lt;/p>
+&lt;!-- raw HTML omitted -->
 &lt;h2 id="compute-requirements">Compute Requirements&lt;/h2>
 &lt;p>If your Rocket.Chat workspace will only support a few users you can generally get away with a machine like:&lt;/p>
 &lt;p>2GB of RAM
