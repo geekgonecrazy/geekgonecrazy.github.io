@@ -103,7 +103,7 @@ server {
 }
 
 server {
-    listen 443; 
+    listen 443 ssl; 
     ssl_certificate /etc/letsencrypt/live/geekgone.dev/fullchain.pem; 
     ssl_certificate_key /etc/letsencrypt/live/geekgone.dev/privkey.pem; 
     include /etc/letsencrypt/options-ssl-nginx.conf; 
@@ -113,7 +113,7 @@ server {
 
     server_name geekgone.dev; 
 
-    location .well-known/matrix/ {
+    location /.well-known/matrix/ {
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -126,7 +126,7 @@ server {
 
 server {
 
-    listen 443; 
+    listen 443 ssl; 
     ssl_certificate /etc/letsencrypt/live/geekgone.dev/fullchain.pem; 
     ssl_certificate_key /etc/letsencrypt/live/geekgone.dev/privkey.pem; 
     include /etc/letsencrypt/options-ssl-nginx.conf; 
@@ -149,7 +149,7 @@ server {
 
 server {
 
-    listen 443; 
+    listen 443 ssl; 
     ssl_certificate /etc/letsencrypt/live/geekgone.dev/fullchain.pem; 
     ssl_certificate_key /etc/letsencrypt/live/geekgone.dev/privkey.pem; 
     include /etc/letsencrypt/options-ssl-nginx.conf; 
