@@ -39,9 +39,9 @@ So if I was to be reached at aaron [at] geekgone.dev then I would also be reache
 Either way you need to decide what domain will you be reached at?  We'll call this the federated domain.  Then you'll also need to expose matrix and Rocket.Chat on their perspective domains.
 
 In my case i'm going to use:
-Federated Domain: geekgone.dev
-Rocket.Chat Domain: chat.geekgone.dev
-Matrix Domain: matrix.geekgone.dev
+- Federated Domain: geekgone.dev
+- Rocket.Chat Domain: chat.geekgone.dev
+- Matrix Domain: matrix.geekgone.dev
 
 Go ahead and point those all at the machine you've provisioned.
 
