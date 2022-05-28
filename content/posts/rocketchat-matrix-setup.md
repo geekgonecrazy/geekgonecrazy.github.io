@@ -2,7 +2,7 @@
 comments = false
 date = 2022-05-27T00:00:00Z
 layout = "post"
-publish = true
+publish = false
 tags = []
 title = "Connecting Rocket.Chat to matrix"
 
