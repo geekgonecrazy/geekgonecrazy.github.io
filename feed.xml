@@ -4,7 +4,6 @@
 &lt;li>&lt;strong>Matrix support in Rocket.Chat is currently considered alpha. Expect things to break&lt;/strong>&lt;/li>
 &lt;li>&lt;strong>This guide also uses Dendrite which is also alpha&lt;/strong>&lt;/li>
 &lt;/ul>
-&lt;!-- raw HTML omitted -->
 &lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
 &lt;iframe src="https://www.youtube.com/embed/oQhIH8kql9I" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
 &lt;/div>
