@@ -23,10 +23,12 @@
 &lt;p>For federation generally the idea is that you are accessed much like you are by email.&lt;br>
 So if I was to be reached at aaron [at] geekgone.dev then I would also be reached at @aaron:geekgone.dev.&lt;/p>
 &lt;p>Either way you need to decide what domain will you be reached at? We&amp;rsquo;ll call this the federated domain. Then you&amp;rsquo;ll also need to expose matrix and Rocket.Chat on their perspective domains.&lt;/p>
-&lt;p>In my case i&amp;rsquo;m going to use:
-Federated Domain: geekgone.dev
-Rocket.Chat Domain: chat.geekgone.dev
-Matrix Domain: matrix.geekgone.dev&lt;/p>
+&lt;p>In my case i&amp;rsquo;m going to use:&lt;/p>
+&lt;ul>
+&lt;li>Federated Domain: geekgone.dev&lt;/li>
+&lt;li>Rocket.Chat Domain: chat.geekgone.dev&lt;/li>
+&lt;li>Matrix Domain: matrix.geekgone.dev&lt;/li>
+&lt;/ul>
 &lt;p>Go ahead and point those all at the machine you&amp;rsquo;ve provisioned.&lt;/p>
 &lt;p>&lt;img src="https://user-images.githubusercontent.com/51996/170783824-d8afd20a-2aae-4dd2-8ce6-9b1173eb45d8.png"
 alt="image"/>&lt;/p>
