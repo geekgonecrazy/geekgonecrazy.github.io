@@ -2,7 +2,7 @@
 comments = false
 date = 2022-05-27T00:00:00Z
 layout = "post"
-publish = false
+publish = true
 tags = []
 title = "Connecting Rocket.Chat to matrix"
 
@@ -11,8 +11,6 @@ Rocket.Chat recently introduced support for Matrix via a built in bridge.  I'm g
 
 - **Matrix support in Rocket.Chat is currently considered alpha.  Expect things to break**
 - **This guide also uses Dendrite which is also alpha**
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/oQhIH8kql9I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 {{< youtube id="oQhIH8kql9I" >}}
 
