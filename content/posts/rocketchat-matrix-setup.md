@@ -1,17 +1,21 @@
 +++
 comments = false
-date = 2022-05-27T00:00:00Z
+date = 2022-05-30T00:00:00Z
 layout = "post"
 publish = true
 tags = []
-title = "Rocket.Chat <--> Matrix"
+title = "Rocket.Chat and the Matrix Protocol"
 
 +++
-Rocket.Chat [recent announcement about interopt with the Matrix protocol](https://rocket.chat/press-releases/rocket-chat-leverages-matrix-protocol-for-decentralized-and-interoperable-communications).
+Rocket.Chat [federation support via the Matrix protocol](https://rocket.chat/press-releases/rocket-chat-leverages-matrix-protocol-for-decentralized-and-interoperable-communications).
 
-Basically.. You can now talk to anyone speaking the Matrix Protocol from Rocket.Chat.
+This announcement is an exciting one to me.  I've been working with Rocket.Chat since I found it over almost 7 years ago.  One of the things I recall from early on is the vision of being as ubiquitious as email.  One of the beauties of email is not everyone is on the same domain or let alone even the same kind of mail server.  Just all speaking the same language.
+
+Rocket.Chat being able to talk the Matrix Protocol to me is a start of it achieving that.
 
 It does this by registering as an AppService with a Matrix homeserver. This means Rocket.Chat is able to create users on the homeserver and then manage them.  So when you opt to federate a room and invite a remote user using Matrix.  Rocket.Chat creates your user on the homeserver and controls it as if they are one and the same user.
+
+tl;dr You can now talk to anyone speaking the Matrix Protocol from Rocket.Chat.
 
 # How to setup Rocket.Chat with a Matrix homeserver
 
