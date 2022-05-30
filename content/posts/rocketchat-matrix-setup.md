@@ -252,7 +252,9 @@ In this case i'm going to use an account from matrix.org [@geekgonedev-demo:matr
 
 Create a channel in Rocket.Chat and then do: `/bridge invite @geekgonedev-demo:matrix.org`
 
-In the client you have connected there you will receive an invite.  Once accepted you can now type a message on either side and if all went well you should receive the message on the other side!
+The client you have connected on the other server you will receive an invite.  Once accepted you can now type a message on either side and if all went well you should receive the message on the other side!
+
+_**Note: if you invite another Rocket.Chat server it currently will auto accept**_
 
 I'll leave the server up for a couple of weeks if you want to try reaching me at [@aaron:geekgone.dev](https://matrix.to/#/@aaron:geekgone.dev)
 
