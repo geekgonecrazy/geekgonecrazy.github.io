@@ -4,14 +4,21 @@ date = 2022-05-27T00:00:00Z
 layout = "post"
 publish = true
 tags = []
-title = "Connecting Rocket.Chat to matrix"
+title = "Rocket.Chat <--> Matrix"
 
 +++
-Rocket.Chat recently introduced support for Matrix via a built in bridge.  I'm going to outline a quick and simple guide to getting this up and running.
+Rocket.Chat [recent announcement about interopt with the Matrix protocol](https://rocket.chat/press-releases/rocket-chat-leverages-matrix-protocol-for-decentralized-and-interoperable-communications).
+
+Basically.. You can now talk to anyone speaking the Matrix Protocol from Rocket.Chat.
+
+It does this by registering as an AppService with a Matrix homeserver. This means Rocket.Chat is able to create users on the homeserver and then manage them.  So when you opt to federate a room and invite a remote user using Matrix.  Rocket.Chat creates your user on the homeserver and controls it as if they are one and the same user.
+
+# How to setup Rocket.Chat with a Matrix homeserver
 
 - **Matrix support in Rocket.Chat is currently considered alpha.  Expect things to break**
-- **This guide also uses Dendrite which is also alpha**
+- **This guide also uses Dendrite which is beta**
 
+Video guide should you prefer that format:
 {{< youtube id="oQhIH8kql9I" >}}
 
 ## Compute Requirements
@@ -91,7 +98,6 @@ server {
         return 301 https://$host$request_uri;
     } 
 
-
     if ($host = chat.geekgone.dev) {
         return 301 https://$host$request_uri;
     } 
@@ -123,11 +129,9 @@ server {
         proxy_pass http://localhost:8008;
         proxy_read_timeout 90;
     }
-
 }
 
 server {
-
     listen 443 ssl; 
     ssl_certificate /etc/letsencrypt/live/geekgone.dev/fullchain.pem; 
     ssl_certificate_key /etc/letsencrypt/live/geekgone.dev/privkey.pem; 
@@ -146,11 +150,9 @@ server {
         proxy_pass http://localhost:3000;
         proxy_read_timeout 90;
     }
-
 }
 
 server {
-
     listen 443 ssl; 
     ssl_certificate /etc/letsencrypt/live/geekgone.dev/fullchain.pem; 
     ssl_certificate_key /etc/letsencrypt/live/geekgone.dev/privkey.pem; 
@@ -169,7 +171,6 @@ server {
         proxy_pass http://localhost:8008;
         proxy_read_timeout 90;
     }
-
 }
 ```
 
@@ -239,12 +240,16 @@ Finally now we can start matrix up:
 docker compose up -d dendrite
 ```
 
-## Lets try talking to matrix
+## Lets try talking to another Matrix Homeserver
 
-Now that we have dendrite up and Rocket.Chat up.  Lets go into Rocket.Chat and try sending a message out to a matrix user out there.  Can be another Rocket.Chat server, dendrite, synapse etc.
+Now that we have dendrite up and Rocket.Chat up.  Lets go into Rocket.Chat and try sending a message out to a user on another server out there speaking the Matrix Protocol.  Can be another Rocket.Chat server, dendrite, synapse etc.
 
-In this case i'm going to use @geekgonedev-demo:matrix.org
+In this case i'm going to use an account from matrix.org [@geekgonedev-demo:matrix.org](https://matrix.to/#/@geekgonedev-demo:matrix.org)
 
 Create a channel in Rocket.Chat and then do: `/bridge invite @geekgonedev-demo:matrix.org`
 
-In the client you have connected there you will receive an invite.  Once accepted you can now type a message on either side and if all went well you should receive the message on the other side!  
+In the client you have connected there you will receive an invite.  Once accepted you can now type a message on either side and if all went well you should receive the message on the other side!
+
+I'll leave the server up for a couple of weeks if you want to try reaching me at [@aaron:geekgone.dev](https://matrix.to/#/@aaron:geekgone.dev)
+
+Happy chatting!
