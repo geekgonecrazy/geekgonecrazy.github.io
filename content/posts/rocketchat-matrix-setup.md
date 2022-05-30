@@ -1,10 +1,14 @@
 +++
-comments = false
+title = "Rocket.Chat and the Matrix Protocol"
 date = 2022-05-30T00:00:00Z
 layout = "post"
 publish = true
+url = "/2022/05/30/rocket.chat-and-the-matrix-protocol/"
+aliases = [
+    "/2022/05/27/connecting-rocket.chat-to-matrix/"
+]
+comments = false
 tags = []
-title = "Rocket.Chat and the Matrix Protocol"
 
 +++
 
