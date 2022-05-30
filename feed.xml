@@ -156,7 +156,8 @@ Replace: &lt;code>as_token&lt;/code> value with the AppService Token you got fro
 &lt;p>Now that we have dendrite up and Rocket.Chat up. Lets go into Rocket.Chat and try sending a message out to a user on another server out there speaking the Matrix Protocol. Can be another Rocket.Chat server, dendrite, synapse etc.&lt;/p>
 &lt;p>In this case i&amp;rsquo;m going to use an account from matrix.org &lt;a href="https://matrix.to/#/@geekgonedev-demo:matrix.org"target="_blank">@geekgonedev-demo:matrix.org&lt;/a>&lt;/p>
 &lt;p>Create a channel in Rocket.Chat and then do: &lt;code>/bridge invite @geekgonedev-demo:matrix.org&lt;/code>&lt;/p>
-&lt;p>In the client you have connected there you will receive an invite. Once accepted you can now type a message on either side and if all went well you should receive the message on the other side!&lt;/p>
+&lt;p>The client you have connected on the other server you will receive an invite. Once accepted you can now type a message on either side and if all went well you should receive the message on the other side!&lt;/p>
+&lt;p>&lt;em>&lt;strong>Note: if you invite another Rocket.Chat server it currently will auto accept&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>I&amp;rsquo;ll leave the server up for a couple of weeks if you want to try reaching me at &lt;a href="https://matrix.to/#/@aaron:geekgone.dev"target="_blank">@aaron:geekgone.dev&lt;/a>&lt;/p>
 &lt;p>Happy chatting!&lt;/p></description></item><item><title>Rover Project: Update 3</title><link>https://geekgonecrazy.com/2021/07/04/rover-project-update-3/</link><pubDate>Sun, 04 Jul 2021 00:03:00 +0000</pubDate><guid>https://geekgonecrazy.com/2021/07/04/rover-project-update-3/</guid><description>
 &lt;p>Finally a more eventful update!&lt;/p>
