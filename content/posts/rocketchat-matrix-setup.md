@@ -9,7 +9,7 @@ title = "Rocket.Chat and the Matrix Protocol"
 +++
 Rocket.Chat [federation support via the Matrix protocol](https://rocket.chat/press-releases/rocket-chat-leverages-matrix-protocol-for-decentralized-and-interoperable-communications).
 
-This announcement is an exciting one to me.  I've been working with Rocket.Chat since I found it over almost 7 years ago.  One of the things I recall from early on is the vision of being as ubiquitious as email.  One of the beauties of email is not everyone is on the same domain or let alone even the same kind of mail server.  Just all speaking the same language.
+This announcement is an exciting one to me.  I've been working with Rocket.Chat since I found it almost 7 years ago.  One of the things I recall from early on is the vision of being as ubiquitious as email.  One of the beauties of email is not everyone is on the same domain or let alone even the same kind of mail server.  Just all speaking the same language.
 
 Rocket.Chat being able to talk the Matrix Protocol to me is a start of it achieving that.
 
