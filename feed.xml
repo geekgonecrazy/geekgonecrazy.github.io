@@ -1,12 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 27 May 2022 00:00:00 +0000</lastBuildDate><item><title>Connecting Rocket.Chat to matrix</title><link>https://geekgonecrazy.com/2022/05/27/connecting-rocket.chat-to-matrix/</link><pubDate>Fri, 27 May 2022 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2022/05/27/connecting-rocket.chat-to-matrix/</guid><description>
-&lt;p>Rocket.Chat recently introduced support for Matrix via a built in bridge. I&amp;rsquo;m going to outline a quick and simple guide to getting this up and running.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 27 May 2022 00:00:00 +0000</lastBuildDate><item><title>Rocket.Chat &lt;--> Matrix</title><link>https://geekgonecrazy.com/2022/05/27/rocket.chat-matrix/</link><pubDate>Fri, 27 May 2022 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2022/05/27/rocket.chat-matrix/</guid><description>
+&lt;p>Rocket.Chat &lt;a href="https://rocket.chat/press-releases/rocket-chat-leverages-matrix-protocol-for-decentralized-and-interoperable-communications"target="_blank">recent announcement about interopt with the Matrix protocol&lt;/a>.&lt;/p>
+&lt;p>Basically.. You can now talk to anyone speaking the Matrix Protocol from Rocket.Chat.&lt;/p>
+&lt;p>It does this by registering as an AppService with a Matrix homeserver. This means Rocket.Chat is able to create users on the homeserver and then manage them. So when you opt to federate a room and invite a remote user using Matrix. Rocket.Chat creates your user on the homeserver and controls it as if they are one and the same user.&lt;/p>
+&lt;h1 id="how-to-setup-rocketchat-with-a-matrix-homeserver">How to setup Rocket.Chat with a Matrix homeserver&lt;/h1>
 &lt;ul>
 &lt;li>&lt;strong>Matrix support in Rocket.Chat is currently considered alpha. Expect things to break&lt;/strong>&lt;/li>
-&lt;li>&lt;strong>This guide also uses Dendrite which is also alpha&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>This guide also uses Dendrite which is beta&lt;/strong>&lt;/li>
 &lt;/ul>
+&lt;p>Video guide should you prefer that format:
 &lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
 &lt;iframe src="https://www.youtube.com/embed/oQhIH8kql9I" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
 &lt;/div>
+&lt;/p>
 &lt;h2 id="compute-requirements">Compute Requirements&lt;/h2>
 &lt;p>If your Rocket.Chat workspace will only support a few users you can generally get away with a machine like:&lt;/p>
 &lt;ul>
@@ -145,11 +150,13 @@ Replace: &lt;code>hs_token&lt;/code> value with the Homeserver Token you got fro
 Replace: &lt;code>as_token&lt;/code> value with the AppService Token you got from Rocket.Chat&lt;/p>
 &lt;p>Finally now we can start matrix up:&lt;/p>
 &lt;pre>&lt;code>docker compose up -d dendrite
-&lt;/code>&lt;/pre>&lt;h2 id="lets-try-talking-to-matrix">Lets try talking to matrix&lt;/h2>
-&lt;p>Now that we have dendrite up and Rocket.Chat up. Lets go into Rocket.Chat and try sending a message out to a matrix user out there. Can be another Rocket.Chat server, dendrite, synapse etc.&lt;/p>
-&lt;p>In this case i&amp;rsquo;m going to use @geekgonedev-demo:matrix.org&lt;/p>
+&lt;/code>&lt;/pre>&lt;h2 id="lets-try-talking-to-another-matrix-homeserver">Lets try talking to another Matrix Homeserver&lt;/h2>
+&lt;p>Now that we have dendrite up and Rocket.Chat up. Lets go into Rocket.Chat and try sending a message out to a user on another server out there speaking the Matrix Protocol. Can be another Rocket.Chat server, dendrite, synapse etc.&lt;/p>
+&lt;p>In this case i&amp;rsquo;m going to use an account from matrix.org &lt;a href="https://matrix.to/#/@geekgonedev-demo:matrix.org"target="_blank">@geekgonedev-demo:matrix.org&lt;/a>&lt;/p>
 &lt;p>Create a channel in Rocket.Chat and then do: &lt;code>/bridge invite @geekgonedev-demo:matrix.org&lt;/code>&lt;/p>
-&lt;p>In the client you have connected there you will receive an invite. Once accepted you can now type a message on either side and if all went well you should receive the message on the other side!&lt;/p></description></item><item><title>Rover Project: Update 3</title><link>https://geekgonecrazy.com/2021/07/04/rover-project-update-3/</link><pubDate>Sun, 04 Jul 2021 00:03:00 +0000</pubDate><guid>https://geekgonecrazy.com/2021/07/04/rover-project-update-3/</guid><description>
+&lt;p>In the client you have connected there you will receive an invite. Once accepted you can now type a message on either side and if all went well you should receive the message on the other side!&lt;/p>
+&lt;p>I&amp;rsquo;ll leave the server up for a couple of weeks if you want to try reaching me at &lt;a href="https://matrix.to/#/@aaron:geekgone.dev"target="_blank">@aaron:geekgone.dev&lt;/a>&lt;/p>
+&lt;p>Happy chatting!&lt;/p></description></item><item><title>Rover Project: Update 3</title><link>https://geekgonecrazy.com/2021/07/04/rover-project-update-3/</link><pubDate>Sun, 04 Jul 2021 00:03:00 +0000</pubDate><guid>https://geekgonecrazy.com/2021/07/04/rover-project-update-3/</guid><description>
 &lt;p>Finally a more eventful update!&lt;/p>
 &lt;p>Last time I worked with building parts in CAD I was using solidworks or AutoCAD. I have no desire to buy either one of those right now plus I need something that will run on linux. So started investing some time into learning my way around FreeCAD.&lt;/p>
 &lt;p>Creating first iteration of the wheel
