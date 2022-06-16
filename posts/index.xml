@@ -55,4 +55,8 @@ Before messing with it.
 When turning it on, it would show its gateway logo and then go blank. Which was a good sign. But none of the inputs worked.
 So I took it apart.</description></item><item><title>Building first desktop from scratch</title><link>/2010/03/24/building-first-desktop-from-scratch/</link><pubDate>Wed, 24 Mar 2010 00:00:00 +0000</pubDate><guid>/2010/03/24/building-first-desktop-from-scratch/</guid><description>Most of my childhood I have built computers. But it was always from parts laying around. A motherboard/CPU from here, case from another one etc.
 I finally saved up and planned out my own build from scratch. I&amp;rsquo;m posting to my blog because its a geeky milestone that every little geek must go through. A rite of passage if you will.
-I ran into a couple of problems along the way.</description></item></channel></rss>
+I ran into a couple of problems along the way.</description></item><item><title/><link>/1/01/01/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/1/01/01/</guid><description>Blog remote password reset
++++ title = &amp;ldquo;Adventures of the Remote Geek: Password reset&amp;rdquo; date = 2022-06-16T00:00:00Z layout = &amp;ldquo;post&amp;rdquo; publish = true comments = false tags = []
++++
+A few years back I wrote about Formating a machine over ssh. That was kind of crazy. But with ssh access to a linux box anything is possible.
+Time to take it to the next level. Time to earn the name Geek Gone Crazy.</description></item></channel></rss>
