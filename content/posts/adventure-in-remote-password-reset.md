@@ -1,5 +1,3 @@
-Blog remote password reset
-
 +++
 title = "Adventures of the Remote Geek: Password reset"
 date = 2022-06-16T00:00:00Z
