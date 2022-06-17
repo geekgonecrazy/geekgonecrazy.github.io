@@ -8,11 +8,6 @@ tags = []
 
 +++
 
-A few years back I wrote about [Formating a machine over ssh](https://geekgonecrazy.com/2012/08/20/format-machine-over-ssh/).  That was kind of crazy.  But with ssh access to a linux box anything is possible.
-
-Time to take it to the next level. Time to earn the name Geek Gone Crazy.  Lets set the stage:
-
----
 Our adventure begins on a Monday evening.  I received a call from a family member that lives a bit over 8 hours away.
 
 > I powered on my laptop today and it won't take my password
