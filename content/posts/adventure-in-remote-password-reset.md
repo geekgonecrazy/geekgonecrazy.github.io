@@ -19,7 +19,7 @@ So then I did what any self respecting computer guy does when need to find out t
 ## Options to do Password Reset
 
 Found a few options
-### Password reset via Security Questions 
+### Password Reset via Security Questions 
 
 Apparently these weren't set. Looks like it was introduced on Windows 10 Version 1803.  Not sure if we originally installed before then or exactly what happened.. but didn't have this.. so wasn't an option.
 
