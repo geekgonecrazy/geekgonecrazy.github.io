@@ -39,6 +39,7 @@ I honestly don't know what happened here.  I tried to navigate doing this based 
 
 It didn't work.
 
+
 ### Password Reset via Offline Windows Password & Registry Editor
 
 More info about it can be found here: https://pogostick.net/~pnh/ntpasswd/
@@ -59,7 +60,7 @@ We had spent several hours by this point.  The idea was even suggested that woul
 
 We decided to call it a night.  Went to bed thinking how much easier it would be if I could just use my own eyes and hands.   I'm a problem solver. I knew that if I was able to see it with my own eyes and use my own hands.. The whole try, process and iterate can happen **a lot faster**!
 
-## Being able to us my own eyes and hands
+## Being able to use my own eyes and hands
 
 Sounds a bit cliché.. But it hit me in the shower the next day.
 
