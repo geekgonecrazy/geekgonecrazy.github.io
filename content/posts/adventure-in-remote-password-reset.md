@@ -148,7 +148,7 @@ Big thanks to @amolith@nixnet.social for the suggestion
 
 If you are using teamviewer I highly recommend switching to RustDesk.  You can even self host the server portion if you want.
 
-From there used Rufus to put on the USB and then had plug ethernet into laptop along with the fresh USB.
+From there used Rufus to put on the USB and then had them plug ethernet into laptop along with the fresh USB.
 
 We booted.. and it didn't connect back up.
 
