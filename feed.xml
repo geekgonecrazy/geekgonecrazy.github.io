@@ -1,80 +1,109 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 16 Jun 2022 00:00:00 +0000</lastBuildDate><item><title>Adventures of the Remote Geek: Password reset</title><link>https://geekgonecrazy.com/2022/06/16/adventures-of-the-remote-geek-password-reset/</link><pubDate>Thu, 16 Jun 2022 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2022/06/16/adventures-of-the-remote-geek-password-reset/</guid><description>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 16 Jun 2022 00:00:00 +0000</lastBuildDate><item><title>Adventures of the Geek: Remote Password Reset</title><link>https://geekgonecrazy.com/2022/06/16/adventures-of-the-geek-remote-password-reset/</link><pubDate>Thu, 16 Jun 2022 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2022/06/16/adventures-of-the-geek-remote-password-reset/</guid><description>
 &lt;p>A few years back I wrote about &lt;a href="https://geekgonecrazy.com/2012/08/20/format-machine-over-ssh/"target="_blank">Formating a machine over ssh&lt;/a>. That was kind of crazy. But with ssh access to a linux box anything is possible.&lt;/p>
 &lt;p>Time to take it to the next level. Time to earn the name Geek Gone Crazy. Lets set the stage:&lt;/p>
-&lt;p>I have an elderly family member that lives a little over 8 hours away. I&amp;rsquo;ve become the defacto IT guy.&lt;/p>
-&lt;p>Anyways so the story begins. I was contacted with the case of &amp;ldquo;My password stopped working and I can&amp;rsquo;t login to my laptop to get some work done&amp;rdquo;.&lt;/p>
-&lt;p>We tried all the typical passwords and variations of them and nothing worked.&lt;/p>
-&lt;p>So then I went into research mode. How does a person reset a password on windows 10 now days? I don&amp;rsquo;t use windows at all now days and haven&amp;rsquo;t for a few years.&lt;/p>
-&lt;p>Found that there are several approaches:&lt;/p>
-&lt;h3 id="password-reset-via-security-questions">Password reset via Security questions&lt;/h3>
-&lt;p>Apparently we didn&amp;rsquo;t have those set. Looks like introduced on Windows 10 Version 1803. Not sure if we originally installed before then or what.. but didn&amp;rsquo;t have this.. so wasn&amp;rsquo;t an option.&lt;/p>
+&lt;hr>
+&lt;p>Our adventure begins on a Monday evening. I received a call from a family member that lives a bit over 8 hours away.&lt;/p>
+&lt;blockquote>
+&lt;p>I powered on my laptop today and it won&amp;rsquo;t take my password&lt;/p>
+&lt;/blockquote>
+&lt;p>Unfortunately the laptop runs Windows 10. I have made it a point to not use windows and haven&amp;rsquo;t for last several years. Primarily using linux or osx. Leaving me at a bit of a disadvantage.&lt;/p>
+&lt;p>So then I did what any self respecting computer guy does when need to find out the options. I duckduckgo&amp;rsquo;d it!&lt;/p>
+&lt;h2 id="options-to-do-password-reset">Options to do Password Reset&lt;/h2>
+&lt;p>Found a few options&lt;/p>
+&lt;h3 id="password-reset-via-security-questions">Password reset via Security Questions&lt;/h3>
+&lt;p>Apparently these weren&amp;rsquo;t set. Looks like it was introduced on Windows 10 Version 1803. Not sure if we originally installed before then or exactly what happened.. but didn&amp;rsquo;t have this.. so wasn&amp;rsquo;t an option.&lt;/p>
 &lt;h3 id="password-reset-via-password-reset-disk-or-usb">Password Reset via Password Reset Disk or USB&lt;/h3>
-&lt;p>We hadn&amp;rsquo;t prepared one. Awesome.&lt;/p>
-&lt;h3 id="reset-password-with-microsoft-account">Reset Password with Microsoft Account&lt;/h3>
-&lt;p>This was a local account.. not an option&lt;/p>
-&lt;h3 id="reset-password-in-safe-mode">Reset Password in Safe Mode&lt;/h3>
-&lt;p>I honestly don&amp;rsquo;t know what happened here. I didn&amp;rsquo;t have windows 10 in front of me and tried to navigate doing this based on screenshots on the internet and description of how things were reacting with my remote eyes and hands.&lt;/p>
+&lt;p>We hadn&amp;rsquo;t prepared one. Awesome&amp;hellip; After this is solved, making one is a must.&lt;/p>
+&lt;h3 id="password-reset-via-microsoft-account">Password Reset via Microsoft Account&lt;/h3>
+&lt;p>This was a local account.. not an option.&lt;/p>
+&lt;h3 id="password-reset-via-safe-mode">Password Reset via Safe Mode&lt;/h3>
+&lt;p>Tried this..&lt;/p>
+&lt;p>I honestly don&amp;rsquo;t know what happened here. I tried to navigate doing this based on screenshots on the internet. Relying on my remote eyes and hands to describe what was happening.&lt;/p>
 &lt;p>It didn&amp;rsquo;t work.&lt;/p>
-&lt;h3 id="several-other-password-reset-utilities">Several other &amp;ldquo;Password reset utilities&amp;rdquo;&lt;/h3>
-&lt;p>But honestly never used any of them. And if I was in person sitting in front of the computer I probably would have tried. But with remote eyes and hands.. It was a no go.&lt;/p>
-&lt;h3 id="offline-windows-password--registry-editor-bootdisk--cd">Offline Windows Password &amp;amp; Registry Editor, Bootdisk / CD&lt;/h3>
+&lt;h3 id="password-reset-via-offline-windows-password--registry-editor">Password Reset via Offline Windows Password &amp;amp; Registry Editor&lt;/h3>
 &lt;p>More info about it can be found here: &lt;a href="https://pogostick.net/~pnh/ntpasswd/">https://pogostick.net/~pnh/ntpasswd/&lt;/a>&lt;/p>
 &lt;p>This one had a lot of potential. Looked like it would do exactly what I needed.&lt;/p>
-&lt;p>So had a flash drive inserted to another laptop in the house. And used teamviewer to connect. Which literally only has their computers on it. They fire it up any time they need me to help.&lt;/p>
+&lt;p>Requested my helpful remote hands find a flash drive and put in an older laptop in the house. Used teamviewer to connect. It was already installed this isn&amp;rsquo;t the first time i&amp;rsquo;ve needed to help out with something.&lt;/p>
 &lt;p>From there I downloaded a super lightweight tool called &lt;a href="https://rufus.ie/"target="_blank">Rufus&lt;/a> and put the ISO on the flash drive.&lt;/p>
-&lt;p>I then attempted to walk through the process of plugging in an hitting F12 to boot from USB. After a few tries we did but the kernel kept crashing.&lt;/p>
-&lt;p>Identified via &lt;a href="https://www.reddit.com/r/techsupport/comments/7j4z5t/pogostick_ntpasswd_error_kernel_panic_not_syncing/"target="_blank">reddit post&lt;/a> that others had this and changing boot options had worked. We tried every combo. Then we went back to the other computer and flashed an older version hoping that would work.&lt;/p>
-&lt;p>Just to point out here.. this took a long time. Trying to relay information being discovered on the internet and translating that to the situation.. and trying to get remote hands to do the same. If you&amp;rsquo;re reading this.. you probably already know.&lt;/p>
-&lt;p>In the end.. Remote eyes and remote hands. If only I could just ssh in and do it my self&amp;hellip;&lt;/p>
-&lt;h2 id="use-my-own-eyes-and-hands">Use my own eyes and hands&lt;/h2>
-&lt;p>I don&amp;rsquo;t do this as my day job. I can imagine if I worked in a support desk i&amp;rsquo;d probably have a procedure documented on exactly how to walk them through it step by step and get it done. But thats not what I do.&lt;/p>
-&lt;p>What I really needed was to be able play to my strengths. I&amp;rsquo;m a problem solver. If I can see it with my own eyes and use my own hands.. I can try, process the information and iterate a &lt;strong>lot&lt;/strong> faster!&lt;/p>
-&lt;p>So what we need is an ssh connection directly to that machine with the power of linux at my disposal.&lt;/p>
-&lt;h3 id="exposing-ssh">Exposing SSH?&lt;/h3>
-&lt;p>How would we do that? Turns out with ssh you can forward local ports remotely. As well as remote ports locally.&lt;/p>
-&lt;p>So if we establish a connection out to a remote vps on the internet and expose our ssh port from the laptop&amp;hellip; We should be able to SSH back from the vps to the laptop.&lt;/p>
-&lt;pre>&lt;code>ssh -R 4022:localhost:22 -N user@my-vps
-&lt;/code>&lt;/pre>&lt;p>Great! But.. do we really want to ask them to type a password or to use password based ssh? Nah..&lt;/p>
-&lt;p>So we generate an ssh key and put the public key on the vps and have the private key for the laptop&lt;/p>
+&lt;p>With a little luck and a little trial and error. We managed to boot from the USB. But kept getting &amp;ldquo;&lt;a href="https://www.reddit.com/r/techsupport/comments/7j4z5t/pogostick_ntpasswd_error_kernel_panic_not_syncing/"target="_blank">Kernel panic not syncing&lt;/a>&amp;rdquo;. Even after trying all suggested work arounds.&lt;/p>
+&lt;p>This took several hours of verbally instructing these options to try, rebooting trying again.. Flashing an older version.&lt;/p>
+&lt;p>All with the same results.&lt;/p>
+&lt;p>We had spent several hours by this point. The idea was even suggested that would make unscheduled trip to visit us. Given the price of gas though and how rough it was for them to travel.. I really didn&amp;rsquo;t want it to come to this.&lt;/p>
+&lt;p>We decided to call it a night. Went to bed thinking how much easier it would be if I could just use my own eyes and hands. I&amp;rsquo;m a problem solver. I knew that if I was able to see it with my own eyes and use my own hands.. The whole try, process and iterate can happen &lt;strong>a lot faster&lt;/strong>!&lt;/p>
+&lt;h2 id="being-able-to-us-my-own-eyes-and-hands">Being able to us my own eyes and hands&lt;/h2>
+&lt;p>Sounds a bit cliché.. But it hit me in the shower the next day.&lt;/p>
+&lt;p>I&amp;rsquo;ve made livecd&amp;rsquo;s before&amp;hellip; What if I could have a livecd like the one we had tried.. but based on a more versital distro like Ubuntu. Ubuntu typically boots up on just works about any hardware.&lt;/p>
+&lt;p>While i&amp;rsquo;m at it, what if it connected back to me so I could run commands my self? With linux at my hands.. I knew we could get it resolved.&lt;/p>
+&lt;h3 id="connect-back-to-me">Connect back to me?&lt;/h3>
+&lt;p>Turns out this is actually extremely easy.&lt;/p>
+&lt;p>With ssh you can expose a local port remotely with a command like this:&lt;/p>
 &lt;pre>&lt;code>ssh -i ~/path-to-ssh-key -R 4022:localhost:22 -N user@my-vps
-&lt;/code>&lt;/pre>&lt;h3 id="wait-are-we-going-to-ask-for-this-all-to-be-typed">Wait.. Are we going to ask for this all to be typed?&lt;/h3>
-&lt;p>Of course not. That would be crazy.&lt;/p>
-&lt;p>In the past (like 10 years ago) I had created a livecd that I had actually shipped to them. But then I made the mistake of losing my copy and all original files that I used to make it up.&lt;/p>
-&lt;p>So I went on the duckduckgo path of trying to figure out now days what the easiest way to package up a livecd was.&lt;/p>
-&lt;p>There are a lot of tools for creating images to install in automated way on machines. Packer etc..&lt;/p>
-&lt;p>But not a lot for making livecds. There are a few gui options.. but I wanted to be able to just quickly put it together in a more repeatable way so this was more future proof.&lt;/p>
-&lt;p>I then found this guide: &lt;a href="https://slai.github.io/posts/customising-ubuntu-live-isos-with-docker/">https://slai.github.io/posts/customising-ubuntu-live-isos-with-docker/&lt;/a>&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>It uses an ssh key and expose port 22 on the remote host on port 4022.&lt;/p>
+&lt;h3 id="creating-your-own-livecd">Creating your own livecd?&lt;/h3>
+&lt;p>I&amp;rsquo;ll save you from some of the discovery. There are many ways to create linux livecds. A few of even with a GUI.&lt;/p>
+&lt;p>But, I wanted a way to do it quickly and repeatable with out having to use a GUI.&lt;/p>
+&lt;p>I&amp;rsquo;ve made some before manually but not very repeatable as it was always manually editing the squashfs and chrooting in and poking around.&lt;/p>
+&lt;p>I found this guide great example of loading a livecd as a docker image and then using docker to modify it&lt;/p>
+&lt;p>&lt;a href="https://slai.github.io/posts/customising-ubuntu-live-isos-with-docker/">https://slai.github.io/posts/customising-ubuntu-live-isos-with-docker/&lt;/a>&lt;/p>
 &lt;p>Perfect!&lt;/p>
-&lt;h3 id="creating-livecd">Creating livecd&lt;/h3>
+&lt;h3 id="lets-do-make-it">Lets do make it!&lt;/h3>
 &lt;p>The important aspects of the livecd would be:&lt;/p>
 &lt;ol>
-&lt;li>Light weight. So need to use the server iso as the base&lt;/li>
+&lt;li>Lighter weight - Ubuntu Server would be the base.&lt;/li>
 &lt;li>Automatically connect to the internet&lt;/li>
-&lt;li>Automatically run the ssh tunnel&lt;/li>
-&lt;li>Reconnect if disconnected&lt;/li>
-&lt;li>Have some preinstalled tools like chntpw that I discovered thanks to the first ISO tried. Also things like openssh-server ntfs-3g would be good to have&lt;/li>
-&lt;li>An ssh key baked in that could be used for connecting up.. but also that could be used to connect from VPS back&lt;/li>
+&lt;li>Automatically run the ssh tunnel back to me&lt;/li>
+&lt;li>Automatically reconnect the ssh tunnel if disconnected&lt;/li>
+&lt;li>Have some preinstalled tools
+&lt;ul>
+&lt;li>ntfs - i&amp;rsquo;d need to mount that partition&lt;/li>
+&lt;li>ssh server - of course&lt;/li>
+&lt;li>chntpw - most importantly in this case the tool we discovered thanks to the previous day that could modify the registry&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Baked ssh keys for bi-directional communciation&lt;/li>
 &lt;/ol>
 &lt;p>Nice to have:&lt;/p>
 &lt;ol>
-&lt;li>Don&amp;rsquo;t start up the installer it just adds confusion&lt;/li>
-&lt;li>Customize grub entry so it doesn&amp;rsquo;t say its installing&lt;/li>
+&lt;li>Don&amp;rsquo;t start up the installer it would be confusing&lt;/li>
+&lt;li>Customize boot menu so it doesn&amp;rsquo;t say &amp;ldquo;Install Ubuntu Server&amp;rdquo;&lt;/li>
 &lt;li>Include some text above the login prompt to communicate to the user&lt;/li>
 &lt;/ol>
-&lt;p>From that we end up with: &lt;a href="https://github.com/geekgonecrazy/remote-recover-livecd">https://github.com/geekgonecrazy/remote-recover-livecd&lt;/a>&lt;/p>
-&lt;h3 id="lets-go">Lets go!&lt;/h3>
-&lt;p>During this time of build, try in vm, iterate&amp;hellip; I ran into an apparently common problem. Teamviewer decided I was using it for commercial use. Meaning sessions lasted ~1 minute in length and would randomly &amp;ldquo;reset&amp;rdquo;. Then it would claim I had to wait 1 minute (it provided the timestamp of when) before I could try again. I&amp;rsquo;d wait 2 minutes (just in case of clock not being sync&amp;rsquo;d) try again and it&amp;rsquo;d say I had to wait another minute. After about 5-6 minutes I could finally get connected and then quickly do something for 1 more minute.&lt;/p>
-&lt;p>&lt;strong>Extremely frustrating&lt;/strong>&lt;/p>
-&lt;p>If I was using this for commercial purposes and I had a bunch of clients I was providing services via teamviewer.. I would have succumed to just paying. How ever since I wasn&amp;rsquo;t making a dime off of any usage from it and fitting in the &amp;ldquo;non-commercial usage&amp;rdquo;.. I went shopping for another tool. Even if I had to pay for it.&lt;/p>
-&lt;p>Ended up thanks to &lt;a href="https://nixnet.social/objects/c34e67c2-aa8f-45bc-916d-1b66f76b84f8"target="_blank">@amolith@nixnet.social&lt;/a> discovering an open source option called: &lt;a href="https://rustdesk.com"target="_blank">rustdesk&lt;/a>&lt;/p>
-&lt;p>Which I painfully managed to install over the course of 30 minutes or so&amp;hellip; Thanks to constant disconnects and waiting 5 minutes between 1 minute bursts.&lt;/p>
-&lt;p>It works flawlessly. 10/10 recommend. Plus you can self host the server portion if you want.&lt;/p>
+&lt;p>For more technical details see this github repo: &lt;a href="https://github.com/geekgonecrazy/remote-recover-livecd">https://github.com/geekgonecrazy/remote-recover-livecd&lt;/a>&lt;/p>
+&lt;p>I set about building after my work day ended.&lt;/p>
+&lt;h3 id="attack-of-the-remote-desktop-tooling">Attack of the remote desktop tooling&lt;/h3>
+&lt;p>It came time to load the iso up on the USB drive.&lt;/p>
+&lt;p>Teamviewer showed its true colors.&lt;/p>
+&lt;p>They apparently decided since I needed to remote in two days in a row.. that I was exhibiting signs of commercial use.&lt;/p>
+&lt;p>Meaning apparently they start being extremely aggressive. My first session of the evening was barely open and then abruptly ended. I tried connecting again and it said something like: You can&amp;rsquo;t reconnect again so soon try again at: 17:55.&lt;/p>
+&lt;p>I waited until then and it showed another saying try again at 17:56. I guess a clock is off somewhere or the error time frame was wrong? It ended up being at least 5 minutes before could connect.&lt;/p>
+&lt;p>Here begun that pattern of wait 5 minutes.. Scramble to work for 1 minute before getting the session ripped away from me.&lt;/p>
+&lt;p>&lt;strong>Extremely frustrating!&lt;/strong>&lt;/p>
+&lt;p>I did debate paying them. But appears they don&amp;rsquo;t sell monthly.. so I&amp;rsquo;d have to shell out $400+ just to ocassionally use it to help out family. Nope.. Sorry.&lt;/p>
+&lt;p>I went shopping for another tool. Even if I had to pay for it surely there is something better out there.&lt;/p>
+&lt;p>I &lt;a href="https://fosstodon.org/@geekgonecrazy/108478535293237696"target="_blank">posted about this frustration on mastodon&lt;/a>&lt;/p>
+&lt;p>Big thanks to @amolith@nixnet.social for the suggestion&lt;/p>
+&lt;p>&lt;img src="https://user-images.githubusercontent.com/51996/174218187-0463babe-38af-4f3f-bf24-5eea9cfd5b30.png"
+alt/>&lt;/p>
+&lt;p>&lt;a href="https://rustdesk.com"target="_blank">Rustdesk&lt;/a> was perfect!&lt;/p>
+&lt;p>A few minute process of installing rustdesk took 30 minutes or so&amp;hellip; Thanks to constant disconnects and waiting 5 minutes between 1 minute bursts.&lt;/p>
+&lt;p>10/10 would recommend RustDesk. Plus you can self host the server portion if you want.&lt;/p>
 &lt;p>From there used Rufus to put on the USB and then had plug ethernet into laptop along with the fresh USB.&lt;/p>
-&lt;p>Then from vps:&lt;/p>
-&lt;pre>&lt;code>ssh -i pre-shared-key -p 4022 root@localhost
-&lt;/code>&lt;/pre>&lt;p>Presto! I had ssh access to the laptop!&lt;/p>
-&lt;h2 id="finally-resetting-password">Finally Resetting password&lt;/h2>
-&lt;p>From there mounted the hard drive with a quick&lt;/p>
+&lt;p>We booted.. and it didn&amp;rsquo;t connect back up.&lt;/p>
+&lt;p>&lt;img src="https://media.giphy.com/media/xT5LMzIK1AdZJ4cYW4/giphy.gif"
+alt/>&lt;/p>
+&lt;p>We had to call it a night. This ended night 2.&lt;/p>
+&lt;h2 id="one-more-try">One more try&lt;/h2>
+&lt;p>Next day I realized it was netplan.. I had removed the installer squashfs and seems it was handling doing some netplan configuration inside of it.&lt;/p>
+&lt;p>At the end of the work day I built the iso again and coordinated the other laptop turned on. Quick rustdesk and rufus later&amp;hellip;&lt;/p>
+&lt;p>USB inserted and there it was!&lt;/p>
+&lt;p>I finally had access and the process of could finally begin of resetting the password!&lt;/p>
+&lt;p>10 minutes later the password was reset.&lt;/p>
+&lt;h2 id="that-was-a-lot">That was a lot&lt;/h2>
+&lt;p>Yeah that was a bit crazy.. But now I have a flash drive on site that if this ever happens again.. I can spin up my vps and have them insert the flash drive.&lt;/p>
+&lt;p>So all in all.. Another tool for the tool belt. Definitely might be closer to earning the Crazy in Geek Gone Crazy. :smile:&lt;/p>
+&lt;h2 id="you-left-me-hanging-how-did-you-reset">You left me hanging how did you reset?&lt;/h2>
+&lt;p>Ok if you want the last 10 minutes.. they went something like this.&lt;/p>
+&lt;p>I mounted the hard drive with a quick:&lt;/p>
 &lt;pre>&lt;code>mkdir /mnt/laptop
 mount /dev/sda2 /mnt/laptop
 &lt;/code>&lt;/pre>&lt;p>Using &lt;code>fdisk -l&lt;/code> to determine the drive and partition.&lt;/p>
@@ -83,7 +112,9 @@ mount /dev/sda2 /mnt/laptop
 &lt;/code>&lt;/pre>&lt;p>Here is where all of the registry hive files are for windows.&lt;/p>
 &lt;p>Now we use the chntpwd util we pre-installed&lt;/p>
 &lt;pre>&lt;code>chntpw –l SAM
-&lt;/code>&lt;/pre>&lt;p>From here you follow the prompts to reset the password. Or in my case I went the path of just blanking the password out.&lt;/p></description></item><item><title>Rocket.Chat and the Matrix Protocol</title><link>https://geekgonecrazy.com/2022/05/30/rocketchat-and-the-matrix-protocol/</link><pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2022/05/30/rocketchat-and-the-matrix-protocol/</guid><description>
+&lt;/code>&lt;/pre>&lt;p>From here you follow the prompts to reset the password. Or in my case I went the path of just blanking the password out.&lt;/p>
+&lt;p>&lt;img src="https://media.giphy.com/media/PqjTdvXImZQfcmTYEO/giphy.gif"
+alt/>&lt;/p></description></item><item><title>Rocket.Chat and the Matrix Protocol</title><link>https://geekgonecrazy.com/2022/05/30/rocketchat-and-the-matrix-protocol/</link><pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2022/05/30/rocketchat-and-the-matrix-protocol/</guid><description>
 &lt;p>Rocket.Chat &lt;a href="https://rocket.chat/press-releases/rocket-chat-leverages-matrix-protocol-for-decentralized-and-interoperable-communications"target="_blank">now has federation support via the Matrix protocol&lt;/a>.&lt;/p>
 &lt;p>This announcement is an exciting one to me. I&amp;rsquo;ve been working with Rocket.Chat since I found it almost 7 years ago. One of the things I recall from early on is the vision of being as ubiquitious as email. One of the beauties of email is not everyone is on the same domain or let alone even the same kind of mail server. Just all speaking the same language.&lt;/p>
 &lt;p>Rocket.Chat being able to talk the Matrix Protocol to me is a start of it achieving that.&lt;/p>
