@@ -39,7 +39,6 @@ I honestly don't know what happened here.  I tried to navigate doing this based 
 
 It didn't work.
 
-
 ### Password Reset via Offline Windows Password & Registry Editor
 
 More info about it can be found here: https://pogostick.net/~pnh/ntpasswd/
@@ -94,7 +93,7 @@ https://slai.github.io/posts/customising-ubuntu-live-isos-with-docker/
 
 Perfect!
 
-### Lets do make it!
+### Lets make it!
 
 The important aspects of the livecd would be:
 1. Lighter weight - Ubuntu Server would be the base.
@@ -170,7 +169,9 @@ I finally had access and the process of could finally begin of resetting the pas
 
 ## That was a lot
 
-Yeah that was a bit crazy.. But now I have a flash drive on site that if this ever happens again.. I can spin up my vps and have them insert the flash drive.
+Yes it was! 3 days to reset a password.  Just a bit crazy..
+
+But now I have a flash drive on site that if this ever happens again.. I can spin up my vps and have them insert the flash drive.
 
 So all in all.. Another tool for the tool belt.  Definitely might be closer to earning the Crazy in Geek Gone Crazy.  :smile:
 
