@@ -43,7 +43,7 @@
 &lt;p>I found this guide great example of loading a livecd as a docker image and then using docker to modify it&lt;/p>
 &lt;p>&lt;a href="https://slai.github.io/posts/customising-ubuntu-live-isos-with-docker/">https://slai.github.io/posts/customising-ubuntu-live-isos-with-docker/&lt;/a>&lt;/p>
 &lt;p>Perfect!&lt;/p>
-&lt;h3 id="lets-do-make-it">Lets do make it!&lt;/h3>
+&lt;h3 id="lets-make-it">Lets make it!&lt;/h3>
 &lt;p>The important aspects of the livecd would be:&lt;/p>
 &lt;ol>
 &lt;li>Lighter weight - Ubuntu Server would be the base.&lt;/li>
@@ -96,7 +96,8 @@ alt/>&lt;/p>
 &lt;p>I finally had access and the process of could finally begin of resetting the password!&lt;/p>
 &lt;p>10 minutes later the password was reset.&lt;/p>
 &lt;h2 id="that-was-a-lot">That was a lot&lt;/h2>
-&lt;p>Yeah that was a bit crazy.. But now I have a flash drive on site that if this ever happens again.. I can spin up my vps and have them insert the flash drive.&lt;/p>
+&lt;p>Yes it was! 3 days to reset a password. Just a bit crazy..&lt;/p>
+&lt;p>But now I have a flash drive on site that if this ever happens again.. I can spin up my vps and have them insert the flash drive.&lt;/p>
 &lt;p>So all in all.. Another tool for the tool belt. Definitely might be closer to earning the Crazy in Geek Gone Crazy. :smile:&lt;/p>
 &lt;h2 id="you-left-me-hanging-how-did-you-reset">You left me hanging how did you reset?&lt;/h2>
 &lt;p>Ok if you want the last 10 minutes.. they went something like this.&lt;/p>
