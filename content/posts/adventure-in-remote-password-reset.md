@@ -62,7 +62,7 @@ We decided to call it a night.  Went to bed thinking how much easier it would be
 
 ## Being able to use my own eyes and hands
 
-Sounds a bit cliché.. But it hit me in the shower the next day.
+Sounds a bit cliché.. But it hit me in the shower Tuesday morning.
 
 I've made livecd's before... What if I could have a livecd like the one we had tried.. but based on a more versital distro like Ubuntu.  Ubuntu typically boots up on just works about any hardware. 
 
@@ -144,9 +144,9 @@ Big thanks to @amolith@nixnet.social for the suggestion
 
 [Rustdesk](https://rustdesk.com) was perfect!
 
-A few minute process of installing rustdesk took 30 minutes or so... Thanks to constant disconnects and waiting 5 minutes between 1 minute bursts.
+30 minutes or so later... Thanks teamviewer.. I had rustdesk installed and was able to move forward.
 
-10/10 would recommend RustDesk.  Plus you can self host the server portion if you want.
+If you are using teamviewer I highly recommend switching to RustDesk.  You can even self host the server portion if you want.
 
 From there used Rufus to put on the USB and then had plug ethernet into laptop along with the fresh USB.
 
@@ -158,9 +158,9 @@ We had to call it a night.  This ended night 2.
 
 ## One more try
 
-Next day I realized it was netplan.. I had removed the installer squashfs and seems it was handling doing some netplan configuration inside of it.
+Wednesday came and I quickly realized it was netplan.. I think because I had removed the installer squashfs not thinking much about it.. It must have been initalizing a netplan file.
 
-At the end of the work day I built the iso again and coordinated the other laptop turned on.  Quick rustdesk and rufus later...
+At the end of the work day I made some changes and built the iso again.  Quick rustdesk and rufus later...
 
 USB inserted and there it was!
 
