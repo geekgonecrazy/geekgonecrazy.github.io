@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 16 Jun 2022 00:00:00 +0000</lastBuildDate><item><title>Adventures of the Geek: Remote Password Reset</title><link>https://geekgonecrazy.com/2022/06/16/adventures-of-the-geek-remote-password-reset/</link><pubDate>Thu, 16 Jun 2022 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2022/06/16/adventures-of-the-geek-remote-password-reset/</guid><description>
-&lt;p>A few years back I wrote about &lt;a href="https://geekgonecrazy.com/2012/08/20/format-machine-over-ssh/"target="_blank">Formating a machine over ssh&lt;/a>. That was kind of crazy. But with ssh access to a linux box anything is possible.&lt;/p>
-&lt;p>Time to take it to the next level. Time to earn the name Geek Gone Crazy. Lets set the stage:&lt;/p>
-&lt;hr>
 &lt;p>Our adventure begins on a Monday evening. I received a call from a family member that lives a bit over 8 hours away.&lt;/p>
 &lt;blockquote>
 &lt;p>I powered on my laptop today and it won&amp;rsquo;t take my password&lt;/p>
