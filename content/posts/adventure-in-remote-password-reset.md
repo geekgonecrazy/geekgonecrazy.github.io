@@ -164,7 +164,7 @@ At the end of the work day I made some changes and built the iso again.  Quick r
 
 USB inserted and there it was!
 
-I finally had access and the process of could finally begin of resetting the password!
+I finally had access and the process could finally begin of resetting the password!
 
 10 minutes later the password was reset.
 
