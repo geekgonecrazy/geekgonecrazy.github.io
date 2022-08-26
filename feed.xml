@@ -1067,9 +1067,9 @@ alt="Screenshots in dock"/>&lt;/p>
 &lt;h3 id="google-chrome">Google Chrome&lt;/h3>
 &lt;p>Gotta have my favorite browser.&lt;/p>
 &lt;p>&lt;a href="https://www.google.com/chrome"target="_blank">Download Here&lt;/a>&lt;/p>
-&lt;h3 id="spectacle">Spectacle&lt;/h3>
+&lt;h3 id="rectangle">Rectangle&lt;/h3>
 &lt;p>This is an application that allows you to use keyboard shortcuts to quickly snap windows. Very useful&lt;/p>
-&lt;p>&lt;a href="https://www.spectacleapp.com/"target="_blank">Download Here&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://rectangleapp.com"target="_blank">Download Here&lt;/a>&lt;/p>
 &lt;h3 id="visual-studio-code">Visual Studio Code&lt;/h3>
 &lt;p>Code editor of choice.&lt;/p>
 &lt;p>&lt;img src="https://code.visualstudio.com/assets/home/home-screenshot-mac.png"
@@ -1143,6 +1143,10 @@ git config --global user.name &amp;quot;Your Name&amp;quot;
 &lt;p>&lt;img src="/images/2015-09-19/final.png"
 alt="Final"/>&lt;/p>
 &lt;h3 id="updates">Updates&lt;/h3>
+&lt;h4 id="08262022">08/26/2022&lt;/h4>
+&lt;ul>
+&lt;li>Swap Spectacle out with Rectangle now that spectacle is no longer maintained&lt;/li>
+&lt;/ul>
 &lt;h4 id="06152018">06/15/2018&lt;/h4>
 &lt;ul>
 &lt;li>Come to realization that this is isn&amp;rsquo;t a blog post&amp;hellip; but more just of a list of software I use.&lt;/li>
