@@ -8,8 +8,6 @@ tags = []
 
 +++
 
-# How to Set Up Client SSL Certificate Authentication for [Rocket.Chat](http://Rocket.Chat) with Nginx
-
 Are you looking to add an extra layer of security to access Rocket.Chat? One way to do this is by implementing client SSL certificate authentication with Nginx. This authentication method requires clients to present a valid SSL certificate to authenticate themselves to the server.
 
 In this tutorial, we will walk through the steps to set up client SSL certificate authentication with Nginx. We assume you have an AWS instance running Ubuntu and have already installed Docker.
