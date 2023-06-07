@@ -1,49 +1,64 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 23 May 2023 00:00:00 +0000</lastBuildDate><item><title>How to Set Up Client SSL Certificate Authentication for Rocket.Chat</title><link>https://geekgonecrazy.com/2023/05/23/how-to-set-up-client-ssl-certificate-authentication-for-rocket.chat/</link><pubDate>Tue, 23 May 2023 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2023/05/23/how-to-set-up-client-ssl-certificate-authentication-for-rocket.chat/</guid><description>
-&lt;p>Are you looking to add an extra layer of security to access Rocket.Chat? One way to do this is by implementing client SSL certificate authentication with Nginx. This authentication method requires clients to present a valid SSL certificate to authenticate themselves to the server.&lt;/p>
-&lt;p>In this tutorial, we will walk through the steps to set up client SSL certificate authentication with Nginx. We assume you have an AWS instance running Ubuntu and have already installed Docker.&lt;/p>
+&lt;p>Are you looking to add an extra layer of security to access Rocket.Chat? One way to do this is by implementing client SSL certificate authentication. This authentication method requires clients to present a valid SSL certificate to authenticate themselves to the server.&lt;/p>
+&lt;p>In this post, we will walk through the steps to set up client SSL certificate authentication using Nginx.&lt;/p>
 &lt;h2 id="prerequisites">Prerequisites&lt;/h2>
-&lt;ol>
-&lt;li>A server
-&lt;ol>
+&lt;ul>
+&lt;li>A server running Ubuntu
+&lt;ul>
 &lt;li>Allow HTTP/HTTPS/ssh in security group&lt;/li>
 &lt;li>Create a public IP and associate it.&lt;/li>
-&lt;/ol>
+&lt;/ul>
 &lt;/li>
 &lt;li>A domain&lt;/li>
 &lt;li>&lt;strong>Domain pointed to the server&lt;/strong>&lt;/li>
-&lt;/ol>
-&lt;h2 id="step-1-install-nginx">Step 1: Install Nginx&lt;/h2>
-&lt;p>&lt;code>sudo apt install -y nginx&lt;/code>&lt;/p>
-&lt;h2 id="step-2-install-certbot">Step 2: Install Certbot&lt;/h2>
-&lt;ol>
-&lt;li>&lt;code>sudo snap install --classic certbot&lt;/code>&lt;/li>
-&lt;li>&lt;code>sudo certbot --nginx&lt;/code>
-&lt;ol>
-&lt;li>Provide email and the domain set&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;/ol>
-&lt;h2 id="step-3-generate-certificate-authority-ca-certificates">Step 3: Generate Certificate Authority (CA) Certificates&lt;/h2>
-&lt;ol>
-&lt;li>Generate a key for your CA for the client SSL with: &lt;code>openssl genrsa -des3 -out ca.key 4096&lt;/code>&lt;/li>
-&lt;li>Generate a certificate for your CA: &lt;code>openssl req -new -x509 -days 365 -key ca.key -out ca.crt&lt;/code>
-&lt;ol>
+&lt;/ul>
+&lt;h2 id="step-1-install-docker">Step 1: Install Docker&lt;/h2>
+&lt;p>Lets do a quick and easy install of Docker if you haven&amp;rsquo;t already.&lt;/p>
+&lt;pre>&lt;code>curl -L https://get.docker.com | sh
+&lt;/code>&lt;/pre>&lt;p>Now Lets add your user to the docker group so you don&amp;rsquo;t have to use &lt;code>sudo&lt;/code> before every docker command.&lt;/p>
+&lt;pre>&lt;code>sudo usermod -aG docker $USER
+&lt;/code>&lt;/pre>&lt;p>Normally here we&amp;rsquo;d say logout and back in.. but I don&amp;rsquo;t want to mess with it so I use:&lt;/p>
+&lt;pre>&lt;code>newgrp docker
+&lt;/code>&lt;/pre>&lt;h2 id="step-2-install-rocketchat">Step 2: Install Rocket.Chat&lt;/h2>
+&lt;p>Now that we have Docker installed lets get Rocket.Chat up and running.&lt;/p>
+&lt;p>Start off with creating a rocketchat directory and grabbing the docker-compose file:&lt;/p>
+&lt;pre>&lt;code>mkdir rocketchat &amp;amp;&amp;amp; cd &amp;quot;$_&amp;quot;
+curl -L https://go.rocket.chat/i/docker-compose.yml -O
+&lt;/code>&lt;/pre>&lt;p>Next lets fire it up.&lt;/p>
+&lt;pre>&lt;code>docker compose up -d
+&lt;/code>&lt;/pre>&lt;p>If impatient or only came here to install Rocket.Chat you could access on port 3000 if your firewall is open. But I suspect you came here for seeing how to do client SSL. So lets carry on!&lt;/p>
+&lt;h2 id="step-3-install-nginx">Step 3: Install Nginx&lt;/h2>
+&lt;pre>&lt;code>sudo apt install -y nginx
+&lt;/code>&lt;/pre>&lt;h2 id="step-4-install-certbot">Step 4: Install Certbot&lt;/h2>
+&lt;p>To help us get a valid certificate we are going to use letsencrypt but using a tool called certbot. This will help us make sure to keep the certificate valid as well.&lt;/p>
+&lt;pre>&lt;code>sudo snap install --classic certbot
+&lt;/code>&lt;/pre>&lt;p>Now use certbot to generate and plug everything up for letsencrypt and nginx:&lt;/p>
+&lt;pre>&lt;code>sudo certbot --nginx
+&lt;/code>&lt;/pre>&lt;p>You’ll be asked to provide a valid email and the domain set.&lt;/p>
+&lt;h2 id="step-5-generate-certificate-authority-ca-certificates">Step 5: Generate Certificate Authority (CA) Certificates&lt;/h2>
+&lt;p>In order to do client SSL Authentication we’re going to need a CA.&lt;/p>
+&lt;h3 id="generate-a-key-for-your-ca">Generate a key for your CA:&lt;/h3>
+&lt;pre>&lt;code>openssl genrsa -des3 -out ca.key 4096
+&lt;/code>&lt;/pre>&lt;h3 id="generate-a-certificate-for-your-ca">Generate a certificate for your CA:&lt;/h3>
+&lt;pre>&lt;code>openssl req -new -x509 -days 365 -key ca.key -out ca.crt
+&lt;/code>&lt;/pre>&lt;ul>
 &lt;li>Note what you’ve entered for Country, State, Locality, and Organization; you’ll want these to match later when you renew the certificate.&lt;/li>
 &lt;li>Do not enter a common name (CN) for the certificate.&lt;/li>
 &lt;li>Email can be omitted.&lt;/li>
-&lt;li>Note renewing certificate involves running the same command. If you need to remember what options you chose you can run: &lt;code>openssl x509 -in ca.crt -noout -text&lt;/code>&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>Move CA cert to: &lt;code>/etc/ssl/private/client-cert-ca.crt&lt;/code>&lt;/li>
-&lt;li>Update Nginx listing adding client cert and location block:&lt;/li>
-&lt;/ol>
+&lt;li>Note renewing certificate involves running the same command. If you need to remember what options you chose you can run:&lt;/li>
+&lt;/ul>
+&lt;pre>&lt;code>openssl x509 -in ca.crt -noout -text
+&lt;/code>&lt;/pre>&lt;h3 id="move-ca-cert">Move CA cert&lt;/h3>
+&lt;p>To: &lt;code>/etc/ssl/private/client-cert-ca.crt&lt;/code>&lt;/p>
+&lt;h3 id="update-nginx-config">Update Nginx config&lt;/h3>
+&lt;p>We need to add CA cert, turn on client ssl authentication and add location block:&lt;/p>
 &lt;pre>&lt;code>ssl_client_certificate /etc/ssl/private/client-cert-ca.crt;
 ssl_verify_client optional;
 location / {
 if ($ssl_client_verify != SUCCESS) {
 return 403;
 }
-proxy_pass &amp;lt;http://localhost:3000/&amp;gt;;
+proxy_pass http://localhost:3000;
 proxy_http_version 1.1;
 proxy_set_header Upgrade $http_upgrade;
 proxy_set_header Connection &amp;quot;upgrade&amp;quot;;
@@ -54,29 +69,36 @@ proxy_set_header X-Forwarded-Proto https;
 proxy_set_header X-Nginx-Proxy true;
 proxy_redirect off;
 }
-&lt;/code>&lt;/pre>&lt;h2 id="step-4-issue-client-ssl-certificates">Step 4: Issue Client SSL Certificates&lt;/h2>
-&lt;ol>
-&lt;li>Generate key: &lt;code>openssl genrsa -des3 -out user.key 4096&lt;/code>&lt;/li>
-&lt;li>Generate CSR: &lt;code>openssl req -new -key user.key -out user.csr&lt;/code>
-&lt;ol>
+&lt;/code>&lt;/pre>&lt;h2 id="step-6-issue-client-ssl-certificates-for-users">Step 6: Issue Client SSL Certificates for users&lt;/h2>
+&lt;p>You can have your users perform most of these steps if you want. But the following are the steps needed to create a certificate to present as client authentication.&lt;/p>
+&lt;h3 id="generate-key-for-user">Generate key for user&lt;/h3>
+&lt;pre>&lt;code>openssl genrsa -des3 -out user.key 4096
+&lt;/code>&lt;/pre>&lt;h3 id="generate-a-csr">Generate a CSR&lt;/h3>
+&lt;pre>&lt;code>openssl req -new -key user.key -out user.csr
+&lt;/code>&lt;/pre>&lt;ul>
 &lt;li>A number of questions will be asked; answer each one, including the Common Name (CN) and email address. The CSR needs to be sent to the admin (or you if you are doing this for the user).&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>As the admin, take the CSR given to you or generated by you and sign the CSR and create valid certificate: &lt;code>openssl x509 -req -days 365 -in user.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out user.crt&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h3 id="sign-csr-with-ca">Sign CSR with CA&lt;/h3>
+&lt;p>As the admin, take the CSR given to you or generated by you and sign the CSR and create valid certificate:&lt;/p>
+&lt;pre>&lt;code>openssl x509 -req -days 365 -in user.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out user.crt
+&lt;/code>&lt;/pre>&lt;ul>
 &lt;li>You’ll want to increment the serial number with each signing. Once the certificate expires, a new CSR doesn’t need to be recreated; the same one can be signed, which will create a new certificate tied to that public key.&lt;/li>
-&lt;li>The signed certificate would be sent back to the user along with the CA cert (not the key!), for installation on their device.&lt;/li>
-&lt;li>Generate pkcs #12: &lt;code>openssl pkcs12 -export -out user.pfx -inkey user.key -in user.crt -certfile ca.crt&lt;/code> beware if you intend to install on Mac or iOS, generate on iOS or use an older version of OpenSSL. More info here: &lt;a href="https://developer.apple.com/forums/thread/697030?answerId=710429022#710429022"target="_blank">https://developer.apple.com/forums/thread/697030?answerId=710429022#710429022&lt;/a>&lt;/li>
-&lt;/ol>
-&lt;h2 id="step-5-access-rocketchat-using-client-ssl-certificate">Step 5: Access Rocket.Chat using Client SSL Certificate&lt;/h2>
+&lt;/ul>
+&lt;h3 id="return-certificate">Return Certificate&lt;/h3>
+&lt;p>The signed certificate (user.crt) can now be sent back to the user along with the CA cert(ca.crt).&lt;/p>
+&lt;p>To be able to use in browsers and mobile generate a pkcs #12 using the user cert and key along with the Ca:&lt;/p>
+&lt;pre>&lt;code>openssl pkcs12 -export -out user.pfx -inkey user.key -in user.crt -certfile ca.crt
+&lt;/code>&lt;/pre>&lt;p>Beware if you intend to install on Mac or iOS, you may need to use an older version of OpenSSL. More info here: &lt;a href="https://developer.apple.com/forums/thread/697030?answerId=710429022#710429022"target="_blank">https://developer.apple.com/forums/thread/697030?answerId=710429022#710429022&lt;/a>&lt;/p>
+&lt;h2 id="step-7-access-rocketchat-using-client-ssl-certificate">Step 7: Access Rocket.Chat using Client SSL Certificate&lt;/h2>
 &lt;p>To access your application with client certificate authentication:&lt;/p>
-&lt;p>On iOS:&lt;/p>
+&lt;h3 id="on-ios">On iOS:&lt;/h3>
 &lt;ul>
 &lt;li>Add the file on Files app (depending on what you do, iOS will try to install it on the whole OS. e.g. copying from airdrop)&lt;/li>
 &lt;li>Go to new server screen and try the server URL just to confirm (an error message should show because you haven&amp;rsquo;t applied the cert yet)&lt;/li>
 &lt;li>Tap &lt;code>apply your certificate&lt;/code> on the bottom of the screen and select it from the Files app&lt;/li>
 &lt;li>Try again, and it should navigate to the workspace info&lt;/li>
 &lt;/ul>
-&lt;p>On Android:&lt;/p>
+&lt;h3 id="on-android">On Android:&lt;/h3>
 &lt;ul>
 &lt;li>Install the certificate&lt;/li>
 &lt;li>Go to new server screen and try the server URL just to confirm (an error message should show because you haven&amp;rsquo;t applied the cert yet)&lt;/li>
@@ -84,8 +106,8 @@ proxy_redirect off;
 &lt;li>Select it&lt;/li>
 &lt;li>Tap connect, and it should navigate to the workspace info&lt;/li>
 &lt;/ul>
-&lt;p>To add a client certificate in Firefox:&lt;/p>
-&lt;ol>
+&lt;h3 id="on-firefox">On Firefox:&lt;/h3>
+&lt;ul>
 &lt;li>Open Firefox and click on the three horizontal lines in the top-right corner of the window.&lt;/li>
 &lt;li>Select &amp;ldquo;Preferences&amp;rdquo;.&lt;/li>
 &lt;li>In the left-hand menu, click on &amp;ldquo;Privacy &amp;amp; Security&amp;rdquo;.&lt;/li>
@@ -96,7 +118,8 @@ proxy_redirect off;
 &lt;li>Enter the password for the certificate if prompted.&lt;/li>
 &lt;li>Click &amp;ldquo;OK&amp;rdquo;.&lt;/li>
 &lt;li>Your client certificate should now be imported and ready to use in Firefox.&lt;/li>
-&lt;/ol>
+&lt;li>Visit the address and you should be prompted to select the certificate.&lt;/li>
+&lt;/ul>
 &lt;p>Congratulations! You have successfully set up client SSL certificate authentication for &lt;a href="http://Rocket.Chat"target="_blank">Rocket.Chat&lt;/a> using Nginx.&lt;/p>
 &lt;p>Extremely useful Reference: &lt;a href="https://fardog.io/blog/2017/12/30/client-side-certificate-authentication-with-nginx/"target="_blank">https://fardog.io/blog/2017/12/30/client-side-certificate-authentication-with-nginx/&lt;/a>&lt;/p></description></item><item><title>Adventures of the Geek: Remote Password Reset</title><link>https://geekgonecrazy.com/2022/06/16/adventures-of-the-geek-remote-password-reset/</link><pubDate>Thu, 16 Jun 2022 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2022/06/16/adventures-of-the-geek-remote-password-reset/</guid><description>
 &lt;p>Our adventure begins on a Monday evening. I received a call from a family member that lives a bit over 8 hours away.&lt;/p>
