@@ -51,7 +51,7 @@ DNSStubListener=no
 &lt;p>From here then it was as simple as:&lt;/p>
 &lt;pre>&lt;code>sudo systemctl mask greenboot-healthcheck.service
 &lt;/code>&lt;/pre>&lt;p>Now to go on to evaluate greenboot further. Seems like a cool idea.&lt;/p>
-&lt;p>&lt;code>systemd.mask&lt;/code> bootarg&lt;/p></description></item><item><title>How to Set Up Client SSL Certificate Authentication for Rocket.Chat</title><link>https://geekgonecrazy.com/2023/05/23/how-to-set-up-client-ssl-certificate-authentication-for-rocket.chat/</link><pubDate>Tue, 23 May 2023 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2023/05/23/how-to-set-up-client-ssl-certificate-authentication-for-rocket.chat/</guid><description>
+&lt;p>&lt;code>systemd.mask&lt;/code> bootarg saved the day!&lt;/p></description></item><item><title>How to Set Up Client SSL Certificate Authentication for Rocket.Chat</title><link>https://geekgonecrazy.com/2023/05/23/how-to-set-up-client-ssl-certificate-authentication-for-rocket.chat/</link><pubDate>Tue, 23 May 2023 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2023/05/23/how-to-set-up-client-ssl-certificate-authentication-for-rocket.chat/</guid><description>
 &lt;p>Are you looking to add an extra layer of security to access Rocket.Chat? One way to do this is by implementing client SSL certificate authentication. This authentication method requires clients to present a valid SSL certificate to authenticate themselves to the server.&lt;/p>
 &lt;p>In this post, we will walk through the steps to set up client SSL certificate authentication using Nginx.&lt;/p>
 &lt;h2 id="prerequisites">Prerequisites&lt;/h2>
