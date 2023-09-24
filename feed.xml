@@ -1,4 +1,57 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 23 May 2023 00:00:00 +0000</lastBuildDate><item><title>How to Set Up Client SSL Certificate Authentication for Rocket.Chat</title><link>https://geekgonecrazy.com/2023/05/23/how-to-set-up-client-ssl-certificate-authentication-for-rocket.chat/</link><pubDate>Tue, 23 May 2023 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2023/05/23/how-to-set-up-client-ssl-certificate-authentication-for-rocket.chat/</guid><description>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 24 Sep 2023 00:00:00 +0000</lastBuildDate><item><title>Fedora Iot, Greenboot, Systemd and of course DNS</title><link>https://geekgonecrazy.com/2023/09/24/fedora-iot-greenboot-systemd-and-of-course-dns/</link><pubDate>Sun, 24 Sep 2023 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2023/09/24/fedora-iot-greenboot-systemd-and-of-course-dns/</guid><description>
+&lt;p>This post is mostly as a resource for future me. But maybe it&amp;rsquo;ll come in useful to someone else.&lt;/p>
+&lt;p>This weekend I was working on provisioning a new NAS/Media box setup after having to do a bit of hardware shuffling. Long story.&lt;/p>
+&lt;p>I decided to try &lt;a href="https://fedoraproject.org/iot/"target="_blank">Fedora iot&lt;/a> on a whim. Fedora iot has an interesting project called &lt;a href="https://github.com/fedora-iot/greenboot"target="_blank">greenboot&lt;/a>. The objective of the project is to define some checks for the state of the machine. When the machine is booting and the machine isn&amp;rsquo;t configured or working as expected it reboots and tries to correct. From what I understand it does this several times and then if unsuccessful it rolls back to the previous ostree commit. In an edge deployment scenario where you can&amp;rsquo;t always have your hands on the device and it almost assuredly will break&amp;hellip; I can see ostree commits + this to being great to rollback when something gets broken. Much easier than in my previous post:&lt;/p>
+&lt;p>&lt;a href="https://geekgonecrazy.com/2022/06/16/adventures-of-the-geek-remote-password-reset/"target="_blank">Adventures of the geek: Remote Password Reset&lt;/a>&lt;/p>
+&lt;p>Anyways.. In this particular case i&amp;rsquo;m also installing pi-hole on it. This will act as the DNS server in my house. Blocking domains related to tracking, ads etc. But also lets me do other typical internal dns stuff, block list of inappropriate domains etc.&lt;/p>
+&lt;p>So I started off by just tying to run pi-hole:&lt;/p>
+&lt;pre>&lt;code>sudo podman run -d \
+--name=pihole \
+-e TZ=America/Chicago \
+-e DNSMASQ_LISTENING=all \
+-e WEBPASSWORD=password \
+-v ./etc-pihole:/etc/pihole:Z \
+-v ./etc-dnsmasq.d:/etc/dnsmasq.d:Z \
+-p 53:53/tcp \
+-p 53:53/udp \
+-p 80:80/tcp \
+--restart=unless-stopped \
+docker.io/pihole/pihole:latest
+&lt;/code>&lt;/pre>&lt;p>This started throwing erorrs about :53 already being used.&lt;/p>
+&lt;p>Turns out that systemd-resolved listens on :53 with a stub-listener and by default all queries goto 127.0.0.1:53 and then through systemd-resolved to upstream dns resolvers.&lt;/p>
+&lt;p>To disable I had to create: &lt;code>/etc/systemd/resolvd.conf.d/stub-listener.conf&lt;/code>&lt;/p>
+&lt;p>With contents:&lt;/p>
+&lt;pre>&lt;code>[Resolve]
+DNSStubListener=no
+&lt;/code>&lt;/pre>&lt;p>Then of course restart systemd-resolved:&lt;/p>
+&lt;pre>&lt;code>sudo systemctl restart systemd-resolved
+&lt;/code>&lt;/pre>&lt;p>This let me start up pihole and I went on about my business setting up volumes, moving data around etc.&lt;/p>
+&lt;p>As part of it a reboot was finally needed. Oops&amp;hellip; It would boot.. get to login screen and then promptly reboot again. I realized this was greenboot. I let it go a few times but it never recovered.&lt;/p>
+&lt;p>So I finally intervened and modified the boot arguments from grub and added:&lt;/p>
+&lt;pre>&lt;code>init=/bin/bash
+&lt;/code>&lt;/pre>&lt;p>To drop into single user mode.&lt;/p>
+&lt;p>I poked around and finally found: &lt;code>/usr/lib/greenboot/check/required.d/01_repository_dns_check.sh&lt;/code>&lt;/p>
+&lt;p>This made me realize what had happened. pi-hole wasn&amp;rsquo;t up at this point and systemd-resolved is no longer running the stub. So this check was failing.&lt;/p>
+&lt;pre>&lt;code>[aaron@super-terribly-named-box ~]$ dig google.com
+;; communications error to ::1#53: connection refused
+;; communications error to ::1#53: connection refused
+;; communications error to ::1#53: connection refused
+;; communications error to 127.0.0.1#53: connection refused
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.17 &amp;lt;&amp;lt;&amp;gt;&amp;gt; google.com
+;; global options: +cmd
+;; no servers could be reached
+&lt;/code>&lt;/pre>&lt;p>I found this issue: &lt;a href="https://github.com/fedora-iot/greenboot/issues/113#issuecomment-1689929196">https://github.com/fedora-iot/greenboot/issues/113#issuecomment-1689929196&lt;/a>&lt;/p>
+&lt;p>The suggestion is simple. Disable the service. Problem was I couldn&amp;rsquo;t even get logged in fast enough over ssh or console access to do this.&lt;/p>
+&lt;p>In single user mode systemd isn&amp;rsquo;t running of course so finding the unit file to quickly mask it didn&amp;rsquo;t work. And at the time I didn&amp;rsquo;t remember how to do it manually with ostree involved anyways.&lt;/p>
+&lt;p>For the record: &lt;code>/usr/lib/systemd/system/greenboot-healthcheck.service&lt;/code> but still the problem of it being read only because of ostree and being in single user mode where rpm-ostree did not seem to work like I was used to. This is a subject i&amp;rsquo;ll be diving into at a later date.&lt;/p>
+&lt;p>I looked for a way via boot args to turn off greenboot. They don&amp;rsquo;t have any. But then I found:&lt;/p>
+&lt;pre>&lt;code>systemd.mask=greenboot-healthcheck.service
+&lt;/code>&lt;/pre>&lt;p>Can read a bit more &lt;a href="https://man.archlinux.org/man/systemd-debug-generator.8.en"target="_blank">here&lt;/a>&lt;/p>
+&lt;p>By adding this to the boot args it will mask that service from starting during that session.&lt;/p>
+&lt;p>From here then it was as simple as:&lt;/p>
+&lt;pre>&lt;code>sudo systemctl mask greenboot-healthcheck.service
+&lt;/code>&lt;/pre>&lt;p>Now to go on to evaluate greenboot further. Seems like a cool idea.&lt;/p>
+&lt;p>&lt;code>systemd.mask&lt;/code> bootarg&lt;/p></description></item><item><title>How to Set Up Client SSL Certificate Authentication for Rocket.Chat</title><link>https://geekgonecrazy.com/2023/05/23/how-to-set-up-client-ssl-certificate-authentication-for-rocket.chat/</link><pubDate>Tue, 23 May 2023 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2023/05/23/how-to-set-up-client-ssl-certificate-authentication-for-rocket.chat/</guid><description>
 &lt;p>Are you looking to add an extra layer of security to access Rocket.Chat? One way to do this is by implementing client SSL certificate authentication. This authentication method requires clients to present a valid SSL certificate to authenticate themselves to the server.&lt;/p>
 &lt;p>In this post, we will walk through the steps to set up client SSL certificate authentication using Nginx.&lt;/p>
 &lt;h2 id="prerequisites">Prerequisites&lt;/h2>
@@ -1145,147 +1198,4 @@ Top Icons Plus - &lt;a href="https://extensions.gnome.org/extension/1031/topicon
 &lt;p>Install keybase
 &lt;code>sudo yum install https://prerelease.keybase.io/keybase_amd64.rpm&lt;/code>&lt;/p>
 &lt;p>Install kubectl
-&lt;a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">https://kubernetes.io/docs/tasks/tools/install-kubectl/&lt;/a>&lt;/p></description></item><item><title>My OSX Setup</title><link>https://geekgonecrazy.com/2015/09/19/my-osx-setup/</link><pubDate>Sat, 19 Sep 2015 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2015/09/19/my-osx-setup/</guid><description>
-&lt;p>I&amp;rsquo;m an on again off again macOS / OSX user. This started off at some point as a blog post, but its grown into more of a living page of the programs I install when on macOS / OSX.&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;h2 id="os-tweaks">OS tweaks&lt;/h2>
-&lt;h3 id="changed-scroll-direction">Changed Scroll Direction&lt;/h3>
-&lt;p>If using a normal mouse with a scroll wheel. The default &amp;ldquo;natural&amp;rdquo; feels very un-natural.&lt;/p>
-&lt;p>Unchecked &amp;ldquo;Scroll direction: natural&amp;rdquo;
-&lt;img src="/images/2015-09-19/scroll-dir.png"
-alt="Scroll Direction"/>&lt;/p>
-&lt;h3 id="change-modifier-keys">Change Modifier keys&lt;/h3>
-&lt;p>If not using an apple keyboard.&lt;/p>
-&lt;p>&lt;img src="/images/2015-09-19/modifier-keys.png"
-alt="Modifier Keys"/>&lt;/p>
-&lt;p>Map the windows key to the command key.&lt;/p>
-&lt;h3 id="auto-hide-dock">Auto hide dock&lt;/h3>
-&lt;p>I like the maximum amount of screen space I can get. So of course I hide the dock.&lt;/p>
-&lt;p>&lt;img src="/images/2015-09-19/dock-autohide.png"
-alt="Dock Auto Hide"/>&lt;/p>
-&lt;h3 id="hot-corner">Hot Corner&lt;/h3>
-&lt;p>If i&amp;rsquo;m at a normal mouse and keyboard I like to turn this on. Also if coming from Fedora/Gnome3 this helps feel more at home.&lt;/p>
-&lt;p>&lt;img src="/images/2015-09-19/hot-corner.png"
-alt="Hot Corner"/>&lt;/p>
-&lt;h3 id="finder-config">Finder config&lt;/h3>
-&lt;p>Very much personal preference.&lt;/p>
-&lt;p>I like having the hard drive icons on my desktop. Its convenient.
-&lt;img src="/images/2015-09-19/finder-desktop.png"
-alt="Finder Desktop"/>&lt;/p>
-&lt;p>Also like being able to quickly get to my home folder.
-&lt;img src="/images/2015-09-19/finder-sidebar.png"
-alt="Finder Sidebar"/>&lt;/p>
-&lt;h3 id="screenshot-directory">Screenshot Directory&lt;/h3>
-&lt;p>I take a lot of screenshots. So I don&amp;rsquo;t want them cluttering my desktop. So I change the folder they are saved to.&lt;/p>
-&lt;p>First create the directory you want them saved to. I chose &lt;code>~/Documents/Screenshots&lt;/code>&lt;/p>
-&lt;p>Then run this command:&lt;/p>
-&lt;pre>&lt;code>defaults write com.apple.screencapture location ~/Documents/Screenshots
-&lt;/code>&lt;/pre>&lt;p>Then to reload so this takes its followed by:&lt;/p>
-&lt;pre>&lt;code>killall SystemUIServer
-&lt;/code>&lt;/pre>&lt;p>For extra convenience I drag the folder into my dock so I have quick access to them.&lt;/p>
-&lt;p>&lt;img src="/images/2015-09-19/Screenshots-dock.png"
-alt="Screenshots in dock"/>&lt;/p>
-&lt;h2 id="applications">Applications&lt;/h2>
-&lt;p>A few of the apps I always seem to download.&lt;/p>
-&lt;h3 id="google-chrome">Google Chrome&lt;/h3>
-&lt;p>Gotta have my favorite browser.&lt;/p>
-&lt;p>&lt;a href="https://www.google.com/chrome"target="_blank">Download Here&lt;/a>&lt;/p>
-&lt;h3 id="rectangle">Rectangle&lt;/h3>
-&lt;p>This is an application that allows you to use keyboard shortcuts to quickly snap windows. Very useful&lt;/p>
-&lt;p>&lt;a href="https://rectangleapp.com"target="_blank">Download Here&lt;/a>&lt;/p>
-&lt;h3 id="visual-studio-code">Visual Studio Code&lt;/h3>
-&lt;p>Code editor of choice.&lt;/p>
-&lt;p>&lt;img src="https://code.visualstudio.com/assets/home/home-screenshot-mac.png"
-alt="Vs Code"/>&lt;/p>
-&lt;p>Open the &lt;strong>Command Palette&lt;/strong> (⇧ + ⌘ + p)) and type &amp;lsquo;shell command&amp;rsquo; to find the &lt;strong>Shell Command: Install &amp;lsquo;code&amp;rsquo; command in PATH&lt;/strong> command.&lt;/p>
-&lt;p>&lt;img src="https://code.visualstudio.com/assets/docs/setup/mac/shell-command.png"
-alt="vscode Commands"/>&lt;/p>
-&lt;p>Also will need to set the git path. The path if installed from xcode is: &lt;code>/usr/bin/git&lt;/code>. Simply typing git in the terminal will trigger a popup to install from xcode.&lt;/p>
-&lt;p>&lt;img src="/images/2015-09-19/git-path.png"
-alt="vscode git setting"/>&lt;/p>
-&lt;p>&lt;a href="https://code.visualstudio.com/"target="_blank">Download Here&lt;/a>&lt;/p>
-&lt;h3 id="rocketchat">Rocket.Chat&lt;/h3>
-&lt;p>Awesome group chat platform like slack / hipchat. Great set of developers. This project is moving very quickly.&lt;/p>
-&lt;p>It for sure gets my recommendation for group chat in business. Offers you that privacy and control that you want and need.&lt;/p>
-&lt;p>&lt;a href="https://rocket.chat"target="_blank">Check the community out here&lt;/a>
-&lt;a href="https://github.com/RocketChat/Rocket.Chat.Electron/releases"target="_blank">Download Client Here&lt;/a>&lt;/p>
-&lt;h3 id="robo-3t-formally-robomongo">Robo 3T (formally Robomongo)&lt;/h3>
-&lt;p>Great application to query / view mongodb databases.&lt;/p>
-&lt;p>&lt;a href="http://robomongo.org/"target="_blank">Download Here&lt;/a>&lt;/p>
-&lt;h3 id="google-play-music-desktop-player">Google Play Music Desktop Player&lt;/h3>
-&lt;p>Best desktop player for Google Music I&amp;rsquo;ve found&lt;/p>
-&lt;p>&lt;a href="https://www.googleplaymusicdesktopplayer.com"target="_blank">Download Here&lt;/a>&lt;/p>
-&lt;h3 id="vlc">VLC&lt;/h3>
-&lt;p>If a video / audio file won&amp;rsquo;t play anywhere else. This will play it.&lt;/p>
-&lt;p>&lt;a href="http://www.videolan.org/vlc/index.html"target="_blank">Download Here&lt;/a>&lt;/p>
-&lt;h3 id="iterm2">iTerm2&lt;/h3>
-&lt;p>Quickly becoming my favorite terminal emulator. This is what i&amp;rsquo;ll use below for setting up my shell.&lt;/p>
-&lt;p>&lt;a href="https://www.iterm2.com/"target="_blank">Download Here&lt;/a>&lt;/p>
-&lt;h3 id="hyper">Hyper&lt;/h3>
-&lt;p>I&amp;rsquo;m on again off again with this terminal. One of the things I like most is cross-platform&lt;/p>
-&lt;p>&lt;a href="https://hyper.is/"target="_blank">Download Here&lt;/a>&lt;/p>
-&lt;h3 id="gifgrabber">GifGrabber&lt;/h3>
-&lt;p>Great application for recording gifs.&lt;/p>
-&lt;p>&lt;a href="http://www.gifgrabber.com/"target="_blank">Download Here&lt;/a>&lt;/p>
-&lt;h3 id="docker-for-mac">Docker for Mac&lt;/h3>
-&lt;p>I use Docker a lot. :)&lt;/p>
-&lt;p>&lt;a href="https://www.docker.com/docker-mac"target="_blank">Download Here&lt;/a>&lt;/p>
-&lt;h3 id="brew">Brew&lt;/h3>
-&lt;p>If you consider your self any sort of power user, this is a must.&lt;/p>
-&lt;p>&lt;a href="http://brew.sh/"target="_blank">Download Here&lt;/a>&lt;/p>
-&lt;h2 id="terminal">Terminal&lt;/h2>
-&lt;h3 id="zsh">zsh&lt;/h3>
-&lt;p>I have come to like zsh. So I always do this.&lt;/p>
-&lt;pre>&lt;code>chsh -s $(which zsh)
-&lt;/code>&lt;/pre>&lt;h3 id="install-oh-my-zsh">Install oh-my-zsh&lt;/h3>
-&lt;p>Part of what makes zsh awesome is installing oh-my-zsh.&lt;/p>
-&lt;p>&lt;a href="http://ohmyz.sh/"target="_blank">More Info Here&lt;/a>&lt;/p>
-&lt;pre>&lt;code>sh -c &amp;quot;$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&amp;quot;
-&lt;/code>&lt;/pre>&lt;p>This will possibly prompt you to install XCode CLI tools. If so do that. Then re-run the command.&lt;/p>
-&lt;h3 id="set-zsh-prompt">Set zsh prompt&lt;/h3>
-&lt;p>To edit which one of the prompts you use do:&lt;/p>
-&lt;pre>&lt;code>code .zshrc
-&lt;/code>&lt;/pre>&lt;p>Replacing atom with your editor of choice.&lt;/p>
-&lt;p>Change the line near the top. That starts with &lt;code>ZSH_THEME&lt;/code>&lt;/p>
-&lt;pre>&lt;code>ZSH_THEME=&amp;quot;ys&amp;quot;
-&lt;/code>&lt;/pre>&lt;p>I changed to &lt;code>ys&lt;/code> which looks like this:&lt;/p>
-&lt;p>&lt;img src="/images/2015-09-19/zsh-prompt.png"
-alt="ZSH Prompt"/>&lt;/p>
-&lt;p>Using &lt;code>source ~/.zshrc&lt;/code> will reload your zsh config.&lt;/p>
-&lt;h3 id="setup-git-info">Setup git Info&lt;/h3>
-&lt;p>You&amp;rsquo;ll be reminded at some point to do this. But good to go ahead and set this. :smile:&lt;/p>
-&lt;pre>&lt;code>git config --global user.email &amp;quot;you@example.com&amp;quot;
-git config --global user.name &amp;quot;Your Name&amp;quot;
-&lt;/code>&lt;/pre>&lt;h2 id="install-misc-other-things">Install misc other things&lt;/h2>
-&lt;p>I used brew to install a few things I used frequently&lt;/p>
-&lt;pre>&lt;code>brew install nodejs tmux golang gpg minio/stable/mc kubectl
-&lt;/code>&lt;/pre>&lt;p>Also I needed jekyll to write blog posts. :smile:&lt;/p>
-&lt;pre>&lt;code>gem install jekyll
-&lt;/code>&lt;/pre>&lt;h2 id="summary">Summary&lt;/h2>
-&lt;p>Great OS. Lots of tools for developers. If you have some program you can&amp;rsquo;t live with out. Would be glad to hear it.&lt;/p>
-&lt;p>&lt;img src="/images/2015-09-19/final.png"
-alt="Final"/>&lt;/p>
-&lt;h3 id="updates">Updates&lt;/h3>
-&lt;h4 id="08262022">08/26/2022&lt;/h4>
-&lt;ul>
-&lt;li>Swap Spectacle out with Rectangle now that spectacle is no longer maintained&lt;/li>
-&lt;/ul>
-&lt;h4 id="06152018">06/15/2018&lt;/h4>
-&lt;ul>
-&lt;li>Come to realization that this is isn&amp;rsquo;t a blog post&amp;hellip; but more just of a list of software I use.&lt;/li>
-&lt;li>Renamed Docker Toolbox to Docker for Mac&lt;/li>
-&lt;li>Removed virtualbox, not typically part of my bare minimum any more&lt;/li>
-&lt;li>Removed Vagrant. Never use it any more&lt;/li>
-&lt;li>Added Hyper. Great Terminal&lt;/li>
-&lt;li>Add minio client to list of tools installed via brew. Minio Client is super useful for managing s3 buckets&lt;/li>
-&lt;li>Added kubectl to brew a daily driver now days :)&lt;/li>
-&lt;/ul>
-&lt;h4 id="03032018">03/03/2018&lt;/h4>
-&lt;ul>
-&lt;li>New primary editor switched from &lt;a href="https://atom.io"target="_blank">atom&lt;/a> to &lt;a href="https://code.visualstudio.com/"target="_blank">vscode&lt;/a>&lt;/li>
-&lt;li>Renamed robomongo to robo 3T&lt;/li>
-&lt;li>Remove postgres.app and sequel pro due to them never being used.&lt;/li>
-&lt;li>Swapped out spotify for Google Play Music Desktop Player&lt;/li>
-&lt;li>Removed teamviewer and join.me&lt;/li>
-&lt;li>Added golang and gpg to those installed with brew&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">https://kubernetes.io/docs/tasks/tools/install-kubectl/&lt;/a>&lt;/p></description></item></channel></rss>
