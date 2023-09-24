@@ -16,7 +16,7 @@ I decided to try [Fedora iot](https://fedoraproject.org/iot/) on a whim. Fedora 
 
 [Adventures of the geek: Remote Password Reset](https://geekgonecrazy.com/2022/06/16/adventures-of-the-geek-remote-password-reset/)
 
-Anyways.. In this particular case i'm also installing pi-hole on it.  This will act as the DNS server in my house.  Blocking domains related to tracking, ads etc. But also lets me do other typical internal dns stuff, block list of inappropriate domains etc.
+Anyways.. In this particular case i'm also installing [pi-hole](https://pi-hole.net/) on it.  This will act as the DNS server in my house.  Blocking domains related to tracking, ads etc. But also lets me do other typical internal dns stuff, block list of inappropriate domains etc.
 
 So I started off by just tying to run pi-hole:
 
@@ -55,7 +55,7 @@ Then of course restart systemd-resolved:
 sudo systemctl restart systemd-resolved
 ```
 
-This let me start up pihole and I went on about my business setting up volumes, moving data around etc.
+This let me start up pi-hole and I went on about my business setting up volumes, moving data around etc.
 
 
 As part of it a reboot was finally needed.  Oops... It would boot.. get to login screen and then promptly reboot again.  I realized this was greenboot.  I let it go a few times but it never recovered.
