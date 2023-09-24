@@ -4,7 +4,7 @@ date = 2023-09-24T00:00:00Z
 layout = "post"
 publish = true
 comments = false
-tags = [fedora, systemd, dns]
+tags = ["fedora", "systemd", "dns"]
 
 +++
 
