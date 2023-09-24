@@ -58,7 +58,7 @@ sudo systemctl restart systemd-resolved
 This let me start up pi-hole and I went on about my business setting up volumes, moving data around etc.
 
 
-As part of it a reboot was finally needed.  Oops... It would boot.. get to login screen and then promptly reboot again.  I realized this was greenboot.  I let it go a few times but it never recovered.
+As part of it a reboot was finally needed.  Oops... It wouldn't boot.. get to login screen and then promptly reboot again.  I realized this was greenboot.  I let it go a few times but it never recovered.
 
 So I finally intervened and modified the boot arguments from grub and added:
 
