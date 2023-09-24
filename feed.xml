@@ -3,7 +3,7 @@
 &lt;p>This weekend I was working on provisioning a new NAS/Media box setup after having to do a bit of hardware shuffling. Long story.&lt;/p>
 &lt;p>I decided to try &lt;a href="https://fedoraproject.org/iot/"target="_blank">Fedora iot&lt;/a> on a whim. Fedora iot has an interesting project called &lt;a href="https://github.com/fedora-iot/greenboot"target="_blank">greenboot&lt;/a>. The objective of the project is to define some checks for the state of the machine. When the machine is booting and the machine isn&amp;rsquo;t configured or working as expected it reboots and tries to correct. From what I understand it does this several times and then if unsuccessful it rolls back to the previous ostree commit. In an edge deployment scenario where you can&amp;rsquo;t always have your hands on the device and it almost assuredly will break&amp;hellip; I can see ostree commits + this to being great to rollback when something gets broken. Much easier than in my previous post:&lt;/p>
 &lt;p>&lt;a href="https://geekgonecrazy.com/2022/06/16/adventures-of-the-geek-remote-password-reset/"target="_blank">Adventures of the geek: Remote Password Reset&lt;/a>&lt;/p>
-&lt;p>Anyways.. In this particular case i&amp;rsquo;m also installing pi-hole on it. This will act as the DNS server in my house. Blocking domains related to tracking, ads etc. But also lets me do other typical internal dns stuff, block list of inappropriate domains etc.&lt;/p>
+&lt;p>Anyways.. In this particular case i&amp;rsquo;m also installing &lt;a href="https://pi-hole.net/"target="_blank">pi-hole&lt;/a> on it. This will act as the DNS server in my house. Blocking domains related to tracking, ads etc. But also lets me do other typical internal dns stuff, block list of inappropriate domains etc.&lt;/p>
 &lt;p>So I started off by just tying to run pi-hole:&lt;/p>
 &lt;pre>&lt;code>sudo podman run -d \
 --name=pihole \
@@ -25,7 +25,7 @@ docker.io/pihole/pihole:latest
 DNSStubListener=no
 &lt;/code>&lt;/pre>&lt;p>Then of course restart systemd-resolved:&lt;/p>
 &lt;pre>&lt;code>sudo systemctl restart systemd-resolved
-&lt;/code>&lt;/pre>&lt;p>This let me start up pihole and I went on about my business setting up volumes, moving data around etc.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>This let me start up pi-hole and I went on about my business setting up volumes, moving data around etc.&lt;/p>
 &lt;p>As part of it a reboot was finally needed. Oops&amp;hellip; It would boot.. get to login screen and then promptly reboot again. I realized this was greenboot. I let it go a few times but it never recovered.&lt;/p>
 &lt;p>So I finally intervened and modified the boot arguments from grub and added:&lt;/p>
 &lt;pre>&lt;code>init=/bin/bash
