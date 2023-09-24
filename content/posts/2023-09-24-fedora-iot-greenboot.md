@@ -111,4 +111,4 @@ sudo systemctl mask greenboot-healthcheck.service
 
 Now to go on to evaluate greenboot further.  Seems like a cool idea.
 
-`systemd.mask` bootarg
+`systemd.mask` bootarg saved the day!
