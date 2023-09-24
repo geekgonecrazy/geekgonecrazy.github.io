@@ -26,7 +26,7 @@ DNSStubListener=no
 &lt;/code>&lt;/pre>&lt;p>Then of course restart systemd-resolved:&lt;/p>
 &lt;pre>&lt;code>sudo systemctl restart systemd-resolved
 &lt;/code>&lt;/pre>&lt;p>This let me start up pi-hole and I went on about my business setting up volumes, moving data around etc.&lt;/p>
-&lt;p>As part of it a reboot was finally needed. Oops&amp;hellip; It would boot.. get to login screen and then promptly reboot again. I realized this was greenboot. I let it go a few times but it never recovered.&lt;/p>
+&lt;p>As part of it a reboot was finally needed. Oops&amp;hellip; It wouldn&amp;rsquo;t boot.. get to login screen and then promptly reboot again. I realized this was greenboot. I let it go a few times but it never recovered.&lt;/p>
 &lt;p>So I finally intervened and modified the boot arguments from grub and added:&lt;/p>
 &lt;pre>&lt;code>init=/bin/bash
 &lt;/code>&lt;/pre>&lt;p>To drop into single user mode.&lt;/p>
