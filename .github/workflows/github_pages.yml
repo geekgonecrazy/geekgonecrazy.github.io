@@ -16,7 +16,7 @@ jobs:
     - name: Publish Site
       uses: chabad360/hugo-gh-pages@master
       with:
-        githubToken: ${{ secrets.GH_PUSH_TOKEN }}
+        githubToken: ${{ secrets.GITHUB_TOKEN }}
         # Use if you have a custom domain for your site.
         cname: geekgonecrazy.com
         # Use if your site is not hosted on the gh-pages branch.
