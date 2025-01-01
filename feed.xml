@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 31 Dec 2024 00:00:00 +0000</lastBuildDate><item><title>Year In Review: 2024</title><link>https://geekgonecrazy.com/2024/12/31/year-in-review-2024/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2024/12/31/year-in-review-2024/</guid><description>
 &lt;p>2024 is now in the books!&lt;/p>
-&lt;p>In prior years for work I would write an internal post about the year to help us realize all of the things we managed to accomplish that year. I found the research and reflection while writing the post to be very revealing. We some times get caught up in the daily grind we aren&amp;rsquo;t able to see what we&amp;rsquo;ve managed to accomplish. This year going to give it a try applying it to my personal life.&lt;/p>
+&lt;p>In prior years for work I would write an internal post about the year to help us realize all of the things we managed to accomplish that year. I found the research and reflection while writing the post to be very revealing. We some times get so caught up in the daily grind, we aren&amp;rsquo;t able to see what we&amp;rsquo;ve managed to accomplish. This year going to give it a try applying it to my personal life.&lt;/p>
 &lt;p>Here&amp;rsquo;s a TL;DR of the year:&lt;/p>
 &lt;p>&lt;strong>Personal Life&lt;/strong>&lt;/p>
 &lt;ul>
@@ -8,8 +8,8 @@
 &lt;li>Started back into &lt;a href="#martial-arts">Martial Arts&lt;/a>&lt;/li>
 &lt;li>Started &lt;a href="#working-out">Working Out&lt;/a> more&lt;/li>
 &lt;li>Lost &lt;a href="#impact">12 pounds&lt;/a>&lt;/li>
-&lt;li>Traveled to [Brazil] and [London]&lt;/li>
-&lt;li>Experienced some culture with [Hamilton] and [Star Wars at the Houston Symphony]&lt;/li>
+&lt;li>Traveled to Brazil and London&lt;/li>
+&lt;li>Experienced some culture with Hamilton and Star Wars at the Houston Symphony&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>Professionally&lt;/strong>&lt;/p>
 &lt;ul>
@@ -40,9 +40,9 @@
 &lt;p>Took a work trip to Brazil. Crazy thing is I went through the airport in Port Alegre only a week before the &lt;a href="https://www.cnn.com/2024/05/08/weather/brazil-flooding-satellite-imagery-intl/index.html"target="_blank">entire airport was flooded&lt;/a>.&lt;/p>
 &lt;p>Took my wife and kids to London. This was my kids first time out of country.&lt;/p>
 &lt;h2 id="culture">Culture&lt;/h2>
-&lt;p>One thing i&amp;rsquo;ve been trying to do a bit more of is experience a bit of &amp;ldquo;culture&amp;rdquo;.&lt;/p>
-&lt;p>Saw Hamilton performed in London this year. It was a lot more moving in person.&lt;/p>
-&lt;p>I also got to experience Star Wars at the Houston Symphony this year. I&amp;rsquo;d recommend.&lt;/p>
+&lt;p>I&amp;rsquo;ve been trying experience a bit of &amp;ldquo;culture&amp;rdquo; in recent years.&lt;/p>
+&lt;p>I saw &lt;a href="https://hamiltonmusical.com"target="_blank">Hamilton&lt;/a> performed in London this year. It was a lot more moving in person. Also I don&amp;rsquo;t get why its so much cheaper to see plays in London than anywhere here in the US&amp;hellip;&lt;/p>
+&lt;p>I also got to experience &lt;a href="https://houstonsymphony.org/tickets/concerts/the-music-of-star-wars/"target="_blank">Star Wars at the Houston Symphony&lt;/a> this year. I&amp;rsquo;d recommend.&lt;/p>
 &lt;h1 id="work--professional">Work / Professional&lt;/h1>
 &lt;p>2024 involved a rather big change for my professionally.&lt;/p>
 &lt;h2 id="production-readiness">Production Readiness&lt;/h2>
@@ -54,7 +54,7 @@
 &lt;p>I&amp;rsquo;ve found that I really like the role of staff engineer. Its a good mixture of coding, writing, leading (not managing), mentoring and helping aligning across teams.&lt;/p>
 &lt;h2 id="new-job">New Job&lt;/h2>
 &lt;p>One of the biggest changes for me this year was changing jobs. I had been at Rocket.Chat for almost 10 years. The original team I built spun off into 3 seperate teams. The downside to this is I still was heavily involved in all 3 of them. In retrospect I was acting a bit like a director setting roadmaps and direction of the teams, while being inside one of the teams, and being a Staff Engineer / Architect. My work/life balance was off and I was struggling to reset it. Even though I&amp;rsquo;d take time off.. I was unable to fully disconnect.&lt;/p>
-&lt;p>I got a job offer being a Senior Engineer at a company called Underline working on building fiber networks in communities and all of the software it takes to make that happen. I&amp;rsquo;ve always been interested in global infrastructure and how they are made. So I took the job as a chance to shake things up, reset and learn something new. Part of me was also curious what it would be like to be just a software engineer again.&lt;/p>
+&lt;p>I got a job offer to be a Senior Engineer at a company called Underline who is building fiber networks in communities and all of the software it takes to make that happen. I&amp;rsquo;ve always been interested in global infrastructure and how they are built and operate. So I took the job as a chance to shake things up, reset and learn something new. Part of me was also curious what it would be like to be just a software engineer again.&lt;/p>
 &lt;p>I&amp;rsquo;ve quickly come to realize that i&amp;rsquo;m not ok just being a software engineer. I don&amp;rsquo;t enjoy just taking other peoples plans and ideas and just executing them. I enjoy being involved in the architecture and direction of the software. I&amp;rsquo;m not sure if this is just because i&amp;rsquo;m used to it or if its just how I am wired.&lt;/p>
 &lt;h3 id="technology">Technology&lt;/h3>
 &lt;p>Part of the new job means working with some new technology.&lt;/p>
