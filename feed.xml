@@ -51,32 +51,34 @@
 &lt;h1 id="work--professional">Work / Professional&lt;/h1>
 &lt;p>2024 brought significant changes to my career.&lt;/p>
 &lt;h2 id="production-readiness">Production Readiness&lt;/h2>
-&lt;p>In the year’s first half, I focused on production readiness: defining SLAs/SLOs, identifying critical user experience factors, and mitigating risks. This involved formalizing processes and making architectural changes.&lt;/p>
+&lt;p>In the year’s first half, I focused on production readiness: defining SLAs/SLOs, identifying critical user experience factors, and identifying risks. This involved formalizing processes, exposing key metrics and making architectural changes.&lt;/p>
 &lt;h2 id="staff-engineer">Staff Engineer&lt;/h2>
-&lt;p>At Rocket.Chat, I’ve held various roles. Engineering Manager, Tech Lead, Team Lead, and more. This year, I embraced being a Staff Engineer, focusing on coding, writing, mentoring, and cross-team alignment. I’ve found this balance fulfilling. More so in retrospect.&lt;/p>
+&lt;p>At Rocket.Chat, I held various roles. Engineering Manager, Tech Lead, Team Lead, and more. This year, I tried to embrace being a Staff Engineer, focusing on coding, dev ex, writing, mentoring, and cross-team alignment. I’ve found this balance fulfilling. Even more so in retrospect.&lt;/p>
 &lt;h2 id="new-job">New Job&lt;/h2>
-&lt;p>After nearly 10 years at Rocket.Chat, I transitioned to a new role as a Senior Engineer at a company building fiber networks and related software. This change allowed me to reset and learn something new, particularly in global infrastructure.&lt;/p>
-&lt;p>However, I’ve realized I find fulfillment in architecture and direction, not just coding. I’m not sure if this is habit or how I’m wired. I suspect baed on my desire to understand how everything works. Probably wired this way.&lt;/p>
+&lt;p>After nearly 10 years at Rocket.Chat, I transitioned to a new role as a Senior Software Engineer at a new company building fiber networks in communities and the software required to provide a marketplace for the members of those communties to chose their ISP and have their equipment provisioned. This change was important to allow me to reset and perform a rebalance of work/life. But also a good opportunity to learn something new, particularly in the ISP space which i&amp;rsquo;ve always found interesting.&lt;/p>
+&lt;p>Some times a change is required to help us realize what we value. I realize I find fulfillment in participating in architecture and direction, not just coding. This is something I&amp;rsquo;ll be focusing on in the new year.&lt;/p>
 &lt;hr>
 &lt;h2 id="technology">Technology&lt;/h2>
-&lt;p>Joining a new team meant working with unfamiliar technologies:&lt;/p>
+&lt;p>Joining a new team meant working with new technologies:&lt;/p>
 &lt;ul>
-&lt;li>&lt;strong>Microservices&lt;/strong>: While microservices can enable scaling and team parallelism, their complexity isn’t always worth it for smaller teams.&lt;/li>
-&lt;li>&lt;strong>GraphQL&lt;/strong>: Although I see its appeal, GraphQL introduces challenges with network traffic, authorization, and boilerplate. I still prefer well-crafted RESTful APIs.&lt;/li>
-&lt;li>&lt;strong>gRPC and Protobufs&lt;/strong>: Defining services with Protobufs and generating REST APIs, openapi documentation, and gRPC Gateway code was a cool experience. I plan to explore this more.&lt;/li>
+&lt;li>&lt;strong>Microservices&lt;/strong>: I&amp;rsquo;ve worked with microservices before typically by breaking part of a monolith off to enable more dynamic scaling. I&amp;rsquo;ve never worked with a microservice first architecture. While microservices can enable scaling and team parallelism, the complexity isn’t always worth it for smaller teams.&lt;/li>
+&lt;li>&lt;strong>GraphQL&lt;/strong>: Although I see its appeal, GraphQL introduces challenges with network traffic, authorization, and increased boilerplate code necessary. I still prefer well-crafted RESTful APIs.&lt;/li>
+&lt;li>&lt;strong>gRPC and Protobufs&lt;/strong>: Defining services with Protobufs and generating REST APIs, openapi documentation, and gRPC Gateway code is really cool. I plan to explore this more.&lt;/li>
 &lt;/ul>
+&lt;p>This article by tailscale is a good read that has been top of mind: &lt;a href="https://tailscale.com/blog/new-internet"target="_blank">https://tailscale.com/blog/new-internet&lt;/a>&lt;/p>
 &lt;hr>
 &lt;h2 id="daily-tech-stack">Daily Tech Stack&lt;/h2>
 &lt;p>This year, I used:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="https://fedoraproject.org/atomic-desktops/silverblue/"target="_blank">Silverblue&lt;/a>, an immutable OS,&lt;/li>
+&lt;li>&lt;a href="https://fedoraproject.org/atomic-desktops/silverblue/"target="_blank">Silverblue&lt;/a>, an immutable OSTree OS,&lt;/li>
 &lt;li>A custom OSTree branch, &lt;a href="https://github.com/geekgonecrazy/triiodide"target="_blank">Triiodide&lt;/a> (i3 - 3 iodine atoms is a &lt;a href="https://en.wikipedia.org/wiki/Triiodide"target="_blank">triiodide&lt;/a> ion) that brings i3wm instead of gnome&lt;/li>
 &lt;li>&lt;a href="https://ghostty.org"target="_blank">Ghostty&lt;/a> for a performant terminal experience&lt;/li>
 &lt;li>A single 32&amp;rdquo; curved monitor plus a smaller secondary display for chat, video conferencing and music&lt;/li>
 &lt;/ul>
 &lt;hr>
-&lt;h1 id="looking-ahead-to-2025">Looking Ahead to 2025&lt;/h1>
-&lt;p>I plan to focus on health, do more writing, and engage more in Staff Engineer/Architect work.&lt;/p>
+&lt;h1 id="2025">2025&lt;/h1>
+&lt;p>I don&amp;rsquo;t really do new year&amp;rsquo;s resolutions any more. You don&amp;rsquo;t need to wait for a new year to make a change.&lt;/p>
+&lt;p>But, I do plan to continue to focus on health, doing more writing, and focus on work I find fullfilling.&lt;/p>
 &lt;p>Here’s to another year of growth!&lt;/p></description></item><item><title>Fedora Iot, Greenboot, Systemd and of course DNS</title><link>https://geekgonecrazy.com/2023/09/24/fedora-iot-greenboot-systemd-and-of-course-dns/</link><pubDate>Sun, 24 Sep 2023 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2023/09/24/fedora-iot-greenboot-systemd-and-of-course-dns/</guid><description>
 &lt;p>This post is mostly as a resource for future me. But maybe it&amp;rsquo;ll come in useful to someone else.&lt;/p>
 &lt;p>This weekend I was working on provisioning a new NAS/Media box setup after having to do a bit of hardware shuffling. Long story.&lt;/p>
