@@ -1,6 +1,6 @@
-baseURL: "https://geekgonecrazy.com"
+baseURL: "https://aaronogle.dev"
 languageCode: "en-us"
-title: "Aaron's Ramblings"
+title: "Aaron Ogle"
 theme: "hugo-notepadium"
 permalinks:
   posts: "/:year/:month/:day/:title"
