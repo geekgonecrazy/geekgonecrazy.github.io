@@ -82,7 +82,7 @@
 &lt;p>Joining a new team meant working with new technologies:&lt;/p>
 &lt;ul>
 &lt;li>&lt;strong>Microservices&lt;/strong>: I&amp;rsquo;ve worked with microservices before typically by breaking part of a monolith off to enable more dynamic scaling. I&amp;rsquo;ve never worked with a microservice first architecture. While microservices can enable scaling and team parallelism, the complexity isn’t always worth it for smaller teams.&lt;/li>
-&lt;li>&lt;strong>GraphQL&lt;/strong>: Although I see its appeal, GraphQL introduces challenges with network traffic, authorization, and increased boilerplate code necessary. I still prefer well-crafted RESTful APIs. I seriously question the argument of less api calls. Sounds like a great argument. In reality I don&amp;rsquo;t think this is true.&lt;/li>
+&lt;li>&lt;strong>GraphQL&lt;/strong>: Although I see its appeal, GraphQL introduces challenges with network traffic, authorization, and increased boilerplate code necessary. I still prefer well-crafted RESTful APIs. &lt;a href="https://bessey.dev/blog/2024/05/24/why-im-over-graphql/"target="_blank">A good article on this&lt;/a>&lt;/li>
 &lt;li>&lt;strong>gRPC and Protobufs&lt;/strong>: Defining services with Protobufs and generating REST APIs, openapi documentation, and gRPC Gateway code is really cool. I plan to explore this more.&lt;/li>
 &lt;/ul>
 &lt;p>This article by tailscale is a good read that has been top of mind: &lt;a href="https://tailscale.com/blog/new-internet"target="_blank">https://tailscale.com/blog/new-internet&lt;/a>&lt;/p>
