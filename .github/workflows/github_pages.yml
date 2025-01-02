@@ -18,7 +18,7 @@ jobs:
       with:
         githubToken: ${{ secrets.GITHUB_TOKEN }}
         # Use if you have a custom domain for your site.
-        cname: geekgonecrazy.com
+        cname: aaronogle.dev
         # Use if your site is not hosted on the gh-pages branch.
         branch: master
         hugoVersion: extended_0.72.0
