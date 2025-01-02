@@ -22,54 +22,82 @@
 &lt;h1 id="personal-life-1">Personal Life&lt;/h1>
 &lt;p>2024 was full of ups and downs, but I made meaningful progress in key areas.&lt;/p>
 &lt;h2 id="health">Health&lt;/h2>
-&lt;p>Improving my health became a major focus—not due to serious issues, but because I realized it’s easier to maintain health now than to regain it later.&lt;/p>
+&lt;p>Improving my health became a major focus. Thankfully not due to any serious issues, but because I&amp;rsquo;ve started to realized it’s easier to get and maintain health now than to regain it later.&lt;/p>
 &lt;h3 id="a-year-free-from-caffeine">A Year Free From Caffeine&lt;/h3>
-&lt;p>In October 2023, I noticed I couldn’t function without caffeine. Specifically, Dr. Pepper. Running out at home meant struggling through the day. It felt like an addiction, so I quit.&lt;/p>
-&lt;p>As of October 2024, I’ve gone an entire year without caffeinated soda. However, I replaced it with sugary alternatives, which wasn’t much healthier. In recent months, I’ve started cutting back on soda altogether to reduce my sugar intake.&lt;/p>
+&lt;p>In October 2023, I noticed I couldn’t function without caffeine. Specifically, I was drinking at least 2-3 Dr. Pepper a day. Worse, if I ran out at home it meant struggling through the day. It felt like an addiction, so I quit cold turkey (that weekend headache sucked).&lt;/p>
+&lt;p>As of October 2024, I’ve gone an entire year without any caffeinated soda. However, I replaced it with sugary alternatives, which completely negated any health benefits that could be had. This year, I’ve started removing soda altogether to reduce my sugar intake.&lt;/p>
 &lt;h3 id="martial-arts">Martial Arts&lt;/h3>
-&lt;p>Martial arts have always been a passion. I earned a yellow belt in Karate during college but stopped due to cost. This year, I joined my kids in their Karate classes. I’ve regained my yellow belt and plan to continue. It’s a great way to disconnect and blow off steam.&lt;/p>
+&lt;p>Martial arts have always been a passion i&amp;rsquo;ve mine. I earned a yellow belt while taking Karate for a PE credit in college. Sadly I didn&amp;rsquo;t continue because I was a poor college student that didn&amp;rsquo;t think it was worth going to the dojo and paying for sessions. This year my kids started doing Karate. After I was good and behind them.. 2 belts. I decided to join.&lt;/p>
+&lt;p>I’ve regained my yellow belt and plan to continue. It’s a great way to completely disconnect. Not to mention the practice for sparring got me moving which was really good for me.&lt;/p>
 &lt;h3 id="working-out">Working Out&lt;/h3>
-&lt;p>I’ve been gradually building a home gym and increasing my exercise routine. My goal is to expand this habit in 2025.&lt;/p>
+&lt;p>I’ve been gradually building a home gym to be able to practice Martial Arts at home as well as lift some weights. The beauty of it being at home is makes it easier to go at weird times. Sometimes even work out with my kids and encourage them to be more physically active as well.&lt;/p>
 &lt;h3 id="impact">Impact&lt;/h3>
-&lt;p>These efforts have paid off. I’ve lost 12 pounds in four months and feel much better overall. I can even spar without feeling like I’m going to pass out!&lt;/p>
+&lt;p>These efforts have been paying off. So far, i’ve lost 12 pounds in the last four months. Not to mention I feel much better overall. I can even spar without feeling like I’m going to pass out!&lt;/p>
 &lt;hr>
 &lt;h2 id="travel">Travel&lt;/h2>
 &lt;p>I traveled internationally twice this year:&lt;/p>
 &lt;ul>
 &lt;li>&lt;strong>Brazil&lt;/strong>: A work trip brought me to Porto Alegre just a week before the airport was severely flooded.&lt;/li>
-&lt;li>&lt;strong>London&lt;/strong>: I took my family on a trip to London. The kids first trip overseas, which was an unforgettable experience for us all.&lt;/li>
+&lt;li>&lt;strong>London&lt;/strong>: I took my family on a trip to London. The kids first trip overseas. They were finally all old enough I felt like they would remember and appreciate it a lot more. Not to mention a lot easier to travel with when they can all walk around on their own.&lt;/li>
 &lt;/ul>
 &lt;hr>
 &lt;h1 id="work--professional">Work / Professional&lt;/h1>
-&lt;p>2024 brought significant changes to my career.&lt;/p>
-&lt;h2 id="production-readiness">Production Readiness&lt;/h2>
-&lt;p>In the year’s first half, I focused on production readiness: defining SLAs/SLOs, identifying critical user experience factors, and identifying risks. This involved formalizing processes, exposing key metrics and making architectural changes.&lt;/p>
+&lt;p>2024 brought some changes to my career.&lt;/p>
 &lt;h2 id="staff-engineer">Staff Engineer&lt;/h2>
-&lt;p>At Rocket.Chat, I held various roles. Engineering Manager, Tech Lead, Team Lead, and more. This year, I tried to embrace being a Staff Engineer, focusing on coding, dev ex, writing, mentoring, and cross-team alignment. I’ve found this balance fulfilling. Even more so in retrospect.&lt;/p>
+&lt;p>At Rocket.Chat over the course of almost 10 years, I held various roles. Engineering Manager, Tech Lead, Team Lead, etc. From building a team, to taking our scope and spliting it up into 3 seperate teams. But Staff Engineer as a level I didn&amp;rsquo;t really know what it was or what I was supposed to do. So this year I tried to settle in and figure out what the industry considers a Staff Engineer and try to learn what I could.&lt;/p>
+&lt;p>This article and book with the same title I really recommend reading if you&amp;rsquo;d like to learn: &lt;a href="https://staffeng.com/guides/what-do-staff-engineers-actually-do/"target="_blank">https://staffeng.com/guides/what-do-staff-engineers-actually-do/&lt;/a>&lt;/p>
+&lt;p>I tried to also spread our support of Staff Engineers so others coming into that role would have more direction. Its a role I really enjoy and realize I do even more so in retrospect.&lt;/p>
+&lt;h2 id="production-readiness">Production Readiness&lt;/h2>
+&lt;p>In the year’s first half, I focused on a cross team initiative: Production Readiness. I might be missing some great sources of information out there. But I felt like this was a subject very under documented on the web.&lt;/p>
+&lt;p>This process was a lot of talking to stakeholders and together:&lt;/p>
+&lt;ul>
+&lt;li>Defining SLAs/SLOs&lt;/li>
+&lt;li>Identifying critical user experience factors&lt;/li>
+&lt;li>Api response time&lt;/li>
+&lt;li>Error rates&lt;/li>
+&lt;li>Error budgets&lt;/li>
+&lt;/ul>
+&lt;p>Then working backwards from there with the engineering team to identify the risks to being able to fullfill these targets.&lt;/p>
+&lt;p>Things like:&lt;/p>
+&lt;ul>
+&lt;li>Building and participating in an on call team to actually be responsible for delivering targets&lt;/li>
+&lt;li>Implementing new metrics to gain visibilty into something critical&lt;/li>
+&lt;li>Removing code complexity from endpoints to speed up response times&lt;/li>
+&lt;li>Ensuring could dynamically scale to meet load&lt;/li>
+&lt;li>Ensuring could handle dependency failures appropriately&lt;/li>
+&lt;li>Ensuring alerts were properly set&lt;/li>
+&lt;li>Ensuring systems like Mongo, Redis, Nats etc were set to a higher SLA&lt;/li>
+&lt;/ul>
+&lt;p>If anyone is looking for good things to blog about.. This would be a good topic to see more information out there. If not I hope to get to it at some point.&lt;/p>
+&lt;h2 id="technical-writing">Technical Writing&lt;/h2>
+&lt;p>As part of that focus on Staff Engineer it was important to help with technical alignment. This means documenting and writing things down. This has been a passion of mine for a long time, but we seemed to always struggle getting stakeholders to go read our docs written in markdown, keeping the docs together so they were discoverable, and having a common agreed on format and system for these documents.&lt;/p>
+&lt;p>For a while I had been eyeing Oxide Computer&amp;rsquo;s Ellusive &lt;a href="https://oxide.computer/blog/rfd-1-requests-for-discussion"target="_blank">RFD Process&lt;/a>. What really stuck out to me was not just documenting but trying to drive discussions. I really wanted to try it out, but their system at the time was part of a larger CIO toolset they had built.&lt;/p>
+&lt;p>So at the end of 2023 I wrote a tool that from what I could tell worked a lot like their tool. I very creatively called: &lt;a href="https://github.com/geekgonecrazy/rfd-tool"target="_blank">RFD Tool&lt;/a>&lt;/p>
+&lt;p>Over the course of 2024 I rolled this out. I also took a bunch of documents I and others had written and imported them into the system. From what I hear the final count at the end of this year was 114 RFDs.&lt;/p>
+&lt;p>I plan to write more about this system in a future post.&lt;/p>
 &lt;h2 id="new-job">New Job&lt;/h2>
 &lt;p>After nearly 10 years at Rocket.Chat, I transitioned to a new role as a Senior Software Engineer at a new company building fiber networks in communities and the software required to provide a marketplace for the members of those communties to chose their ISP and have their equipment provisioned. This change was important to allow me to reset and perform a rebalance of work/life. But also a good opportunity to learn something new, particularly in the ISP space which i&amp;rsquo;ve always found interesting.&lt;/p>
 &lt;p>Some times a change is required to help us realize what we value. I realize I find fulfillment in participating in architecture and direction, not just coding. This is something I&amp;rsquo;ll be focusing on in the new year.&lt;/p>
-&lt;hr>
-&lt;h2 id="technology">Technology&lt;/h2>
+&lt;h3 id="technology">Technology&lt;/h3>
 &lt;p>Joining a new team meant working with new technologies:&lt;/p>
 &lt;ul>
 &lt;li>&lt;strong>Microservices&lt;/strong>: I&amp;rsquo;ve worked with microservices before typically by breaking part of a monolith off to enable more dynamic scaling. I&amp;rsquo;ve never worked with a microservice first architecture. While microservices can enable scaling and team parallelism, the complexity isn’t always worth it for smaller teams.&lt;/li>
-&lt;li>&lt;strong>GraphQL&lt;/strong>: Although I see its appeal, GraphQL introduces challenges with network traffic, authorization, and increased boilerplate code necessary. I still prefer well-crafted RESTful APIs.&lt;/li>
+&lt;li>&lt;strong>GraphQL&lt;/strong>: Although I see its appeal, GraphQL introduces challenges with network traffic, authorization, and increased boilerplate code necessary. I still prefer well-crafted RESTful APIs. I seriously question the argument of less api calls. Sounds like a great argument. In reality I don&amp;rsquo;t think this is true.&lt;/li>
 &lt;li>&lt;strong>gRPC and Protobufs&lt;/strong>: Defining services with Protobufs and generating REST APIs, openapi documentation, and gRPC Gateway code is really cool. I plan to explore this more.&lt;/li>
 &lt;/ul>
 &lt;p>This article by tailscale is a good read that has been top of mind: &lt;a href="https://tailscale.com/blog/new-internet"target="_blank">https://tailscale.com/blog/new-internet&lt;/a>&lt;/p>
-&lt;hr>
 &lt;h2 id="daily-tech-stack">Daily Tech Stack&lt;/h2>
-&lt;p>This year, I used:&lt;/p>
+&lt;p>This year my primary daily stack was:&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="https://fedoraproject.org/atomic-desktops/silverblue/"target="_blank">Silverblue&lt;/a>, an immutable OSTree OS,&lt;/li>
 &lt;li>A custom OSTree branch, &lt;a href="https://github.com/geekgonecrazy/triiodide"target="_blank">Triiodide&lt;/a> (i3 - 3 iodine atoms is a &lt;a href="https://en.wikipedia.org/wiki/Triiodide"target="_blank">triiodide&lt;/a> ion) that brings i3wm instead of gnome&lt;/li>
+&lt;li>Dev Containers&lt;/li>
 &lt;li>&lt;a href="https://ghostty.org"target="_blank">Ghostty&lt;/a> for a performant terminal experience&lt;/li>
 &lt;li>A single 32&amp;rdquo; curved monitor plus a smaller secondary display for chat, video conferencing and music&lt;/li>
 &lt;/ul>
-&lt;hr>
+&lt;p>Plan to write more about my immutable/Container based flow at some point soon.&lt;/p>
 &lt;h1 id="2025">2025&lt;/h1>
-&lt;p>I don&amp;rsquo;t really do new year&amp;rsquo;s resolutions any more. You don&amp;rsquo;t need to wait for a new year to make a change.&lt;/p>
+&lt;p>I don&amp;rsquo;t really do new year&amp;rsquo;s resolutions any more. I feel like uou don&amp;rsquo;t need to wait for a new year to make a change. Plus most people I see that only do resolutions one time a year.. Usually set themselves up for failure by trying to do too many at the same time. How many times did you set a goal to workout and buy a gym membership only to stop going after 2-3 months? I have.. several times.&lt;/p>
 &lt;p>But, I do plan to continue to focus on health, doing more writing, and focus on work I find fullfilling.&lt;/p>
 &lt;p>Here’s to another year of growth!&lt;/p></description></item><item><title>Fedora Iot, Greenboot, Systemd and of course DNS</title><link>https://aaronogle.dev/2023/09/24/fedora-iot-greenboot-systemd-and-of-course-dns/</link><pubDate>Sun, 24 Sep 2023 00:00:00 +0000</pubDate><guid>https://aaronogle.dev/2023/09/24/fedora-iot-greenboot-systemd-and-of-course-dns/</guid><description>
 &lt;p>This post is mostly as a resource for future me. But maybe it&amp;rsquo;ll come in useful to someone else.&lt;/p>
