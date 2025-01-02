@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron's Ramblings</title><link>https://geekgonecrazy.com/</link><description>Recent content on Aaron's Ramblings</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 31 Dec 2024 00:00:00 +0000</lastBuildDate><item><title>Year In Review: 2024</title><link>https://geekgonecrazy.com/2024/12/31/year-in-review-2024/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2024/12/31/year-in-review-2024/</guid><description>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aaron Ogle</title><link>https://aaronogle.dev/</link><description>Recent content on Aaron Ogle</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 31 Dec 2024 00:00:00 +0000</lastBuildDate><item><title>Year In Review: 2024</title><link>https://aaronogle.dev/2024/12/31/year-in-review-2024/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://aaronogle.dev/2024/12/31/year-in-review-2024/</guid><description>
 &lt;h1 id="2024-is-now-in-the-books">2024 is now in the books!&lt;/h1>
 &lt;p>In previous years, I wrote internal posts at work to reflect on the year and highlight accomplishments. This exercise was revealing. It was often a great way to see how much we’d achieved that you might lose sight of in the daily grind. This year, I decided to apply the same reflection to my personal life.&lt;/p>
 &lt;p>Here’s a TL;DR of 2024:&lt;/p>
@@ -71,7 +71,7 @@
 &lt;h1 id="2025">2025&lt;/h1>
 &lt;p>I don&amp;rsquo;t really do new year&amp;rsquo;s resolutions any more. You don&amp;rsquo;t need to wait for a new year to make a change.&lt;/p>
 &lt;p>But, I do plan to continue to focus on health, doing more writing, and focus on work I find fullfilling.&lt;/p>
-&lt;p>Here’s to another year of growth!&lt;/p></description></item><item><title>Fedora Iot, Greenboot, Systemd and of course DNS</title><link>https://geekgonecrazy.com/2023/09/24/fedora-iot-greenboot-systemd-and-of-course-dns/</link><pubDate>Sun, 24 Sep 2023 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2023/09/24/fedora-iot-greenboot-systemd-and-of-course-dns/</guid><description>
+&lt;p>Here’s to another year of growth!&lt;/p></description></item><item><title>Fedora Iot, Greenboot, Systemd and of course DNS</title><link>https://aaronogle.dev/2023/09/24/fedora-iot-greenboot-systemd-and-of-course-dns/</link><pubDate>Sun, 24 Sep 2023 00:00:00 +0000</pubDate><guid>https://aaronogle.dev/2023/09/24/fedora-iot-greenboot-systemd-and-of-course-dns/</guid><description>
 &lt;p>This post is mostly as a resource for future me. But maybe it&amp;rsquo;ll come in useful to someone else.&lt;/p>
 &lt;p>This weekend I was working on provisioning a new NAS/Media box setup after having to do a bit of hardware shuffling. Long story.&lt;/p>
 &lt;p>I decided to try &lt;a href="https://fedoraproject.org/iot/"target="_blank">Fedora iot&lt;/a> on a whim. Fedora iot has an interesting project called &lt;a href="https://github.com/fedora-iot/greenboot"target="_blank">greenboot&lt;/a>. The objective of the project is to define some checks for the state of the machine. When the machine is booting and the machine isn&amp;rsquo;t configured or working as expected it reboots and tries to correct. From what I understand it does this several times and then if unsuccessful it rolls back to the previous ostree commit. In an edge deployment scenario where you can&amp;rsquo;t always have your hands on the device and it almost assuredly will break&amp;hellip; I can see ostree commits + this to being great to rollback when something gets broken. Much easier than in my previous post:&lt;/p>
@@ -124,7 +124,7 @@ DNSStubListener=no
 &lt;p>From here then it was as simple as:&lt;/p>
 &lt;pre>&lt;code>sudo systemctl mask greenboot-healthcheck.service
 &lt;/code>&lt;/pre>&lt;p>Now to go on to evaluate greenboot further. Seems like a cool idea.&lt;/p>
-&lt;p>&lt;code>systemd.mask&lt;/code> bootarg saved the day!&lt;/p></description></item><item><title>How to Set Up Client SSL Certificate Authentication for Rocket.Chat</title><link>https://geekgonecrazy.com/2023/05/23/how-to-set-up-client-ssl-certificate-authentication-for-rocket.chat/</link><pubDate>Tue, 23 May 2023 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2023/05/23/how-to-set-up-client-ssl-certificate-authentication-for-rocket.chat/</guid><description>
+&lt;p>&lt;code>systemd.mask&lt;/code> bootarg saved the day!&lt;/p></description></item><item><title>How to Set Up Client SSL Certificate Authentication for Rocket.Chat</title><link>https://aaronogle.dev/2023/05/23/how-to-set-up-client-ssl-certificate-authentication-for-rocket.chat/</link><pubDate>Tue, 23 May 2023 00:00:00 +0000</pubDate><guid>https://aaronogle.dev/2023/05/23/how-to-set-up-client-ssl-certificate-authentication-for-rocket.chat/</guid><description>
 &lt;p>Are you looking to add an extra layer of security to access Rocket.Chat? One way to do this is by implementing client SSL certificate authentication. This authentication method requires clients to present a valid SSL certificate to authenticate themselves to the server.&lt;/p>
 &lt;p>In this post, we will walk through the steps to set up client SSL certificate authentication using Nginx.&lt;/p>
 &lt;h2 id="prerequisites">Prerequisites&lt;/h2>
@@ -247,7 +247,7 @@ proxy_redirect off;
 &lt;li>Visit the address and you should be prompted to select the certificate.&lt;/li>
 &lt;/ul>
 &lt;p>Congratulations! You have successfully set up client SSL certificate authentication for &lt;a href="http://Rocket.Chat"target="_blank">Rocket.Chat&lt;/a> using Nginx.&lt;/p>
-&lt;p>Extremely useful Reference: &lt;a href="https://fardog.io/blog/2017/12/30/client-side-certificate-authentication-with-nginx/"target="_blank">https://fardog.io/blog/2017/12/30/client-side-certificate-authentication-with-nginx/&lt;/a>&lt;/p></description></item><item><title>Adventures of the Geek: Remote Password Reset</title><link>https://geekgonecrazy.com/2022/06/16/adventures-of-the-geek-remote-password-reset/</link><pubDate>Thu, 16 Jun 2022 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2022/06/16/adventures-of-the-geek-remote-password-reset/</guid><description>
+&lt;p>Extremely useful Reference: &lt;a href="https://fardog.io/blog/2017/12/30/client-side-certificate-authentication-with-nginx/"target="_blank">https://fardog.io/blog/2017/12/30/client-side-certificate-authentication-with-nginx/&lt;/a>&lt;/p></description></item><item><title>Adventures of the Geek: Remote Password Reset</title><link>https://aaronogle.dev/2022/06/16/adventures-of-the-geek-remote-password-reset/</link><pubDate>Thu, 16 Jun 2022 00:00:00 +0000</pubDate><guid>https://aaronogle.dev/2022/06/16/adventures-of-the-geek-remote-password-reset/</guid><description>
 &lt;p>Our adventure begins on a Monday evening. I received a call from a family member that lives a bit over 8 hours away.&lt;/p>
 &lt;blockquote>
 &lt;p>I powered on my laptop today and it won&amp;rsquo;t take my password&lt;/p>
@@ -361,7 +361,7 @@ mount /dev/sda2 /mnt/laptop
 &lt;pre>&lt;code>chntpw –l SAM
 &lt;/code>&lt;/pre>&lt;p>From here you follow the prompts to reset the password. Or in my case I went the path of just blanking the password out.&lt;/p>
 &lt;p>&lt;img src="https://media.giphy.com/media/PqjTdvXImZQfcmTYEO/giphy.gif"
-alt/>&lt;/p></description></item><item><title>Rocket.Chat and the Matrix Protocol</title><link>https://geekgonecrazy.com/2022/05/30/rocketchat-and-the-matrix-protocol/</link><pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2022/05/30/rocketchat-and-the-matrix-protocol/</guid><description>
+alt/>&lt;/p></description></item><item><title>Rocket.Chat and the Matrix Protocol</title><link>https://aaronogle.dev/2022/05/30/rocketchat-and-the-matrix-protocol/</link><pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate><guid>https://aaronogle.dev/2022/05/30/rocketchat-and-the-matrix-protocol/</guid><description>
 &lt;p>Rocket.Chat &lt;a href="https://rocket.chat/press-releases/rocket-chat-leverages-matrix-protocol-for-decentralized-and-interoperable-communications"target="_blank">now has federation support via the Matrix protocol&lt;/a>.&lt;/p>
 &lt;p>This announcement is an exciting one to me. I&amp;rsquo;ve been working with Rocket.Chat since I found it almost 7 years ago. One of the things I recall from early on is the vision of being as ubiquitious as email. One of the beauties of email is not everyone is on the same domain or let alone even the same kind of mail server. Just all speaking the same language.&lt;/p>
 &lt;p>Rocket.Chat being able to talk the Matrix Protocol to me is a start of it achieving that.&lt;/p>
@@ -522,7 +522,7 @@ Replace: &lt;code>as_token&lt;/code> value with the AppService Token you got fro
 &lt;p>The client you have connected on the other server you will receive an invite. Once accepted you can now type a message on either side and if all went well you should receive the message on the other side!&lt;/p>
 &lt;p>&lt;em>&lt;strong>Note: if you invite another Rocket.Chat server it currently will auto accept&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>I&amp;rsquo;ll leave the server up for a couple of weeks if you want to try reaching me at &lt;a href="https://matrix.to/#/@aaron:geekgone.dev"target="_blank">@aaron:geekgone.dev&lt;/a>&lt;/p>
-&lt;p>Happy chatting!&lt;/p></description></item><item><title>Rover Project: Update 3</title><link>https://geekgonecrazy.com/2021/07/04/rover-project-update-3/</link><pubDate>Sun, 04 Jul 2021 00:03:00 +0000</pubDate><guid>https://geekgonecrazy.com/2021/07/04/rover-project-update-3/</guid><description>
+&lt;p>Happy chatting!&lt;/p></description></item><item><title>Rover Project: Update 3</title><link>https://aaronogle.dev/2021/07/04/rover-project-update-3/</link><pubDate>Sun, 04 Jul 2021 00:03:00 +0000</pubDate><guid>https://aaronogle.dev/2021/07/04/rover-project-update-3/</guid><description>
 &lt;p>Finally a more eventful update!&lt;/p>
 &lt;p>Last time I worked with building parts in CAD I was using solidworks or AutoCAD. I have no desire to buy either one of those right now plus I need something that will run on linux. So started investing some time into learning my way around FreeCAD.&lt;/p>
 &lt;p>Creating first iteration of the wheel
@@ -568,7 +568,7 @@ alt/>&lt;/p>
 &lt;p>Then after a long period of debugging&amp;hellip; finally got the 433mhz transmitter and receiver talking. Ended up getting it working with the virtualwire library.&lt;/p>
 &lt;p>&lt;img src="/images/2021-07-04/workbench-with-basic-electronics-working.jpg"
 alt/>&lt;/p>
-&lt;p>Next step get the chassis designed and printed!&lt;/p></description></item><item><title>Rover Project: Update 2</title><link>https://geekgonecrazy.com/2021/07/04/rover-project-update-2/</link><pubDate>Sun, 04 Jul 2021 00:02:00 +0000</pubDate><guid>https://geekgonecrazy.com/2021/07/04/rover-project-update-2/</guid><description>
+&lt;p>Next step get the chassis designed and printed!&lt;/p></description></item><item><title>Rover Project: Update 2</title><link>https://aaronogle.dev/2021/07/04/rover-project-update-2/</link><pubDate>Sun, 04 Jul 2021 00:02:00 +0000</pubDate><guid>https://aaronogle.dev/2021/07/04/rover-project-update-2/</guid><description>
 &lt;p>So the robot parts sat in my closet for a few months. I kind of forgot to order the parts.&lt;/p>
 &lt;p>Recently realized I really need to disconnect more fully from work in my off hours. When your hobby includes coding and in same language as you write for work.. Its a bit harder to keep your brain from making that jump to thinking about work.&lt;/p>
 &lt;p>So i&amp;rsquo;ve been on the look out for new hobbies.&lt;/p>
@@ -592,7 +592,7 @@ alt/>&lt;/p>
 &lt;li>&lt;a href="https://bc-robotics.com/tutorials/controlling-dc-motor-arduino/">https://bc-robotics.com/tutorials/controlling-dc-motor-arduino/&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://maker.pro/custom/projects/all-you-need-to-know-about-l293d">https://maker.pro/custom/projects/all-you-need-to-know-about-l293d&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>Now to wait on these parts to arrive. Plus some tools needed to build out my electronics work area. Has been pretty barebones since Harvey. Time to fix that :)&lt;/p></description></item><item><title>Rover Project: Update 1</title><link>https://geekgonecrazy.com/2021/07/04/rover-project-update-1/</link><pubDate>Sun, 04 Jul 2021 00:01:00 +0000</pubDate><guid>https://geekgonecrazy.com/2021/07/04/rover-project-update-1/</guid><description>
+&lt;p>Now to wait on these parts to arrive. Plus some tools needed to build out my electronics work area. Has been pretty barebones since Harvey. Time to fix that :)&lt;/p></description></item><item><title>Rover Project: Update 1</title><link>https://aaronogle.dev/2021/07/04/rover-project-update-1/</link><pubDate>Sun, 04 Jul 2021 00:01:00 +0000</pubDate><guid>https://aaronogle.dev/2021/07/04/rover-project-update-1/</guid><description>
 &lt;p>Parts came in!&lt;/p>
 &lt;p>&lt;img src="/images/2021-07-04/parts-1.jpg"
 alt/>
@@ -624,7 +624,7 @@ alt/>&lt;/p>
 &lt;p>So figured maybe I was being too clever and switch to transmitting strings and probably 10x variations.&lt;/p>
 &lt;p>So after still not even a hum from the motors.. I figured it must be just something wrong with the 433Mhz pair. I wanted to at least validate the motors worked. So I found an example program for those motors show them working. It was here and getting this to work&amp;hellip; I realized these aren&amp;rsquo;t really the right motors for the wheels.&lt;/p>
 &lt;p>So we shelved it until I could go and order the right motors.&lt;/p>
-&lt;p>It wasn&amp;rsquo;t until later I actually realized I some how completely spazzed on putting antenna&amp;rsquo;s on and their range was only centimeters with out one.&lt;/p></description></item><item><title>Rover Project</title><link>https://geekgonecrazy.com/2021/07/04/rover-project/</link><pubDate>Sun, 04 Jul 2021 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2021/07/04/rover-project/</guid><description>
+&lt;p>It wasn&amp;rsquo;t until later I actually realized I some how completely spazzed on putting antenna&amp;rsquo;s on and their range was only centimeters with out one.&lt;/p></description></item><item><title>Rover Project</title><link>https://aaronogle.dev/2021/07/04/rover-project/</link><pubDate>Sun, 04 Jul 2021 00:00:00 +0000</pubDate><guid>https://aaronogle.dev/2021/07/04/rover-project/</guid><description>
 &lt;p>My family is very STEM oriented. I grew up learning hands on at home. Taking things apart. Questioning how things worked and eventually learning how to actually fix those things I took apart. As much as possible we&amp;rsquo;re trying to encourage this for our kids.&lt;/p>
 &lt;p>They are pretty fortunate as they have good examples of this on both sides of the family. So they come by their curiousity about the world around them very naturally. Now days its not surprising to get asked questions about things even we don&amp;rsquo;t know or remember the answer to.&lt;/p>
 &lt;p>Not going to pretend some times the constant questions doesn&amp;rsquo;t get a little annoying. But just have to stop and appreciate the curiousity and help them learn more about the things they are actually curious about.&lt;/p>
@@ -689,7 +689,7 @@ alt/>&lt;/p>
 &lt;li>&lt;a href="https://www.amazon.com/gp/product/B086ZL8W1W/ref=ppx_yo_dt_b_asin_title_o03_s00?ie=UTF8&amp;amp;psc=1"target="_blank">433Mhz Transmitter / Receivers&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.amazon.com/gp/product/B07C6T6YCZ/ref=ppx_yo_dt_b_asin_title_o03_s00?ie=UTF8&amp;amp;psc=1"target="_blank">AA Battery box&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>Now we waited on the parts to arrive.&lt;/p></description></item><item><title>OVH Serial over LAN (SOL)</title><link>https://geekgonecrazy.com/2020/09/07/ovh-serial-over-lan-sol/</link><pubDate>Mon, 07 Sep 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/09/07/ovh-serial-over-lan-sol/</guid><description>
+&lt;p>Now we waited on the parts to arrive.&lt;/p></description></item><item><title>OVH Serial over LAN (SOL)</title><link>https://aaronogle.dev/2020/09/07/ovh-serial-over-lan-sol/</link><pubDate>Mon, 07 Sep 2020 00:00:00 +0000</pubDate><guid>https://aaronogle.dev/2020/09/07/ovh-serial-over-lan-sol/</guid><description>
 &lt;p>Its been a while since I&amp;rsquo;ve worked with physical servers and typically when something happened I could pretty quickly get physical access to the box if things went pear shaped.&lt;/p>
 &lt;p>But when you buy or lease servers from a provider like OVH. Those servers might be sitting half way around the world. So if something goes wrong you need to some how virtually be in front of the keyboard.&lt;/p>
 &lt;p>OVH has a few different ways to access your servers console to interact with the machine directly.&lt;/p>
@@ -742,7 +742,7 @@ GRUB_SERIAL_COMMAND=&amp;quot;serial --unit=1 --speed=115200 --word=8 --parity=n
 alt/>&lt;/p>
 &lt;p>&lt;img src="/images/2020-09-07/screen-shot-2020-09-07-at-14-29-20.png"
 alt/>&lt;/p>
-&lt;p>I want to thank the author of this blog post for setting me on the right track: &lt;a href="http://divideoverflow.com/2016/07/Configuring_IPMI_on_OVH_server/">http://divideoverflow.com/2016/07/Configuring_IPMI_on_OVH_server/&lt;/a>&lt;/p></description></item><item><title>Tinkerbell or iPXE boot on OVH</title><link>https://geekgonecrazy.com/2020/09/07/tinkerbell-or-ipxe-boot-on-ovh/</link><pubDate>Mon, 07 Sep 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/09/07/tinkerbell-or-ipxe-boot-on-ovh/</guid><description>
+&lt;p>I want to thank the author of this blog post for setting me on the right track: &lt;a href="http://divideoverflow.com/2016/07/Configuring_IPMI_on_OVH_server/">http://divideoverflow.com/2016/07/Configuring_IPMI_on_OVH_server/&lt;/a>&lt;/p></description></item><item><title>Tinkerbell or iPXE boot on OVH</title><link>https://aaronogle.dev/2020/09/07/tinkerbell-or-ipxe-boot-on-ovh/</link><pubDate>Mon, 07 Sep 2020 00:00:00 +0000</pubDate><guid>https://aaronogle.dev/2020/09/07/tinkerbell-or-ipxe-boot-on-ovh/</guid><description>
 &lt;p>Recently have had to work with a number of physical servers that need to be treated more cattle like than a bunch of pets. I need to be able to quickly and easily provision servers to fit a specific role with out having to go through a complicated setup process.&lt;/p>
 &lt;p>For this type of thing PXE or iPXE comes to the rescue. Allowing you to boot over the network. Simply rebooting the machine and then having it pick up its instructions and be provisioned like needed.&lt;/p>
 &lt;h2 id="tinkerbell">Tinkerbell&lt;/h2>
@@ -910,7 +910,7 @@ timeout: 60
 &lt;p>Swap out the mac address for the same address used in your hardware.json above.&lt;/p>
 &lt;h3 id="try-it">Try it&lt;/h3>
 &lt;p>Now for the fun part. Connect to KVM console for your machine and then reboot it.&lt;/p>
-&lt;p>If all went well you should see it boot up&lt;/p></description></item><item><title>Decision Fatigue in 2020</title><link>https://geekgonecrazy.com/2020/08/28/decision-fatigue-in-2020/</link><pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/08/28/decision-fatigue-in-2020/</guid><description>
+&lt;p>If all went well you should see it boot up&lt;/p></description></item><item><title>Decision Fatigue in 2020</title><link>https://aaronogle.dev/2020/08/28/decision-fatigue-in-2020/</link><pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate><guid>https://aaronogle.dev/2020/08/28/decision-fatigue-in-2020/</guid><description>
 &lt;p>This last couple of weeks I finally took some time off of work to try and reset. I’m not always the greatest at taking time off. I take an extra day or two combined with the weekend for a mini-vacation around the Holidays to see family and it’s often the minimum time needed. This year with everything going on really had to force my self to step back and try to reset with a staycation.&lt;/p>
 &lt;p>It’s all too easy now days to get overwhelmed and stressed out. A couple of key contributors now days:&lt;/p>
 &lt;ul>
@@ -943,7 +943,7 @@ timeout: 60
 &lt;li>Organization - being organized helps decision fatigue a lot.&lt;/li>
 &lt;li>Value your own time. Just because someone DM’s you asking for something doesn’t mean you need to stop what you are doing now and respond. In fact busy mode / do not disturb is your best friend here. Not even seeing it prevents you from having to make a decision.&lt;/li>
 &lt;/ul>
-&lt;p>Don’t be afraid to take time off to reset! It’s hard to take time off. But it’s important to take care of your self!&lt;/p></description></item><item><title>A k8s Migration Concept</title><link>https://geekgonecrazy.com/2020/05/01/a-k8s-migration-concept/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/05/01/a-k8s-migration-concept/</guid><description>
+&lt;p>Don’t be afraid to take time off to reset! It’s hard to take time off. But it’s important to take care of your self!&lt;/p></description></item><item><title>A k8s Migration Concept</title><link>https://aaronogle.dev/2020/05/01/a-k8s-migration-concept/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>https://aaronogle.dev/2020/05/01/a-k8s-migration-concept/</guid><description>
 &lt;p>Surprisingly I don’t have a lot of kubernetes related content on my blog yet. This might just because I’m too busy using it to talk about it. But i’m a heavy user of it. To me it just makes orchestrating work loads easier.&lt;/p>
 &lt;p>One thing in general I don’t see a lot of talk about is migrating between infrastructure. Especially don’t see much for kubernetes.&lt;/p>
 &lt;!-- raw HTML omitted -->
@@ -978,7 +978,7 @@ timeout: 60
 &lt;p>Once it was all over only thing left to do was to clean up.&lt;/p>
 &lt;p>To me the magic here is in being able to change the DNS and traffic still be working with some minimal latency increase.&lt;/p>
 &lt;p>Things can definitely go wrong. You have to plan for them. This is also why giving your self a maintenance window is also extremely important.&lt;/p>
-&lt;p>Also if you know anything about working with the kubernetes api.. consider writing something to do this.&lt;/p></description></item><item><title>Quarantainment</title><link>https://geekgonecrazy.com/2020/05/01/quarantainment/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/05/01/quarantainment/</guid><description>
+&lt;p>Also if you know anything about working with the kubernetes api.. consider writing something to do this.&lt;/p></description></item><item><title>Quarantainment</title><link>https://aaronogle.dev/2020/05/01/quarantainment/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>https://aaronogle.dev/2020/05/01/quarantainment/</guid><description>
 &lt;p>I don’t think its likely a surprise to anyone if I say I’m typically an introvert. I stay at and around home a lot in general. But when its no longer by choice.. kinda takes the fun out of it.&lt;/p>
 &lt;p>We identified early on that we needed to keep our selves busy and entertained.&lt;/p>
 &lt;!-- raw HTML omitted -->
@@ -1003,7 +1003,7 @@ alt/>&lt;/p>
 &lt;p>I also bought some controllers and loaded a raspberry pi up with &lt;a href="https://retropie.org.uk/"target="_blank">retropie&lt;/a>.&lt;/p>
 &lt;p>&lt;img src="https://paper-attachments.dropbox.com/s_5B8DDF11035244A7AC92669A93E624BCD7D0866F945EF2DF2F75C708AABAABDC_1588365556279_file.jpeg"
 alt/>&lt;/p>
-&lt;p>So far its working. We have stayed fairly sane and we are coming out the other side a bit better then we went in.&lt;/p></description></item><item><title>Respecting Privacy in Analytics</title><link>https://geekgonecrazy.com/2020/04/29/respecting-privacy-in-analytics/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/04/29/respecting-privacy-in-analytics/</guid><description>
+&lt;p>So far its working. We have stayed fairly sane and we are coming out the other side a bit better then we went in.&lt;/p></description></item><item><title>Respecting Privacy in Analytics</title><link>https://aaronogle.dev/2020/04/29/respecting-privacy-in-analytics/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate><guid>https://aaronogle.dev/2020/04/29/respecting-privacy-in-analytics/</guid><description>
 &lt;p>There is a reason why people tend to add analytics to sites. I&amp;rsquo;d say most people add for completely honest reasoning. They just want to be able to see how their site is doing and if anyone actually shows up.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;p>But its really important to go down the path with caution. If you dont carefully select and think through your analytics… You end up spying on your users likely without even realizing it.&lt;/p>
@@ -1031,7 +1031,7 @@ Saved: &lt;a href="https://github.com/usefathom/fathom/blob/8f7c6d2e45ebb2865120
 &lt;p>Here is a sample of my brief moment on hackernews yesterday. But what you see there is it. Super simple, but does the job.&lt;/p>
 &lt;p>&lt;img src="https://paper-attachments.dropbox.com/s_3A770CD59D00AB3A931B3BF5D654149EDE7875E5917677E7CC0A064B28BBDD07_1588216208662_file.jpeg"
 alt/>&lt;/p>
-&lt;p>Think about privacy the next time you start adding analytics to your website. Think about what you are making your users give up in exchange. Do the right thing 🙂&lt;/p></description></item><item><title>De-Googling: My Progress</title><link>https://geekgonecrazy.com/2020/04/28/de-googling-my-progress/</link><pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/04/28/de-googling-my-progress/</guid><description>
+&lt;p>Think about privacy the next time you start adding analytics to your website. Think about what you are making your users give up in exchange. Do the right thing 🙂&lt;/p></description></item><item><title>De-Googling: My Progress</title><link>https://aaronogle.dev/2020/04/28/de-googling-my-progress/</link><pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate><guid>https://aaronogle.dev/2020/04/28/de-googling-my-progress/</guid><description>
 &lt;p>I wrote a bit about my reasoning to De-Google &lt;a href="https://geekgonecrazy.com/2020/04/27/de-googling/"target="_blank">here&lt;/a>. Now I want to write a bit about my progress, the struggles and what I ended up with.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;h1 id="search">Search&lt;/h1>
@@ -1105,7 +1105,7 @@ alt/>&lt;/p>
 &lt;p>Looking through my phone at the Google Apps installed.&lt;/p>
 &lt;p>Youtube is the only app/service I visit any more for personal use. I&amp;rsquo;ve tried using invidious.. But I don&amp;rsquo;t know how much this really helps. Also if I self host then the data is then tied to me… so kinda defeats the purposes.&lt;/p>
 &lt;p>When ever I do find my self having to access Google I do so in a separate Firefox Container.&lt;/p>
-&lt;p>Overall I feel like I&amp;rsquo;ve done a great job removing my reliance on Google! I have a feeling I will be self hosting a lot more in the future. Maybe more on that another time. 😉&lt;/p></description></item><item><title>De-Googling</title><link>https://geekgonecrazy.com/2020/04/27/de-googling/</link><pubDate>Mon, 27 Apr 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/04/27/de-googling/</guid><description>
+&lt;p>Overall I feel like I&amp;rsquo;ve done a great job removing my reliance on Google! I have a feeling I will be self hosting a lot more in the future. Maybe more on that another time. 😉&lt;/p></description></item><item><title>De-Googling</title><link>https://aaronogle.dev/2020/04/27/de-googling/</link><pubDate>Mon, 27 Apr 2020 00:00:00 +0000</pubDate><guid>https://aaronogle.dev/2020/04/27/de-googling/</guid><description>
 &lt;p>This is not by any means a new idea. A quick search around the web will return many results of people doing this. My reasons are likely similar to many others. Privacy being the most common shared reason.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;p>Ok that&amp;rsquo;s it I spoiled it! Now you don&amp;rsquo;t need to read on 😜 But I&amp;rsquo;ll explain anyways.&lt;/p>
@@ -1140,7 +1140,7 @@ alt/>&lt;/p>
 &lt;p>What if a company went out of business and took all of your data with them? This has happened.&lt;/p>
 &lt;p>Diversifying the companies you use for services you can&amp;rsquo;t host your self is like hedging your bets.&lt;/p>
 &lt;hr>
-&lt;p>Thats it folks! Hopefully my perspective is different enough to be interesting. 😜 I might follow this up with how I have de-googled.&lt;/p></description></item><item><title>Hacking in the Physical World</title><link>https://geekgonecrazy.com/2020/04/26/hacking-in-the-physical-world/</link><pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/04/26/hacking-in-the-physical-world/</guid><description>
+&lt;p>Thats it folks! Hopefully my perspective is different enough to be interesting. 😜 I might follow this up with how I have de-googled.&lt;/p></description></item><item><title>Hacking in the Physical World</title><link>https://aaronogle.dev/2020/04/26/hacking-in-the-physical-world/</link><pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate><guid>https://aaronogle.dev/2020/04/26/hacking-in-the-physical-world/</guid><description>
 &lt;p>Hacking is often a term used to mean malicious behavior. But I believe hacking is a mindset. It&amp;rsquo;s about trying to be creative.. Taking things and making them work in a different way. It&amp;rsquo;s about not letting your self be your own limiter. Just because you&amp;rsquo;ve never done something before… doesn&amp;rsquo;t mean you shouldn&amp;rsquo;t try.&lt;/p>
 &lt;p>I don&amp;rsquo;t consider my self good at carpentry. Or using screws, hammers, power tools etc.. I&amp;rsquo;m also sure &lt;del>some&lt;/del> most of the work makes professionals cringe just like I do at code by a novice.&lt;/p>
 &lt;!-- raw HTML omitted -->
@@ -1171,13 +1171,13 @@ alt/>&lt;/p>
 alt/>&lt;/p>
 &lt;p>Once they were as straight as I could.. cut a few spare 2x4s put them in as square as I could and then removed the bowed pieces.&lt;/p>
 &lt;p>Anyways… it&amp;rsquo;s not pretty. But it will last a little longer until I can do it right.&lt;/p>
-&lt;p>Hopefully interesting in some way! If not we’ll try again. I&amp;rsquo;ve got several more projects needing done 🙂&lt;/p></description></item><item><title>100 Day writing challenge</title><link>https://geekgonecrazy.com/2020/04/25/100-day-writing-challenge/</link><pubDate>Sat, 25 Apr 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/04/25/100-day-writing-challenge/</guid><description>
+&lt;p>Hopefully interesting in some way! If not we’ll try again. I&amp;rsquo;ve got several more projects needing done 🙂&lt;/p></description></item><item><title>100 Day writing challenge</title><link>https://aaronogle.dev/2020/04/25/100-day-writing-challenge/</link><pubDate>Sat, 25 Apr 2020 00:00:00 +0000</pubDate><guid>https://aaronogle.dev/2020/04/25/100-day-writing-challenge/</guid><description>
 &lt;p>Hello its me again your friendly neighborhood Geek Gone Crazy.😜 Its been a bit less time since my last post than normal. Recently I came across a challenge on mastodon to do a 100 day writing challenge. Inspired by the 100 days of code.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;!-- raw HTML omitted -->
 &lt;p>The idea being much like 100 days of code it encourages a person to sit down to write more often. Of course by doing this you get better at it.&lt;/p>
 &lt;p>As you can see from my posting history here.. I don&amp;rsquo;t post a lot. But I do enjoy writing, I do a fair amount of writing for work and have always wanted to post a bit more. So.. here goes nothing!&lt;/p>
-&lt;p>Here&amp;rsquo;s to hopefully a few more posts!&lt;/p></description></item><item><title>Rocket.Chat + Kubernetes + Traefik = :heart:</title><link>https://geekgonecrazy.com/2020/02/20/rocket.chat-kubernetes-traefik-heart/</link><pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate><guid>https://geekgonecrazy.com/2020/02/20/rocket.chat-kubernetes-traefik-heart/</guid><description>
+&lt;p>Here&amp;rsquo;s to hopefully a few more posts!&lt;/p></description></item><item><title>Rocket.Chat + Kubernetes + Traefik = :heart:</title><link>https://aaronogle.dev/2020/02/20/rocket.chat-kubernetes-traefik-heart/</link><pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate><guid>https://aaronogle.dev/2020/02/20/rocket.chat-kubernetes-traefik-heart/</guid><description>
 &lt;p>You could say I&amp;rsquo;ve been a docker / container fanboy for a while now&amp;hellip; I started working with containers in a couple of previous jobs. Primarily only as aids for the build process or for maintaining the same environment between dev and production. But at my current job I got the opportunity to really go all in. At Rocket.Chat we wanted to build a cloud offering to allow people to quickly and easily deploy Rocket.Chat.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;p>We started this journey off with a couple of my collegues actually putting together a quick proof of concept using a wildcard cert, hipache and a solution that was at the time called tutum. Tutum was later aquired by docker.. and shutdown.&lt;/p>
