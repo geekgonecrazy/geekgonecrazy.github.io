@@ -1,13 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>osx on Aaron Ogle</title><link>/tags/osx/</link><description>Recent content in osx on Aaron Ogle</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 05 Dec 2017 00:00:00 +0000</lastBuildDate><atom:link href="/tags/osx/index.xml" rel="self" type="application/rss+xml"/><item><title>Fedora Setup</title><link>/2017/12/05/fedora-setup/</link><pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate><guid>/2017/12/05/fedora-setup/</guid><description>Install nvidia drivers (oss drivers on this card fail miserably)
-Install gnome tweak tool sudo dnf install gnome-tweak-tool
-Enable global dark theme
-Enable minamize and maximize buttons
-Enable workspaces span displays
-Set screenshot area to clipboard to ctrl+shift+4
-Install tilix
-sudo dnf install tilix
-sudo dnf install tmux
-sudo dnf groupinstall &amp;quot;Development Tools&amp;quot; sudo dnf groupinstall &amp;quot;C Development Tools and Libraries&amp;quot; sudo dnf install zsh
-Install oh my zsh sh -c &amp;quot;$(curl -fsSL https://raw.</description></item><item><title>My OSX Setup</title><link>/2015/09/19/my-osx-setup/</link><pubDate>Sat, 19 Sep 2015 00:00:00 +0000</pubDate><guid>/2015/09/19/my-osx-setup/</guid><description>I&amp;rsquo;m an on again off again macOS / OSX user. This started off at some point as a blog post, but its grown into more of a living page of the programs I install when on macOS / OSX.
-OS tweaks Changed Scroll Direction If using a normal mouse with a scroll wheel. The default &amp;ldquo;natural&amp;rdquo; feels very un-natural.
-Unchecked &amp;ldquo;Scroll direction: natural&amp;rdquo; Change Modifier keys If not using an apple keyboard.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Osx on Aaron Ogle</title><link>/tags/osx/</link><description>Recent content in Osx on Aaron Ogle</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 05 Dec 2017 00:00:00 +0000</lastBuildDate><atom:link href="/tags/osx/index.xml" rel="self" type="application/rss+xml"/><item><title>Fedora Setup</title><link>/2017/12/05/fedora-setup/</link><pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate><guid>/2017/12/05/fedora-setup/</guid><description>&lt;p&gt;Install nvidia drivers (oss drivers on this card fail miserably)&lt;/p&gt;
+&lt;p&gt;Install gnome tweak tool
+&lt;code&gt;sudo dnf install gnome-tweak-tool&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Enable global dark theme&lt;/p&gt;
+&lt;p&gt;Enable minamize and maximize buttons&lt;/p&gt;
+&lt;p&gt;Enable workspaces span displays&lt;/p&gt;
+&lt;p&gt;Set screenshot area to clipboard to ctrl+shift+4&lt;/p&gt;
+&lt;p&gt;Install tilix&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo dnf install tilix&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo dnf install tmux&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo dnf groupinstall &amp;#34;Development Tools&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo dnf groupinstall &amp;#34;C Development Tools and Libraries&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;sudo dnf install zsh&lt;/p&gt;
+&lt;p&gt;Install oh my zsh
+&lt;code&gt;sh -c &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&amp;quot;&lt;/code&gt;&lt;/p&gt;</description></item><item><title>My OSX Setup</title><link>/2015/09/19/my-osx-setup/</link><pubDate>Sat, 19 Sep 2015 00:00:00 +0000</pubDate><guid>/2015/09/19/my-osx-setup/</guid><description>&lt;p&gt;I&amp;rsquo;m an on again off again macOS / OSX user. This started off at some point as a blog post, but its grown into more of a living page of the programs I install when on macOS / OSX.&lt;/p&gt;
+&lt;h2 id="os-tweaks"&gt;OS tweaks&lt;/h2&gt;
+&lt;h3 id="changed-scroll-direction"&gt;Changed Scroll Direction&lt;/h3&gt;
+&lt;p&gt;If using a normal mouse with a scroll wheel. The default &amp;ldquo;natural&amp;rdquo; feels very un-natural.&lt;/p&gt;
+&lt;p&gt;Unchecked &amp;ldquo;Scroll direction: natural&amp;rdquo;
+&lt;img src="https://aaronogle.dev/images/2015-09-19/scroll-dir.png" alt="Scroll Direction" loading="lazy"&gt;&lt;/p&gt;
+&lt;h3 id="change-modifier-keys"&gt;Change Modifier keys&lt;/h3&gt;
+&lt;p&gt;If not using an apple keyboard.&lt;/p&gt;</description></item></channel></rss>

@@ -1,106 +1,111 @@
-<!doctype html><html lang=en><meta charset=utf-8><meta name=generator content="Hugo 0.72.0"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name=color-scheme content="light dark"><meta name=supported-color-schemes content="light dark"><title>Rocket.Chat and the Matrix Protocol&nbsp;&ndash;&nbsp;Aaron Ogle</title><link rel=stylesheet href=/css/core.min.51a44d5b8886c4d68322a4e7f2c4d3a9ae730b123178c37858c71c49e9bba12bcf142960b0cfe957684d097b1bbfb40d.css integrity=sha384-UaRNW4iGxNaDIqTn8sTTqa5zCxIxeMN4WMccSem7oSvPFClgsM/pV2hNCXsbv7QN><meta name=twitter:card content="summary"><meta name=twitter:title content="Rocket.Chat and the Matrix Protocol"><script async defer data-website-id=258570bf-2ff8-4af6-b739-89e886752918 src=https://a-jaguar.fidetech.io/t1.js></script><body><section id=header><div class="header wrap"><span class="header left-side"><a class="site home" href=/><span class="site name">Aaron Ogle</span></a></span>
-<span class="header right-side"><div class="nav wrap"><nav class=nav><a class="nav item" href=/>Home</a><a class="nav item" href=/about>About</a></nav></div></span></div></section><section id=content><div class=article-container><section class="article header"><h1 class="article title">Rocket.Chat and the Matrix Protocol</h1><p class="article date">2022-05-30</p></section><article class="article markdown-body"><p>Rocket.Chat <a href=https://rocket.chat/press-releases/rocket-chat-leverages-matrix-protocol-for-decentralized-and-interoperable-communications target=_blank>now has federation support via the Matrix protocol</a>.</p><p>This announcement is an exciting one to me. I&rsquo;ve been working with Rocket.Chat since I found it almost 7 years ago. One of the things I recall from early on is the vision of being as ubiquitious as email. One of the beauties of email is not everyone is on the same domain or let alone even the same kind of mail server. Just all speaking the same language.</p><p>Rocket.Chat being able to talk the Matrix Protocol to me is a start of it achieving that.</p><p>It does this by registering as an AppService with a Matrix homeserver. This means Rocket.Chat is able to create users on the homeserver and then manage them. So when you opt to federate a room and invite a remote user using Matrix. Rocket.Chat creates your user on the homeserver and controls it as if they are one and the same user.</p><p>tl;dr You can now talk to anyone speaking the Matrix Protocol from Rocket.Chat.</p><h1 id=how-to-setup-rocketchat-with-a-matrix-homeserver>How to setup Rocket.Chat with a Matrix homeserver</h1><ul><li><strong>Matrix support in Rocket.Chat is currently considered alpha. Expect things to break</strong></li><li><strong>This guide also uses Dendrite which is beta</strong></li></ul><p>Video guide should you prefer that format:<div style=position:relative;padding-bottom:56.25%;height:0;overflow:hidden><iframe src=https://www.youtube.com/embed/oQhIH8kql9I style=position:absolute;top:0;left:0;width:100%;height:100%;border:0 allowfullscreen title="YouTube Video"></iframe></div></p><h2 id=compute-requirements>Compute Requirements</h2><p>If your Rocket.Chat workspace will only support a few users you can generally get away with a machine like:</p><ul><li>2GB of RAM</li><li>2CPU</li><li>20GB of Storage</li></ul><p>If you start using it more heavily you&rsquo;ll probably want to increase to a couple of CPU and more ram. See the <a href=https://docs.rocket.chat target=_blank>Rocket.Chat Documentation</a> for more details.</p><p>In this case i&rsquo;ve selected this digitalocean droplet:</p><p>I&rsquo;ve also selected Ubuntu 20.04 as the distro.</p><h2 id=domain-requirements>Domain Requirements</h2><p>You&rsquo;ll need a domain you control. In this case i&rsquo;m going to use geekgone.dev.</p><p>For federation generally the idea is that you are accessed much like you are by email.<br>So if I was to be reached at aaron [at] geekgone.dev then I would also be reached at @aaron:geekgone.dev.</p><p>Either way you need to decide what domain will you be reached at? We&rsquo;ll call this the federated domain. Then you&rsquo;ll also need to expose matrix and Rocket.Chat on their perspective domains.</p><p>In my case i&rsquo;m going to use:</p><ul><li>Federated Domain: geekgone.dev</li><li>Rocket.Chat Domain: chat.geekgone.dev</li><li>Matrix Domain: matrix.geekgone.dev</li></ul><p>Go ahead and point those all at the machine you&rsquo;ve provisioned.</p><p><img src=https://user-images.githubusercontent.com/51996/170783824-d8afd20a-2aae-4dd2-8ce6-9b1173eb45d8.png alt=image></p><h2 id=install-some-pre-reqs>Install some pre-reqs</h2><p>We need a reverse proxy. I&rsquo;m going to use nginx:</p><pre><code>sudo apt update &amp;&amp; sudo apt install -y nginx 
-</code></pre><p>Now we need docker:</p><pre><code>curl -fsSL https://get.docker.com -o get-docker.sh
-sh get-docker.sh
-</code></pre><p>Now for ease we&rsquo;ll add our self to the docker group and assume it:</p><pre><code>sudo usermod -a -G docker ubuntu
-newgrp docker
-</code></pre><p>Finally we need certbot. This is one of the quickest and easiest way to install it currently:</p><pre><code>sudo snap install --classic certbot
-</code></pre><h2 id=configure-lets-encrypt-certificates>Configure Lets Encrypt Certificates</h2><pre><code>certbot certonly --nginx -d geekgone.dev,chat.geekgone.dev,matrix.geekgone.dev
-</code></pre><h2 id=setup-nginx-rules>Setup Nginx Rules</h2><p>Edit /etc/nginx/sites-available/default</p><pre><code>server {
-    listen 80 ;
-    listen [::]:80 ;
-
-    if ($host = geekgone.dev) {
-        return 301 https://$host$request_uri;
-    } 
-
-    if ($host = chat.geekgone.dev) {
-        return 301 https://$host$request_uri;
-    } 
-    
-    if ($host = matrix.geekgone.dev) {
-        return 301 https://$host$request_uri;
-    } 
-        
-    server_name matrix.geekgone.dev chat.geekgone.dev geekgone.dev;
-    return 404; 
-}
-
-server {
-    listen 443 ssl; 
-    ssl_certificate /etc/letsencrypt/live/geekgone.dev/fullchain.pem; 
-    ssl_certificate_key /etc/letsencrypt/live/geekgone.dev/privkey.pem; 
-    include /etc/letsencrypt/options-ssl-nginx.conf; 
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; 
-
-    root /var/www/html;
-
-    server_name geekgone.dev; 
-
-    location /.well-known/matrix/ {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_pass http://localhost:8008;
-        proxy_read_timeout 90;
-    }
-}
-
-server {
-    listen 443 ssl; 
-    ssl_certificate /etc/letsencrypt/live/geekgone.dev/fullchain.pem; 
-    ssl_certificate_key /etc/letsencrypt/live/geekgone.dev/privkey.pem; 
-    include /etc/letsencrypt/options-ssl-nginx.conf; 
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; 
-
-    root /var/www/html;
-
-    server_name chat.geekgone.dev; 
-
-    location / {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_pass http://localhost:3000;
-        proxy_read_timeout 90;
-    }
-}
-
-server {
-    listen 443 ssl; 
-    ssl_certificate /etc/letsencrypt/live/geekgone.dev/fullchain.pem; 
-    ssl_certificate_key /etc/letsencrypt/live/geekgone.dev/privkey.pem; 
-    include /etc/letsencrypt/options-ssl-nginx.conf; 
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; 
-
-    root /var/www/html;
-
-    server_name matrix.geekgone.dev; 
-
-    location / {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_pass http://localhost:8008;
-        proxy_read_timeout 90;
-    }
-}
-</code></pre><p>Do a <code>nginx -t</code> just to make sure everything is ok.</p><p>Then:</p><pre><code>systemctl reload nginx
-</code></pre><h2 id=install-rocketchat-and-dendrite>Install Rocket.Chat and Dendrite</h2><p>I&rsquo;ve commited a docker-compose and config file in a public repo. So will start off with grabbing that:</p><pre><code>git clone https://github.com/geekgonecrazy/rocketchat-matrix-federation-example.git matrix
-cd matrix
-</code></pre><p>Lets bring Rocket.Chat up:</p><pre><code>docker compose up -d rocketchat mongo mongo-init-replica
-</code></pre><p>Goto your Rocket.Chat install and finish the initial setup. In my case it was available at <a href=https://chat.geekgone.dev>https://chat.geekgone.dev</a></p><p>Now goto: Admin->Settings->Federation and expand the Matrix Bridge section</p><p>In the Homeserver URL section use:</p><pre><code>http://dendrite:8008
-</code></pre><p>In the Homeserver Domain use your federation domain. In my case:</p><pre><code>geekgone.dev
-</code></pre><p>Now flip to enabled and click save changes.</p><p>Grab the Homeserver Token and the AppService Token and put them some place safe for a moment.</p><p>Rocket.Chat is ready. Now lets go back to the terminal and look at dendrite.</p><p>We need to edit the dendrite config file. Edit: <code>config/dendrite.yaml</code></p><p>Replace geekgone.dev in this section with your federation domain:</p><pre><code>global:
-  # The domain name of this homeserver.
-  server_name: geekgone.dev
-</code></pre><p>Replace matrix.geekgone.dev in this section with your matrix domain:</p><pre><code>  # The server name to delegate server-server communications to, with optional port
-  # e.g. localhost:443
-  well_known_server_name: &quot;matrix.geekgone.dev:443&quot;
-</code></pre><p>Now we need to edit: <code>config/rocketchat-registration.yaml</code>
+<!doctype html><html lang=en data-theme=dark><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="dark light"><title>Rocket.Chat and the Matrix Protocol &ndash; Aaron Ogle</title><link rel=stylesheet href=/css/main.min.3a6c0f85e5f4b5f905c7b170b109a0e815f223919fd75a39cb31e12e59cef75df7c1678653664aa64c952fd3f3952289.css integrity=sha384-OmwPheX0tfkFx7FwsQmg6BXyI5Gf11o5yzHhLlnO9133wWeGU2ZKpkyVL9PzlSKJ><script>(function(){var e=localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme:light)").matches?"light":"dark");document.documentElement.setAttribute("data-theme",e)})()</script><script async defer data-website-id=258570bf-2ff8-4af6-b739-89e886752918 src=https://a-jaguar.fidetech.io/t1.js></script></head><body><header class=site-header><div class=header-inner><a href=https://aaronogle.dev/ class=site-title><span class=prompt>~$</span> Aaron Ogle</a><nav class=site-nav><a href=/>./home</a>
+<a href=/about>./about</a>
+<button id=theme-toggle class=theme-toggle aria-label="Toggle theme">
+<script>document.write(document.documentElement.getAttribute("data-theme")==="dark"?"[light]":"[dark]")</script></button></nav></div></header><main id=content><article><header class=article-header><h1 class=article-title>Rocket.Chat and the Matrix Protocol</h1><div class=article-meta><time datetime=2022-05-30>2022-05-30</time></div></header><div class=prose><p>Rocket.Chat <a href=https://rocket.chat/press-releases/rocket-chat-leverages-matrix-protocol-for-decentralized-and-interoperable-communications>now has federation support via the Matrix protocol</a>.</p><p>This announcement is an exciting one to me. I&rsquo;ve been working with Rocket.Chat since I found it almost 7 years ago. One of the things I recall from early on is the vision of being as ubiquitious as email. One of the beauties of email is not everyone is on the same domain or let alone even the same kind of mail server. Just all speaking the same language.</p><p>Rocket.Chat being able to talk the Matrix Protocol to me is a start of it achieving that.</p><p>It does this by registering as an AppService with a Matrix homeserver. This means Rocket.Chat is able to create users on the homeserver and then manage them. So when you opt to federate a room and invite a remote user using Matrix. Rocket.Chat creates your user on the homeserver and controls it as if they are one and the same user.</p><p>tl;dr You can now talk to anyone speaking the Matrix Protocol from Rocket.Chat.</p><h1 id=how-to-setup-rocketchat-with-a-matrix-homeserver>How to setup Rocket.Chat with a Matrix homeserver</h1><ul><li><strong>Matrix support in Rocket.Chat is currently considered alpha. Expect things to break</strong></li><li><strong>This guide also uses Dendrite which is beta</strong></li></ul><p>Video guide should you prefer that format:<div style=position:relative;padding-bottom:56.25%;height:0;overflow:hidden><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading=eager referrerpolicy=strict-origin-when-cross-origin src="https://www.youtube.com/embed/oQhIH8kql9I?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style=position:absolute;top:0;left:0;width:100%;height:100%;border:0 title="YouTube video"></iframe></div></p><h2 id=compute-requirements>Compute Requirements</h2><p>If your Rocket.Chat workspace will only support a few users you can generally get away with a machine like:</p><ul><li>2GB of RAM</li><li>2CPU</li><li>20GB of Storage</li></ul><p>If you start using it more heavily you&rsquo;ll probably want to increase to a couple of CPU and more ram. See the <a href=https://docs.rocket.chat>Rocket.Chat Documentation</a> for more details.</p><p>In this case i&rsquo;ve selected this digitalocean droplet:</p><p>I&rsquo;ve also selected Ubuntu 20.04 as the distro.</p><h2 id=domain-requirements>Domain Requirements</h2><p>You&rsquo;ll need a domain you control. In this case i&rsquo;m going to use geekgone.dev.</p><p>For federation generally the idea is that you are accessed much like you are by email.<br>So if I was to be reached at aaron [at] geekgone.dev then I would also be reached at @aaron:geekgone.dev.</p><p>Either way you need to decide what domain will you be reached at? We&rsquo;ll call this the federated domain. Then you&rsquo;ll also need to expose matrix and Rocket.Chat on their perspective domains.</p><p>In my case i&rsquo;m going to use:</p><ul><li>Federated Domain: geekgone.dev</li><li>Rocket.Chat Domain: chat.geekgone.dev</li><li>Matrix Domain: matrix.geekgone.dev</li></ul><p>Go ahead and point those all at the machine you&rsquo;ve provisioned.</p><p><img src=https://user-images.githubusercontent.com/51996/170783824-d8afd20a-2aae-4dd2-8ce6-9b1173eb45d8.png alt=image loading=lazy></p><h2 id=install-some-pre-reqs>Install some pre-reqs</h2><p>We need a reverse proxy. I&rsquo;m going to use nginx:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>sudo apt update &amp;&amp; sudo apt install -y nginx 
+</span></span></code></pre></div><p>Now we need docker:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>curl -fsSL https://get.docker.com -o get-docker.sh
+</span></span><span class=line><span class=cl>sh get-docker.sh
+</span></span></code></pre></div><p>Now for ease we&rsquo;ll add our self to the docker group and assume it:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>sudo usermod -a -G docker ubuntu
+</span></span><span class=line><span class=cl>newgrp docker
+</span></span></code></pre></div><p>Finally we need certbot. This is one of the quickest and easiest way to install it currently:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>sudo snap install --classic certbot
+</span></span></code></pre></div><h2 id=configure-lets-encrypt-certificates>Configure Lets Encrypt Certificates</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>certbot certonly --nginx -d geekgone.dev,chat.geekgone.dev,matrix.geekgone.dev
+</span></span></code></pre></div><h2 id=setup-nginx-rules>Setup Nginx Rules</h2><p>Edit /etc/nginx/sites-available/default</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>server</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>listen</span> <span class=mi>80</span> <span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>listen</span> <span class=p>[::]:</span><span class=mi>80</span> <span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=o>$</span><span class=n>host</span> <span class=o>=</span> <span class=n>geekgone</span><span class=o>.</span><span class=n>dev</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=mi>301</span> <span class=n>https</span><span class=p>:</span><span class=o>//$</span><span class=n>host</span><span class=o>$</span><span class=n>request_uri</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=o>$</span><span class=n>host</span> <span class=o>=</span> <span class=n>chat</span><span class=o>.</span><span class=n>geekgone</span><span class=o>.</span><span class=n>dev</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=mi>301</span> <span class=n>https</span><span class=p>:</span><span class=o>//$</span><span class=n>host</span><span class=o>$</span><span class=n>request_uri</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> 
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=o>$</span><span class=n>host</span> <span class=o>=</span> <span class=n>matrix</span><span class=o>.</span><span class=n>geekgone</span><span class=o>.</span><span class=n>dev</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=mi>301</span> <span class=n>https</span><span class=p>:</span><span class=o>//$</span><span class=n>host</span><span class=o>$</span><span class=n>request_uri</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> 
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>    <span class=n>server_name</span> <span class=n>matrix</span><span class=o>.</span><span class=n>geekgone</span><span class=o>.</span><span class=n>dev</span> <span class=n>chat</span><span class=o>.</span><span class=n>geekgone</span><span class=o>.</span><span class=n>dev</span> <span class=n>geekgone</span><span class=o>.</span><span class=n>dev</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mi>404</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>server</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>listen</span> <span class=mi>443</span> <span class=n>ssl</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=n>ssl_certificate</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>letsencrypt</span><span class=o>/</span><span class=n>live</span><span class=o>/</span><span class=n>geekgone</span><span class=o>.</span><span class=n>dev</span><span class=o>/</span><span class=n>fullchain</span><span class=o>.</span><span class=n>pem</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=n>ssl_certificate_key</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>letsencrypt</span><span class=o>/</span><span class=n>live</span><span class=o>/</span><span class=n>geekgone</span><span class=o>.</span><span class=n>dev</span><span class=o>/</span><span class=n>privkey</span><span class=o>.</span><span class=n>pem</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=n>include</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>letsencrypt</span><span class=o>/</span><span class=n>options</span><span class=o>-</span><span class=n>ssl</span><span class=o>-</span><span class=n>nginx</span><span class=o>.</span><span class=n>conf</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=n>ssl_dhparam</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>letsencrypt</span><span class=o>/</span><span class=n>ssl</span><span class=o>-</span><span class=n>dhparams</span><span class=o>.</span><span class=n>pem</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>root</span> <span class=o>/</span><span class=k>var</span><span class=o>/</span><span class=n>www</span><span class=o>/</span><span class=n>html</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>server_name</span> <span class=n>geekgone</span><span class=o>.</span><span class=n>dev</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>location</span> <span class=o>/.</span><span class=n>well</span><span class=o>-</span><span class=n>known</span><span class=o>/</span><span class=n>matrix</span><span class=o>/</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_set_header</span> <span class=n>Host</span> <span class=o>$</span><span class=n>host</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_set_header</span> <span class=n>X</span><span class=o>-</span><span class=n>Real</span><span class=o>-</span><span class=ne>IP</span> <span class=o>$</span><span class=n>remote_addr</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_set_header</span> <span class=n>X</span><span class=o>-</span><span class=n>Forwarded</span><span class=o>-</span><span class=n>For</span> <span class=o>$</span><span class=n>proxy_add_x_forwarded_for</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_set_header</span> <span class=n>X</span><span class=o>-</span><span class=n>Forwarded</span><span class=o>-</span><span class=n>Proto</span> <span class=o>$</span><span class=n>scheme</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_pass</span> <span class=n>http</span><span class=p>:</span><span class=o>//</span><span class=n>localhost</span><span class=p>:</span><span class=mi>8008</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_read_timeout</span> <span class=mi>90</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>server</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>listen</span> <span class=mi>443</span> <span class=n>ssl</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=n>ssl_certificate</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>letsencrypt</span><span class=o>/</span><span class=n>live</span><span class=o>/</span><span class=n>geekgone</span><span class=o>.</span><span class=n>dev</span><span class=o>/</span><span class=n>fullchain</span><span class=o>.</span><span class=n>pem</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=n>ssl_certificate_key</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>letsencrypt</span><span class=o>/</span><span class=n>live</span><span class=o>/</span><span class=n>geekgone</span><span class=o>.</span><span class=n>dev</span><span class=o>/</span><span class=n>privkey</span><span class=o>.</span><span class=n>pem</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=n>include</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>letsencrypt</span><span class=o>/</span><span class=n>options</span><span class=o>-</span><span class=n>ssl</span><span class=o>-</span><span class=n>nginx</span><span class=o>.</span><span class=n>conf</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=n>ssl_dhparam</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>letsencrypt</span><span class=o>/</span><span class=n>ssl</span><span class=o>-</span><span class=n>dhparams</span><span class=o>.</span><span class=n>pem</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>root</span> <span class=o>/</span><span class=k>var</span><span class=o>/</span><span class=n>www</span><span class=o>/</span><span class=n>html</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>server_name</span> <span class=n>chat</span><span class=o>.</span><span class=n>geekgone</span><span class=o>.</span><span class=n>dev</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>location</span> <span class=o>/</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_set_header</span> <span class=n>Host</span> <span class=o>$</span><span class=n>host</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_set_header</span> <span class=n>X</span><span class=o>-</span><span class=n>Real</span><span class=o>-</span><span class=ne>IP</span> <span class=o>$</span><span class=n>remote_addr</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_set_header</span> <span class=n>X</span><span class=o>-</span><span class=n>Forwarded</span><span class=o>-</span><span class=n>For</span> <span class=o>$</span><span class=n>proxy_add_x_forwarded_for</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_set_header</span> <span class=n>X</span><span class=o>-</span><span class=n>Forwarded</span><span class=o>-</span><span class=n>Proto</span> <span class=o>$</span><span class=n>scheme</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_pass</span> <span class=n>http</span><span class=p>:</span><span class=o>//</span><span class=n>localhost</span><span class=p>:</span><span class=mi>3000</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_read_timeout</span> <span class=mi>90</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>server</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>listen</span> <span class=mi>443</span> <span class=n>ssl</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=n>ssl_certificate</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>letsencrypt</span><span class=o>/</span><span class=n>live</span><span class=o>/</span><span class=n>geekgone</span><span class=o>.</span><span class=n>dev</span><span class=o>/</span><span class=n>fullchain</span><span class=o>.</span><span class=n>pem</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=n>ssl_certificate_key</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>letsencrypt</span><span class=o>/</span><span class=n>live</span><span class=o>/</span><span class=n>geekgone</span><span class=o>.</span><span class=n>dev</span><span class=o>/</span><span class=n>privkey</span><span class=o>.</span><span class=n>pem</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=n>include</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>letsencrypt</span><span class=o>/</span><span class=n>options</span><span class=o>-</span><span class=n>ssl</span><span class=o>-</span><span class=n>nginx</span><span class=o>.</span><span class=n>conf</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=n>ssl_dhparam</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>letsencrypt</span><span class=o>/</span><span class=n>ssl</span><span class=o>-</span><span class=n>dhparams</span><span class=o>.</span><span class=n>pem</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>root</span> <span class=o>/</span><span class=k>var</span><span class=o>/</span><span class=n>www</span><span class=o>/</span><span class=n>html</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>server_name</span> <span class=n>matrix</span><span class=o>.</span><span class=n>geekgone</span><span class=o>.</span><span class=n>dev</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>location</span> <span class=o>/</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_set_header</span> <span class=n>Host</span> <span class=o>$</span><span class=n>host</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_set_header</span> <span class=n>X</span><span class=o>-</span><span class=n>Real</span><span class=o>-</span><span class=ne>IP</span> <span class=o>$</span><span class=n>remote_addr</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_set_header</span> <span class=n>X</span><span class=o>-</span><span class=n>Forwarded</span><span class=o>-</span><span class=n>For</span> <span class=o>$</span><span class=n>proxy_add_x_forwarded_for</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_set_header</span> <span class=n>X</span><span class=o>-</span><span class=n>Forwarded</span><span class=o>-</span><span class=n>Proto</span> <span class=o>$</span><span class=n>scheme</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_pass</span> <span class=n>http</span><span class=p>:</span><span class=o>//</span><span class=n>localhost</span><span class=p>:</span><span class=mi>8008</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_read_timeout</span> <span class=mi>90</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>Do a <code>nginx -t</code> just to make sure everything is ok.</p><p>Then:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>systemctl</span> <span class=n>reload</span> <span class=n>nginx</span>
+</span></span></code></pre></div><h2 id=install-rocketchat-and-dendrite>Install Rocket.Chat and Dendrite</h2><p>I&rsquo;ve commited a docker-compose and config file in a public repo. So will start off with grabbing that:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>git clone https://github.com/geekgonecrazy/rocketchat-matrix-federation-example.git matrix
+</span></span><span class=line><span class=cl>cd matrix
+</span></span></code></pre></div><p>Lets bring Rocket.Chat up:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>docker compose up -d rocketchat mongo mongo-init-replica
+</span></span></code></pre></div><p>Goto your Rocket.Chat install and finish the initial setup. In my case it was available at <a href=https://chat.geekgone.dev>https://chat.geekgone.dev</a></p><p>Now goto: Admin->Settings->Federation and expand the Matrix Bridge section</p><p>In the Homeserver URL section use:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>http://dendrite:8008
+</span></span></code></pre></div><p>In the Homeserver Domain use your federation domain. In my case:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>geekgone.dev
+</span></span></code></pre></div><p>Now flip to enabled and click save changes.</p><p>Grab the Homeserver Token and the AppService Token and put them some place safe for a moment.</p><p>Rocket.Chat is ready. Now lets go back to the terminal and look at dendrite.</p><p>We need to edit the dendrite config file. Edit: <code>config/dendrite.yaml</code></p><p>Replace geekgone.dev in this section with your federation domain:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>global:
+</span></span><span class=line><span class=cl>  # The domain name of this homeserver.
+</span></span><span class=line><span class=cl>  server_name: geekgone.dev
+</span></span></code></pre></div><p>Replace matrix.geekgone.dev in this section with your matrix domain:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>  # The server name to delegate server-server communications to, with optional port
+</span></span><span class=line><span class=cl>  # e.g. localhost:443
+</span></span><span class=line><span class=cl>  well_known_server_name: &#34;matrix.geekgone.dev:443&#34;
+</span></span></code></pre></div><p>Now we need to edit: <code>config/rocketchat-registration.yaml</code>
 Replace: <code>hs_token</code> value with the Homeserver Token you got from Rocket.Chat
-Replace: <code>as_token</code> value with the AppService Token you got from Rocket.Chat</p><p>Finally now we can start matrix up:</p><pre><code>docker compose up -d dendrite
-</code></pre><h2 id=lets-try-talking-to-another-matrix-homeserver>Lets try talking to another Matrix Homeserver</h2><p>Now that we have dendrite up and Rocket.Chat up. Lets go into Rocket.Chat and try sending a message out to a user on another server out there speaking the Matrix Protocol. Can be another Rocket.Chat server, dendrite, synapse etc.</p><p>In this case i&rsquo;m going to use an account from matrix.org <a href=https://matrix.to/#/@geekgonedev-demo:matrix.org target=_blank>@geekgonedev-demo:matrix.org</a></p><p>Create a channel in Rocket.Chat and then do: <code>/bridge invite @geekgonedev-demo:matrix.org</code></p><p>The client you have connected on the other server you will receive an invite. Once accepted you can now type a message on either side and if all went well you should receive the message on the other side!</p><p><em><strong>Note: if you invite another Rocket.Chat server it currently will auto accept</strong></em></p><p>I&rsquo;ll leave the server up for a couple of weeks if you want to try reaching me at <a href=https://matrix.to/#/@aaron:geekgone.dev target=_blank>@aaron:geekgone.dev</a></p><p>Happy chatting!</p></article></div><div class="article bottom"><section class="article navigation"><p><a class=link href=/2022/06/16/adventures-of-the-geek-remote-password-reset/><span class="iconfont icon-article"></span>Adventures of the Geek: Remote Password Reset</a></p><p><a class=link href=/2021/07/04/rover-project-update-3/><span class="iconfont icon-article"></span>Rover Project: Update 3</a></p></section></div></section><section id=footer><div class=footer-wrap><p class=copyright>Aaron Ogle</p><p class=powerby><span>Powered by </span><a href=https://gohugo.io target=_blank>Hugo</a><span> and the </span><a href=https://themes.gohugo.io/hugo-notepadium/ target=_blank>Notepadium</a></p></div></section></body></html>
+Replace: <code>as_token</code> value with the AppService Token you got from Rocket.Chat</p><p>Finally now we can start matrix up:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>docker compose up -d dendrite
+</span></span></code></pre></div><h2 id=lets-try-talking-to-another-matrix-homeserver>Lets try talking to another Matrix Homeserver</h2><p>Now that we have dendrite up and Rocket.Chat up. Lets go into Rocket.Chat and try sending a message out to a user on another server out there speaking the Matrix Protocol. Can be another Rocket.Chat server, dendrite, synapse etc.</p><p>In this case i&rsquo;m going to use an account from matrix.org <a href=https://matrix.to/#/@geekgonedev-demo:matrix.org>@geekgonedev-demo:matrix.org</a></p><p>Create a channel in Rocket.Chat and then do: <code>/bridge invite @geekgonedev-demo:matrix.org</code></p><p>The client you have connected on the other server you will receive an invite. Once accepted you can now type a message on either side and if all went well you should receive the message on the other side!</p><p><em><strong>Note: if you invite another Rocket.Chat server it currently will auto accept</strong></em></p><p>I&rsquo;ll leave the server up for a couple of weeks if you want to try reaching me at <a href=https://matrix.to/#/@aaron:geekgone.dev>@aaron:geekgone.dev</a></p><p>Happy chatting!</p></div><nav class=post-nav><a href=/2021/07/04/rover-project-update-3/><span class=label>&larr; Previous</span>
+Rover Project: Update 3
+</a><a href=/2022/06/16/adventures-of-the-geek-remote-password-reset/><span class=label>Next &rarr;</span>
+Adventures of the Geek: Remote Password Reset</a></nav></article></main><footer class=site-footer><span class=prompt>></span> &copy; 2026 Aaron Ogle</footer><script>document.getElementById("theme-toggle").addEventListener("click",function(){var t=document.documentElement,n=t.getAttribute("data-theme"),e=n==="dark"?"light":"dark";t.setAttribute("data-theme",e),localStorage.setItem("theme",e),this.textContent=e==="dark"?"[light]":"[dark]"})</script></body></html>
