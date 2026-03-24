@@ -1,0 +1,19 @@
+{{- define "main" -}}
+{{- $mainSections := .Site.Params.mainSections | default (slice "posts") -}}
+{{- $pages := where .Site.RegularPages "Section" "in" $mainSections -}}
+{{- $paginator := .Paginate $pages -}}
+<ul class="post-list">
+  {{- range $paginator.Pages }}
+  <li class="post-item">
+    <h2 class="post-item-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    <div class="post-item-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+    </div>
+    {{- with .Summary }}
+    <p class="post-item-summary">{{ . | plainify | truncate 450 }}</p>
+    {{- end }}
+  </li>
+  {{- end }}
+</ul>
+{{- partial "pagination.html" $paginator -}}
+{{- end -}}

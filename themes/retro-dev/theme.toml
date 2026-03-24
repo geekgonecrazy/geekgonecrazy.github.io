@@ -1,0 +1,9 @@
+name = "retro-dev"
+license = "MIT"
+licenselink = ""
+description = "A clean, retro-inspired dark theme for developer blogs"
+tags = ["dark", "retro", "developer", "blog", "responsive"]
+min_version = "0.112.0"
+
+[author]
+  name = "Aaron Ogle"

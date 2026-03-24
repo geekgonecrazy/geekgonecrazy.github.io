@@ -1,0 +1,13 @@
+<header class="site-header">
+  <div class="header-inner">
+    <a href="{{ .Site.BaseURL }}" class="site-title"><span class="prompt">~$</span> {{ .Site.Title }}</a>
+    <nav class="site-nav">
+      {{- range .Site.Params.nav.custom }}
+      <a href="{{ .url }}">./{{ .title | lower }}</a>
+      {{- end }}
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <script>document.write(document.documentElement.getAttribute('data-theme')==='dark'?'[light]':'[dark]')</script>
+      </button>
+    </nav>
+  </div>
+</header>

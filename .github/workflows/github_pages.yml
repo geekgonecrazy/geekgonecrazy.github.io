@@ -7,22 +7,20 @@ on:
 
 jobs:
   build-deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
     - name: Checkout Source
-      uses: actions/checkout@master
+      uses: actions/checkout@v4
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@v3
       with:
-        submodules: true
-    - name: Publish Site
-      uses: chabad360/hugo-gh-pages@master
+        hugo-version: 'latest'
+        extended: true
+    - name: Build
+      run: hugo --gc --minify --cleanDestinationDir
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v4
       with:
-        githubToken: ${{ secrets.GITHUB_TOKEN }}
-        # Use if you have a custom domain for your site.
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: master
         cname: aaronogle.dev
-        # Use if your site is not hosted on the gh-pages branch.
-        branch: master
-        hugoVersion: extended_0.72.0
-        # Use if your site requires a specific version of Hugo
-        # Append "extended_" to the begining to use Hugo Extended
-        args: --gc --minify --cleanDestinationDir
-        # Use if you want to pass some custom arguments to Hugo

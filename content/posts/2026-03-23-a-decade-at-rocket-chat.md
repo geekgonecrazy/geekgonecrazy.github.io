@@ -7,9 +7,8 @@ comments = false
 tags = []
 
 +++
-# A Decade at Rocket.Chat: Looking Back on 10 Years of Building, Breaking, and Growing
 
-It's hard to believe I'm writing this. After nearly 10 years at Rocket.Chat, March 31st, 2026 will be my last day. What started as a guy on the internet submitting pull requests to fix image stretching turned into a decade of building cloud platforms, migrating databases at conference booths, and somehow ending up as Head of Infrastructure & Deployment.
+It's hard to believe I'm writing this. After nearly 10 years at Rocket.Chat, I'm saying goodbye. What started as a guy on the internet submitting pull requests to fix image stretching turned into a decade of building cloud platforms, migrating databases at conference booths, and somehow ending up as Head of Infrastructure & Deployment.
 
 I want to look back on this journey. Not just the technical milestones, but how I grew as a technical professional, the team evolution, the org changes, the migrations that aged me, and the people who made it all worth it.
 
@@ -35,7 +34,11 @@ In **January 2017** we received our Google Cloud credits, and Fleetcommand went 
 
 A kind of funny thing that happened during this time: I had traveled to Brazil on February 23rd, 2017 for our first ever company summit. While there, we received an opportunity for a free booth at Google Next in San Francisco only a few days later, March 8th to 10th. So we flew from Brazil to San Francisco.
 
+![The Rocket.Chat team at Google Cloud Next 2017](/images/2017-03-08/google-next-rocketchat.jpeg)
+
 **At that booth, we switched the deployment of workspaces to run on Kubernetes on Google Cloud.** We were literally refining the process and deploying fixes live from the conference floor. We even rushed a proof of concept that automatically linked users to their Google accounts. Once it was finished, we actually then returned to Brazil and had our summit.
+
+![Fleetcommand hosting page going live](/images/2017-03-08/google-next-fleetcommand-live.png)
 
 ### The First Great Migration
 

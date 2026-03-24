@@ -1,0 +1,45 @@
+{{- define "main" -}}
+<article>
+  <header class="article-header">
+    <h1 class="article-title">{{ .Title }}</h1>
+    <div class="article-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      {{- if .Params.tags }}
+      <span>&middot;</span>
+      {{- range .Params.tags }}
+      <a href="{{ "tags/" | absURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
+      {{- end }}
+      {{- end }}
+    </div>
+  </header>
+  <div class="prose">
+    {{ .Content }}
+  </div>
+  {{- if .Params.tags }}
+  <div class="article-tags">
+    {{- range .Params.tags }}
+    <a href="{{ "tags/" | absURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
+    {{- end }}
+  </div>
+  {{- end }}
+  <nav class="post-nav">
+    {{- with .PrevInSection }}
+    <a href="{{ .RelPermalink }}">
+      <span class="label">&larr; Previous</span>
+      {{ .Title }}
+    </a>
+    {{- else }}
+    <span></span>
+    {{- end }}
+    {{- with .NextInSection }}
+    <a href="{{ .RelPermalink }}">
+      <span class="label">Next &rarr;</span>
+      {{ .Title }}
+    </a>
+    {{- else }}
+    <span></span>
+    {{- end }}
+  </nav>
+  {{- partial "article-comments.html" . -}}
+</article>
+{{- end -}}

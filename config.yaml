@@ -1,10 +1,16 @@
 baseURL: "https://aaronogle.dev"
 languageCode: "en-us"
 title: "Aaron Ogle"
-theme: "hugo-notepadium"
+theme: "retro-dev"
 permalinks:
   posts: "/:year/:month/:day/:title"
+markup:
+  highlight:
+    noClasses: false
+    guessSyntax: true
 params:
+  mainSections:
+    - posts
   style: "dark"
   nav:
     custom:

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}" data-theme="dark">
+{{- partial "head.html" . -}}
+<body>
+  {{- partial "header.html" . -}}
+  <main id="content">
+    {{- block "main" . -}}{{- end -}}
+  </main>
+  {{- partial "footer.html" . -}}
+  <script>
+  document.getElementById('theme-toggle').addEventListener('click',function(){
+    var h=document.documentElement,c=h.getAttribute('data-theme'),n=c==='dark'?'light':'dark';
+    h.setAttribute('data-theme',n);localStorage.setItem('theme',n);
+    this.textContent=n==='dark'?'[light]':'[dark]';
+  });
+  </script>
+</body>
+</html>

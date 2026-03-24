@@ -1,0 +1,744 @@
+/* ==========================================================================
+   retro-dev theme — CSS Custom Properties + Single-file styles
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Custom Properties — Dark Mode (Default)
+   -------------------------------------------------------------------------- */
+:root {
+  --bg: #0a0c10;
+  --bg-surface: #13161e;
+  --bg-code: #0e1018;
+  --bg-header: #0e1016;
+  --text: #c8c4b8;
+  --text-muted: #6a6860;
+  --heading: #33ff99;
+  --link: #33ff99;
+  --link-hover: #66ffbb;
+  --accent: #33ff99;
+  --code-text: #33ff99;
+  --code-inline-bg: #1a1d28;
+  --border: #1e2130;
+  --selection: rgba(51, 255, 153, 0.2);
+  --blockquote-border: rgba(51, 255, 153, 0.4);
+  --tag-bg: rgba(51, 255, 153, 0.08);
+  --tag-text: #33ff99;
+  --glow-heading: rgba(51, 255, 153, 0.4);
+  --glow-link: rgba(51, 255, 153, 0.3);
+  --content-width: 1080px;
+  --header-height: 60px;
+  --mono: 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+}
+
+/* --------------------------------------------------------------------------
+   2. Light Mode Overrides
+   -------------------------------------------------------------------------- */
+[data-theme="light"] {
+  --bg: #f5f2e8;
+  --bg-surface: #fffef8;
+  --bg-code: #edeadf;
+  --bg-header: #f5f2e8;
+  --text: #2a2a2a;
+  --text-muted: #6b6660;
+  --heading: #0e6e3a;
+  --link: #1a7a4a;
+  --link-hover: #0e5c35;
+  --accent: #0e6e3a;
+  --code-text: #0e6e3a;
+  --code-inline-bg: #e8e4d8;
+  --border: #d8d4c8;
+  --selection: rgba(14, 110, 58, 0.15);
+  --blockquote-border: rgba(14, 110, 58, 0.4);
+  --tag-bg: rgba(14, 110, 58, 0.08);
+  --tag-text: #0e6e3a;
+  --glow-heading: none;
+  --glow-link: none;
+}
+
+/* --------------------------------------------------------------------------
+   3. Reset
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, figure {
+  margin: 0;
+  padding: 0;
+}
+
+/* --------------------------------------------------------------------------
+   4. Typography
+   -------------------------------------------------------------------------- */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--mono);
+  color: var(--heading);
+  font-weight: 700;
+  line-height: 1.4;
+  text-shadow: 0 0 10px var(--glow-heading);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  transition: color 0.15s ease, text-shadow 0.15s ease;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-shadow: 0 0 8px var(--glow-link);
+}
+
+::selection {
+  background: var(--selection);
+}
+
+/* --------------------------------------------------------------------------
+   5. Layout
+   -------------------------------------------------------------------------- */
+.site-header {
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.header-inner {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-title {
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--heading);
+  text-shadow: 0 0 10px var(--glow-heading);
+}
+
+.site-title:hover {
+  color: var(--link);
+  text-shadow: 0 0 10px var(--glow-link);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-family: var(--mono);
+}
+
+.site-nav a {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.site-nav a:hover {
+  color: var(--link);
+  text-shadow: 0 0 8px var(--glow-link);
+}
+
+#content {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  min-height: calc(100vh - var(--header-height) - 80px);
+}
+
+.site-footer {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+}
+
+/* --------------------------------------------------------------------------
+   6. Theme Toggle
+   -------------------------------------------------------------------------- */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--link);
+  border-color: var(--link);
+  text-shadow: 0 0 8px var(--glow-link);
+}
+
+/* --------------------------------------------------------------------------
+   7. Post List (Homepage / Section)
+   -------------------------------------------------------------------------- */
+.post-list {
+  list-style: none;
+}
+
+.post-item {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-item:last-child {
+  border-bottom: none;
+}
+
+.post-item-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.post-item-title a {
+  color: var(--text);
+}
+
+.post-item-title a:hover {
+  color: var(--heading);
+}
+
+.post-item-meta {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.post-item-summary {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   8. Article (Single Post)
+   -------------------------------------------------------------------------- */
+.article-header {
+  margin-bottom: 2.5rem;
+}
+
+.article-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.article-meta {
+  font-family: var(--mono);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.tag {
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0;
+  border: 1px solid var(--border);
+  text-decoration: none;
+}
+
+.tag:hover {
+  color: var(--heading);
+}
+
+/* Article prose */
+.prose h1 { font-size: 1.8rem; margin: 2rem 0 1rem; }
+.prose h2 { font-size: 1.5rem; margin: 1.8rem 0 0.8rem; }
+.prose h3 { font-size: 1.25rem; margin: 1.5rem 0 0.6rem; }
+.prose h4 { font-size: 1.1rem; margin: 1.25rem 0 0.5rem; }
+
+.prose p {
+  margin-bottom: 1.25em;
+}
+
+.prose ul, .prose ol {
+  margin-bottom: 1.25em;
+  padding-left: 1.5em;
+}
+
+.prose li {
+  margin-bottom: 0.3em;
+}
+
+.prose li > ul, .prose li > ol {
+  margin-bottom: 0;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+  margin: 1.5em 0;
+  display: block;
+}
+
+.prose figure {
+  margin: 1.5em 0;
+}
+
+.prose figure img {
+  margin: 0 0 0.5em;
+}
+
+.prose figcaption {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--blockquote-border);
+  padding: 0.5em 1em;
+  margin: 1.25em 0;
+  color: var(--text-muted);
+  background: var(--bg-surface);
+  border-radius: 0;
+}
+
+.prose blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  font-size: 0.95rem;
+}
+
+.prose th, .prose td {
+  padding: 0.6em 0.8em;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.prose th {
+  background: var(--bg-surface);
+  font-weight: 600;
+  color: var(--heading);
+}
+
+.prose strong {
+  font-weight: 700;
+}
+
+.prose del {
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   9. Code — Inline & Blocks
+   -------------------------------------------------------------------------- */
+.prose code {
+  font-family: 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+  font-size: 0.88em;
+  background: var(--code-inline-bg);
+  color: var(--code-text);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+}
+
+.prose pre {
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-left: 3px solid rgba(51, 255, 153, 0.3);
+  border-radius: 2px;
+  padding: 1.25rem;
+  margin: 1.5em 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.prose pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  font-size: 0.88em;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   10. Syntax Highlighting (Chroma — retro palette)
+   -------------------------------------------------------------------------- */
+.chroma { color: #e0ddd4; background-color: var(--bg-code); }
+.chroma .lnlinks { outline: none; text-decoration: none; color: inherit; }
+.chroma .lntd { vertical-align: top; padding: 0; margin: 0; border: 0; }
+.chroma .lntable { border-spacing: 0; padding: 0; margin: 0; border: 0; }
+.chroma .hl { background-color: rgba(51, 255, 153, 0.08); }
+.chroma .lnt { white-space: pre; user-select: none; margin-right: 0.4em; padding: 0 0.4em; color: #4a4940; }
+.chroma .ln { white-space: pre; user-select: none; margin-right: 0.4em; padding: 0 0.4em; color: #4a4940; }
+.chroma .line { display: flex; }
+
+/* Keywords — phosphor green */
+.chroma .k  { color: #66ffbb; }
+.chroma .kc { color: #66ffbb; }
+.chroma .kd { color: #66ffbb; }
+.chroma .kn { color: #ff6e8a; }
+.chroma .kp { color: #66ffbb; }
+.chroma .kr { color: #66ffbb; }
+.chroma .kt { color: #66d9ef; }
+
+/* Names — green */
+.chroma .na { color: #33ff99; }
+.chroma .nc { color: #33ff99; }
+.chroma .no { color: #66d9ef; }
+.chroma .nd { color: #33ff99; }
+.chroma .ne { color: #33ff99; }
+.chroma .nx { color: #33ff99; }
+.chroma .nt { color: #ff6e8a; }
+.chroma .nf { color: #33ff99; }
+.chroma .fm { color: #33ff99; }
+
+/* Strings — warm yellow */
+.chroma .l  { color: #e6db74; }
+.chroma .ld { color: #e6db74; }
+.chroma .s  { color: #e6db74; }
+.chroma .sa { color: #e6db74; }
+.chroma .sb { color: #e6db74; }
+.chroma .sc { color: #e6db74; }
+.chroma .dl { color: #e6db74; }
+.chroma .sd { color: #e6db74; }
+.chroma .s2 { color: #e6db74; }
+.chroma .se { color: #ae81ff; }
+.chroma .sh { color: #e6db74; }
+.chroma .si { color: #e6db74; }
+.chroma .sx { color: #e6db74; }
+.chroma .sr { color: #e6db74; }
+.chroma .s1 { color: #e6db74; }
+.chroma .ss { color: #e6db74; }
+
+/* Numbers — soft purple */
+.chroma .m  { color: #ae81ff; }
+.chroma .mb { color: #ae81ff; }
+.chroma .mf { color: #ae81ff; }
+.chroma .mh { color: #ae81ff; }
+.chroma .mi { color: #ae81ff; }
+.chroma .il { color: #ae81ff; }
+.chroma .mo { color: #ae81ff; }
+
+/* Operators */
+.chroma .o  { color: #ff6e8a; }
+.chroma .ow { color: #ff6e8a; }
+
+/* Comments — muted */
+.chroma .c  { color: #6a6a5a; font-style: italic; }
+.chroma .ch { color: #6a6a5a; font-style: italic; }
+.chroma .cm { color: #6a6a5a; font-style: italic; }
+.chroma .c1 { color: #6a6a5a; font-style: italic; }
+.chroma .cs { color: #6a6a5a; font-style: italic; }
+.chroma .cp { color: #6a6a5a; }
+.chroma .cpf { color: #6a6a5a; }
+
+/* Diff */
+.chroma .gd { color: #ff6e8a; }
+.chroma .ge { font-style: italic; }
+.chroma .gi { color: #33ff99; }
+.chroma .gs { font-weight: bold; }
+.chroma .gu { color: #6a6a5a; }
+
+/* Light mode syntax overrides */
+[data-theme="light"] .chroma { color: #2a2a2a; background-color: var(--bg-code); }
+[data-theme="light"] .chroma .hl { background-color: rgba(14, 110, 58, 0.08); }
+[data-theme="light"] .chroma .lnt,
+[data-theme="light"] .chroma .ln { color: #a0a0a0; }
+[data-theme="light"] .chroma .k,
+[data-theme="light"] .chroma .kc,
+[data-theme="light"] .chroma .kd,
+[data-theme="light"] .chroma .kp,
+[data-theme="light"] .chroma .kr { color: #0e6e3a; }
+[data-theme="light"] .chroma .kn { color: #c4265e; }
+[data-theme="light"] .chroma .kt { color: #2e86c1; }
+[data-theme="light"] .chroma .na,
+[data-theme="light"] .chroma .nc,
+[data-theme="light"] .chroma .nd,
+[data-theme="light"] .chroma .ne,
+[data-theme="light"] .chroma .nx,
+[data-theme="light"] .chroma .nf,
+[data-theme="light"] .chroma .fm { color: #1a7a4a; }
+[data-theme="light"] .chroma .nt { color: #c4265e; }
+[data-theme="light"] .chroma .l,
+[data-theme="light"] .chroma .ld,
+[data-theme="light"] .chroma .s,
+[data-theme="light"] .chroma .sa,
+[data-theme="light"] .chroma .sb,
+[data-theme="light"] .chroma .sc,
+[data-theme="light"] .chroma .dl,
+[data-theme="light"] .chroma .sd,
+[data-theme="light"] .chroma .s2,
+[data-theme="light"] .chroma .sh,
+[data-theme="light"] .chroma .si,
+[data-theme="light"] .chroma .sx,
+[data-theme="light"] .chroma .sr,
+[data-theme="light"] .chroma .s1,
+[data-theme="light"] .chroma .ss { color: #986801; }
+[data-theme="light"] .chroma .se { color: #6f42c1; }
+[data-theme="light"] .chroma .m,
+[data-theme="light"] .chroma .mb,
+[data-theme="light"] .chroma .mf,
+[data-theme="light"] .chroma .mh,
+[data-theme="light"] .chroma .mi,
+[data-theme="light"] .chroma .il,
+[data-theme="light"] .chroma .mo { color: #6f42c1; }
+[data-theme="light"] .chroma .o,
+[data-theme="light"] .chroma .ow { color: #c4265e; }
+[data-theme="light"] .chroma .c,
+[data-theme="light"] .chroma .ch,
+[data-theme="light"] .chroma .cm,
+[data-theme="light"] .chroma .c1,
+[data-theme="light"] .chroma .cs { color: #999; font-style: italic; }
+[data-theme="light"] .chroma .cp,
+[data-theme="light"] .chroma .cpf { color: #999; }
+[data-theme="light"] .chroma .gd { color: #c4265e; }
+[data-theme="light"] .chroma .gi { color: #1a7a4a; }
+[data-theme="light"] .chroma .gu { color: #999; }
+
+[data-theme="light"] .prose pre {
+  border-left-color: rgba(14, 110, 58, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   11. Pagination
+   -------------------------------------------------------------------------- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+.pagination a {
+  color: var(--text-muted);
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 0;
+}
+
+.pagination a:hover {
+  color: var(--text);
+  border-color: var(--text-muted);
+}
+
+.pagination .active {
+  color: var(--heading);
+  border-color: var(--heading);
+}
+
+/* --------------------------------------------------------------------------
+   12. Post Navigation (Prev/Next)
+   -------------------------------------------------------------------------- */
+.post-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.post-nav a {
+  color: var(--text-muted);
+  max-width: 45%;
+}
+
+.post-nav a:hover {
+  color: var(--link);
+}
+
+.post-nav .label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+  color: var(--text-muted);
+}
+
+.post-nav a {
+  font-size: 0.9rem;
+}
+
+/* --------------------------------------------------------------------------
+   13. Section / Page Header
+   -------------------------------------------------------------------------- */
+.section-header {
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  color: var(--heading);
+}
+
+/* --------------------------------------------------------------------------
+   14. 404
+   -------------------------------------------------------------------------- */
+.not-found {
+  text-align: center;
+  padding: 4rem 0;
+}
+
+.not-found h1 {
+  font-size: 3rem;
+  color: var(--heading);
+  margin-bottom: 0.5rem;
+}
+
+.not-found p {
+  color: var(--text-muted);
+}
+
+.not-found code {
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+  color: var(--code-text);
+}
+
+/* --------------------------------------------------------------------------
+   15. Terminal Accents
+   -------------------------------------------------------------------------- */
+.prompt {
+  color: var(--link);
+  text-shadow: 0 0 8px var(--glow-link);
+  margin-right: 0.15em;
+}
+
+/* Blinking cursor on site title */
+.site-title::after {
+  content: '_';
+  animation: blink 1s step-end infinite;
+  color: var(--heading);
+  margin-left: 0.1em;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Subtle scanline overlay (dark mode only) */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+}
+
+[data-theme="light"] body::after {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   16. Responsive
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  .article-title {
+    font-size: 1.6rem;
+  }
+
+  .prose h1 { font-size: 1.5rem; }
+  .prose h2 { font-size: 1.3rem; }
+  .prose h3 { font-size: 1.15rem; }
+
+  .prose pre {
+    padding: 1rem;
+    border-radius: 4px;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+  }
+
+  .post-nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .post-nav a {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-inner {
+    padding: 0 1rem;
+  }
+
+  #content {
+    padding: 1.5rem 1rem;
+  }
+
+  .site-footer {
+    padding: 1.5rem 1rem;
+  }
+
+  .site-nav {
+    gap: 0.75rem;
+  }
+
+  .article-title {
+    font-size: 1.4rem;
+  }
+}
