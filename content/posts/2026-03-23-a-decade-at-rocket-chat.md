@@ -191,10 +191,10 @@ Gabriel Casals, for showing me what a great EM looks like. You set the example f
 
 Guilherme Gazzo, for the partnership across engineering. Sing Li, for being a constant sounding board from the very beginning, always encouraging me to write more and take the leaps into the unknown that the startup world demands. Julio Bertelli "the Professional," one of the most talented Go developers I've had the chance to work with. Douglas Gubert, for the many Ketchup sessions where we'd talk about anything and everything. And Julio Araujo, the coolest head of security I've ever worked with, and one of the most talented security engineers too.
 
-To the Rocket.Chat community, you're the reason I started. A product good enough that strangers on the internet wanted to make it better. That's special. And a big part of what makes it special comes from the founders themselves. There's a warmth that Gabriel Engel and Rodrigo, Diego, Marcelo have always brought to this project from day one, always welcoming, always open. I remember the first time meeting everyone in person and receiving big hugs like we'd known each other for years. That warmth is something you can feel throughout the entire company. It's invisible on paper but you feel it in every interaction, and honestly it's what kept me going through all the hard times.
+A big part of what makes Rocket.Chat special comes from the founders themselves. There's a warmth that Gabriel Engel and Rodrigo, Diego, Marcelo have always brought to this project from day one.  Always welcoming!  I remember the first time meeting everyone in person and receiving big hugs like we'd known each other for years. That warmth is something you can feel throughout the entire company. It's invisible on paper but you feel it in every interaction, and honestly it's what kept me going through all the hard times.
 
-It's been an incredible ride. From "Fix image stretching" to Head of Infrastructure & Deployment. From 1 repo to 84. From fixing UI bugs to architectural decisions that shaped how tens of thousands of workspaces run.
+It's been an incredible ride. From community contribution to Head of Infrastructure & Deployment. From 1 repo to 84. From fixing UI bugs to architectural decisions that shaped how tens of thousands of workspaces run.
 
-Time for the next adventure.
+Time for the next adventure!
 
 *- Aaron Ogle*
