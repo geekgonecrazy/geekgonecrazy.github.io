@@ -1,5 +1,5 @@
 +++
-title = "A Decade at Rocket.Chat: Looking Back on 10 Years of Building, Breaking, and Growing"
+title = "A Decade at Rocket.Chat: Looking Back on 10 Years"
 date = 2026-03-23T00:00:00Z
 layout = "post"
 publish = true
@@ -8,13 +8,15 @@ tags = []
 
 +++
 
-It's hard to believe I'm writing this. After nearly 10 years at Rocket.Chat, I'm saying goodbye. What started as just a guy on the internet submitting pull requests to fix image stretching... Turned into a decade of building across multiple cloud platforms, traveling the world, meeting/working with great people, making friends, leading teams, and learning **A Lot**.
+After 10 years at Rocket.Chat... I'm saying goodbye. I started contributing to Rocket.Chat after it appeared on Hacker News in 2015. Some of my first pull requests were fixing image stretching bugs, hubot integrations, jitsi integration and many others.  Then quickly became the Cloud/Deployment guy after being hired.  
+
+When I joined my world was pretty small.  I hadn't been out of country much, and I only ever worked with people I had met in person.  Now i've traveled and worked with people from all around the world.
 
 I want to look back on this journey. Not just the technical milestones, but how I grew as a technical professional, the team evolution, the org changes, the migrations that aged me, and the people who made it all worth it.
 
-## The Very Beginning: A Community Contributor Fixing Bugs (2015)
+## 2015: A Community Contributor Fixing Bugs 
 
-I discovered Rocket.Chat in 2015. **Bradley Hilton** and I had actually been building our own chat application. It started because he needed a staff chat for his Minecraft server and was tired of using Slack (and definitely didn't want to pay for it). We couldn't find anything that fit, so we started building our own. When I found Rocket.Chat it was exactly what we were trying to build. So instead of reinventing the wheel, I started using it, hit rough edges, and started fixing them. My first pull request on August 21st, 2015 was titled "Fix image stretching." The second one came the same day: "Fix search not coming up."
+I discovered Rocket.Chat in 2015. **Bradley Hilton** and I had actually been building our own chat application. It started because he needed a staff chat for his Minecraft server and was tired of using Slack (and definitely didn't want to pay for it). We couldn't find anything off the shelf that fit the need.  So we started building our own in Golang. When I found Rocket.Chat it was almost exactly what we were trying to build. So instead of reinventing the wheel, I started using it, hit rough edges, and started fixing them. My first pull request on August 21st, 2015 was titled "Fix image stretching." The second one came the same day: "Fix search not coming up."
 
 Within a week I was submitting PRs for pin/unpin functionality, configuring the site name via environment variables, adding `/invite` and `/leave` slash commands, and improving hubot-rocketchat. 33 PRs across 4 repos before the year was out. I wasn't an employee. I wasn't getting paid. I was just a guy who liked the product enough to make it better.
 
@@ -54,53 +56,58 @@ Early **2018** after our summit is when the "cloud" team was born. Bradley, who 
 
 In **July 2018** we also made our first infrastructure-specific hire. The team grew from 2 to 3.
 
-If you look at my GitHub history from the second half of 2018 there's a clear pattern: take a service, containerize it, add automated builds with Google Cloud Build, deploy it. On **July 31st** alone I submitted PRs adding a Dockerfile and auto-deploy to the marketplace-api *and* adding Prometheus to Fleetcommand. Three days later: "Release initial version" of cloud-portal. Then statuscentral, our status page which we'd built in about 2-3 days in Go inspired by another open-source status page, got Docker and Cloud Build (September 27th). That little project would keep evolving for the next seven years: maintenance windows, a CLI, snapshot ability, incident history, even a Twitter integration so customers could follow along during outages. Then the Push Gateway was rewritten from JavaScript to Go and containerized (November 15th). The JavaScript version had been locking up under load; the process would just stop responding and the only fix was killing the pod. The Go rewrite was night and day. Memory went from around a gigabyte down to megabytes. Go's built-in concurrency handled the high-throughput push notification traffic without breaking a sweat. The OmniChannel Gateway got a multi-stage Docker build. The Federation Hub got simplified and containerized. One by one, the cloud platform took shape.
+If you look at my GitHub history from the second half of 2018 there's a clear pattern: take a service, containerize it, add automated builds with Google Cloud Build, deploy it. On **July 31st** alone I submitted PRs adding a Dockerfile and auto-deploy to the marketplace-api *and* adding Prometheus to Fleetcommand. Three days later: "Release initial version" of cloud-portal. Then statuscentral, our status page which we'd built in about 2-3 days in Go inspired by another open-source status page, got Docker and Cloud Build (September 27th). That little project would keep evolving for the next seven years: maintenance windows, a CLI, snapshot ability, incident history, even a Twitter integration so customers could follow along during outages. Then the Push Gateway was rewritten from Javascript to Go and containerized (November 15th). The Javascript version was locking up under load. The process would stop responding and the only fix was killing the pod. The Go rewrite was a night and day difference. The memory footprint went from around a gigabyte down to ~100 megabytes and cpu usage went way down. The OmniChannel Gateway got a multi-stage Docker build. The Federation Hub got simplified and containerized. One by one, the cloud platform took shape.
 
 By the end of 2018 we had the bones of the cloud platform. I had 142 PRs across 27 repos that year, and the operational burden of managing a growing hosted customer base was growing right alongside it.
 
-## The Great Migrations (2019 - 2020)
+## 2019 - 2020:The Great Migrations 
 
-### Google Cloud to AWS (2019)
+### 2019: Google Cloud to AWS
 
 We operated on Google Cloud until those credits also began to diminish. Amazon approached us with AWS credits, so we kicked off our **second major migration**. This time the approach was a little bit more sophisticated. Like last time, we established a secure tunnel between the two environments so they could talk to each other, and extended MongoDB replica sets from Google Cloud into AWS.  This time we introduced ingress records in the new infrastructure that would proxy traffic back to Google Cloud. We shifted DNS to point to the new AWS ingress, then migrated customers in controlled batches, spinning up workspaces in AWS and flipping their specific ingress records one by one.
 
-I later documented this migration pattern in a blog post: [A K8s Migration Concept](https://aaronogle.dev/2020/05/01/a-k8s-migration-concept/). The migration was completed on **March 1st, 2019**. The most satisfying PR? "Remove GCP", 5,279 lines deleted. Goodbye Google Cloud.
+I later documented this migration pattern in a blog post: [A K8s Migration Concept](https://aaronogle.dev/2020/05/01/a-k8s-migration-concept/). The migration was completed on **March 1st, 2019**. 
 
-### The Bare Metal Leap: OVH (2020)
+### 2020: AWS to OVH
 
-In 2020, we needed to decrease our operational costs. Oracle offered credits but their infrastructure and consoles were challenging. Our search led us to **OVH** and bare metal servers.
+In 2020 we needed to decrease costs. So we went on the hunt to find options cheaper than AWS.  We entertained a few options from other cloud providers like Oracle offering us credits. 😅  Our search led us to **OVH** and bare metal servers which we found out even over provisioning we would be saving a lot of money and be getting the raw performance of the metal.
 
-This was a whole new world. We had to master deploying Kubernetes on bare metal with Rancher, deal with OVH's unique "vracks" requiring manual IP assignment, set up bastions for access, and learn that their firewall rules only protected against traffic from *outside* OVH, meaning other OVH customers could bypass them entirely. Storage was another challenge. On managed cloud you just request a volume and it appears. On bare metal there's nothing. We found **Longhorn**, which let us carve out persistent volumes from some nodes we provisioned with big raid disk arrays, giving us the storage layer Kubernetes needed.
+This brought on a lot of learning.  Here are some of the new challenges:
+* No Managed Kubernetes - Rancher actually fits this particular problem very well.
+* Public interface + Private Interface on a "vrack" - OVH gives you essentially a vlan on the private interface.  No gateway, no DHCP server.  So you have to manually assign an ip address to every server to be able to communicate over the private network. 
+* Bastions for access
+* OVH "Firewall" - So big surprise their firewall rules only protected against traffic from *outside* OVH, meaning other OVH customers could bypass them entirely. Hello iptables.
+* Kubernetes Volumes - On managed cloud you just request a volume and it appears. On bare metal there's nothing. We found **Longhorn**. This let us have persistent volumes from some nodes we provisioned with a raid disk array. This mostly worked well. 
 
-We executed **another zero-downtime migration**, completing it on **July 3rd, 2020**. We refined our process further, exposing many ingress switching functionalities as API calls within Fleetcommand.
+We executed **another zero-downtime migration**, completing it on **July 3rd, 2020**. This migration we refined our process further. This time exposing many ingress switching functionalities as API calls within Fleetcommand. Run ingress on both AWS and OVH. OVH pointing over to AWS for ingress. Then flipping dns and programatically moving the load and then switching the ingress to point to the OVH load.
 
 OVH also taught us about hardware failures. Nodes just die on bare metal and way more often than we thought. CPU overheating and bootlooping randomly. Water cooling manifold related issues, thermal paste etc. Not things we expected to be having to raise support tickets and deal with. You also learn quickly about capacity planning when there's no auto-scaling button. You learn to have spares ready. You build close relationships with your vendors.
 
-Throughout all of this, three major migrations, multiple cloud providers, growing customer demands, a small team of 3-4 people kept everything running. 199 PRs in 2020 alone. "Begin OVH adventure" (16,539 lines), "Svc migration to ovh" (18,593 lines). Not glamorous work, but the kind of work that keeps a platform alive.
+Throughout all of this... three major migrations across multiple cloud providers.. All while customer demands kept growing. We accomplished this with a small team of 3-4 people. 
 
-## The Spotify Era: Tribes, Squads and Chapters (2021)
+In hindsight.. OVH != Traditional Bare Metal with white glove service.  I think us getting a few racks in a datacenter would have been a better match to our expectations.
 
-In early **2021**, the company adopted a Spotify-style organizational model. Tribes, Squads with Product Managers, Engineering Managers, and Tech Leads. Chapters for disciplines like frontend, backend and infrastructure.
+## 2021: The Spotify Era
 
-Up until this point I'd been doing everything: writing code, managing infrastructure, *and* being the engineering manager. Running 1:1s, performance reviews, salary negotiations, hiring. I was listed as the hiring manager for the whole cloud team. It was too much for one person, and something had to give.
+In early **2021** the company adopted the Spotify-style organizational model. A couple of Tribes.  Squads were formed with scrum procedures.  Every squad got a Product Manager, Engineering Manager, and Tech Lead. Chapters were formed for disciplines like frontend, backend and infrastructure.
 
-The squad reorg changed that. What had been "the cloud team" became a cloud tribe with multiple squads. I moved into the **Tech Lead/Architect role across the Cloud tribe**, specifically the **Cloud Service Squad** (Fleetcommand, cloud portal, push gateway, and others), the **Marketplace Squad** and still was involved in the **Infrastructure Squad** as a major stakeholder/architect as we did have a team member step up as the main lead for that team.
+Up until this point I'd been doing everything: writing code, managing infrastructure, and being the team lead. Running 1:1s, performance reviews, salary negotiations, hiring. I was listed as the hiring manager for the whole cloud team. It was a lot. 
 
-This was also a period of significant growth. We brought on our first PMs. New engineers joined like Debdut and Daniel, both coming in as interns (and still at Rocket.Chat today). The team was bigger than ever. And crucially, **Gabriel Casals** came on as an Engineering Manager for the Cloud squads. This was a turning point for me. He was the first non-technical EM I worked closely with, and he showed me what the role should actually look like: handling the people side, the process, the coordination, so I could focus on technical direction. That partnership taught me how a strong EM and a strong tech lead can complement each other instead of stepping on each other's toes. After years of carrying both loads, it was a huge relief to no longer be responsible for the people side of things.
+The squad reorg changed that. What had been "the cloud team" became a cloud tribe with multiple squads. I moved into the **Architect role across the Cloud tribe**. This tribe was made up of 3 squads. The **Cloud Service Squad** (Fleetcommand, cloud portal, push gateway, and others), the **Marketplace Squad** and the **Infrastructure Squad**. I also acted as the Tech Lead for the Cloud Service Squad helping run the scrum cycles.
 
-## Floating, Splitting, and beginning of the SRE Transformation (2022 - 2023)
+With all these new squads we had new engineers join like Debdut and Daniel, both coming in as interns (and still at Rocket.Chat as of today). The team was bigger than ever. **Gabriel Casals** came on as an Engineering Manager for the Cloud squads. This was a turning point for me. He was the first non-technical EM I worked closely with. He helped show me what the role should actually look like. It was like a partnership.  I helped set the technical direction and he focused on the people side. That partnership taught me how a strong EM and a strong tech lead can complement each other instead of stepping on each other's toes. 
+
+## 2022 - 2023: Floating, Splitting, and start of the SRE Transformation
 
 **2022** brought major changes. Our PM for the Cloud tribe left in January. **Julio Bertelli** joined. The company went through a restructuring that impacted 12 people.
 
-I found myself increasingly acting as a **floating architect** across squads rather than being embedded in one. The Cloud Service Squad, the Cloud Hosting efforts, and the infrastructure team all needed technical direction, and I was the thread connecting them. But it was getting harder. The infrastructure team and the service squad had different priorities, and things were falling through the cracks.
+I found myself increasingly acting as a **floating architect** across squads rather than being embedded in one. 
 
-Meanwhile, a new Engineering Manager came in, initially working across QA and security, and eventually taking on the infrastructure team as well. By early 2023 he was EM for both the security team and the infra team. The arrangement meant I could focus on the technical side while he handled the people management.
-
-Around this time, the Marketplace Squad was dissolved and absorbed into the Cloud Services Squad, which was then renamed to the **Connectivity Squad** under Gabriel Casals as EM, handling registration, licensing, marketplace, and workspace connection services. The Infra team we started calling the **SRE team**.
+The Marketplace Squad was dissolved and absorbed into the Cloud Services Squad. It was then renamed to the **Connectivity Squad** under Gabriel Casals as EM, handling registration, licensing, marketplace, and workspace connection services. The Infra team we started calling the **SRE team**.
 
 The catalyst for the SRE transformation was the launch of **Premium and Dedicated offerings on February 2nd, 2023**, with a commitment to a **99.9% SLA**. That kind of promise changes how you think about everything. It's not "best effort" anymore. You need monitoring, runbooks, incident response, post-mortems, on-call rotations. You need to think like an SRE team, not just an infrastructure team.
 
-This was probably the most intense period of my career. I was the technical lead spanning both squads, setting direction for the SRE team on the infrastructure side and the Connectivity Squad on the services side, each with their own EM handling the people management. It meant I was the common thread between the two; the person who understood how the infrastructure and the services fit together end-to-end. We were reshaping what had been a purely infrastructure-focused group into a team that thought about reliability as its core mandate.
+This was probably the most intense period of my career. I was back to being the architect + technical lead of both squads. Setting direction for the SRE team on the infrastructure side and the Connectivity Squad on the services side. Each with their own EM handling the people management. I became the common thread between the two.  Bridging two squads that interacted a lot.  The person who understood how the infrastructure and the services fit together end-to-end. We were reshaping what had been a purely infrastructure-focused group into a team that thought about reliability as its core mandate.
 
 ### Writing Things Down: RFCs, RFDs, ADRs, and Post-Mortems
 
@@ -122,19 +129,19 @@ The tool kept evolving right up to the end. I added support for D2 diagrams, swi
 
 RFC → RFD → ADR. Discourse → GitHub → adr.rocket.chat. The format changed, the tools changed, but the core idea stayed the same from RFC 1 in 2018 to ADR 148 in 2025: write it down, invite discussion, make it discoverable.
 
-## Stepping Away and Coming Back (2024 - 2025)
+## 2024 - 2025: Stepping Away and Coming Back
 
-By mid-**2024**, after nearly nine years, I decided to step away. I transitioned out in July 2024 and stayed on in an advisory capacity, keeping a connection to the team and the platform I'd helped build.
+In mid-**2024**, after nearly nine years, I decided to step away. I transitioned out in July 2024 and stayed on in an advisory capacity, keeping a connection to the team and the platform I'd helped build.
 
 The time away was valuable. I found balance. I picked up hobbies outside of work, something I hadn't really had in years. But I also realized how much I missed the work itself. Building things that matter. Solving hard problems with good people. I [wrote more about that period](https://aaronogle.dev/2024/12/31/year-in-review-2024/#work--professional) in my 2024 year in review.
 
 On **May 19th, 2025**, I officially returned as **Head of Infrastructure & Deployment**.
 
-This time I took both People and Tech hats deliberately. No split between a technical lead and an engineering manager. I'd seen what happened when those roles were separated and the partnership didn't gel. Simpler is better.
+This time I took both People and Tech hats deliberately. Before joining I asked exectly what the expectations were for me in the role.  I then proposed a Role Charter. Something I plan to repeat going forward. No split between a technical lead and an engineering manager. I'd seen what happened when those roles were separated and the partnership didn't gel. Simpler is better.
 
-## The SRE Team: Building Something That Would Outlast Me (2025 - 2026)
+## 2025 - 2026:The SRE Team: Building Something That Would Outlast Me
 
-When I came back, one of the first things I did was write a **team charter**, a document that made clear the team's purpose, scope, and strategic objectives. We started an SRE book club. We formalized documentation practices in Confluence. I wrote a lot... Posted priority alignments every week making sure that any adjustments in priority were clearly communicated to the team, every month setting the months priorities.  The main goal was to increase alignment so it was very clear what we were working towards.  I pushed for post-mortems after every incident, and tried to build a culture where reliability wasn't just my obsession but the team's identity.
+I liked the role charter so much that after I came back, one of the first things I did was write a **team charter**, a document that made clear the team's purpose, scope, and strategic objectives. We started an SRE book club. We formalized documentation practices in Confluence. I wrote a lot... Posted priority alignments every week making sure that any adjustments in priority were clearly communicated to the team, every month setting the months priorities.  The main goal was to increase alignment so it was very clear what we were working towards.  I pushed for post-mortems after every incident, and tried to build a culture where reliability wasn't just my obsession but the team's identity.
 
 We launched **Launchpad** (our opinionated deployment tool), drove SLO definitions across services, and pushed forward on everything from Helm chart improvements to airgapped deployment support.
 
