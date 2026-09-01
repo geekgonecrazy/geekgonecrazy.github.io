@@ -12,27 +12,31 @@ After 10 years at Rocket.Chat... I'm saying goodbye. I started contributing to R
 
 When I joined my world was pretty small.  I hadn't been out of country much, and I only ever worked with people I had met in person.  Now i've traveled and worked with people from all around the world.
 
-I want to look back on this journey. Not just the technical milestones, but how I grew as a technical professional, the team evolution, the org changes, the migrations that aged me, and the people who made it all worth it.
-
 ## 2015: A Community Contributor Fixing Bugs 
 
-I discovered Rocket.Chat in 2015. **Bradley Hilton** and I had actually been building our own chat application. It started because he needed a staff chat for his Minecraft server and was tired of using Slack (and definitely didn't want to pay for it). We couldn't find anything off the shelf that fit the need.  So we started building our own in Golang. When I found Rocket.Chat it was almost exactly what we were trying to build. So instead of reinventing the wheel, I started using it, hit rough edges, and started fixing them. My first pull request on August 21st, 2015 was titled "Fix image stretching." The second one came the same day: "Fix search not coming up."
+I discovered Rocket.Chat in 2015. **Bradley Hilton** and I had actually been building our own chat application. It started because he needed a staff chat for his Minecraft server and was tired of using Slack (and definitely didn't want to pay for it). We couldn't find anything off the shelf that fit the need.  So we started building our own in Golang. When I found Rocket.Chat it was almost exactly what we were trying to build. We spent some time kicking the tires. When we hit some rough edges since it was open source I talked to the founders and then just opened a PR. My first pull request on August 21st, 2015 was titled "Fix image stretching." The second one came the same day: "Fix search not coming up."
 
-Within a week I was submitting PRs for pin/unpin functionality, configuring the site name via environment variables, adding `/invite` and `/leave` slash commands, and improving hubot-rocketchat. 33 PRs across 4 repos before the year was out. I wasn't an employee. I wasn't getting paid. I was just a guy who liked the product enough to make it better.
+Within a week I was submitting PRs across the product. It’s been a while so I had AI track them down:
+* Added pin/unpin functionality
+* configuring the site name via environment variables
+* adding `/invite` and `/leave` slash commands
+* improving hubot-rocketchat. 
 
-In October of 2015, Diego Sampaio built the first easy way to try Rocket.Chat, a proof-of-concept system brought online for **OSCON in Amsterdam**. You'd enter your email and a subdomain like `something.rocket.chat` and it would spin up a workspace. Built on Rackspace with Tutum, a single Mongo node, a single worker, and Hipache for load balancing. The address was `deploy.rocket.chat`. Simple. Scrappy. It worked.
+33 PRs across 4 repos before the year was out. I wasn't an employee. I wasn't getting paid. But due to the power of open source, I could help make things better.
+
+In October of 2015, Diego Sampaio built the first 1-click hosted solution to try Rocket.Chat.  It was a proof-of-concept system brought online for **OSCON in Amsterdam**. You'd enter your email and a subdomain like `something.rocket.chat` and it would spin up a workspace. It was running on a couple of servers from Rackspace using Tutum(before Docker acquired them). All running on a single Mongo node, a single worker node, and using Hipache for load balancing. The address was `deploy.rocket.chat`. Simple. Scrappy. It worked.
 
 The seeds of everything that would come later were planted right there.
 
-By mid-2016 I was going deeper, I contributed the original **Jitsi video conferencing integration** in the hotel lobby across from **OSCON in Austin**.  We met Emil Ivov the founder of Jitsi earlier that day in the Atlassian office.  Got excited and started building.
+By mid-2016 I was going deeper.  I contributed the original **Jitsi video conferencing integration** in the hotel lobby across from **OSCON in Austin**.  We met Emil Ivov the founder of Jitsi earlier that day in the Atlassian office.  Got excited and started building.
 
 ## Fleetcommand and the Cloud Team (2016 - 2018)
 
 In **September 2016**, we built the `rocketchat-server` snap, one of the very first snaps created. This was a direct result of interactions with Mark Shuttleworth from Canonical. A small but cool moment in our open-source story.
 
-By **October 2016**, it was becoming clear that Rocket.Chat was going to receive its first round of funding (which officially came in **November 2016**). I started building **Fleetcommand**, the software that would manage trials, handle Stripe billing, and automate provisioning for our hosted customers. The original vision was a portal at `my.rocket.chat` for users to manage their workspaces. We explored many options like using Juju by Canonical(after earlier success with snaps), docker swarm, mesos, nomad and several other ideas.  But ultimately decided on kubernetes and utilizing its API and specifically the same go packages kubectl leveraged.
+By **October 2016**, it was becoming clear that Rocket.Chat was going to receive its first round of funding (which officially came in **November 2016**). I started building **Fleetcommand** the software that I would end up owning for a decade.  It would grow to manage trials, handle Stripe billing, licensing and automate provisioning for our hosted customers. The original vision was a portal at `my.rocket.chat` for users to manage their workspaces. We explored many options like using Juju by Canonical(after earlier success with snaps), docker swarm, mesos, nomad and several other ideas.  But ultimately decided on kubernetes and utilizing its API and the same go packages kubectl leveraged.
 
-In **January 2017** we received our Google Cloud credits, and Fleetcommand went live around **March 4th, 2017**.
+In **January 2017** we received Google Cloud credit and Fleetcommand went live around **March 4th, 2017**.
 
 A fun story during this time: I had traveled to Brazil on February 23rd, 2017 for our first ever company summit. While there, we received an opportunity for a free booth at Google Next in San Francisco only a few days later, March 8th to 10th. So we flew from Brazil to San Francisco.  I was gone for 20 days.  My wife was not so sure about this new startup I had joined! 😂
 
@@ -60,7 +64,7 @@ If you look at my GitHub history from the second half of 2018 there's a clear pa
 
 By the end of 2018 we had the bones of the cloud platform. I had 142 PRs across 27 repos that year, and the operational burden of managing a growing hosted customer base was growing right alongside it.
 
-## 2019 - 2020:The Great Migrations 
+## 2019 - 2020: The Great Migrations 
 
 ### 2019: Google Cloud to AWS
 
