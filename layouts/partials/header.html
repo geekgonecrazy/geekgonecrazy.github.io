@@ -1,0 +1,16 @@
+<header class="site-header">
+  <div class="header-inner">
+    <a href="{{ .Site.BaseURL }}" class="site-brand">
+      <img src="/images/avatar.png" alt="{{ .Site.Params.author | default .Site.Title }} avatar" class="site-avatar" width="72" height="72" fetchpriority="high" />
+      <span class="site-title"><span class="prompt">~$</span> {{ .Site.Title }}</span>
+    </a>
+    <nav class="site-nav">
+      {{- range .Site.Params.nav.custom }}
+      <a href="{{ .url }}">./{{ .title | lower }}</a>
+      {{- end }}
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <script>document.write(document.documentElement.getAttribute('data-theme')==='dark'?'[light]':'[dark]')</script>
+      </button>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,64 @@
+{{- define "main" -}}
+<section class="home-hero">
+  <div class="hero-body">
+    <img src="/images/avatar.png" alt="{{ .Site.Params.author | default .Site.Title }} avatar" class="hero-avatar" width="192" height="192" fetchpriority="high" />
+    <div class="hero-text">
+      <h1 class="hero-title"><span class="prompt">~$</span> whoami</h1>
+      <p class="hero-name">{{ .Site.Params.author }}</p>
+      <p class="hero-tagline">Principal Software Engineer &amp; perpetual tinkerer. Homelab · Open source · AI/agents · System design · Family.</p>
+      <nav class="hero-links">
+        <a href="/about">./about</a>
+        <a href="/posts/">./blog</a>
+        <a href="https://github.com/geekgonecrazy">github</a>
+        <a href="https://fosstodon.org/@geekgonecrazy">mastodon</a>
+        <a href="/feed.xml">rss</a>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<section class="home-section">
+  <h2 class="section-title"><span class="prompt">&gt;</span> recent posts</h2>
+  {{- $mainSections := .Site.Params.mainSections | default (slice "posts") -}}
+  {{- $pages := where .Site.RegularPages "Section" "in" $mainSections -}}
+  <ul class="post-list">
+    {{- range first 5 $pages }}
+    <li class="post-item">
+      <h3 class="post-item-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+      <div class="post-item-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      </div>
+      {{- with .Summary }}
+      <p class="post-item-summary">{{ . | plainify | truncate 220 }}</p>
+      {{- end }}
+    </li>
+    {{- end }}
+  </ul>
+  <p class="more-link"><a href="/posts/">view all posts &rarr;</a></p>
+</section>
+
+{{/* Projects — hidden until ready to showcase
+<section class="home-section">
+  <h2 class="section-title"><span class="prompt">&gt;</span> projects</h2>
+  <div class="project-grid">
+    <a class="project-card" href="https://github.com/RocketChat/statuscentral">
+      <span class="project-name">statuscentral</span>
+      <span class="project-desc">Go status page, built in days, run for 7+ years.</span>
+    </a>
+    <a class="project-card" href="https://github.com/geekgonecrazy/rfd-tool">
+      <span class="project-name">rfd-tool</span>
+      <span class="project-desc">Powering 148+ architectural decision records.</span>
+    </a>
+    <a class="project-card" href="https://github.com/geekgonecrazy/prismplus">
+      <span class="project-name">prismplus</span>
+      <span class="project-desc">RTMP multicast to many destinations.</span>
+    </a>
+    <a class="project-card" href="https://github.com/geekgonecrazy/deepfreeze">
+      <span class="project-name">deepfreeze</span>
+      <span class="project-desc">Encrypted MongoDB backup utility.</span>
+    </a>
+  </div>
+  <p class="more-link"><a href="/about/">more about what I build &rarr;</a></p>
+</section>
+*/}}
+{{- end -}}

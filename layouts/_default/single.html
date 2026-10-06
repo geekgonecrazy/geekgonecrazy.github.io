@@ -1,0 +1,54 @@
+{{- define "main" -}}
+<article>
+  {{- with .Params.banner }}
+  <div class="article-banner">
+    <img src="{{ . }}" alt="{{ $.Title }} banner" fetchpriority="high" />
+  </div>
+  {{- end }}
+  <header class="article-header">
+    <h1 class="article-title">{{ .Title }}</h1>
+    {{- if or (not .Date.IsZero) (.Params.tags) }}
+    <div class="article-meta">
+      {{- if not .Date.IsZero }}
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      {{- end }}
+      {{- if .Params.tags }}
+      <span>&middot;</span>
+      {{- range .Params.tags }}
+      <a href="{{ "tags/" | absURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
+      {{- end }}
+      {{- end }}
+    </div>
+    {{- end }}
+  </header>
+  <div class="prose">
+    {{ .Content }}
+  </div>
+  {{- if .Params.tags }}
+  <div class="article-tags">
+    {{- range .Params.tags }}
+    <a href="{{ "tags/" | absURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
+    {{- end }}
+  </div>
+  {{- end }}
+  <nav class="post-nav">
+    {{- with .PrevInSection }}
+    <a href="{{ .RelPermalink }}">
+      <span class="label">&larr; Previous</span>
+      {{ .Title }}
+    </a>
+    {{- else }}
+    <span></span>
+    {{- end }}
+    {{- with .NextInSection }}
+    <a href="{{ .RelPermalink }}">
+      <span class="label">Next &rarr;</span>
+      {{ .Title }}
+    </a>
+    {{- else }}
+    <span></span>
+    {{- end }}
+  </nav>
+  {{- partial "article-comments.html" . -}}
+</article>
+{{- end -}}

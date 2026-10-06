@@ -1,6 +1,6 @@
-baseURL: "https://aaronogle.dev"
+baseURL: "https://geekgonecrazy.com"
 languageCode: "en-us"
-title: "Aaron Ogle"
+title: "geekgonecrazy"
 theme: "retro-dev"
 permalinks:
   posts: "/:year/:month/:day/:title"
@@ -9,6 +9,7 @@ markup:
     noClasses: false
     guessSyntax: true
 params:
+  author: "Aaron Ogle"
   mainSections:
     - posts
   style: "dark"
@@ -16,6 +17,8 @@ params:
     custom:
       - title: "Home"
         url: "/"
+      - title: "Blog"
+        url: "/posts/"
       - title: "About"
         url: "/about"
 outputs:
